@@ -1200,54 +1200,54 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal partID As String, ByVal description As String, ByVal color As String, ByVal size As Double, ByVal count As Integer, ByVal internalID As Integer, ByVal shopNumber As String, ByVal itemNumber As Global.System.Nullable(Of Double), ByVal itemQuantity As Global.System.Nullable(Of Integer), ByVal context1 As String, ByVal context2 As Global.System.Nullable(Of Double), ByVal context3 As String) As Integer
-            If (partID Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("partID")
+        Public Overloads Overridable Function Insert(ByVal __partID As String, ByVal __description As String, ByVal __color As String, ByVal __size As Double, ByVal __count As Integer, ByVal __internalID As Integer, ByVal __shopNumber As String, ByVal __itemNumber As Global.System.Nullable(Of Double), ByVal __itemQuantity As Global.System.Nullable(Of Integer), ByVal __context1 As String, ByVal __context2 As Global.System.Nullable(Of Double), ByVal __context3 As String) As Integer
+            If (__partID Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("__partID")
             Else
-                Me.Adapter.InsertCommand.Parameters(0).Value = CType(partID,String)
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(__partID,String)
             End If
-            If (description Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("description")
+            If (__description Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("__description")
             Else
-                Me.Adapter.InsertCommand.Parameters(1).Value = CType(description,String)
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(__description,String)
             End If
-            If (color Is Nothing) Then
+            If (__color Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(2).Value = CType(color,String)
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(__color,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(3).Value = CType(size,Double)
-            Me.Adapter.InsertCommand.Parameters(4).Value = CType(count,Integer)
-            Me.Adapter.InsertCommand.Parameters(5).Value = CType(internalID,Integer)
-            If (shopNumber Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("shopNumber")
+            Me.Adapter.InsertCommand.Parameters(3).Value = CType(__size,Double)
+            Me.Adapter.InsertCommand.Parameters(4).Value = CType(__count,Integer)
+            Me.Adapter.InsertCommand.Parameters(5).Value = CType(__internalID,Integer)
+            If (__shopNumber Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("__shopNumber")
             Else
-                Me.Adapter.InsertCommand.Parameters(6).Value = CType(shopNumber,String)
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(__shopNumber,String)
             End If
-            If (itemNumber.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(7).Value = CType(itemNumber.Value,Double)
+            If (__itemNumber.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(__itemNumber.Value,Double)
             Else
                 Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
             End If
-            If (itemQuantity.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(8).Value = CType(itemQuantity.Value,Integer)
+            If (__itemQuantity.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(8).Value = CType(__itemQuantity.Value,Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
             End If
-            If (context1 Is Nothing) Then
+            If (__context1 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(9).Value = CType(context1,String)
+                Me.Adapter.InsertCommand.Parameters(9).Value = CType(__context1,String)
             End If
-            If (context2.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(10).Value = CType(context2.Value,Double)
+            If (__context2.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(10).Value = CType(__context2.Value,Double)
             Else
                 Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
             End If
-            If (context3 Is Nothing) Then
+            If (__context3 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(11).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(11).Value = CType(context3,String)
+                Me.Adapter.InsertCommand.Parameters(11).Value = CType(__context3,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _

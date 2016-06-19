@@ -37,7 +37,7 @@ Partial Class ChooseStock
         Me.ListBox1.ItemHeight = 16
         Me.ListBox1.Location = New System.Drawing.Point(12, 65)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(466, 180)
+        Me.ListBox1.Size = New System.Drawing.Size(554, 180)
         Me.ListBox1.TabIndex = 0
         '
         'Label1
@@ -76,13 +76,13 @@ Partial Class ChooseStock
         Me.TextBox1.Location = New System.Drawing.Point(12, 37)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(652, 22)
+        Me.TextBox1.Size = New System.Drawing.Size(740, 22)
         Me.TextBox1.TabIndex = 4
         '
         'TextBox2
         '
         Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(484, 65)
+        Me.TextBox2.Location = New System.Drawing.Point(572, 65)
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ReadOnly = True
@@ -93,7 +93,7 @@ Partial Class ChooseStock
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(677, 307)
+        Me.ClientSize = New System.Drawing.Size(764, 307)
         Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Button2)

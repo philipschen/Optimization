@@ -45,85 +45,168 @@ Public Class NavInput
                 internalID.Add(temp1)
             End While
 
-            Dim totalcount As String = Convert.ToString(shXL.UsedRange.Rows.Count - 1)
-            Dim it As Integer = 0
-            For it2 = 0 To shXL.UsedRange.Rows.Count - 1
-                Dim c0 As String = shXL.Cells(2 + it2, 1).Value
-                Dim c1 As String = shXL.Cells(2 + it2, 2).Value
-                Dim c2 As String = shXL.Cells(2 + it2, 10).Value
-                Dim c3 As String = shXL.Cells(2 + it2, 7).Value
-                Dim c4 As String = shXL.Cells(2 + it2, 8).Value
-                Dim c5 As String = shXL.Cells(2 + it2, 16).Value
-                Dim c6 As String = ""
-                Dim c7 As String = 0
-                Dim c8 As String = ""
-                If String.Equals(c2, "BAR") Then
-                    Dim inputinternal As Integer
-                    Dim rn As New Random
-                    inputinternal = rn.Next(10000, 99999)
-                    For it1 = 0 To internalID.Count - 1
-                        If internalID(it1) = inputinternal Or usedID.Contains(inputinternal) Then
-                            it1 = 0
-                            inputinternal = rn.Next(10000, 99999)
+            Dim frmchoice As chooseNAV = New chooseNAV()
+            frmchoice.ShowDialog()
+            If frmchoice.choice = 0 Then
+                Dim totalcount As String = Convert.ToString(shXL.UsedRange.Rows.Count - 1)
+                Dim it As Integer = 0
+                For it2 = 0 To shXL.UsedRange.Rows.Count - 1
+                    Dim c0 As String = shXL.Cells(2 + it2, 1).Value 'id1
+                    Dim c1 As String = shXL.Cells(2 + it2, 2).Value 'id2
+                    Dim c2 As String = shXL.Cells(2 + it2, 15).Value ' uom
+                    Dim c3 As String = shXL.Cells(2 + it2, 7).Value '
+                    Dim c4 As String = shXL.Cells(2 + it2, 8).Value '
+                    Dim c5 As String = shXL.Cells(2 + it2, 3).Value ' count
+                    Dim c6 As String = ""
+                    Dim c7 As String = 0
+                    Dim c8 As String = ""
+                    Dim c5s As Integer = Math.Round(Convert.ToDouble(c5))
+                    c5 = c5s
+                    If String.Equals(c2, "BAR") AndAlso c5s >= 0 Then
+                        Dim inputinternal As Integer
+                        Dim rn As New Random
+                        inputinternal = rn.Next(10000, 99999)
+                        For it1 = 0 To internalID.Count - 1
+                            If internalID(it1) = inputinternal Or usedID.Contains(inputinternal) Then
+                                it1 = 0
+                                inputinternal = rn.Next(10000, 99999)
+                            End If
+                        Next
+                        usedID.Add(inputinternal)
+
+                        Label1.Text = "Loading " + it2.ToString + "/" + totalcount
+
+                        Dim in0 As String = ""
+                        Dim in1 As String = ""
+                        Dim in2 As String = ""
+                        Dim in3 As String = ""
+                        Dim in4 As String = ""
+                        Dim in5 As String = ""
+                        Dim in6 As String = ""
+                        Dim in8 As String = ""
+                        Dim in10 As String = ""
+
+
+                        If c0 IsNot Nothing Then
+                            in1 = c0
                         End If
-                    Next
-                    usedID.Add(inputinternal)
+                        If c1 IsNot Nothing Then
+                            in2 = c1
+                        End If
+                        If c3 IsNot Nothing Then
+                            in3 = c3
+                        End If
+                        If c5 IsNot Nothing Then
+                            in5 = c5
+                        End If
 
-                    Label1.Text = "Loading " + it2.ToString + "/" + totalcount
-
-                    Dim in0 As String = ""
-                    Dim in1 As String = ""
-                    Dim in2 As String = ""
-                    Dim in3 As String = ""
-                    Dim in4 As String = ""
-                    Dim in5 As String = ""
-                    Dim in6 As String = ""
-                    Dim in8 As String = ""
-                    Dim in10 As String = ""
-
-
-                    If c0 IsNot Nothing Then
-                        in1 = c0
+                        DataGridView1.Rows.Add()
+                        DataGridView1.Rows(it).Cells(0).Value = in0
+                        DataGridView1.Rows(it).Cells(1).Value = in1
+                        DataGridView1.Rows(it).Cells(2).Value = in2
+                        DataGridView1.Rows(it).Cells(3).Value = in3
+                        DataGridView1.Rows(it).Cells(4).Value = in4
+                        DataGridView1.Rows(it).Cells(5).Value = "0"
+                        DataGridView1.Rows(it).Cells(6).Value = in5
+                        DataGridView1.Rows(it).Cells(7).Value = inputinternal
+                        DataGridView1.Rows(it).Cells(8).Value = in8
+                        DataGridView1.Rows(it).Cells(9).Value = 0
+                        DataGridView1.Rows(it).Cells(10).Value = in10
+                        it += 1
                     End If
-                    If c1 IsNot Nothing Then
-                        in2 = c1
-                    End If
-                    If c3 IsNot Nothing Then
-                        in3 = c3
-                    End If
-                    If c5 IsNot Nothing Then
-                        in5 = c5
-                    End If
+                Next
+                Label1.Text = "Loading Complete"
+                DataGridView1.AutoResizeColumns()
+                readerObj.Close()
+                shXL = Nothing
+                wbXl = Nothing
+                appXL.Quit()
+                appXL = Nothing
+                GC.Collect()
+            ElseIf frmchoice.choice = 1 Then
+                Dim totalcount As String = Convert.ToString(shXL.UsedRange.Rows.Count - 1)
+                Dim it As Integer = 0
+                For it2 = 0 To shXL.UsedRange.Rows.Count - 1
+                    Dim c0 As String = shXL.Cells(2 + it2, 1).Value 'id1
+                    Dim c1 As String = shXL.Cells(2 + it2, 2).Value 'id2
+                    Dim c2 As String = shXL.Cells(2 + it2, 15).Value ' uom
+                    Dim c3 As String = shXL.Cells(2 + it2, 7).Value '
+                    Dim c4 As String = shXL.Cells(2 + it2, 8).Value '
+                    Dim c5 As String = shXL.Cells(2 + it2, 3).Value ' count
+                    Dim c6 As String = ""
+                    Dim c7 As String = 0
+                    Dim c8 As String = ""
+                    Dim c5s As Integer = Math.Round(Convert.ToDouble(c5))
+                    c5 = c5s
+                    If String.Equals(c2, "BAR") AndAlso c5s > 0 Then
+                        Dim inputinternal As Integer
+                        Dim rn As New Random
+                        inputinternal = rn.Next(10000, 99999)
+                        For it1 = 0 To internalID.Count - 1
+                            If internalID(it1) = inputinternal Or usedID.Contains(inputinternal) Then
+                                it1 = 0
+                                inputinternal = rn.Next(10000, 99999)
+                            End If
+                        Next
+                        usedID.Add(inputinternal)
 
-                    DataGridView1.Rows.Add()
-                    DataGridView1.Rows(it).Cells(0).Value = in0
-                    DataGridView1.Rows(it).Cells(1).Value = in1
-                    DataGridView1.Rows(it).Cells(2).Value = in2
-                    DataGridView1.Rows(it).Cells(3).Value = in3
-                    DataGridView1.Rows(it).Cells(4).Value = in4
-                    DataGridView1.Rows(it).Cells(5).Value = "0"
-                    DataGridView1.Rows(it).Cells(6).Value = in5
-                    DataGridView1.Rows(it).Cells(7).Value = inputinternal
-                    DataGridView1.Rows(it).Cells(8).Value = in8
-                    DataGridView1.Rows(it).Cells(9).Value = 0
-                    DataGridView1.Rows(it).Cells(10).Value = in10
-                    it += 1
-                End If
-            Next
-            Label1.Text = "Loading Complete"
-            DataGridView1.AutoResizeColumns()
-            readerObj.Close()
-            shXL = Nothing
-            wbXl = Nothing
-            appXL.Quit()
-            appXL = Nothing
-            GC.Collect()
+                        Label1.Text = "Loading " + it2.ToString + "/" + totalcount
+
+                        Dim in0 As String = ""
+                        Dim in1 As String = ""
+                        Dim in2 As String = ""
+                        Dim in3 As String = ""
+                        Dim in4 As String = ""
+                        Dim in5 As String = ""
+                        Dim in6 As String = ""
+                        Dim in8 As String = ""
+                        Dim in10 As String = ""
+
+
+                        If c0 IsNot Nothing Then
+                            in1 = c0
+                        End If
+                        If c1 IsNot Nothing Then
+                            in2 = c1
+                        End If
+                        If c3 IsNot Nothing Then
+                            in3 = c3
+                        End If
+                        If c5 IsNot Nothing Then
+                            in5 = c5
+                        End If
+
+                        DataGridView1.Rows.Add()
+                        DataGridView1.Rows(it).Cells(0).Value = in0
+                        DataGridView1.Rows(it).Cells(1).Value = in1
+                        DataGridView1.Rows(it).Cells(2).Value = in2
+                        DataGridView1.Rows(it).Cells(3).Value = in3
+                        DataGridView1.Rows(it).Cells(4).Value = in4
+                        DataGridView1.Rows(it).Cells(5).Value = "0"
+                        DataGridView1.Rows(it).Cells(6).Value = in5
+                        DataGridView1.Rows(it).Cells(7).Value = inputinternal
+                        DataGridView1.Rows(it).Cells(8).Value = in8
+                        DataGridView1.Rows(it).Cells(9).Value = 0
+                        DataGridView1.Rows(it).Cells(10).Value = in10
+                        it += 1
+                    End If
+                Next
+                Label1.Text = "Loading Complete"
+                DataGridView1.AutoResizeColumns()
+                readerObj.Close()
+                shXL = Nothing
+                wbXl = Nothing
+                appXL.Quit()
+                appXL = Nothing
+                GC.Collect()
+            End If
         End If
 
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Label1.Text = "Uploading..."
+
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
         con.ConnectionString = connectionstring.connect1
@@ -192,8 +275,10 @@ Public Class NavInput
             ar5(it) = frminfo.size1
             ar8(it) = frminfo.saw
             ar9(it) = frminfo.minsize
-            cmd1.CommandText = "INSERT INTO stockNew VALUES('" + ar0(it) + "', '" + ar1(it) + "' , '" + ar2(it) + "', '" + ar3(it) + "' , '" + ar4(it) + "', " + ar5(it) + " , " + ar6(it) + ", " + ar7(it) + ", '" + ar8(it) + "'," + ar9(it) + ",'" + ar10(it) + "')"
-            cmd1.ExecuteNonQuery()
+            If Not ar3(it).ToString.Contains("'") Then
+                cmd1.CommandText = "INSERT INTO stockNew VALUES('" + ar0(it) + "', '" + ar1(it) + "' , '" + ar2(it) + "', '" + ar3(it) + "' , '" + ar4(it) + "', " + ar5(it) + " , " + ar6(it) + ", " + ar7(it) + ", '" + ar8(it) + "'," + ar9(it) + ",'" + ar10(it) + "')"
+                cmd1.ExecuteNonQuery()
+            End If
         Next
 
         Label1.Text = "Upload Complete"
