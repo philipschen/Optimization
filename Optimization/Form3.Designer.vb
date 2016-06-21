@@ -52,26 +52,27 @@ Partial Class Form3
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(19, 26)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
+        Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(62, 13)
+        Me.Label1.Size = New System.Drawing.Size(102, 24)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Input Stock"
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(22, 58)
+        Me.Button1.Location = New System.Drawing.Point(12, 48)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.Size = New System.Drawing.Size(92, 33)
         Me.Button1.TabIndex = 1
         Me.Button1.Text = "Manually"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(103, 58)
+        Me.Button2.Location = New System.Drawing.Point(110, 48)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.Size = New System.Drawing.Size(92, 33)
         Me.Button2.TabIndex = 2
         Me.Button2.Text = "From Excell"
         Me.Button2.UseVisualStyleBackColor = True
@@ -79,9 +80,10 @@ Partial Class Form3
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(22, 92)
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.Label3.Location = New System.Drawing.Point(8, 84)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(112, 13)
+        Me.Label3.Size = New System.Drawing.Size(169, 20)
         Me.Label3.TabIndex = 23
         Me.Label3.Text = "Input Series And Color"
         '
@@ -128,7 +130,7 @@ Partial Class Form3
         'ListBox1
         '
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(22, 256)
+        Me.ListBox1.Location = New System.Drawing.Point(22, 253)
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.Size = New System.Drawing.Size(120, 316)
         Me.ListBox1.TabIndex = 16

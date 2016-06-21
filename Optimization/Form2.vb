@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+
 Public Class Form2
 
     Protected partID As ArrayList = New ArrayList()
@@ -348,6 +349,15 @@ Public Class Form2
                 ListBox3.Items.Add(id)
                 Dim tempPart As String = Convert.ToString(iPart)
                 test1 = Calculator.CreateStockImage(iPart, "test" + tempPart + ".png", 500)
+
+                'Dim document As PdfDocument = New PdfDocument
+                'document.Info.Title = "Created with PDFsharp"
+                'Dim page As PdfPage = document.AddPage
+                'Dim gfx As XGraphics = XGraphics.FromPdfPage(page)
+                'Dim font As XFont = New XFont("Verdana", 20, XFontStyle.Bold)
+                'gfx.DrawString("Hello, World!", font, XBrushes.Black, New XRect(0, 0, page.Width.Point, page.Height.Point), XStringFormats.Center)
+                'Dim filename As String = "HelloWorld.pdf"
+                'document.Save(filename)
             Next iPart
 
         Else
