@@ -56,6 +56,12 @@
     <Reference Include="PdfSharp.Charting">
       <HintPath>PDFsharp-MigraDocFoundation-Assemblies-1_32\GDI+\PdfSharp.Charting.dll</HintPath>
     </Reference>
+    <Reference Include="PdfSharp.Charting.resources">
+      <HintPath>PDFsharp-MigraDocFoundation-Assemblies-1_32\GDI+\de\PdfSharp.Charting.resources.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.resources">
+      <HintPath>PDFsharp-MigraDocFoundation-Assemblies-1_32\GDI+\de\PdfSharp.resources.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -157,6 +163,9 @@
     <None Include="PartsDataSet.xss">
       <DependentUpon>PartsDataSet.xsd</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

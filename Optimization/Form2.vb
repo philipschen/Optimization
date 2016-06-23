@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports PdfSharp.Drawing
+Imports PdfSharp.Pdf
 
 Public Class Form2
 
@@ -6,7 +8,6 @@ Public Class Form2
     Protected partColor As ArrayList = New ArrayList()
     Protected partSize As ArrayList = New ArrayList()
     Protected partCount As ArrayList = New ArrayList()
-
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) _
    Handles MyBase.Load
@@ -264,8 +265,12 @@ Public Class Form2
         Dim stockColor As ArrayList = New ArrayList()
         Dim stockSize As ArrayList = New ArrayList()
         Dim stockCount As ArrayList = New ArrayList()
-
-
+        Dim cutID As ArrayList = New ArrayList()
+        Dim cutStock As ArrayList = New ArrayList()
+        Dim cutPos As ArrayList = New ArrayList()
+        Dim cutLength As ArrayList = New ArrayList()
+        Dim cutPicID As ArrayList = New ArrayList()
+        Dim pagecount As Integer
 
         cmd.CommandText = "SELECT stockID, Color, Size, Count FROM Parts"
         cmd.ExecuteNonQuery()
@@ -288,6 +293,7 @@ Public Class Form2
                 Exit While
             End If
         End While
+
         it1 = ""
         For Each it1 In stockID
             Dim temp1 As Integer = Convert.ToInt32(stockCount(it2))
@@ -319,49 +325,171 @@ Public Class Form2
             it2 += 1
         Next
 
+        '
+        'Calculates Cuts 
+        '
+
         Dim result As String
         result = Calculator.ExecuteLinear()
 
-        Dim test1 As Boolean
+        '
+        'Formats Outputs
+        '
 
         If (result = "") Then
             Dim StockNo As Integer
             Dim Length As Double
             Dim X As Double
             Dim iPart As Integer
-            Dim id As String
+            Dim id As String = ""
+
+            Dim document As PdfDocument = New PdfDocument
+            document.Info.Title = "Cut Instructions"
+
+            Dim font As XFont = New XFont("Verdana", 16, XFontStyle.Bold)
+            Dim filename As String = "CutInstructions.pdf"
 
             For iPart = 0 To Calculator.PartCount - 1
                 ' Get sizes and location of the part with index Iter
                 ' in case of incomplete optimization the function returns FALSE
-
-                If Calculator.GetResultLinearPart(iPart, StockNo, Length, X, id) Then
-                    Console.WriteLine("Part ID={0};  stock={1};  X={2}  Length={3} ", id, StockNo, X, Length)
-                Else
-                    Console.WriteLine("Source part {0} was not placed", iPart)
-                End If
-
-                If Calculator.GetResultLinearPart(iPart, StockNo, Length, X, id) Then
-                    Console.WriteLine("Part ID={0};  stock={1};  X={2}  Length={3}", id, StockNo, X, Length)
-                Else
-                    Console.WriteLine("Source part {0} was not placed", iPart)
-                End If
-                ListBox3.Items.Add(id)
                 Dim tempPart As String = Convert.ToString(iPart)
-                test1 = Calculator.CreateStockImage(iPart, "test" + tempPart + ".png", 500)
 
-                'Dim document As PdfDocument = New PdfDocument
-                'document.Info.Title = "Created with PDFsharp"
-                'Dim page As PdfPage = document.AddPage
-                'Dim gfx As XGraphics = XGraphics.FromPdfPage(page)
-                'Dim font As XFont = New XFont("Verdana", 20, XFontStyle.Bold)
-                'gfx.DrawString("Hello, World!", font, XBrushes.Black, New XRect(0, 0, page.Width.Point, page.Height.Point), XStringFormats.Center)
-                'Dim filename As String = "HelloWorld.pdf"
-                'document.Save(filename)
+                If Calculator.GetResultLinearPart(iPart, StockNo, Length, X, id) Then
+                    cutStock.Add(StockNo)
+                    cutLength.Add(Length)
+                    cutPos.Add(X)
+                    cutID.Add(id)
+                    cutPicID.Add(iPart)
+                    Console.WriteLine("Part ID={0};  stock={1};  X={2}  Length={3} ", cutID(iPart), cutStock(iPart), cutPos(iPart), cutLength(iPart))
+
+                    If StockNo > pagecount Then
+                        pagecount = StockNo
+                    End If
+
+                Else
+                    Console.WriteLine("Source part {0} was Not placed", iPart)
+                End If
+
+                Dim tempPart1 As String = Convert.ToString(iPart)
+                Calculator.CreateStockImage(iPart, "test" + tempPart1 + ".png", 500)
+
             Next iPart
 
+            '
+            'Orders Cuts
+            '
+
+            Dim printID As ArrayList = cutID
+            Dim printStock As ArrayList = cutStock
+            Dim printPos As ArrayList = cutPos
+            Dim printLength As ArrayList = cutLength
+
+            For it = 0 To printStock.Count - 2
+                For it2 = 0 To printStock.Count - 2
+
+                    If printPos(it + 1) < printPos(it) Then
+
+                        Dim temp As String = printID(it + 1)
+                        printID.RemoveAt(it + 1)
+                        printID.Insert(it, temp)
+
+                        Dim temp1 As Integer = printStock(it + 1)
+                        printStock.RemoveAt(it + 1)
+                        printStock.Insert(it, temp)
+
+                        Dim temp2 As Double = printPos(it + 1)
+                        printPos.RemoveAt(it + 1)
+                        printPos.Insert(it, temp)
+
+                        Dim temp3 As Double = printLength(it + 1)
+                        printLength.RemoveAt(it + 1)
+                        printLength.Insert(it, temp)
+                    End If
+
+                Next
+            Next
+
+            it = 0
+            it2 = 0
+            For it = 0 To pagecount
+
+                ListBox3.Items.Add(printID(it))
+
+
+
+
+                Dim pos1 As Integer = 0
+                For it2 = 0 To cutStock.Count - 1
+
+
+                    If cutStock(it2) = it Then
+                        gfx.DrawString("Part ID=" + cutID(it) + "  stock=" + Stockt + "  X=" + xt + "  Length=" + Lengtht, font, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        pos1 += 20
+                    End If
+                Next
+            Next
+
+            Dim StockIndex, VStockCount, ViPart, iLayout, partCount, partIndex, tmp, iStock As Integer
+            Dim partLength, VX, StockLength As Double
+            Dim StockActive As Boolean
+
+            Console.WriteLine("Created {0} different layouts", Calculator.LayoutCount)
+            ' IsAngle = Calculator.CrossSection > 0
+            ' Iterate by each layout and output information about each layout,
+            ' such as number and length of used stocks and part indices cut from the stocks
+            For iLayout = 0 To Calculator.LayoutCount - 1
+                Calculator.GetLayoutInfo(iLayout, StockIndex, VStockCount)
+                ' StockIndex is global index of the first stock used in the layout iLayout
+                ' VStockCount is quantity of stocks of the same length as StockIndex used for this layout
+                If VStockCount > 0 Then
+
+                    Console.WriteLine("Layout={0}:  Start Stock={1};  Count of Stock={2}", iLayout, StockIndex, VStockCount)
+                    ' Output information about each stock, such as stock Length
+                    For iStock = StockIndex To StockIndex + VStockCount - 1
+                        If Calculator.GetLinearStockInfo(iStock, StockLength, StockActive) Then
+
+                            Dim pageNo As String = Convert.ToString(iLayout + 1)
+                            Dim tempIt As String = Convert.ToString(iLayout)
+                            Dim page As PdfPage = document.AddPage
+                            Dim gfx As XGraphics = XGraphics.FromPdfPage(page)
+                            Dim image As XImage = XImage.FromFile("test" + tempIt + ".png")
+
+                            gfx.DrawImage(image, 50, 700, 500, 30)
+                            gfx.DrawString("Page " + pageNo, font, XBrushes.Black, New XRect(50, 50, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+
+
+                            Console.WriteLine("Stock={0}:  Length={1}", iStock, StockLength)
+
+                            Dim Stockt As String = Convert.ToString(iStock)
+                            Dim xt As String = Convert.ToString(StockLength)
+                            'Dim Lengtht As String = Convert.ToString(cutLength(it2))
+                            gfx.DrawString("Stock = " + cutID(it) + "  stock=" + Stockt + "  X=" + xt + "  Length=" + Lengtht, font, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                            pos1 += 20
+                            ' Output the information about parts cut from this stock
+                            ' First we get quantity of parts cut from the stock
+                            partCount = Calculator.GetPartCountOnStock(iStock)
+                            ' Iterate by parts and get indices of cut parts
+                            For ViPart = 0 To partCount - 1
+                                ' Get global part index of ViPart cut from the current stock
+                                partIndex = Calculator.GetPartIndexOnStock(iStock, ViPart)
+                                ' Get length and location of the part
+                                ' X - coordinate on the stock where the part beggins.
+
+                                Calculator.GetResultLinearPart(partIndex, tmp, partLength, VX)
+                                    ' Output the part information
+                                    Console.WriteLine("Part= {0}:  X={1}  Length={2}", partIndex, VX, partLength)
+
+                            Next ViPart
+                        End If
+                    Next iStock
+                End If
+            Next iLayout
+
+            document.Save(filename)
+            Process.Start(filename)
+
         Else
-            Label5.Text = "calculate fail"
+            Console.WriteLine("calculate fail")
         End If
 
     End Sub
@@ -369,7 +497,7 @@ Public Class Form2
     Private Sub ListBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox3.SelectedIndexChanged
         Dim iSelector As Integer = ListBox3.SelectedIndex()
         Dim TiSelector As String = Convert.ToString(iSelector)
-        PictureBox2.Image = Image.FromFile("C:\Users\Veritias\Documents\visual studio 2015\Projects\Project1\WindowsApplication1\bin\Debug\test" + TiSelector + ".png")
+        PictureBox2.Image = Image.FromFile("test" + TiSelector + ".png")
     End Sub
 
 End Class
