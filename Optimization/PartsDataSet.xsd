@@ -45,7 +45,7 @@
   <xs:element name="PartsDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="PartsDataSet" msprop:Generator_UserDSName="PartsDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Parts" msprop:Generator_TableClassName="PartsDataTable" msprop:Generator_TableVarName="tableParts" msprop:Generator_TablePropName="Parts" msprop:Generator_RowDeletingName="PartsRowDeleting" msprop:Generator_RowChangingName="PartsRowChanging" msprop:Generator_RowEvHandlerName="PartsRowChangeEventHandler" msprop:Generator_RowDeletedName="PartsRowDeleted" msprop:Generator_UserTableName="Parts" msprop:Generator_RowChangedName="PartsRowChanged" msprop:Generator_RowEvArgName="PartsRowChangeEvent" msprop:Generator_RowClassName="PartsRow">
+        <xs:element name="Parts" msprop:Generator_TableClassName="PartsDataTable" msprop:Generator_TableVarName="tableParts" msprop:Generator_RowChangedName="PartsRowChanged" msprop:Generator_TablePropName="Parts" msprop:Generator_RowDeletingName="PartsRowDeleting" msprop:Generator_RowChangingName="PartsRowChanging" msprop:Generator_RowEvHandlerName="PartsRowChangeEventHandler" msprop:Generator_RowDeletedName="PartsRowDeleted" msprop:Generator_RowClassName="PartsRow" msprop:Generator_UserTableName="Parts" msprop:Generator_RowEvArgName="PartsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="stockID" msprop:Generator_ColumnVarNameInTable="columnstockID" msprop:Generator_ColumnPropNameInRow="stockID" msprop:Generator_ColumnPropNameInTable="stockIDColumn" msprop:Generator_UserColumnName="stockID" minOccurs="0">

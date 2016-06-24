@@ -40,6 +40,7 @@ Partial Class Form2
         Me.ListBox2 = New System.Windows.Forms.ListBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.ListBox3 = New System.Windows.Forms.ListBox()
+        Me.Button3 = New System.Windows.Forms.Button()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -201,11 +202,21 @@ Partial Class Form2
         Me.ListBox3.Size = New System.Drawing.Size(124, 82)
         Me.ListBox3.TabIndex = 30
         '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(169, 340)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(75, 23)
+        Me.Button3.TabIndex = 31
+        Me.Button3.Text = "Clear Entries"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(967, 549)
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.ListBox3)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.ListBox2)
@@ -249,4 +260,5 @@ Partial Class Form2
     Friend WithEvents ListBox2 As ListBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents ListBox3 As ListBox
+    Friend WithEvents Button3 As Button
 End Class
