@@ -23,19 +23,30 @@ Public Class Form1
 
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=Parts;Integrated Security=True"
+        'con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=Parts;Integrated Security=True"
+        'con.Open()
+        'cmd.Connection = con
+
+        'cmd.CommandText = "DELETE FROM Parts"
+        'cmd.ExecuteNonQuery()
+
+        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
         con.Open()
         cmd.Connection = con
 
-        cmd.CommandText = "DELETE FROM Parts"
+        cmd.CommandText = "DELETE FROM stockNew"
 
         cmd.ExecuteNonQuery()
-
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim ext1 As Extrusions = New Extrusions()
         ext1.Show()
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim ext2 As NewExtrusions = New NewExtrusions()
+        ext2.Show()
     End Sub
 End Class
 

@@ -24,7 +24,6 @@ Public Class Form2
         ListBox1.SelectedIndex = 0
         ListBox2.SelectedIndex = 0
 
-
     End Sub
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged

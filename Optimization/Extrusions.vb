@@ -1,8 +1,23 @@
 ﻿Imports Excel = Microsoft.Office.Interop.Excel
+Imports System.Data.SqlClient
+
 Public Class Extrusions
+
+    Dim stockID1 As ArrayList = New ArrayList
+    Dim stockID2 As ArrayList = New ArrayList
+    Dim stockID3 As ArrayList = New ArrayList
+    Dim description As ArrayList = New ArrayList
+    Dim color As ArrayList = New ArrayList
+    Dim size As ArrayList = New ArrayList
+    Dim internalID As ArrayList = New ArrayList
+    Dim Used As ArrayList = New ArrayList
+
     Private Sub Extrusions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set the caption bar text of the form.  
         Me.Text = "Easy Cut V1.0"
+
+
+
 
         ListBox1.Items.Add("Bronze")
         ListBox1.Items.Add("White")
@@ -10,12 +25,101 @@ Public Class Extrusions
         ListBox1.Items.Add("Other")
         ListBox2.Items.Add("New Part")
 
+        Dim con As New SqlConnection
+        Dim cmd As New SqlCommand
+        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.Open()
+        cmd.Connection = con
+
+        cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size FROM stockNew"
+        cmd.ExecuteNonQuery()
+        Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
+
+        '
+        ' Reads data from database 
+        '
+
+        While readerObj.Read
+            Dim tempSize As Integer = Convert.ToInt32(readerObj("Size").ToString)
+
+            ComboBox1.Items.Add(readerObj("stockID1").ToString)
+            ComboBox2.Items.Add(readerObj("stockID2").ToString)
+            ComboBox3.Items.Add(readerObj("stockID3").ToString)
+            description.Add(readerObj("description").ToString)
+
+            stockID1.Add(readerObj("stockID1").ToString)
+            stockID2.Add(readerObj("stockID2").ToString)
+            stockID3.Add(readerObj("stockID3").ToString)
+            color.Add(readerObj("color").ToString)
+            size.Add(readerObj("size").ToString)
+            ' internalID.Add(readerObj("internalID").ToString)
+
+
+            If readerObj.IsDBNull(1) Then
+                readerObj.Close()
+                Exit While
+            End If
+        End While
+
+    End Sub
+
+    Private Sub comboBox1_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+
+        For it1 = 0 To description.Count - 1
+
+            If String.Equals(ComboBox1.SelectedText, stockID1(it1)) And Not Used.Contains(it1) Then
+                ListBox2.Items.Add(description(it1) + " " + color(it1) + " ")
+                Used.Add(it1)
+            End If
+        Next
+
+    End Sub
+
+    Private Sub comboBox2_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedValueChanged
+
+        For it1 = 0 To description.Count - 1
+
+            If String.Equals(ComboBox2.SelectedText, stockID2(it1)) And Not Used.Contains(it1) Then
+                ListBox2.Items.Add(description(it1) + " " + color(it1) + " ")
+                Used.Add(it1)
+
+            End If
+        Next
+
+    End Sub
+
+    Private Sub comboBox3_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedValueChanged
+
+        For it1 = 0 To description.Count - 1
+
+            If String.Equals(ComboBox3.SelectedText, stockID3(it1)) And Not Used.Contains(it1) Then
+                ListBox2.Items.Add(description(it1) + " " + color(it1) + " ")
+                Used.Add(it1)
+            End If
+        Next
+
+    End Sub
+
+    Private Sub ListBox2_SelectedValueChanged(sender As Object, e As EventArgs) Handles ListBox2.SelectedValueChanged
+        Dim pString As String = ""
+        If ListBox2.SelectedIndex = 0 Then
+            pString = "Cannot find piece, Click Input to input new stock"
+        End If
+        If ListBox2.SelectedIndex > 0 Then
+            pString = description(Used(ListBox2.SelectedIndex - 1)) + vbCrLf + color(Used(ListBox2.SelectedIndex - 1)) + vbCrLf + size(Used(ListBox2.SelectedIndex - 1)) + vbCrLf + stockID1(Used(ListBox2.SelectedIndex - 1)) + vbCrLf + stockID2(Used(ListBox2.SelectedIndex - 1)) + vbCrLf + stockID3(Used(ListBox2.SelectedIndex - 1))
+
+        End If
+        RichTextBox1.Text = pString
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
         If ListBox2.SelectedItem = "New Part" Then
             Dim frmNewExtr As NewExtrusions = New NewExtrusions()
             frmNewExtr.ShowDialog()
+
+        ElseIf ListBox2.SelectedIndex >= 0 Then
+
         End If
 
     End Sub
@@ -85,9 +189,5 @@ Public Class Extrusions
         appXL = Nothing
     End Sub
 
-    Private Sub ListBox2_SelectedValueChanged(sender As Object, e As EventArgs) Handles ListBox2.SelectedValueChanged
-        Dim pString As String
-        pString = "Temporary Description" + vbCrLf + "Temporary color"
-        RichTextBox1.Text = pString
-    End Sub
+
 End Class

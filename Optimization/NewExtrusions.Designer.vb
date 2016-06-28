@@ -34,7 +34,7 @@ Partial Class NewExtrusions
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -45,14 +45,14 @@ Partial Class NewExtrusions
         '
         Me.TextBox1.Location = New System.Drawing.Point(37, 117)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox1.Size = New System.Drawing.Size(165, 20)
         Me.TextBox1.TabIndex = 0
         '
         'TextBox2
         '
         Me.TextBox2.Location = New System.Drawing.Point(37, 185)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox2.Size = New System.Drawing.Size(165, 20)
         Me.TextBox2.TabIndex = 1
         '
         'Label1
@@ -102,22 +102,22 @@ Partial Class NewExtrusions
         '
         'TextBox3
         '
-        Me.TextBox3.Location = New System.Drawing.Point(37, 328)
+        Me.TextBox3.Location = New System.Drawing.Point(37, 266)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(281, 20)
-        Me.TextBox3.TabIndex = 6
+        Me.TextBox3.Size = New System.Drawing.Size(165, 20)
+        Me.TextBox3.TabIndex = 2
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(37, 260)
+        Me.TextBox4.Location = New System.Drawing.Point(37, 327)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox4.TabIndex = 5
+        Me.TextBox4.Size = New System.Drawing.Size(299, 20)
+        Me.TextBox4.TabIndex = 3
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(239, 156)
+        Me.Label6.Location = New System.Drawing.Point(233, 88)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(64, 13)
         Me.Label6.TabIndex = 12
@@ -125,26 +125,26 @@ Partial Class NewExtrusions
         '
         'TextBox5
         '
-        Me.TextBox5.Location = New System.Drawing.Point(242, 185)
+        Me.TextBox5.Location = New System.Drawing.Point(236, 117)
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox5.TabIndex = 10
+        Me.TextBox5.TabIndex = 4
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(239, 91)
+        Me.Label9.Location = New System.Drawing.Point(233, 155)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(46, 13)
+        Me.Label9.Size = New System.Drawing.Size(73, 13)
         Me.Label9.TabIndex = 15
-        Me.Label9.Text = "Quantity"
+        Me.Label9.Text = "Initial Quantity"
         '
-        'TextBox8
+        'TextBox6
         '
-        Me.TextBox8.Location = New System.Drawing.Point(242, 117)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox8.TabIndex = 13
+        Me.TextBox6.Location = New System.Drawing.Point(236, 180)
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox6.TabIndex = 5
         '
         'Label7
         '
@@ -165,20 +165,20 @@ Partial Class NewExtrusions
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(278, 427)
+        Me.Button1.Location = New System.Drawing.Point(180, 413)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.Size = New System.Drawing.Size(75, 49)
         Me.Button1.TabIndex = 17
-        Me.Button1.Text = "Button1"
+        Me.Button1.Text = "Accept"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(383, 427)
+        Me.Button2.Location = New System.Drawing.Point(261, 413)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.Size = New System.Drawing.Size(75, 49)
         Me.Button2.TabIndex = 18
-        Me.Button2.Text = "Button2"
+        Me.Button2.Text = "Close"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'NewExtrusions
@@ -190,7 +190,7 @@ Partial Class NewExtrusions
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.TextBox8)
+        Me.Controls.Add(Me.TextBox6)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.TextBox5)
@@ -223,7 +223,7 @@ Partial Class NewExtrusions
     Friend WithEvents TextBox5 As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label9 As Label
-    Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents TextBox6 As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents ListBox1 As ListBox
     Friend WithEvents Button2 As Button

@@ -244,14 +244,18 @@ Partial Class Extrusions
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(121, 24)
         Me.ComboBox3.TabIndex = 2
+        Me.ComboBox3.DropDownStyle = ComboBoxStyle.DropDownList
         '
         'ComboBox2
         '
+        Me.ComboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+        Me.ComboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Location = New System.Drawing.Point(6, 107)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(121, 24)
         Me.ComboBox2.TabIndex = 1
+        Me.ComboBox2.DropDownStyle = ComboBoxStyle.DropDownList
         '
         'ComboBox1
         '
@@ -260,6 +264,7 @@ Partial Class Extrusions
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(121, 24)
         Me.ComboBox1.TabIndex = 0
+        Me.ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList
         '
         'TabControl1
         '
