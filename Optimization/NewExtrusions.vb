@@ -40,10 +40,10 @@ Public Class NewExtrusions
             While readerObj.Read
                 Dim temp1 As Integer = Convert.ToInt64(readerObj("internalID").ToString)
                 internalID.Add(temp1)
-                If readerObj.IsDBNull(1) Then
-                    readerObj.Close()
-                    Exit While
-                End If
+                '   If readerObj.IsDBNull(1) Then
+                '  readerObj.Close()
+                ' Exit While
+                ' End If
             End While
 
             If vUpdate Then

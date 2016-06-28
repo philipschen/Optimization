@@ -191,7 +191,7 @@ Partial Class Extrusions
         Me.ListBox1.ItemHeight = 16
         Me.ListBox1.Location = New System.Drawing.Point(12, 270)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(120, 84)
+        Me.ListBox1.Size = New System.Drawing.Size(132, 84)
         Me.ListBox1.TabIndex = 1
         '
         'GroupBox1
@@ -239,32 +239,32 @@ Partial Class Extrusions
         '
         'ComboBox3
         '
+        Me.ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox3.FormattingEnabled = True
         Me.ComboBox3.Location = New System.Drawing.Point(6, 167)
         Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(121, 24)
+        Me.ComboBox3.Size = New System.Drawing.Size(176, 24)
         Me.ComboBox3.TabIndex = 2
-        Me.ComboBox3.DropDownStyle = ComboBoxStyle.DropDownList
         '
         'ComboBox2
         '
         Me.ComboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
         Me.ComboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Location = New System.Drawing.Point(6, 107)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(121, 24)
+        Me.ComboBox2.Size = New System.Drawing.Size(176, 24)
         Me.ComboBox2.TabIndex = 1
-        Me.ComboBox2.DropDownStyle = ComboBoxStyle.DropDownList
         '
         'ComboBox1
         '
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Location = New System.Drawing.Point(6, 47)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 24)
+        Me.ComboBox1.Size = New System.Drawing.Size(176, 24)
         Me.ComboBox1.TabIndex = 0
-        Me.ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList
         '
         'TabControl1
         '
