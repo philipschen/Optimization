@@ -14,15 +14,6 @@ Public Class DirectlyEdit
         con.Open()
         cmd.Connection = con
 
-        Dim stockID1 As ArrayList = New ArrayList
-        Dim stockID2 As ArrayList = New ArrayList
-        Dim stockID3 As ArrayList = New ArrayList
-        Dim description As ArrayList = New ArrayList
-        Dim color As ArrayList = New ArrayList
-        Dim size1 As ArrayList = New ArrayList
-        Dim internalID As ArrayList = New ArrayList
-        Dim Used As ArrayList = New ArrayList
-
         cmd.CommandText = "DELETE FROM stockNew"
         cmd.ExecuteNonQuery()
 

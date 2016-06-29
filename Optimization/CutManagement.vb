@@ -121,8 +121,10 @@ Public Class CutManagement
 
     Private Sub ListBox2_SelectedValueChanged(sender As Object, e As EventArgs) Handles ListBox2.SelectedValueChanged
         Dim pString As String = ""
-        pString = description(Used(ListBox2.SelectedIndex)) + vbCrLf + color(Used(ListBox2.SelectedIndex)) + vbCrLf + size1(Used(ListBox2.SelectedIndex)) + vbCrLf + stockID1(Used(ListBox2.SelectedIndex)) + vbCrLf + stockID2(Used(ListBox2.SelectedIndex)) + vbCrLf + stockID3(Used(ListBox2.SelectedIndex))
-        RichTextBox1.Text = pString
+        If ListBox2.SelectedIndex >= 0 Then
+            pString = description(Used(ListBox2.SelectedIndex)) + vbCrLf + color(Used(ListBox2.SelectedIndex)) + vbCrLf + size1(Used(ListBox2.SelectedIndex)) + vbCrLf + stockID1(Used(ListBox2.SelectedIndex)) + vbCrLf + stockID2(Used(ListBox2.SelectedIndex)) + vbCrLf + stockID3(Used(ListBox2.SelectedIndex))
+            RichTextBox1.Text = pString
+        End If
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -221,6 +223,17 @@ Public Class CutManagement
         End While
 
         '
+        'Initialize PDF
+        '
+
+        Dim document As PdfDocument = New PdfDocument
+        document.Info.Title = "Cut Instructions"
+
+        Dim font As XFont = New XFont("Verdana", 12, XFontStyle.Bold)
+        Dim font2 As XFont = New XFont("Verdana", 14, XFontStyle.Bold)
+        Dim font3 As XFont = New XFont("Verdana", 16, XFontStyle.Bold)
+        Dim filename As String = "CutInstructions.pdf"
+        '
         ' Adds parts to Calculator
         '
 
@@ -250,15 +263,6 @@ Public Class CutManagement
         '
 
         If (result = "") Then
-            Dim id As String = ""
-
-            Dim document As PdfDocument = New PdfDocument
-            document.Info.Title = "Cut Instructions"
-
-            Dim font As XFont = New XFont("Verdana", 12, XFontStyle.Bold)
-            Dim font2 As XFont = New XFont("Verdana", 14, XFontStyle.Bold)
-            Dim font3 As XFont = New XFont("Verdana", 16, XFontStyle.Bold)
-            Dim filename As String = "CutInstructions.pdf"
 
             '
             'Printing output
@@ -306,7 +310,6 @@ Public Class CutManagement
                                     descriptionString5 = cutstockID3(it)
                                 End If
                             Next
-
 
                             'ListBox3.Items.Add(cutId1)
                             gfx.DrawImage(image, 50, 700, 500, 30)
@@ -357,5 +360,6 @@ Public Class CutManagement
             Console.WriteLine("calculate fail")
         End If
     End Sub
+
 
 End Class
