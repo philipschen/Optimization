@@ -64,6 +64,17 @@ Namespace My
                 Return CType(Me("PartsConnectionString"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrat"& _ 
+            "ed Security=True")>  _
+        Public ReadOnly Property OptimizationDatabaseConnectionString() As String
+            Get
+                Return CType(Me("OptimizationDatabaseConnectionString"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

@@ -70,7 +70,12 @@ Public Class NewExtrusions
                 cmd.ExecuteNonQuery()
                 Me.Close()
             End If
+        ElseIf ListBox1.SelectedIndex < 0 Then
+            Dim warning1 As inputColor = New inputColor()
+            warning1.ShowDialog()
         End If
+
+
 
     End Sub
 

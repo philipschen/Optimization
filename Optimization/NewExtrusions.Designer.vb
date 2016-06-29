@@ -43,140 +43,158 @@ Partial Class NewExtrusions
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(37, 117)
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.TextBox1.Location = New System.Drawing.Point(16, 101)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(165, 20)
+        Me.TextBox1.Size = New System.Drawing.Size(208, 23)
         Me.TextBox1.TabIndex = 0
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(37, 185)
+        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.TextBox2.Location = New System.Drawing.Point(16, 164)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(165, 20)
+        Me.TextBox2.Size = New System.Drawing.Size(208, 23)
         Me.TextBox2.TabIndex = 1
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(34, 31)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(89, 13)
+        Me.Label1.Size = New System.Drawing.Size(179, 20)
         Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Insert New Stock"
+        Me.Label1.Text = "Input New Stock Details"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(34, 91)
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.Label2.Location = New System.Drawing.Point(13, 72)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(83, 13)
+        Me.Label2.Size = New System.Drawing.Size(162, 17)
         Me.Label2.TabIndex = 3
-        Me.Label2.Text = "ID1 Die Number"
+        Me.Label2.Text = "ID1 Die Number:  U1234"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(34, 156)
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.Label3.Location = New System.Drawing.Point(13, 139)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(76, 13)
+        Me.Label3.Size = New System.Drawing.Size(256, 17)
         Me.Label3.TabIndex = 4
-        Me.Label3.Text = "ID2 Internal ID"
+        Me.Label3.Text = "ID2 Internal ID: 1240-572-000000-F201"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(34, 299)
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.Label4.Location = New System.Drawing.Point(13, 273)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(60, 13)
+        Me.Label4.Size = New System.Drawing.Size(251, 17)
         Me.Label4.TabIndex = 8
-        Me.Label4.Text = "Description"
+        Me.Label4.Text = "Description: SILL WITH 2 1/2 INCH FIN"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(34, 234)
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.Label5.Location = New System.Drawing.Point(13, 201)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(83, 13)
+        Me.Label5.Size = New System.Drawing.Size(247, 17)
         Me.Label5.TabIndex = 7
-        Me.Label5.Text = "ID3 Die Number"
+        Me.Label5.Text = "ID3 Secondary Internal ID: THX-30-05"
         '
         'TextBox3
         '
-        Me.TextBox3.Location = New System.Drawing.Point(37, 266)
+        Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.TextBox3.Location = New System.Drawing.Point(16, 231)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(165, 20)
+        Me.TextBox3.Size = New System.Drawing.Size(208, 23)
         Me.TextBox3.TabIndex = 2
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(37, 327)
+        Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.TextBox4.Location = New System.Drawing.Point(16, 302)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(299, 20)
+        Me.TextBox4.Size = New System.Drawing.Size(348, 23)
         Me.TextBox4.TabIndex = 3
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(233, 88)
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.Label6.Location = New System.Drawing.Point(350, 72)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(64, 13)
+        Me.Label6.Size = New System.Drawing.Size(116, 17)
         Me.Label6.TabIndex = 12
-        Me.Label6.Text = "Default Size"
+        Me.Label6.Text = "Default Size: 240"
         '
         'TextBox5
         '
-        Me.TextBox5.Location = New System.Drawing.Point(236, 117)
+        Me.TextBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.TextBox5.Location = New System.Drawing.Point(353, 101)
         Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox5.Size = New System.Drawing.Size(113, 23)
         Me.TextBox5.TabIndex = 4
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(233, 155)
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.Label9.Location = New System.Drawing.Point(350, 139)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(73, 13)
+        Me.Label9.Size = New System.Drawing.Size(121, 17)
         Me.Label9.TabIndex = 15
-        Me.Label9.Text = "Initial Quantity"
+        Me.Label9.Text = "Initial Quantity: 10"
         '
         'TextBox6
         '
-        Me.TextBox6.Location = New System.Drawing.Point(236, 180)
+        Me.TextBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.TextBox6.Location = New System.Drawing.Point(353, 164)
         Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox6.Size = New System.Drawing.Size(113, 23)
         Me.TextBox6.TabIndex = 5
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(34, 366)
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.Label7.Location = New System.Drawing.Point(13, 355)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(31, 13)
+        Me.Label7.Size = New System.Drawing.Size(41, 17)
         Me.Label7.TabIndex = 11
         Me.Label7.Text = "Color"
         '
         'ListBox1
         '
+        Me.ListBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(37, 398)
+        Me.ListBox1.ItemHeight = 16
+        Me.ListBox1.Location = New System.Drawing.Point(16, 387)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(120, 95)
+        Me.ListBox1.Size = New System.Drawing.Size(120, 84)
         Me.ListBox1.TabIndex = 16
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(180, 413)
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.Button1.Location = New System.Drawing.Point(161, 387)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 49)
+        Me.Button1.Size = New System.Drawing.Size(99, 74)
         Me.Button1.TabIndex = 17
         Me.Button1.Text = "Accept"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(261, 413)
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.Button2.Location = New System.Drawing.Point(266, 387)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 49)
+        Me.Button2.Size = New System.Drawing.Size(98, 74)
         Me.Button2.TabIndex = 18
         Me.Button2.Text = "Close"
         Me.Button2.UseVisualStyleBackColor = True

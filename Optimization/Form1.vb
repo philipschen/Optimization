@@ -8,15 +8,15 @@ Public Class Form1
         '  PictureBox1.SizeMode = PictureBoxSizeMode.AutoSize
 
     End Sub
-    Private Sub BStock_Click(sender As Object, e As EventArgs) _
-   Handles BStock.Click
-        Dim frm3 As Form3 = New Form3()
-        frm3.Show()
+
+    Private Sub BStock_Click(sender As Object, e As EventArgs) Handles BStock.Click
+        Dim ext1 As Extrusions = New Extrusions()
+        ext1.Show()
     End Sub
 
     Private Sub BPart_Click(sender As Object, e As EventArgs) Handles BPart.Click
-        Dim frm2 As Form2 = New Form2()
-        frm2.Show()
+        Dim cutman1 As CutManagement = New CutManagement()
+        cutman1.Show()
     End Sub
 
     Private Sub set_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -40,13 +40,13 @@ Public Class Form1
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim ext1 As Extrusions = New Extrusions()
-        ext1.Show()
+        Dim tables1 As DirectlyEdit = New DirectlyEdit()
+        tables1.Show()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Dim ext2 As NewExtrusions = New NewExtrusions()
-        ext2.Show()
+        Dim excellin1 As StockInputExcell = New StockInputExcell()
+        excellin1.Show()
     End Sub
 End Class
 

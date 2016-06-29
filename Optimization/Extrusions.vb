@@ -13,6 +13,8 @@ Public Class Extrusions
     Dim Used As ArrayList = New ArrayList
 
     Private Sub Extrusions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'OptimizationDatabaseDataSet.stockNew' table. You can move, or remove it, as needed.
+        Me.StockNewTableAdapter.Fill(Me.OptimizationDatabaseDataSet.stockNew)
         ' Set the caption bar text of the form.  
         Me.Text = "Easy Cut V1.0"
 

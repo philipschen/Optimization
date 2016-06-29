@@ -87,6 +87,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CutManagement.Designer.vb">
+      <DependentUpon>CutManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CutManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DirectlyEdit.Designer.vb">
+      <DependentUpon>DirectlyEdit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DirectlyEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Extrusions.Designer.vb">
       <DependentUpon>Extrusions.vb</DependentUpon>
     </Compile>
@@ -112,6 +124,12 @@
     <Compile Include="Form3.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="inputColor.Designer.vb">
+      <DependentUpon>inputColor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inputColor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -133,6 +151,11 @@
     <Compile Include="NewExtrusions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="OptimizationDatabaseDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OptimizationDatabaseDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="PartsDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -141,8 +164,20 @@
     <Compile Include="PartsDataSet.vb">
       <DependentUpon>PartsDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="StockInputExcell.Designer.vb">
+      <DependentUpon>StockInputExcell.vb</DependentUpon>
+    </Compile>
+    <Compile Include="StockInputExcell.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CutManagement.resx">
+      <DependentUpon>CutManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DirectlyEdit.resx">
+      <DependentUpon>DirectlyEdit.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Extrusions.resx">
       <DependentUpon>Extrusions.vb</DependentUpon>
     </EmbeddedResource>
@@ -155,6 +190,9 @@
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="inputColor.resx">
+      <DependentUpon>inputColor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -163,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewExtrusions.resx">
       <DependentUpon>NewExtrusions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockInputExcell.resx">
+      <DependentUpon>StockInputExcell.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +217,17 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="OptimizationDatabaseDataSet.xsc">
+      <DependentUpon>OptimizationDatabaseDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="OptimizationDatabaseDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OptimizationDatabaseDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="OptimizationDatabaseDataSet.xss">
+      <DependentUpon>OptimizationDatabaseDataSet.xsd</DependentUpon>
+    </None>
     <None Include="PartsDataSet.xsc">
       <DependentUpon>PartsDataSet.xsd</DependentUpon>
     </None>
