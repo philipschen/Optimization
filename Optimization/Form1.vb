@@ -34,7 +34,7 @@ Public Class Form1
         con.Open()
         cmd.Connection = con
 
-        cmd.CommandText = "DELETE FROM stockNew Where internalID = 0"
+        cmd.CommandText = "DELETE FROM stockNew"
 
         cmd.ExecuteNonQuery()
     End Sub

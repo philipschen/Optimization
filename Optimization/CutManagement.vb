@@ -177,6 +177,8 @@ Public Class CutManagement
         Dim stockSize As ArrayList = New ArrayList()
         Dim stockCount As ArrayList = New ArrayList()
         Dim stockComboID As ArrayList = New ArrayList()
+        Dim imagecount As Integer = 0
+        Dim imagecountfile As ArrayList = New ArrayList
 
         cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, count, internalID FROM stockNew"
         cmd.ExecuteNonQuery()
@@ -272,7 +274,7 @@ Public Class CutManagement
             Dim partLength, VX, StockLength As Double
             Dim StockActive As Boolean
             Dim cutId1 As String = ""
-
+            iStock = 0
             Console.WriteLine("Created {0} different layouts", Calculator.LayoutCount)
             ' Iterate by each layout and output information about each layout,
             ' such as number and length of used stocks and part indices cut from the stocks
@@ -293,6 +295,8 @@ Public Class CutManagement
                             Dim gfx As XGraphics = XGraphics.FromPdfPage(page)
                             Calculator.CreateStockImage(iStock, "test" + tempIt + ".png", 500)
                             Dim image As XImage = XImage.FromFile("test" + tempIt + ".png")
+                            imagecount = tempIt
+                            imagecountfile.Add(image)
                             Console.WriteLine("picture index: " + tempIt)
                             Dim pos1 As Integer = 0
                             Dim descriptionString As String = ""
@@ -349,16 +353,26 @@ Public Class CutManagement
 
                             Next ViPart
                         End If
+
                     Next iStock
+
                 End If
             Next iLayout
 
             document.Save(filename)
+            document.Close()
             Process.Start(filename)
+            Calculator.Clear()
+            For it = 0 To imagecount
+                Dim temp As String = Convert.ToString(it)
+                imagecountfile(it).Dispose()
+                My.Computer.FileSystem.DeleteFile("test" + temp + ".png")
+            Next
 
         Else
             Console.WriteLine("calculate fail")
         End If
+
     End Sub
 
 

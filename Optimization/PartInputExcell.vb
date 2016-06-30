@@ -1,6 +1,6 @@
 ﻿Imports Excel = Microsoft.Office.Interop.Excel
 Imports System.Data.SqlClient
-Public Class StockInputExcell
+Public Class PartInputExcell
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
