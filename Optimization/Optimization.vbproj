@@ -156,10 +156,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OptimizationDatabaseDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="OptimizationDatabaseDataSet1.Designer.vb">
+    <Compile Include="OptimizationDatabaseDataSet2.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OptimizationDatabaseDataSet1.xsd</DependentUpon>
+      <DependentUpon>OptimizationDatabaseDataSet2.xsd</DependentUpon>
     </Compile>
     <Compile Include="PartInputExcell.Designer.vb">
       <DependentUpon>PartInputExcell.vb</DependentUpon>
@@ -242,16 +242,16 @@
     <None Include="OptimizationDatabaseDataSet.xss">
       <DependentUpon>OptimizationDatabaseDataSet.xsd</DependentUpon>
     </None>
-    <None Include="OptimizationDatabaseDataSet1.xsc">
-      <DependentUpon>OptimizationDatabaseDataSet1.xsd</DependentUpon>
+    <None Include="OptimizationDatabaseDataSet2.xsc">
+      <DependentUpon>OptimizationDatabaseDataSet2.xsd</DependentUpon>
     </None>
-    <None Include="OptimizationDatabaseDataSet1.xsd">
+    <None Include="OptimizationDatabaseDataSet2.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>OptimizationDatabaseDataSet1.Designer.vb</LastGenOutput>
+      <LastGenOutput>OptimizationDatabaseDataSet2.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="OptimizationDatabaseDataSet1.xss">
-      <DependentUpon>OptimizationDatabaseDataSet1.xsd</DependentUpon>
+    <None Include="OptimizationDatabaseDataSet2.xss">
+      <DependentUpon>OptimizationDatabaseDataSet2.xsd</DependentUpon>
     </None>
     <None Include="PartsDataSet.xsc">
       <DependentUpon>PartsDataSet.xsd</DependentUpon>

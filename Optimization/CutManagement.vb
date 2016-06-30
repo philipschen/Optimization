@@ -22,6 +22,15 @@ Public Class CutManagement
     Dim cutUsed As ArrayList = New ArrayList
     Dim cutcount As ArrayList = New ArrayList
 
+    Dim orderstockID1 As ArrayList = New ArrayList
+    Dim orderstockID2 As ArrayList = New ArrayList
+    Dim orderstockID3 As ArrayList = New ArrayList
+    Dim orderdescription As ArrayList = New ArrayList
+    Dim ordercolor As ArrayList = New ArrayList
+    Dim ordersize1 As ArrayList = New ArrayList
+    Dim orderinternalID As ArrayList = New ArrayList
+    Dim orderUsed As ArrayList = New ArrayList
+
     Private Sub CutManagement_load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set the caption bar text of the form.  
         Me.Text = "Easy Cut V1.0"
@@ -37,13 +46,13 @@ Public Class CutManagement
         con.Open()
         cmd.Connection = con
 
+        '
+        ' Reads stock from database 
+        '
         cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, internalID FROM stockNew"
         cmd.ExecuteNonQuery()
         Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
 
-        '
-        ' Reads data from database 
-        '
         While readerObj.Read
             Dim tempSize As Integer = Convert.ToInt32(readerObj("Size").ToString)
 
@@ -64,10 +73,23 @@ Public Class CutManagement
             size1.Add(readerObj("size").ToString)
             internalID.Add(readerObj("internalID").ToString)
 
-            If readerObj.IsDBNull(1) Then
-                readerObj.Close()
-                Exit While
+        End While
+        readerObj.Close()
+
+        '
+        ' Reads parts from database 
+        '
+        cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, internalID, shopNumber FROM part"
+        cmd.ExecuteNonQuery()
+        Dim readerObj1 As SqlClient.SqlDataReader = cmd.ExecuteReader
+
+        While readerObj1.Read
+            Dim tempSize As Double = Convert.ToDouble(readerObj1("Size").ToString)
+
+            If Not ComboBox6.Items.Contains(readerObj1("shopNumber").ToString) Then
+                ComboBox6.Items.Add(readerObj1("shopNumber").ToString)
             End If
+
         End While
 
     End Sub
@@ -375,5 +397,105 @@ Public Class CutManagement
 
     End Sub
 
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+        If CheckBox1.Checked = True Then
+            For it = 0 To ListBox3.Items.Count - 1
+                ListBox3.SetSelected(it, True)
+            Next
+        Else
+            For it = 0 To ListBox3.Items.Count - 1
+                ListBox3.SetSelected(it, False)
+            Next
+        End if
+    End Sub
 
+    Private Sub ComboBox6_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox6.SelectedValueChanged
+        Dim con As New SqlConnection
+        Dim cmd As New SqlCommand
+        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.Open()
+        cmd.Connection = con
+        cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, internalID, shopNumber FROM part"
+        cmd.ExecuteNonQuery()
+        Dim readerObj1 As SqlClient.SqlDataReader = cmd.ExecuteReader
+        orderdescription.Clear()
+        orderstockID1.Clear()
+        orderstockID2.Clear()
+        orderstockID3.Clear()
+        ordercolor.Clear()
+        ordersize1.Clear()
+        orderinternalID.Clear()
+
+        While readerObj1.Read
+            Dim tempSize As Double = Convert.ToDouble(readerObj1("Size").ToString)
+
+            ListBox3.Items.Add(readerObj1("description").ToString)
+
+            If String.Equals(ComboBox6.SelectedItem, readerObj1("shopNumber").ToString) And Not ComboBox5.Items.Contains(readerObj1("stockID2").ToString) Then
+                ComboBox5.Items.Add(readerObj1("stockID2").ToString)
+            End If
+            If String.Equals(ComboBox6.SelectedItem, readerObj1("shopNumber").ToString) And Not ComboBox4.Items.Contains(readerObj1("description").ToString) Then
+                ComboBox4.Items.Add(readerObj1("description").ToString)
+            End If
+            orderdescription.Add(readerObj1("description").ToString)
+            orderstockID1.Add(readerObj1("stockID1").ToString)
+            orderstockID2.Add(readerObj1("stockID2").ToString)
+            orderstockID3.Add(readerObj1("stockID3").ToString)
+            ordercolor.Add(readerObj1("color").ToString)
+            ordersize1.Add(readerObj1("size").ToString)
+            orderinternalID.Add(readerObj1("internalID").ToString)
+
+        End While
+    End Sub
+
+    Private Sub ComboBox5_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox5.SelectedValueChanged
+        ListBox3.Items.Clear()
+        For it = 0 To orderinternalID.Count - 1
+            If String.Equals(ComboBox5.SelectedItem, orderstockID2(it)) Then
+                ListBox3.Items.Add(orderdescription(it))
+            End If
+        Next
+
+    End Sub
+
+    Private Sub ComboBox4_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox4.SelectedValueChanged
+        ListBox3.Items.Clear()
+        For it = 0 To orderinternalID.Count - 1
+            If String.Equals(ComboBox4.SelectedItem, orderdescription(it)) Then
+                ListBox3.Items.Add(orderdescription(it))
+            End If
+        Next
+
+    End Sub
+
+    Private Sub ListBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox3.SelectedIndexChanged
+        Dim pString As String = ""
+        If ListBox3.SelectedIndex >= 0 Then
+            pString = orderdescription(orderUsed(ListBox3.SelectedIndex)) + vbCrLf + ordercolor(orderUsed(ListBox3.SelectedIndex)) + vbCrLf + ordersize1(orderUsed(ListBox3.SelectedIndex)) + vbCrLf + orderstockID2(orderUsed(ListBox3.SelectedIndex))
+            RichTextBox4.Text = pString
+        End If
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        For it = 0 To ListBox3.SelectedIndices.Count - 1
+            cutdescription.Add(description(Used(ListBox3.SelectedIndices(it))))
+            cutstockID1.Add(stockID1(Used(ListBox3.SelectedIndex)))
+            cutstockID2.Add(stockID2(Used(ListBox3.SelectedIndex)))
+            cutstockID3.Add(stockID3(Used(ListBox3.SelectedIndex)))
+            cutcolor.Add(color(Used(ListBox3.SelectedIndex)))
+            cutsize1.Add(size1(Used(ListBox3.SelectedIndex)))
+            cutcount.Add(color(Used(ListBox3.SelectedIndex)))
+            cutinternalID.Add(internalID(Used(ListBox2.SelectedIndex)))
+            cutUsed.Add(Used(ListBox2.SelectedIndex))
+
+            ListBox3.Items.RemoveAt(it)
+        Next
+
+
+        Dim pString As String = ""
+        For it = 0 To cutinternalID.Count - 1
+            pString = pString + cutcolor(it) + " " + cutstockID2(it) + "  Size: " + cutsize1(it) + "  Count: " + cutcount(it) + vbCrLf
+            RichTextBox3.Text = pString
+        Next
+    End Sub
 End Class

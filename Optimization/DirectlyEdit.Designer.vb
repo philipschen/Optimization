@@ -25,6 +25,7 @@ Partial Class DirectlyEdit
         Me.components = New System.ComponentModel.Container()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.stockID1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.stockID2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -37,23 +38,6 @@ Partial Class DirectlyEdit
         Me.context1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.context2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.context3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.StockNewBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.OptimizationDatabaseDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.OptimizationDatabaseDataSet = New Optimization.OptimizationDatabaseDataSet()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.StockID1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.StockID2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.StockID3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescriptionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SizeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.InternalIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Context1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Context2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Context3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.StockNewTableAdapter = New Optimization.OptimizationDatabaseDataSetTableAdapters.stockNewTableAdapter()
         Me.StockID1DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StockID2DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StockID3DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -65,11 +49,13 @@ Partial Class DirectlyEdit
         Me.Context1DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Context2DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Context3DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StockNewBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.OptimizationDatabaseDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.OptimizationDatabaseDataSet = New Optimization.OptimizationDatabaseDataSet()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.StockNewBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.OptimizationDatabaseDataSet1 = New Optimization.OptimizationDatabaseDataSet1()
-        Me.PartsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.PartsTableAdapter = New Optimization.OptimizationDatabaseDataSet1TableAdapters.partsTableAdapter()
         Me.StockID1DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StockID2DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StockID3DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -83,19 +69,35 @@ Partial Class DirectlyEdit
         Me.Context1DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Context2DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Context3DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.PartBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.OptimizationDatabaseDataSet2 = New Optimization.OptimizationDatabaseDataSet2()
+        Me.PartsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.StockID1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StockID2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StockID3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescriptionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SizeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InternalIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Context1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Context2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Context3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StockNewTableAdapter = New Optimization.OptimizationDatabaseDataSetTableAdapters.stockNewTableAdapter()
+        Me.StockNewBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.PartTableAdapter = New Optimization.OptimizationDatabaseDataSet2TableAdapters.partTableAdapter()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.StockNewBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.OptimizationDatabaseDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.OptimizationDatabaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage2.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.StockNewBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.OptimizationDatabaseDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PartBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.OptimizationDatabaseDataSet2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PartsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.StockNewBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -122,6 +124,17 @@ Partial Class DirectlyEdit
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "New Stock"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.Button1.Location = New System.Drawing.Point(3, 530)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(1146, 56)
+        Me.Button1.TabIndex = 5
+        Me.Button1.Text = "Save Changes"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'DataGridView1
         '
@@ -202,113 +215,6 @@ Partial Class DirectlyEdit
         Me.context3.HeaderText = "context3"
         Me.context3.Name = "context3"
         '
-        'StockNewBindingSource
-        '
-        Me.StockNewBindingSource.DataMember = "stockNew"
-        Me.StockNewBindingSource.DataSource = Me.OptimizationDatabaseDataSetBindingSource
-        '
-        'OptimizationDatabaseDataSetBindingSource
-        '
-        Me.OptimizationDatabaseDataSetBindingSource.DataSource = Me.OptimizationDatabaseDataSet
-        Me.OptimizationDatabaseDataSetBindingSource.Position = 0
-        '
-        'OptimizationDatabaseDataSet
-        '
-        Me.OptimizationDatabaseDataSet.DataSetName = "OptimizationDatabaseDataSet"
-        Me.OptimizationDatabaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.Button2)
-        Me.TabPage2.Controls.Add(Me.DataGridView2)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 44)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1152, 589)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Used Stock"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'TabPage3
-        '
-        Me.TabPage3.Location = New System.Drawing.Point(4, 44)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(1152, 589)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Cut Parts"
-        Me.TabPage3.UseVisualStyleBackColor = True
-        '
-        'StockID1DataGridViewTextBoxColumn
-        '
-        Me.StockID1DataGridViewTextBoxColumn.DataPropertyName = "stockID1"
-        Me.StockID1DataGridViewTextBoxColumn.HeaderText = "stockID1"
-        Me.StockID1DataGridViewTextBoxColumn.Name = "StockID1DataGridViewTextBoxColumn"
-        '
-        'StockID2DataGridViewTextBoxColumn
-        '
-        Me.StockID2DataGridViewTextBoxColumn.DataPropertyName = "stockID2"
-        Me.StockID2DataGridViewTextBoxColumn.HeaderText = "stockID2"
-        Me.StockID2DataGridViewTextBoxColumn.Name = "StockID2DataGridViewTextBoxColumn"
-        '
-        'StockID3DataGridViewTextBoxColumn
-        '
-        Me.StockID3DataGridViewTextBoxColumn.DataPropertyName = "stockID3"
-        Me.StockID3DataGridViewTextBoxColumn.HeaderText = "stockID3"
-        Me.StockID3DataGridViewTextBoxColumn.Name = "StockID3DataGridViewTextBoxColumn"
-        '
-        'DescriptionDataGridViewTextBoxColumn
-        '
-        Me.DescriptionDataGridViewTextBoxColumn.DataPropertyName = "description"
-        Me.DescriptionDataGridViewTextBoxColumn.HeaderText = "description"
-        Me.DescriptionDataGridViewTextBoxColumn.Name = "DescriptionDataGridViewTextBoxColumn"
-        '
-        'ColorDataGridViewTextBoxColumn
-        '
-        Me.ColorDataGridViewTextBoxColumn.DataPropertyName = "color"
-        Me.ColorDataGridViewTextBoxColumn.HeaderText = "color"
-        Me.ColorDataGridViewTextBoxColumn.Name = "ColorDataGridViewTextBoxColumn"
-        '
-        'SizeDataGridViewTextBoxColumn
-        '
-        Me.SizeDataGridViewTextBoxColumn.DataPropertyName = "size"
-        Me.SizeDataGridViewTextBoxColumn.HeaderText = "size"
-        Me.SizeDataGridViewTextBoxColumn.Name = "SizeDataGridViewTextBoxColumn"
-        '
-        'CountDataGridViewTextBoxColumn
-        '
-        Me.CountDataGridViewTextBoxColumn.DataPropertyName = "count"
-        Me.CountDataGridViewTextBoxColumn.HeaderText = "count"
-        Me.CountDataGridViewTextBoxColumn.Name = "CountDataGridViewTextBoxColumn"
-        '
-        'InternalIDDataGridViewTextBoxColumn
-        '
-        Me.InternalIDDataGridViewTextBoxColumn.DataPropertyName = "internalID"
-        Me.InternalIDDataGridViewTextBoxColumn.HeaderText = "internalID"
-        Me.InternalIDDataGridViewTextBoxColumn.Name = "InternalIDDataGridViewTextBoxColumn"
-        '
-        'Context1DataGridViewTextBoxColumn
-        '
-        Me.Context1DataGridViewTextBoxColumn.DataPropertyName = "context1"
-        Me.Context1DataGridViewTextBoxColumn.HeaderText = "context1"
-        Me.Context1DataGridViewTextBoxColumn.Name = "Context1DataGridViewTextBoxColumn"
-        '
-        'Context2DataGridViewTextBoxColumn
-        '
-        Me.Context2DataGridViewTextBoxColumn.DataPropertyName = "context2"
-        Me.Context2DataGridViewTextBoxColumn.HeaderText = "context2"
-        Me.Context2DataGridViewTextBoxColumn.Name = "Context2DataGridViewTextBoxColumn"
-        '
-        'Context3DataGridViewTextBoxColumn
-        '
-        Me.Context3DataGridViewTextBoxColumn.DataPropertyName = "context3"
-        Me.Context3DataGridViewTextBoxColumn.HeaderText = "context3"
-        Me.Context3DataGridViewTextBoxColumn.Name = "Context3DataGridViewTextBoxColumn"
-        '
-        'StockNewTableAdapter
-        '
-        Me.StockNewTableAdapter.ClearBeforeFill = True
-        '
         'StockID1DataGridViewTextBoxColumn1
         '
         Me.StockID1DataGridViewTextBoxColumn1.DataPropertyName = "stockID1"
@@ -375,35 +281,64 @@ Partial Class DirectlyEdit
         Me.Context3DataGridViewTextBoxColumn1.HeaderText = "context3"
         Me.Context3DataGridViewTextBoxColumn1.Name = "Context3DataGridViewTextBoxColumn1"
         '
+        'StockNewBindingSource
+        '
+        Me.StockNewBindingSource.DataMember = "stockNew"
+        Me.StockNewBindingSource.DataSource = Me.OptimizationDatabaseDataSetBindingSource
+        '
+        'OptimizationDatabaseDataSetBindingSource
+        '
+        Me.OptimizationDatabaseDataSetBindingSource.DataSource = Me.OptimizationDatabaseDataSet
+        Me.OptimizationDatabaseDataSetBindingSource.Position = 0
+        '
+        'OptimizationDatabaseDataSet
+        '
+        Me.OptimizationDatabaseDataSet.DataSetName = "OptimizationDatabaseDataSet"
+        Me.OptimizationDatabaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Location = New System.Drawing.Point(4, 44)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(1152, 589)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Used Stock"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.Button2)
+        Me.TabPage3.Controls.Add(Me.DataGridView2)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 44)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(1152, 589)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "Cut Parts"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.Button2.Location = New System.Drawing.Point(3, 530)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(1146, 56)
+        Me.Button2.TabIndex = 8
+        Me.Button2.Text = "Save Changes"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'DataGridView2
         '
         Me.DataGridView2.AutoGenerateColumns = False
         Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.StockID1DataGridViewTextBoxColumn2, Me.StockID2DataGridViewTextBoxColumn2, Me.StockID3DataGridViewTextBoxColumn2, Me.DescriptionDataGridViewTextBoxColumn2, Me.ColorDataGridViewTextBoxColumn2, Me.SizeDataGridViewTextBoxColumn2, Me.CountDataGridViewTextBoxColumn2, Me.InternalIDDataGridViewTextBoxColumn2, Me.shopNumber, Me.Location, Me.Context1DataGridViewTextBoxColumn2, Me.Context2DataGridViewTextBoxColumn2, Me.Context3DataGridViewTextBoxColumn2})
-        Me.DataGridView2.DataSource = Me.PartsBindingSource
-        Me.DataGridView2.Location = New System.Drawing.Point(6, 6)
+        Me.DataGridView2.DataSource = Me.PartBindingSource
+        Me.DataGridView2.Location = New System.Drawing.Point(6, 3)
         Me.DataGridView2.Name = "DataGridView2"
         Me.DataGridView2.Size = New System.Drawing.Size(1140, 518)
-        Me.DataGridView2.TabIndex = 0
-        '
-        'StockNewBindingSource1
-        '
-        Me.StockNewBindingSource1.DataMember = "stockNew"
-        Me.StockNewBindingSource1.DataSource = Me.OptimizationDatabaseDataSetBindingSource
-        '
-        'OptimizationDatabaseDataSet1
-        '
-        Me.OptimizationDatabaseDataSet1.DataSetName = "OptimizationDatabaseDataSet1"
-        Me.OptimizationDatabaseDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'PartsBindingSource
-        '
-        Me.PartsBindingSource.DataMember = "parts"
-        Me.PartsBindingSource.DataSource = Me.OptimizationDatabaseDataSet1
-        '
-        'PartsTableAdapter
-        '
-        Me.PartsTableAdapter.ClearBeforeFill = True
+        Me.DataGridView2.TabIndex = 7
         '
         'StockID1DataGridViewTextBoxColumn2
         '
@@ -483,27 +418,99 @@ Partial Class DirectlyEdit
         Me.Context3DataGridViewTextBoxColumn2.HeaderText = "context3"
         Me.Context3DataGridViewTextBoxColumn2.Name = "Context3DataGridViewTextBoxColumn2"
         '
-        'Button1
+        'PartBindingSource
         '
-        Me.Button1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Button1.Location = New System.Drawing.Point(3, 530)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(1146, 56)
-        Me.Button1.TabIndex = 5
-        Me.Button1.Text = "Save Changes"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.PartBindingSource.DataMember = "part"
+        Me.PartBindingSource.DataSource = Me.OptimizationDatabaseDataSet2
         '
-        'Button2
+        'OptimizationDatabaseDataSet2
         '
-        Me.Button2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Button2.Location = New System.Drawing.Point(3, 530)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(1146, 56)
-        Me.Button2.TabIndex = 6
-        Me.Button2.Text = "Save Changes"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.OptimizationDatabaseDataSet2.DataSetName = "OptimizationDatabaseDataSet2"
+        Me.OptimizationDatabaseDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'PartsBindingSource
+        '
+        Me.PartsBindingSource.DataMember = "parts"
+
+        '
+        'StockID1DataGridViewTextBoxColumn
+        '
+        Me.StockID1DataGridViewTextBoxColumn.DataPropertyName = "stockID1"
+        Me.StockID1DataGridViewTextBoxColumn.HeaderText = "stockID1"
+        Me.StockID1DataGridViewTextBoxColumn.Name = "StockID1DataGridViewTextBoxColumn"
+        '
+        'StockID2DataGridViewTextBoxColumn
+        '
+        Me.StockID2DataGridViewTextBoxColumn.DataPropertyName = "stockID2"
+        Me.StockID2DataGridViewTextBoxColumn.HeaderText = "stockID2"
+        Me.StockID2DataGridViewTextBoxColumn.Name = "StockID2DataGridViewTextBoxColumn"
+        '
+        'StockID3DataGridViewTextBoxColumn
+        '
+        Me.StockID3DataGridViewTextBoxColumn.DataPropertyName = "stockID3"
+        Me.StockID3DataGridViewTextBoxColumn.HeaderText = "stockID3"
+        Me.StockID3DataGridViewTextBoxColumn.Name = "StockID3DataGridViewTextBoxColumn"
+        '
+        'DescriptionDataGridViewTextBoxColumn
+        '
+        Me.DescriptionDataGridViewTextBoxColumn.DataPropertyName = "description"
+        Me.DescriptionDataGridViewTextBoxColumn.HeaderText = "description"
+        Me.DescriptionDataGridViewTextBoxColumn.Name = "DescriptionDataGridViewTextBoxColumn"
+        '
+        'ColorDataGridViewTextBoxColumn
+        '
+        Me.ColorDataGridViewTextBoxColumn.DataPropertyName = "color"
+        Me.ColorDataGridViewTextBoxColumn.HeaderText = "color"
+        Me.ColorDataGridViewTextBoxColumn.Name = "ColorDataGridViewTextBoxColumn"
+        '
+        'SizeDataGridViewTextBoxColumn
+        '
+        Me.SizeDataGridViewTextBoxColumn.DataPropertyName = "size"
+        Me.SizeDataGridViewTextBoxColumn.HeaderText = "size"
+        Me.SizeDataGridViewTextBoxColumn.Name = "SizeDataGridViewTextBoxColumn"
+        '
+        'CountDataGridViewTextBoxColumn
+        '
+        Me.CountDataGridViewTextBoxColumn.DataPropertyName = "count"
+        Me.CountDataGridViewTextBoxColumn.HeaderText = "count"
+        Me.CountDataGridViewTextBoxColumn.Name = "CountDataGridViewTextBoxColumn"
+        '
+        'InternalIDDataGridViewTextBoxColumn
+        '
+        Me.InternalIDDataGridViewTextBoxColumn.DataPropertyName = "internalID"
+        Me.InternalIDDataGridViewTextBoxColumn.HeaderText = "internalID"
+        Me.InternalIDDataGridViewTextBoxColumn.Name = "InternalIDDataGridViewTextBoxColumn"
+        '
+        'Context1DataGridViewTextBoxColumn
+        '
+        Me.Context1DataGridViewTextBoxColumn.DataPropertyName = "context1"
+        Me.Context1DataGridViewTextBoxColumn.HeaderText = "context1"
+        Me.Context1DataGridViewTextBoxColumn.Name = "Context1DataGridViewTextBoxColumn"
+        '
+        'Context2DataGridViewTextBoxColumn
+        '
+        Me.Context2DataGridViewTextBoxColumn.DataPropertyName = "context2"
+        Me.Context2DataGridViewTextBoxColumn.HeaderText = "context2"
+        Me.Context2DataGridViewTextBoxColumn.Name = "Context2DataGridViewTextBoxColumn"
+        '
+        'Context3DataGridViewTextBoxColumn
+        '
+        Me.Context3DataGridViewTextBoxColumn.DataPropertyName = "context3"
+        Me.Context3DataGridViewTextBoxColumn.HeaderText = "context3"
+        Me.Context3DataGridViewTextBoxColumn.Name = "Context3DataGridViewTextBoxColumn"
+        '
+        'StockNewTableAdapter
+        '
+        Me.StockNewTableAdapter.ClearBeforeFill = True
+        '
+        'StockNewBindingSource1
+        '
+        Me.StockNewBindingSource1.DataMember = "stockNew"
+        Me.StockNewBindingSource1.DataSource = Me.OptimizationDatabaseDataSetBindingSource
+        '
+        'PartTableAdapter
+        '
+        Me.PartTableAdapter.ClearBeforeFill = True
         '
         'DirectlyEdit
         '
@@ -519,11 +526,12 @@ Partial Class DirectlyEdit
         CType(Me.StockNewBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.OptimizationDatabaseDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.OptimizationDatabaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.StockNewBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.OptimizationDatabaseDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PartBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.OptimizationDatabaseDataSet2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PartsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.StockNewBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -570,11 +578,11 @@ Partial Class DirectlyEdit
     Friend WithEvents Context1DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents Context2DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents Context3DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridView2 As DataGridView
     Friend WithEvents StockNewBindingSource1 As BindingSource
-    Friend WithEvents OptimizationDatabaseDataSet1 As OptimizationDatabaseDataSet1
     Friend WithEvents PartsBindingSource As BindingSource
-    Friend WithEvents PartsTableAdapter As OptimizationDatabaseDataSet1TableAdapters.partsTableAdapter
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents DataGridView2 As DataGridView
     Friend WithEvents StockID1DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents StockID2DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents StockID3DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
@@ -588,6 +596,7 @@ Partial Class DirectlyEdit
     Friend WithEvents Context1DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents Context2DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents Context3DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents OptimizationDatabaseDataSet2 As OptimizationDatabaseDataSet2
+    Friend WithEvents PartBindingSource As BindingSource
+    Friend WithEvents PartTableAdapter As OptimizationDatabaseDataSet2TableAdapters.partTableAdapter
 End Class

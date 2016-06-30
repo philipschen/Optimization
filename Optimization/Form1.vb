@@ -48,5 +48,10 @@ Public Class Form1
         Dim excellin1 As StockInputExcell = New StockInputExcell()
         excellin1.Show()
     End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Dim excellin1 As PartInputExcell = New PartInputExcell()
+        excellin1.Show()
+    End Sub
 End Class
 

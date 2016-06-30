@@ -81,9 +81,11 @@ Public Class StockInputExcell
         con.Open()
         cmd.Connection = con
 
-        For it = 0 To DataGridView1.RowCount - 2
-            cmd.CommandText = "INSERT INTO stockNew VALUES('" + DataGridView1.Rows(it).Cells(0).Value.ToString + "', '" + DataGridView1.Rows(it).Cells(1).Value.ToString + "' , '" + DataGridView1.Rows(it).Cells(2).Value.ToString + "', '" + DataGridView1.Rows(it).Cells(3).Value.ToString + "' , '" + DataGridView1.Rows(it).Cells(4).Value.ToString + "', " + DataGridView1.Rows(it).Cells(5).Value.ToString + " , " + DataGridView1.Rows(it).Cells(6).Value.ToString + ", " + DataGridView1.Rows(it).Cells(7).Value.ToString + ", '" + DataGridView1.Rows(it).Cells(8).Value.ToString + "'," + DataGridView1.Rows(it).Cells(9).Value.ToString + ",'" + DataGridView1.Rows(it).Cells(10).Value.ToString + "')"
-            cmd.ExecuteNonQuery()
+        For it = 0 To DataGridView1.RowCount - 1
+            If Not (DataGridView1.Rows(it).Cells(3).Value Is Nothing) Then
+                cmd.CommandText = "INSERT INTO stockNew VALUES('" + DataGridView1.Rows(it).Cells(0).Value.ToString + "', '" + DataGridView1.Rows(it).Cells(1).Value.ToString + "' , '" + DataGridView1.Rows(it).Cells(2).Value.ToString + "', '" + DataGridView1.Rows(it).Cells(3).Value.ToString + "' , '" + DataGridView1.Rows(it).Cells(4).Value.ToString + "', " + DataGridView1.Rows(it).Cells(5).Value.ToString + " , " + DataGridView1.Rows(it).Cells(6).Value.ToString + ", " + DataGridView1.Rows(it).Cells(7).Value.ToString + ", '" + DataGridView1.Rows(it).Cells(8).Value.ToString + "'," + DataGridView1.Rows(it).Cells(9).Value.ToString + ",'" + DataGridView1.Rows(it).Cells(10).Value.ToString + "')"
+                cmd.ExecuteNonQuery()
+            End If
         Next
 
     End Sub

@@ -45,31 +45,34 @@ Public Class PartInputExcell
 
                 Dim inputinternal As Integer
                 Dim rn As New Random
-                inputinternal = rn.Next(1000, 9999)
-                For it1 = 0 To internalID.Count - 1
-                    If internalID(it1) = inputinternal Or usedID.Contains(inputinternal) Then
-                        it1 = 0
-                        inputinternal = rn.Next(1000, 9999)
-                    End If
-                Next
+                'inputinternal = rn.Next(1000, 9999)
+                'For it1 = 0 To internalID.Count - 1
+                '    If internalID(it1) = inputinternal Or usedID.Contains(inputinternal) Then
+                '        it1 = 0
+                '        inputinternal = rn.Next(1000, 9999)
+                '    End If
+                'Next
 
                 usedID.Add(inputinternal)
                 DataGridView1.Rows.Add()
-                DataGridView1.Rows(it).Cells(0).Value = shXL.Cells(1 + it, 6).Value
-                DataGridView1.Rows(it).Cells(1).Value = shXL.Cells(1 + it, 1).Value
-                DataGridView1.Rows(it).Cells(2).Value = shXL.Cells(1 + it, 2).Value
-                DataGridView1.Rows(it).Cells(3).Value = shXL.Cells(1 + it, 4).Value
+                DataGridView1.Rows(it).Cells(0).Value = ""
+                DataGridView1.Rows(it).Cells(1).Value = shXL.Cells(2 + it, 8).Value
+                DataGridView1.Rows(it).Cells(2).Value = ""
+                DataGridView1.Rows(it).Cells(3).Value = shXL.Cells(2 + it, 9).Value
                 DataGridView1.Rows(it).Cells(4).Value = ""
-                DataGridView1.Rows(it).Cells(5).Value = shXL.Cells(1 + it, 3).Value
-                DataGridView1.Rows(it).Cells(6).Value = shXL.Cells(1 + it, 7).Value
-                DataGridView1.Rows(it).Cells(7).Value = inputinternal
-                DataGridView1.Rows(it).Cells(8).Value = ""
-                DataGridView1.Rows(it).Cells(9).Value = 0
+                DataGridView1.Rows(it).Cells(5).Value = shXL.Cells(2 + it, 11).Value
+                DataGridView1.Rows(it).Cells(6).Value = shXL.Cells(2 + it, 10).Value
+                DataGridView1.Rows(it).Cells(7).Value = 0
+                DataGridView1.Rows(it).Cells(8).Value = shXL.Cells(2 + it, 1).Value
+                DataGridView1.Rows(it).Cells(9).Value = ""
                 DataGridView1.Rows(it).Cells(10).Value = ""
+                DataGridView1.Rows(it).Cells(11).Value = 0
+                DataGridView1.Rows(it).Cells(12).Value = ""
             Next
 
             DataGridView1.AutoResizeColumns()
             readerObj.Close()
+            wbXl.Close()
         End If
 
     End Sub
@@ -81,9 +84,11 @@ Public Class PartInputExcell
         con.Open()
         cmd.Connection = con
 
-        For it = 0 To DataGridView1.RowCount - 2
-            cmd.CommandText = "INSERT INTO stockNew VALUES('" + DataGridView1.Rows(it).Cells(0).Value.ToString + "', '" + DataGridView1.Rows(it).Cells(1).Value.ToString + "' , '" + DataGridView1.Rows(it).Cells(2).Value.ToString + "', '" + DataGridView1.Rows(it).Cells(3).Value.ToString + "' , '" + DataGridView1.Rows(it).Cells(4).Value.ToString + "', " + DataGridView1.Rows(it).Cells(5).Value.ToString + " , " + DataGridView1.Rows(it).Cells(6).Value.ToString + ", " + DataGridView1.Rows(it).Cells(7).Value.ToString + ", '" + DataGridView1.Rows(it).Cells(8).Value.ToString + "'," + DataGridView1.Rows(it).Cells(9).Value.ToString + ",'" + DataGridView1.Rows(it).Cells(10).Value.ToString + "')"
-            cmd.ExecuteNonQuery()
+        For it = 0 To DataGridView1.RowCount - 1
+            If Not (DataGridView1.Rows(it).Cells(1).Value Is Nothing) Then
+                cmd.CommandText = "INSERT INTO part VALUES('" + DataGridView1.Rows(it).Cells(0).Value.ToString + "', '" + DataGridView1.Rows(it).Cells(1).Value.ToString + "' , '" + DataGridView1.Rows(it).Cells(2).Value.ToString + "', '" + DataGridView1.Rows(it).Cells(3).Value.ToString + "' , '" + DataGridView1.Rows(it).Cells(4).Value.ToString + "', " + DataGridView1.Rows(it).Cells(5).Value.ToString + " , " + DataGridView1.Rows(it).Cells(6).Value.ToString + ", " + DataGridView1.Rows(it).Cells(7).Value.ToString + ", '" + DataGridView1.Rows(it).Cells(8).Value.ToString + "','" + DataGridView1.Rows(it).Cells(9).Value.ToString + "','" + DataGridView1.Rows(it).Cells(10).Value.ToString + "'," + DataGridView1.Rows(it).Cells(11).Value.ToString + ", '" + DataGridView1.Rows(it).Cells(12).Value.ToString + " ')"
+                cmd.ExecuteNonQuery()
+            End If
         Next
 
     End Sub

@@ -20,12 +20,12 @@ Option Explicit On
  Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
  Global.System.ComponentModel.ToolboxItem(true),  _
  Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema"),  _
- Global.System.Xml.Serialization.XmlRootAttribute("OptimizationDatabaseDataSet1"),  _
+ Global.System.Xml.Serialization.XmlRootAttribute("OptimizationDatabaseDataSet2"),  _
  Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")>  _
-Partial Public Class OptimizationDatabaseDataSet1
+Partial Public Class OptimizationDatabaseDataSet2
     Inherits Global.System.Data.DataSet
     
-    Private tableparts As partsDataTable
+    Private tablepart As partDataTable
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
@@ -56,8 +56,8 @@ Partial Public Class OptimizationDatabaseDataSet1
         If (Me.DetermineSchemaSerializationMode(info, context) = Global.System.Data.SchemaSerializationMode.IncludeSchema) Then
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet()
             ds.ReadXmlSchema(New Global.System.Xml.XmlTextReader(New Global.System.IO.StringReader(strSchema)))
-            If (Not (ds.Tables("parts")) Is Nothing) Then
-                MyBase.Tables.Add(New partsDataTable(ds.Tables("parts")))
+            If (Not (ds.Tables("part")) Is Nothing) Then
+                MyBase.Tables.Add(New partDataTable(ds.Tables("part")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -80,9 +80,9 @@ Partial Public Class OptimizationDatabaseDataSet1
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
      Global.System.ComponentModel.Browsable(false),  _
      Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
-    Public ReadOnly Property parts() As partsDataTable
+    Public ReadOnly Property part() As partDataTable
         Get
-            Return Me.tableparts
+            Return Me.tablepart
         End Get
     End Property
     
@@ -128,7 +128,7 @@ Partial Public Class OptimizationDatabaseDataSet1
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Overrides Function Clone() As Global.System.Data.DataSet
-        Dim cln As OptimizationDatabaseDataSet1 = CType(MyBase.Clone,OptimizationDatabaseDataSet1)
+        Dim cln As OptimizationDatabaseDataSet2 = CType(MyBase.Clone,OptimizationDatabaseDataSet2)
         cln.InitVars
         cln.SchemaSerializationMode = Me.SchemaSerializationMode
         Return cln
@@ -153,8 +153,8 @@ Partial Public Class OptimizationDatabaseDataSet1
             Me.Reset
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet()
             ds.ReadXml(reader)
-            If (Not (ds.Tables("parts")) Is Nothing) Then
-                MyBase.Tables.Add(New partsDataTable(ds.Tables("parts")))
+            If (Not (ds.Tables("part")) Is Nothing) Then
+                MyBase.Tables.Add(New partDataTable(ds.Tables("part")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -188,10 +188,10 @@ Partial Public Class OptimizationDatabaseDataSet1
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Friend Overloads Sub InitVars(ByVal initTable As Boolean)
-        Me.tableparts = CType(MyBase.Tables("parts"),partsDataTable)
+        Me.tablepart = CType(MyBase.Tables("part"),partDataTable)
         If (initTable = true) Then
-            If (Not (Me.tableparts) Is Nothing) Then
-                Me.tableparts.InitVars
+            If (Not (Me.tablepart) Is Nothing) Then
+                Me.tablepart.InitVars
             End If
         End If
     End Sub
@@ -199,18 +199,18 @@ Partial Public Class OptimizationDatabaseDataSet1
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Private Sub InitClass()
-        Me.DataSetName = "OptimizationDatabaseDataSet1"
+        Me.DataSetName = "OptimizationDatabaseDataSet2"
         Me.Prefix = ""
-        Me.Namespace = "http://tempuri.org/OptimizationDatabaseDataSet1.xsd"
+        Me.Namespace = "http://tempuri.org/OptimizationDatabaseDataSet2.xsd"
         Me.EnforceConstraints = true
         Me.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
-        Me.tableparts = New partsDataTable()
-        MyBase.Tables.Add(Me.tableparts)
+        Me.tablepart = New partDataTable()
+        MyBase.Tables.Add(Me.tablepart)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-    Private Function ShouldSerializeparts() As Boolean
+    Private Function ShouldSerializepart() As Boolean
         Return false
     End Function
     
@@ -225,7 +225,7 @@ Partial Public Class OptimizationDatabaseDataSet1
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Shared Function GetTypedDataSetSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-        Dim ds As OptimizationDatabaseDataSet1 = New OptimizationDatabaseDataSet1()
+        Dim ds As OptimizationDatabaseDataSet2 = New OptimizationDatabaseDataSet2()
         Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
         Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
         Dim any As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
@@ -273,15 +273,15 @@ Partial Public Class OptimizationDatabaseDataSet1
     End Function
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-    Public Delegate Sub partsRowChangeEventHandler(ByVal sender As Object, ByVal e As partsRowChangeEvent)
+    Public Delegate Sub partRowChangeEventHandler(ByVal sender As Object, ByVal e As partRowChangeEvent)
     
     '''<summary>
     '''Represents the strongly named DataTable class.
     '''</summary>
     <Global.System.Serializable(),  _
      Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
-    Partial Public Class partsDataTable
-        Inherits Global.System.Data.TypedTableBase(Of partsRow)
+    Partial Public Class partDataTable
+        Inherits Global.System.Data.TypedTableBase(Of partRow)
         
         Private columnstockID1 As Global.System.Data.DataColumn
         
@@ -301,7 +301,7 @@ Partial Public Class OptimizationDatabaseDataSet1
         
         Private columnshopNumber As Global.System.Data.DataColumn
         
-        Private columnLocation As Global.System.Data.DataColumn
+        Private columnlocation As Global.System.Data.DataColumn
         
         Private columncontext1 As Global.System.Data.DataColumn
         
@@ -313,7 +313,7 @@ Partial Public Class OptimizationDatabaseDataSet1
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
             MyBase.New
-            Me.TableName = "parts"
+            Me.TableName = "part"
             Me.BeginInit
             Me.InitClass
             Me.EndInit
@@ -418,9 +418,9 @@ Partial Public Class OptimizationDatabaseDataSet1
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property LocationColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property locationColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnLocation
+                Return Me.columnlocation
             End Get
         End Property
         
@@ -459,44 +459,44 @@ Partial Public Class OptimizationDatabaseDataSet1
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As partsRow
+        Public Default ReadOnly Property Item(ByVal index As Integer) As partRow
             Get
-                Return CType(Me.Rows(index),partsRow)
+                Return CType(Me.Rows(index),partRow)
             End Get
         End Property
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Event partsRowChanging As partsRowChangeEventHandler
+        Public Event partRowChanging As partRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Event partsRowChanged As partsRowChangeEventHandler
+        Public Event partRowChanged As partRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Event partsRowDeleting As partsRowChangeEventHandler
+        Public Event partRowDeleting As partRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Event partsRowDeleted As partsRowChangeEventHandler
+        Public Event partRowDeleted As partRowChangeEventHandler
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Sub AddpartsRow(ByVal row As partsRow)
+        Public Overloads Sub AddpartRow(ByVal row As partRow)
             Me.Rows.Add(row)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddpartsRow(ByVal stockID1 As String, ByVal stockID2 As String, ByVal stockID3 As String, ByVal description As String, ByVal color As String, ByVal size As Double, ByVal count As Integer, ByVal internalID As Integer, ByVal shopNumber As Integer, ByVal Location As String, ByVal context1 As String, ByVal context2 As Double, ByVal context3 As String) As partsRow
-            Dim rowpartsRow As partsRow = CType(Me.NewRow,partsRow)
-            Dim columnValuesArray() As Object = New Object() {stockID1, stockID2, stockID3, description, color, size, count, internalID, shopNumber, Location, context1, context2, context3}
-            rowpartsRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowpartsRow)
-            Return rowpartsRow
+        Public Overloads Function AddpartRow(ByVal stockID1 As String, ByVal stockID2 As String, ByVal stockID3 As String, ByVal description As String, ByVal color As String, ByVal size As Double, ByVal count As Integer, ByVal internalID As Integer, ByVal shopNumber As String, ByVal location As String, ByVal context1 As String, ByVal context2 As Double, ByVal context3 As String) As partRow
+            Dim rowpartRow As partRow = CType(Me.NewRow,partRow)
+            Dim columnValuesArray() As Object = New Object() {stockID1, stockID2, stockID3, description, color, size, count, internalID, shopNumber, location, context1, context2, context3}
+            rowpartRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowpartRow)
+            Return rowpartRow
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As partsDataTable = CType(MyBase.Clone,partsDataTable)
+            Dim cln As partDataTable = CType(MyBase.Clone,partDataTable)
             cln.InitVars
             Return cln
         End Function
@@ -504,7 +504,7 @@ Partial Public Class OptimizationDatabaseDataSet1
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New partsDataTable()
+            Return New partDataTable()
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -519,7 +519,7 @@ Partial Public Class OptimizationDatabaseDataSet1
             Me.columncount = MyBase.Columns("count")
             Me.columninternalID = MyBase.Columns("internalID")
             Me.columnshopNumber = MyBase.Columns("shopNumber")
-            Me.columnLocation = MyBase.Columns("Location")
+            Me.columnlocation = MyBase.Columns("location")
             Me.columncontext1 = MyBase.Columns("context1")
             Me.columncontext2 = MyBase.Columns("context2")
             Me.columncontext3 = MyBase.Columns("context3")
@@ -544,10 +544,10 @@ Partial Public Class OptimizationDatabaseDataSet1
             MyBase.Columns.Add(Me.columncount)
             Me.columninternalID = New Global.System.Data.DataColumn("internalID", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columninternalID)
-            Me.columnshopNumber = New Global.System.Data.DataColumn("shopNumber", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnshopNumber = New Global.System.Data.DataColumn("shopNumber", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnshopNumber)
-            Me.columnLocation = New Global.System.Data.DataColumn("Location", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnLocation)
+            Me.columnlocation = New Global.System.Data.DataColumn("location", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnlocation)
             Me.columncontext1 = New Global.System.Data.DataColumn("context1", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columncontext1)
             Me.columncontext2 = New Global.System.Data.DataColumn("context2", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
@@ -562,35 +562,36 @@ Partial Public Class OptimizationDatabaseDataSet1
             Me.columnsize.AllowDBNull = false
             Me.columncount.AllowDBNull = false
             Me.columninternalID.AllowDBNull = false
-            Me.columnLocation.MaxLength = 50
+            Me.columnshopNumber.MaxLength = 50
+            Me.columnlocation.MaxLength = 50
             Me.columncontext1.MaxLength = 50
             Me.columncontext3.MaxLength = 50
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function NewpartsRow() As partsRow
-            Return CType(Me.NewRow,partsRow)
+        Public Function NewpartRow() As partRow
+            Return CType(Me.NewRow,partRow)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New partsRow(builder)
+            Return New partRow(builder)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(partsRow)
+            Return GetType(partRow)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowChanged(e)
-            If (Not (Me.partsRowChangedEvent) Is Nothing) Then
-                RaiseEvent partsRowChanged(Me, New partsRowChangeEvent(CType(e.Row,partsRow), e.Action))
+            If (Not (Me.partRowChangedEvent) Is Nothing) Then
+                RaiseEvent partRowChanged(Me, New partRowChangeEvent(CType(e.Row,partRow), e.Action))
             End If
         End Sub
         
@@ -598,8 +599,8 @@ Partial Public Class OptimizationDatabaseDataSet1
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowChanging(e)
-            If (Not (Me.partsRowChangingEvent) Is Nothing) Then
-                RaiseEvent partsRowChanging(Me, New partsRowChangeEvent(CType(e.Row,partsRow), e.Action))
+            If (Not (Me.partRowChangingEvent) Is Nothing) Then
+                RaiseEvent partRowChanging(Me, New partRowChangeEvent(CType(e.Row,partRow), e.Action))
             End If
         End Sub
         
@@ -607,8 +608,8 @@ Partial Public Class OptimizationDatabaseDataSet1
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowDeleted(e)
-            If (Not (Me.partsRowDeletedEvent) Is Nothing) Then
-                RaiseEvent partsRowDeleted(Me, New partsRowChangeEvent(CType(e.Row,partsRow), e.Action))
+            If (Not (Me.partRowDeletedEvent) Is Nothing) Then
+                RaiseEvent partRowDeleted(Me, New partRowChangeEvent(CType(e.Row,partRow), e.Action))
             End If
         End Sub
         
@@ -616,14 +617,14 @@ Partial Public Class OptimizationDatabaseDataSet1
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowDeleting(e)
-            If (Not (Me.partsRowDeletingEvent) Is Nothing) Then
-                RaiseEvent partsRowDeleting(Me, New partsRowChangeEvent(CType(e.Row,partsRow), e.Action))
+            If (Not (Me.partRowDeletingEvent) Is Nothing) Then
+                RaiseEvent partRowDeleting(Me, New partRowChangeEvent(CType(e.Row,partRow), e.Action))
             End If
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub RemovepartsRow(ByVal row As partsRow)
+        Public Sub RemovepartRow(ByVal row As partRow)
             Me.Rows.Remove(row)
         End Sub
         
@@ -632,7 +633,7 @@ Partial Public Class OptimizationDatabaseDataSet1
         Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
             Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
             Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
-            Dim ds As OptimizationDatabaseDataSet1 = New OptimizationDatabaseDataSet1()
+            Dim ds As OptimizationDatabaseDataSet2 = New OptimizationDatabaseDataSet2()
             Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
             any1.Namespace = "http://www.w3.org/2001/XMLSchema"
             any1.MinOccurs = New Decimal(0)
@@ -650,7 +651,7 @@ Partial Public Class OptimizationDatabaseDataSet1
             type.Attributes.Add(attribute1)
             Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
             attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "partsDataTable"
+            attribute2.FixedValue = "partDataTable"
             type.Attributes.Add(attribute2)
             type.Particle = sequence
             Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
@@ -697,16 +698,16 @@ Partial Public Class OptimizationDatabaseDataSet1
     '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
-    Partial Public Class partsRow
+    Partial Public Class partRow
         Inherits Global.System.Data.DataRow
         
-        Private tableparts As partsDataTable
+        Private tablepart As partDataTable
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
             MyBase.New(rb)
-            Me.tableparts = CType(Me.Table,partsDataTable)
+            Me.tablepart = CType(Me.Table,partDataTable)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -714,13 +715,13 @@ Partial Public Class OptimizationDatabaseDataSet1
         Public Property stockID1() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableparts.stockID1Column),String)
+                    Return CType(Me(Me.tablepart.stockID1Column),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'stockID1' in table 'parts' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'stockID1' in table 'part' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableparts.stockID1Column) = value
+                Me(Me.tablepart.stockID1Column) = value
             End Set
         End Property
         
@@ -729,13 +730,13 @@ Partial Public Class OptimizationDatabaseDataSet1
         Public Property stockID2() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableparts.stockID2Column),String)
+                    Return CType(Me(Me.tablepart.stockID2Column),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'stockID2' in table 'parts' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'stockID2' in table 'part' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableparts.stockID2Column) = value
+                Me(Me.tablepart.stockID2Column) = value
             End Set
         End Property
         
@@ -744,13 +745,13 @@ Partial Public Class OptimizationDatabaseDataSet1
         Public Property stockID3() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableparts.stockID3Column),String)
+                    Return CType(Me(Me.tablepart.stockID3Column),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'stockID3' in table 'parts' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'stockID3' in table 'part' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableparts.stockID3Column) = value
+                Me(Me.tablepart.stockID3Column) = value
             End Set
         End Property
         
@@ -759,13 +760,13 @@ Partial Public Class OptimizationDatabaseDataSet1
         Public Property description() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableparts.descriptionColumn),String)
+                    Return CType(Me(Me.tablepart.descriptionColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'description' in table 'parts' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'description' in table 'part' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableparts.descriptionColumn) = value
+                Me(Me.tablepart.descriptionColumn) = value
             End Set
         End Property
         
@@ -774,13 +775,13 @@ Partial Public Class OptimizationDatabaseDataSet1
         Public Property color() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableparts.colorColumn),String)
+                    Return CType(Me(Me.tablepart.colorColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'color' in table 'parts' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'color' in table 'part' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableparts.colorColumn) = value
+                Me(Me.tablepart.colorColumn) = value
             End Set
         End Property
         
@@ -788,10 +789,10 @@ Partial Public Class OptimizationDatabaseDataSet1
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property size() As Double
             Get
-                Return CType(Me(Me.tableparts.sizeColumn),Double)
+                Return CType(Me(Me.tablepart.sizeColumn),Double)
             End Get
             Set
-                Me(Me.tableparts.sizeColumn) = value
+                Me(Me.tablepart.sizeColumn) = value
             End Set
         End Property
         
@@ -799,10 +800,10 @@ Partial Public Class OptimizationDatabaseDataSet1
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property count() As Integer
             Get
-                Return CType(Me(Me.tableparts.countColumn),Integer)
+                Return CType(Me(Me.tablepart.countColumn),Integer)
             End Get
             Set
-                Me(Me.tableparts.countColumn) = value
+                Me(Me.tablepart.countColumn) = value
             End Set
         End Property
         
@@ -810,40 +811,40 @@ Partial Public Class OptimizationDatabaseDataSet1
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property internalID() As Integer
             Get
-                Return CType(Me(Me.tableparts.internalIDColumn),Integer)
+                Return CType(Me(Me.tablepart.internalIDColumn),Integer)
             End Get
             Set
-                Me(Me.tableparts.internalIDColumn) = value
+                Me(Me.tablepart.internalIDColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property shopNumber() As Integer
+        Public Property shopNumber() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableparts.shopNumberColumn),Integer)
+                    Return CType(Me(Me.tablepart.shopNumberColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'shopNumber' in table 'parts' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'shopNumber' in table 'part' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableparts.shopNumberColumn) = value
+                Me(Me.tablepart.shopNumberColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Location() As String
+        Public Property location() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableparts.LocationColumn),String)
+                    Return CType(Me(Me.tablepart.locationColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Location' in table 'parts' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'location' in table 'part' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableparts.LocationColumn) = value
+                Me(Me.tablepart.locationColumn) = value
             End Set
         End Property
         
@@ -852,13 +853,13 @@ Partial Public Class OptimizationDatabaseDataSet1
         Public Property context1() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableparts.context1Column),String)
+                    Return CType(Me(Me.tablepart.context1Column),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'context1' in table 'parts' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'context1' in table 'part' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableparts.context1Column) = value
+                Me(Me.tablepart.context1Column) = value
             End Set
         End Property
         
@@ -867,13 +868,13 @@ Partial Public Class OptimizationDatabaseDataSet1
         Public Property context2() As Double
             Get
                 Try 
-                    Return CType(Me(Me.tableparts.context2Column),Double)
+                    Return CType(Me(Me.tablepart.context2Column),Double)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'context2' in table 'parts' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'context2' in table 'part' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableparts.context2Column) = value
+                Me(Me.tablepart.context2Column) = value
             End Set
         End Property
         
@@ -882,134 +883,134 @@ Partial Public Class OptimizationDatabaseDataSet1
         Public Property context3() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableparts.context3Column),String)
+                    Return CType(Me(Me.tablepart.context3Column),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'context3' in table 'parts' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'context3' in table 'part' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableparts.context3Column) = value
+                Me(Me.tablepart.context3Column) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsstockID1Null() As Boolean
-            Return Me.IsNull(Me.tableparts.stockID1Column)
+            Return Me.IsNull(Me.tablepart.stockID1Column)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetstockID1Null()
-            Me(Me.tableparts.stockID1Column) = Global.System.Convert.DBNull
+            Me(Me.tablepart.stockID1Column) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsstockID2Null() As Boolean
-            Return Me.IsNull(Me.tableparts.stockID2Column)
+            Return Me.IsNull(Me.tablepart.stockID2Column)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetstockID2Null()
-            Me(Me.tableparts.stockID2Column) = Global.System.Convert.DBNull
+            Me(Me.tablepart.stockID2Column) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsstockID3Null() As Boolean
-            Return Me.IsNull(Me.tableparts.stockID3Column)
+            Return Me.IsNull(Me.tablepart.stockID3Column)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetstockID3Null()
-            Me(Me.tableparts.stockID3Column) = Global.System.Convert.DBNull
+            Me(Me.tablepart.stockID3Column) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsdescriptionNull() As Boolean
-            Return Me.IsNull(Me.tableparts.descriptionColumn)
+            Return Me.IsNull(Me.tablepart.descriptionColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetdescriptionNull()
-            Me(Me.tableparts.descriptionColumn) = Global.System.Convert.DBNull
+            Me(Me.tablepart.descriptionColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IscolorNull() As Boolean
-            Return Me.IsNull(Me.tableparts.colorColumn)
+            Return Me.IsNull(Me.tablepart.colorColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetcolorNull()
-            Me(Me.tableparts.colorColumn) = Global.System.Convert.DBNull
+            Me(Me.tablepart.colorColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsshopNumberNull() As Boolean
-            Return Me.IsNull(Me.tableparts.shopNumberColumn)
+            Return Me.IsNull(Me.tablepart.shopNumberColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetshopNumberNull()
-            Me(Me.tableparts.shopNumberColumn) = Global.System.Convert.DBNull
+            Me(Me.tablepart.shopNumberColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsLocationNull() As Boolean
-            Return Me.IsNull(Me.tableparts.LocationColumn)
+        Public Function IslocationNull() As Boolean
+            Return Me.IsNull(Me.tablepart.locationColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetLocationNull()
-            Me(Me.tableparts.LocationColumn) = Global.System.Convert.DBNull
+        Public Sub SetlocationNull()
+            Me(Me.tablepart.locationColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function Iscontext1Null() As Boolean
-            Return Me.IsNull(Me.tableparts.context1Column)
+            Return Me.IsNull(Me.tablepart.context1Column)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub Setcontext1Null()
-            Me(Me.tableparts.context1Column) = Global.System.Convert.DBNull
+            Me(Me.tablepart.context1Column) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function Iscontext2Null() As Boolean
-            Return Me.IsNull(Me.tableparts.context2Column)
+            Return Me.IsNull(Me.tablepart.context2Column)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub Setcontext2Null()
-            Me(Me.tableparts.context2Column) = Global.System.Convert.DBNull
+            Me(Me.tablepart.context2Column) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function Iscontext3Null() As Boolean
-            Return Me.IsNull(Me.tableparts.context3Column)
+            Return Me.IsNull(Me.tablepart.context3Column)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub Setcontext3Null()
-            Me(Me.tableparts.context3Column) = Global.System.Convert.DBNull
+            Me(Me.tablepart.context3Column) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -1017,16 +1018,16 @@ Partial Public Class OptimizationDatabaseDataSet1
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-    Public Class partsRowChangeEvent
+    Public Class partRowChangeEvent
         Inherits Global.System.EventArgs
         
-        Private eventRow As partsRow
+        Private eventRow As partRow
         
         Private eventAction As Global.System.Data.DataRowAction
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub New(ByVal row As partsRow, ByVal action As Global.System.Data.DataRowAction)
+        Public Sub New(ByVal row As partRow, ByVal action As Global.System.Data.DataRowAction)
             MyBase.New
             Me.eventRow = row
             Me.eventAction = action
@@ -1034,7 +1035,7 @@ Partial Public Class OptimizationDatabaseDataSet1
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property Row() As partsRow
+        Public ReadOnly Property Row() As partRow
             Get
                 Return Me.eventRow
             End Get
@@ -1050,7 +1051,7 @@ Partial Public Class OptimizationDatabaseDataSet1
     End Class
 End Class
 
-Namespace OptimizationDatabaseDataSet1TableAdapters
+Namespace OptimizationDatabaseDataSet2TableAdapters
     
     '''<summary>
     '''Represents the connection and commands used to retrieve and save data.
@@ -1061,7 +1062,7 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
      Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
      Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-    Partial Public Class partsTableAdapter
+    Partial Public Class partTableAdapter
         Inherits Global.System.ComponentModel.Component
         
         Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
@@ -1178,7 +1179,7 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
             Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
             Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
             tableMapping.SourceTable = "Table"
-            tableMapping.DataSetTable = "parts"
+            tableMapping.DataSetTable = "part"
             tableMapping.ColumnMappings.Add("stockID1", "stockID1")
             tableMapping.ColumnMappings.Add("stockID2", "stockID2")
             tableMapping.ColumnMappings.Add("stockID3", "stockID3")
@@ -1188,18 +1189,18 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
             tableMapping.ColumnMappings.Add("count", "count")
             tableMapping.ColumnMappings.Add("internalID", "internalID")
             tableMapping.ColumnMappings.Add("shopNumber", "shopNumber")
-            tableMapping.ColumnMappings.Add("Location", "Location")
+            tableMapping.ColumnMappings.Add("location", "location")
             tableMapping.ColumnMappings.Add("context1", "context1")
             tableMapping.ColumnMappings.Add("context2", "context2")
             tableMapping.ColumnMappings.Add("context3", "context3")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[parts] ([stockID1], [stockID2], [stockID3], [description], [co"& _ 
-                "lor], [size], [count], [internalID], [shopNumber], [Location], [context1], [cont"& _ 
-                "ext2], [context3]) VALUES (@stockID1, @stockID2, @stockID3, @description, @color"& _ 
-                ", @size, @count, @internalID, @shopNumber, @Location, @context1, @context2, @con"& _ 
-                "text3)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[part] ([stockID1], [stockID2], [stockID3], [description], [col"& _ 
+                "or], [size], [count], [internalID], [shopNumber], [location], [context1], [conte"& _ 
+                "xt2], [context3]) VALUES (@stockID1, @stockID2, @stockID3, @description, @color,"& _ 
+                " @size, @count, @internalID, @shopNumber, @location, @context1, @context2, @cont"& _ 
+                "ext3)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@stockID1", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "stockID1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@stockID2", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "stockID2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -1209,8 +1210,8 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@size", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "size", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@count", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "count", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@internalID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "internalID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@shopNumber", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "shopNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Location", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Location", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@shopNumber", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "shopNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@location", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "location", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@context1", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "context1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@context2", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "context2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@context3", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "context3", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -1230,7 +1231,7 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, count, internalID,"& _ 
-                " shopNumber, Location, context1, context2, context3 FROM dbo.parts"
+                " shopNumber, location, context1, context2, context3 FROM dbo.part"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -1238,7 +1239,7 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
-        Public Overloads Overridable Function Fill(ByVal dataTable As OptimizationDatabaseDataSet1.partsDataTable) As Integer
+        Public Overloads Overridable Function Fill(ByVal dataTable As OptimizationDatabaseDataSet2.partDataTable) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             If (Me.ClearBeforeFill = true) Then
                 dataTable.Clear
@@ -1251,9 +1252,9 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
-        Public Overloads Overridable Function GetData() As OptimizationDatabaseDataSet1.partsDataTable
+        Public Overloads Overridable Function GetData() As OptimizationDatabaseDataSet2.partDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
-            Dim dataTable As OptimizationDatabaseDataSet1.partsDataTable = New OptimizationDatabaseDataSet1.partsDataTable()
+            Dim dataTable As OptimizationDatabaseDataSet2.partDataTable = New OptimizationDatabaseDataSet2.partDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
         End Function
@@ -1261,15 +1262,15 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataTable As OptimizationDatabaseDataSet1.partsDataTable) As Integer
+        Public Overloads Overridable Function Update(ByVal dataTable As OptimizationDatabaseDataSet2.partDataTable) As Integer
             Return Me.Adapter.Update(dataTable)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataSet As OptimizationDatabaseDataSet1) As Integer
-            Return Me.Adapter.Update(dataSet, "parts")
+        Public Overloads Overridable Function Update(ByVal dataSet As OptimizationDatabaseDataSet2) As Integer
+            Return Me.Adapter.Update(dataSet, "part")
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1290,7 +1291,7 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal stockID1 As String, ByVal stockID2 As String, ByVal stockID3 As String, ByVal description As String, ByVal color As String, ByVal size As Double, ByVal count As Integer, ByVal internalID As Integer, ByVal shopNumber As Global.System.Nullable(Of Integer), ByVal Location As String, ByVal context1 As String, ByVal context2 As Global.System.Nullable(Of Double), ByVal context3 As String) As Integer
+        Public Overloads Overridable Function Insert(ByVal stockID1 As String, ByVal stockID2 As String, ByVal stockID3 As String, ByVal description As String, ByVal color As String, ByVal size As Double, ByVal count As Integer, ByVal internalID As Integer, ByVal shopNumber As String, ByVal location As String, ByVal context1 As String, ByVal context2 As Global.System.Nullable(Of Double), ByVal context3 As String) As Integer
             If (stockID1 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -1319,15 +1320,15 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
             Me.Adapter.InsertCommand.Parameters(5).Value = CType(size,Double)
             Me.Adapter.InsertCommand.Parameters(6).Value = CType(count,Integer)
             Me.Adapter.InsertCommand.Parameters(7).Value = CType(internalID,Integer)
-            If (shopNumber.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(8).Value = CType(shopNumber.Value,Integer)
-            Else
+            If (shopNumber Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(8).Value = CType(shopNumber,String)
             End If
-            If (Location Is Nothing) Then
+            If (location Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(9).Value = CType(Location,String)
+                Me.Adapter.InsertCommand.Parameters(9).Value = CType(location,String)
             End If
             If (context1 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
@@ -1373,7 +1374,7 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
         
         Private _updateOrder As UpdateOrderOption
         
-        Private _partsTableAdapter As partsTableAdapter
+        Private _partTableAdapter As partTableAdapter
         
         Private _backupDataSetBeforeUpdate As Boolean
         
@@ -1395,12 +1396,12 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
          Global.System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso"& _ 
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3"& _ 
             "a", "System.Drawing.Design.UITypeEditor")>  _
-        Public Property partsTableAdapter() As partsTableAdapter
+        Public Property partTableAdapter() As partTableAdapter
             Get
-                Return Me._partsTableAdapter
+                Return Me._partTableAdapter
             End Get
             Set
-                Me._partsTableAdapter = value
+                Me._partTableAdapter = value
             End Set
         End Property
         
@@ -1423,9 +1424,9 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
                 If (Not (Me._connection) Is Nothing) Then
                     Return Me._connection
                 End If
-                If ((Not (Me._partsTableAdapter) Is Nothing)  _
-                            AndAlso (Not (Me._partsTableAdapter.Connection) Is Nothing)) Then
-                    Return Me._partsTableAdapter.Connection
+                If ((Not (Me._partTableAdapter) Is Nothing)  _
+                            AndAlso (Not (Me._partTableAdapter.Connection) Is Nothing)) Then
+                    Return Me._partTableAdapter.Connection
                 End If
                 Return Nothing
             End Get
@@ -1440,7 +1441,7 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
         Public ReadOnly Property TableAdapterInstanceCount() As Integer
             Get
                 Dim count As Integer = 0
-                If (Not (Me._partsTableAdapter) Is Nothing) Then
+                If (Not (Me._partTableAdapter) Is Nothing) Then
                     count = (count + 1)
                 End If
                 Return count
@@ -1452,14 +1453,14 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
         '''</summary>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Private Function UpdateUpdatedRows(ByVal dataSet As OptimizationDatabaseDataSet1, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow), ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
+        Private Function UpdateUpdatedRows(ByVal dataSet As OptimizationDatabaseDataSet2, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow), ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
-            If (Not (Me._partsTableAdapter) Is Nothing) Then
-                Dim updatedRows() As Global.System.Data.DataRow = dataSet.parts.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+            If (Not (Me._partTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.part.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
                 updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
                 If ((Not (updatedRows) Is Nothing)  _
                             AndAlso (0 < updatedRows.Length)) Then
-                    result = (result + Me._partsTableAdapter.Update(updatedRows))
+                    result = (result + Me._partTableAdapter.Update(updatedRows))
                     allChangedRows.AddRange(updatedRows)
                 End If
             End If
@@ -1471,13 +1472,13 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
         '''</summary>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Private Function UpdateInsertedRows(ByVal dataSet As OptimizationDatabaseDataSet1, ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
+        Private Function UpdateInsertedRows(ByVal dataSet As OptimizationDatabaseDataSet2, ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
-            If (Not (Me._partsTableAdapter) Is Nothing) Then
-                Dim addedRows() As Global.System.Data.DataRow = dataSet.parts.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+            If (Not (Me._partTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.part.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
                 If ((Not (addedRows) Is Nothing)  _
                             AndAlso (0 < addedRows.Length)) Then
-                    result = (result + Me._partsTableAdapter.Update(addedRows))
+                    result = (result + Me._partTableAdapter.Update(addedRows))
                     allAddedRows.AddRange(addedRows)
                 End If
             End If
@@ -1489,13 +1490,13 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
         '''</summary>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Private Function UpdateDeletedRows(ByVal dataSet As OptimizationDatabaseDataSet1, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
+        Private Function UpdateDeletedRows(ByVal dataSet As OptimizationDatabaseDataSet2, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
-            If (Not (Me._partsTableAdapter) Is Nothing) Then
-                Dim deletedRows() As Global.System.Data.DataRow = dataSet.parts.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+            If (Not (Me._partTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.part.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
                 If ((Not (deletedRows) Is Nothing)  _
                             AndAlso (0 < deletedRows.Length)) Then
-                    result = (result + Me._partsTableAdapter.Update(deletedRows))
+                    result = (result + Me._partTableAdapter.Update(deletedRows))
                     allChangedRows.AddRange(deletedRows)
                 End If
             End If
@@ -1533,15 +1534,15 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
         '''</summary>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overridable Function UpdateAll(ByVal dataSet As OptimizationDatabaseDataSet1) As Integer
+        Public Overridable Function UpdateAll(ByVal dataSet As OptimizationDatabaseDataSet2) As Integer
             If (dataSet Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("dataSet")
             End If
             If (dataSet.HasChanges = false) Then
                 Return 0
             End If
-            If ((Not (Me._partsTableAdapter) Is Nothing)  _
-                        AndAlso (Me.MatchTableAdapterConnection(Me._partsTableAdapter.Connection) = false)) Then
+            If ((Not (Me._partTableAdapter) Is Nothing)  _
+                        AndAlso (Me.MatchTableAdapterConnection(Me._partTableAdapter.Connection) = false)) Then
                 Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
                         "tring.")
             End If
@@ -1577,13 +1578,13 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
             Try 
                 '---- Prepare for update -----------
                 '
-                If (Not (Me._partsTableAdapter) Is Nothing) Then
-                    revertConnections.Add(Me._partsTableAdapter, Me._partsTableAdapter.Connection)
-                    Me._partsTableAdapter.Connection = CType(workConnection,Global.System.Data.SqlClient.SqlConnection)
-                    Me._partsTableAdapter.Transaction = CType(workTransaction,Global.System.Data.SqlClient.SqlTransaction)
-                    If Me._partsTableAdapter.Adapter.AcceptChangesDuringUpdate Then
-                        Me._partsTableAdapter.Adapter.AcceptChangesDuringUpdate = false
-                        adaptersWithAcceptChangesDuringUpdate.Add(Me._partsTableAdapter.Adapter)
+                If (Not (Me._partTableAdapter) Is Nothing) Then
+                    revertConnections.Add(Me._partTableAdapter, Me._partTableAdapter.Connection)
+                    Me._partTableAdapter.Connection = CType(workConnection,Global.System.Data.SqlClient.SqlConnection)
+                    Me._partTableAdapter.Transaction = CType(workTransaction,Global.System.Data.SqlClient.SqlTransaction)
+                    If Me._partTableAdapter.Adapter.AcceptChangesDuringUpdate Then
+                        Me._partTableAdapter.Adapter.AcceptChangesDuringUpdate = false
+                        adaptersWithAcceptChangesDuringUpdate.Add(Me._partTableAdapter.Adapter)
                     End If
                 End If
                 '
@@ -1646,9 +1647,9 @@ Namespace OptimizationDatabaseDataSet1TableAdapters
                 If workConnOpened Then
                     workConnection.Close
                 End If
-                If (Not (Me._partsTableAdapter) Is Nothing) Then
-                    Me._partsTableAdapter.Connection = CType(revertConnections(Me._partsTableAdapter),Global.System.Data.SqlClient.SqlConnection)
-                    Me._partsTableAdapter.Transaction = Nothing
+                If (Not (Me._partTableAdapter) Is Nothing) Then
+                    Me._partTableAdapter.Connection = CType(revertConnections(Me._partTableAdapter),Global.System.Data.SqlClient.SqlConnection)
+                    Me._partTableAdapter.Transaction = Nothing
                 End If
                 If (0 < adaptersWithAcceptChangesDuringUpdate.Count) Then
                     Dim adapters((adaptersWithAcceptChangesDuringUpdate.Count) - 1) As Global.System.Data.Common.DataAdapter
