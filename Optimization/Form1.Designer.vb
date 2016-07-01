@@ -33,7 +33,9 @@ Partial Class Form1
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupBox1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -69,9 +71,9 @@ Partial Class Form1
         'Button3
         '
         Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(248, 177)
+        Me.Button3.Location = New System.Drawing.Point(12, 317)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(100, 64)
+        Me.Button3.Size = New System.Drawing.Size(112, 64)
         Me.Button3.TabIndex = 3
         Me.Button3.Text = "Clear All Data"
         Me.Button3.UseVisualStyleBackColor = True
@@ -89,9 +91,9 @@ Partial Class Form1
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(248, 107)
+        Me.Button1.Location = New System.Drawing.Point(12, 247)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(100, 64)
+        Me.Button1.Size = New System.Drawing.Size(112, 64)
         Me.Button1.TabIndex = 6
         Me.Button1.Text = "Directly Edit Tables"
         Me.Button1.UseVisualStyleBackColor = True
@@ -150,11 +152,20 @@ Partial Class Form1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Excel Inputs"
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(248, 107)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(200, 234)
+        Me.PictureBox1.TabIndex = 12
+        Me.PictureBox1.TabStop = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(483, 397)
+        Me.ClientSize = New System.Drawing.Size(483, 462)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label2)
@@ -165,6 +176,7 @@ Partial Class Form1
         Me.Name = "Form1"
         Me.Text = "Form1"
         Me.GroupBox1.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -181,4 +193,5 @@ Partial Class Form1
     Friend WithEvents Button5 As Button
     Friend WithEvents Button6 As Button
     Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents PictureBox1 As PictureBox
 End Class
