@@ -33,7 +33,7 @@ Partial Class Form1
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(88, 49)
         Me.Button2.TabIndex = 3
-        Me.Button2.Text = "Button2"
+        Me.Button2.Text = "BOM Input"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
