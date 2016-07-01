@@ -475,14 +475,19 @@ Public Class CutManagement
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-
+        Dim countbool As ArrayList = New ArrayList
         Dim uocountdownrep As ArrayList = New ArrayList
+        Dim uocountdownrep2 As ArrayList = New ArrayList
         For it = 0 To uocount.Count - 1
             uocountdownrep.Add(uocount(it) / uoitemQuantity(it))
+            uocountdownrep2.Add(uocount(it) / uoitemQuantity(it))
         Next
         Dim uocountdown As ArrayList = New ArrayList
         For it = 0 To uoitemQuantity.Count - 1
             uocountdown.Add(1)
+        Next
+        For it = 0 To uoitemQuantity.Count - 1
+            countbool.Add(True)
         Next
         '
         ' lists of nonduplicate, combined parts
@@ -884,6 +889,7 @@ Public Class CutManagement
                 Dim itemcount2 As Integer = 0
 
                 For iLayout = 0 To Calculator.LayoutCount - 1
+
                     '
                     ' Gets count of stock used
                     '
@@ -904,18 +910,21 @@ Public Class CutManagement
                     '
                     ' Determines if 1 or 2 layouts per page
                     '
+
                     Dim over20 As Boolean = False
+                    Dim over40 As Boolean = False
                     Dim page As PdfPage
                     Dim gfx As XGraphics
-                    partCount = Calculator.GetPartCountOnStock(iStock)
-                    If partCount > 18 Then
+                    partCount = Calculator.GetPartCountOnStock(StockIndex)
+
+                    If VStockCount / 4 * partCount + partCount > 30 Then
                         page = document.AddPage
                         gfx = XGraphics.FromPdfPage(page)
                         over20 = True
                         font = New XFont("Verdana", 10, XFontStyle.Regular)
                         sectioncount = 0
 
-                    ElseIf partCount > 8 Then
+                    ElseIf VStockCount / 4 * partCount + partCount > 14 Then
                         page = document.AddPage
                         gfx = XGraphics.FromPdfPage(page)
                         pos2 = 0
@@ -979,6 +988,7 @@ Public Class CutManagement
 
                         Console.WriteLine("Layout={0}:  Length={1}", iStock, StockLength)
                         Dim lengthlist As ArrayList = New ArrayList
+                        Dim linecount As Integer = 0
                         ' Iterate by parts and get indices of cut parts
                         For ViPart = 0 To partCount - 1
                             ' Get global part index of ViPart cut from the current stock
@@ -1002,28 +1012,31 @@ Public Class CutManagement
                             Dim layoutit As Integer = VStockCount
                             Dim remove1 As Integer = 0
                             Dim remove2 As Integer = 0
+                            Dim countplace1 As ArrayList = New ArrayList
+
 
 
                             For it1 = 0 To uosize.Count - 1
                                 If layoutit > 0 Then
+                                    If countbool(it1) AndAlso partLength = uosize(it1) AndAlso String.Equals(partlistid(it), uopartID(it1)) Then
+                                        'countbool(it1) = False
+                                        For it2 = 1 To uoitemQuantity(it1)
+                                            For it3 = 1 To uocountdownrep(it1)
+                                                countplace1.Add(it2)
+                                            Next
+                                        Next
+                                    End If
+
                                     If partLength = uosize(it1) AndAlso String.Equals(partlistid(it), uopartID(it1)) Then
-                                        For it2 = uocountdown(it1) To uoitemQuantity(it1)
+                                        For it2 = uocountdown(it1) To uoitemQuantity(it1) * uocountdownrep(it1)
                                             If layoutit > 0 Then
-                                                Dim itcount As Integer = uocountdownrep(it1)
-                                                Dim remove3 As Integer = 0
 
-                                                For it3 = 1 To itcount
-                                                    If layoutit > 0 Then
-                                                        tempstring.Add(uolistorderline(it1) + "-" + uoitemNumber(it1).ToString + "-" + it2.ToString)
-                                                        layoutit -= 1
-
-                                                        remove3 += 1
-                                                    End If
-                                                    If layoutit = 0 Then
-                                                    End If
-                                                Next
+                                                If layoutit > 0 Then
+                                                    tempstring.Add(uolistorderline(it1) + "-" + uoitemNumber(it1).ToString + "-" + countplace1(it2 - 1).ToString)
+                                                    layoutit -= 1
+                                                End If
                                                 remove2 += 1
-                                                itcount -= remove3
+
                                             End If
                                         Next
                                         uocountdown(it1) += remove2
@@ -1036,7 +1049,7 @@ Public Class CutManagement
 
                             Dim count1 As Integer = 1
                             Dim line1 As Boolean = True
-                            Dim line2 As Boolean = False
+                            'Dim line2 As Boolean = False
                             For it1 = 0 To tempstring.Count - 1
                                 If count1 < 3 Then
                                     correspondingnum = correspondingnum + tempstring(it1) + " "
@@ -1045,7 +1058,7 @@ Public Class CutManagement
                                     correspondingnum = ""
                                     correspondingnum = tempstring(it1) + " "
                                     count1 = 0
-                                    line2 = True
+                                    'line2 = True
                                 End If
 
                                 If line1 AndAlso (count1 = 3 Or it1 = tempstring.Count - 1) Then
@@ -1055,16 +1068,29 @@ Public Class CutManagement
                                     Else
                                         pos1 += 14
                                     End If
+                                    linecount += 1
                                     line1 = False
-                                ElseIf line2 AndAlso (count1 = 4 Or it1 = tempstring.Count - 1) Then
+                                ElseIf (count1 = 3 Or it1 = tempstring.Count - 1) Then
                                     gfx.DrawString("  " + correspondingnum, font, XBrushes.Black, New XRect(leftanchor, 135 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                                     If over20 Then
                                         pos1 += 10
                                     Else
                                         pos1 += 14
                                     End If
+                                    linecount += 1
                                 End If
                             Next
+
+                            If linecount > 50 Then
+                                linecount = 0
+                                page = document.AddPage
+                                gfx = XGraphics.FromPdfPage(page)
+                                pos2 = 0
+                                pos1 = 0
+                                gfx.DrawString("(Continued)", font3, XBrushes.Black, New XRect(leftanchor, 40 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+
+                                sectioncount = 0
+                            End If
 
                             If VX + partLength > remainder Then
                                 remainder = VX + partLength
@@ -1081,56 +1107,8 @@ Public Class CutManagement
                         End If
 
                         gfx.DrawImage(image, leftanchor, 145 + pos1 + pos2 - 10, 520, 20)
-                        '
-                        ' Prints out which quote and line number the part corresponds to
-                        '
-                        'For it2 = 0 To lengthlist.Count - 1
-                        '    Dim correspondingnum As String = "Orders: "
-                        '    Dim tempstring As ArrayList = New ArrayList
-                        '    For it1 = 0 To uosize.Count - 1
-                        '        If lengthlist(it2) = uosize(it1) AndAlso Not tempstring.Contains(uolistorderline(it1) + "-" + uoitemNumber(it1).ToString + " ") Then
-                        '            For it3 = 0 To uocount(it1) / uoitemQuantity(it1)
-                        '                tempstring.Add(uolistorderline(it1) + "-" + uoitemNumber(it1).ToString + "  " + uocountdown(it1))
-                        '                uocountdown(it1) -= 1
-                        '            Next
-                        '        End If
-                        '    Next
-                        '    Dim count1 As Integer = 1
-                        '    Dim line1 As Boolean = True
-                        '    Dim line2 As Boolean = False
-                        '    For it1 = 0 To tempstring.Count - 1
-                        '        If count1 < 4 Then
-                        '            correspondingnum = correspondingnum + tempstring(it1)
-                        '            count1 += 1
-                        '        Else
-                        '            correspondingnum = ""
-                        '            correspondingnum = tempstring(it1)
-                        '            count1 = 0
-                        '            line2 = True
-                        '        End If
 
-                        '        If line1 AndAlso (count1 = 4 Or it1 = tempstring.Count - 1) Then
-                        '            gfx.DrawString("Size: " + lengthlist(it2).ToString + " " + correspondingnum, font, XBrushes.Black, New XRect(leftanchor, 170 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                        '            If over20 Then
-                        '                pos1 += 10
-                        '            Else
-                        '                pos1 += 14
-                        '            End If
-                        '            line1 = False
-                        '        ElseIf line2 AndAlso (count1 = 4 Or it1 = tempstring.Count - 1) Then
-                        '            gfx.DrawString("  " + correspondingnum, font, XBrushes.Black, New XRect(leftanchor, 170 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                        '            If over20 Then
-                        '                pos1 += 10
-                        '            Else
-                        '                pos1 += 14
-                        '            End If
-                        '        End If
-                        '    Next
-                        'Next
 
-                        '
-                        ' Saves list of used stock that was actually used
-                        '
                         If StockLength <> usedsize1(it) Then
                             cmd.CommandText = "SELECT stockID2, size, count, internalID, context2  FROM stockUsed"
                             cmd.ExecuteNonQuery()
@@ -1317,32 +1295,32 @@ Public Class CutManagement
                 '
                 ' If you do not want to remove parts and stocks from tables.
                 '
-                Dim con As New SqlConnection
-                Dim cmd As New SqlCommand
-                con.ConnectionString = connectionstring.connect1
-                con.Open()
-                cmd.Connection = con
-                For it = 0 To usedstockinternalIDcreated.Count - 1
-                    cmd.CommandText = "DELETE FROM stockUsed WHERE context2 = " + usedstockinternalIDcreated(it).ToString
-                    cmd.ExecuteNonQuery()
-                Next
+                'Dim con As New SqlConnection
+                'Dim cmd As New SqlCommand
+                'con.ConnectionString = connectionstring.connect1
+                'con.Open()
+                'cmd.Connection = con
+                'For it = 0 To usedstockinternalIDcreated.Count - 1
+                '    cmd.CommandText = "DELETE FROM stockUsed WHERE context2 = " + usedstockinternalIDcreated(it).ToString
+                '    cmd.ExecuteNonQuery()
+                'Next
 
-                cmd.CommandText = "SELECT count, context2 FROM stockUsed"
-                cmd.ExecuteNonQuery()
-                Dim count As Integer
+                'cmd.CommandText = "SELECT count, context2 FROM stockUsed"
+                'cmd.ExecuteNonQuery()
+                'Dim count As Integer
 
-                For it = 0 To usedstockinternalID.Count - 1
-                    Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
-                    While readerObj.Read
-                        If String.Equals(readerObj("context2").ToString, usedcontext2(it)) Then
-                            count = readerObj("count")
-                        End If
-                    End While
-                    readerObj.Close()
-                    count -= usedcontextamount(it)
-                    cmd.CommandText = "UPDATE stockUsed SET count = " + count.ToString + " WHERE context2 = " + usedstockinternalID(it).ToString
-                    cmd.ExecuteNonQuery()
-                Next
+                'For it = 0 To usedstockinternalID.Count - 1
+                '    Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
+                '    While readerObj.Read
+                '        If String.Equals(readerObj("context2").ToString, usedcontext2(it)) Then
+                '            count = readerObj("count")
+                '        End If
+                '    End While
+                '    readerObj.Close()
+                '    count -= usedcontextamount(it)
+                '    cmd.CommandText = "UPDATE stockUsed SET count = " + count.ToString + " WHERE context2 = " + usedstockinternalID(it).ToString
+                '    cmd.ExecuteNonQuery()
+                'Next
                 Me.Close()
             End If
 
