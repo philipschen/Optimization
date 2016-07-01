@@ -47,12 +47,10 @@ Partial Class CutManagement
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ComboBox6 = New System.Windows.Forms.ComboBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.RichTextBox4 = New System.Windows.Forms.RichTextBox()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -63,6 +61,10 @@ Partial Class CutManagement
         Me.Label18 = New System.Windows.Forms.Label()
         Me.ComboBox5 = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.ComboBox7 = New System.Windows.Forms.ComboBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -300,14 +302,14 @@ Partial Class CutManagement
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.ListBox1)
+        Me.TabPage2.Controls.Add(Me.CheckBox1)
         Me.TabPage2.Controls.Add(Me.Label19)
         Me.TabPage2.Controls.Add(Me.ComboBox6)
-        Me.TabPage2.Controls.Add(Me.CheckBox1)
         Me.TabPage2.Controls.Add(Me.Button4)
         Me.TabPage2.Controls.Add(Me.Button5)
         Me.TabPage2.Controls.Add(Me.Button6)
         Me.TabPage2.Controls.Add(Me.Label11)
-        Me.TabPage2.Controls.Add(Me.RichTextBox3)
         Me.TabPage2.Controls.Add(Me.Label13)
         Me.TabPage2.Controls.Add(Me.RichTextBox4)
         Me.TabPage2.Controls.Add(Me.Label15)
@@ -340,17 +342,6 @@ Partial Class CutManagement
         Me.ComboBox6.Name = "ComboBox6"
         Me.ComboBox6.Size = New System.Drawing.Size(200, 23)
         Me.ComboBox6.TabIndex = 38
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.CheckBox1.Location = New System.Drawing.Point(380, 22)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(85, 21)
-        Me.CheckBox1.TabIndex = 37
-        Me.CheckBox1.Text = "Select All"
-        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'Button4
         '
@@ -388,20 +379,11 @@ Partial Class CutManagement
         Me.Label11.TabIndex = 33
         Me.Label11.Text = "Current Parts List"
         '
-        'RichTextBox3
-        '
-        Me.RichTextBox3.Location = New System.Drawing.Point(555, 53)
-        Me.RichTextBox3.Name = "RichTextBox3"
-        Me.RichTextBox3.ReadOnly = True
-        Me.RichTextBox3.Size = New System.Drawing.Size(296, 431)
-        Me.RichTextBox3.TabIndex = 32
-        Me.RichTextBox3.Text = ""
-        '
         'Label13
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(12, 175)
+        Me.Label13.Location = New System.Drawing.Point(12, 224)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(100, 16)
         Me.Label13.TabIndex = 29
@@ -410,7 +392,7 @@ Partial Class CutManagement
         'RichTextBox4
         '
         Me.RichTextBox4.BackColor = System.Drawing.SystemColors.Control
-        Me.RichTextBox4.Location = New System.Drawing.Point(12, 207)
+        Me.RichTextBox4.Location = New System.Drawing.Point(15, 243)
         Me.RichTextBox4.Name = "RichTextBox4"
         Me.RichTextBox4.ReadOnly = True
         Me.RichTextBox4.Size = New System.Drawing.Size(200, 182)
@@ -434,12 +416,13 @@ Partial Class CutManagement
         Me.ListBox3.ItemHeight = 16
         Me.ListBox3.Location = New System.Drawing.Point(238, 53)
         Me.ListBox3.Name = "ListBox3"
-        Me.ListBox3.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
         Me.ListBox3.Size = New System.Drawing.Size(301, 372)
         Me.ListBox3.TabIndex = 24
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.Label12)
+        Me.GroupBox2.Controls.Add(Me.ComboBox7)
         Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Controls.Add(Me.ComboBox4)
         Me.GroupBox2.Controls.Add(Me.Label18)
@@ -447,7 +430,7 @@ Partial Class CutManagement
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox2.Location = New System.Drawing.Point(6, 53)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(212, 119)
+        Me.GroupBox2.Size = New System.Drawing.Size(212, 168)
         Me.GroupBox2.TabIndex = 21
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Refine Search"
@@ -504,6 +487,47 @@ Partial Class CutManagement
         Me.Label7.TabIndex = 3
         Me.Label7.Text = "Calculate Cuts"
         '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(6, 115)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(28, 16)
+        Me.Label12.TabIndex = 12
+        Me.Label12.Text = "Set"
+        '
+        'ComboBox7
+        '
+        Me.ComboBox7.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+        Me.ComboBox7.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.ComboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox7.FormattingEnabled = True
+        Me.ComboBox7.Location = New System.Drawing.Point(6, 131)
+        Me.ComboBox7.Name = "ComboBox7"
+        Me.ComboBox7.Size = New System.Drawing.Size(200, 23)
+        Me.ComboBox7.TabIndex = 11
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(377, 19)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(94, 24)
+        Me.CheckBox1.TabIndex = 40
+        Me.CheckBox1.Text = "Select All"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'ListBox1
+        '
+        Me.ListBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.ItemHeight = 16
+        Me.ListBox1.Location = New System.Drawing.Point(555, 53)
+        Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.Size = New System.Drawing.Size(299, 436)
+        Me.ListBox1.TabIndex = 41
+        '
         'CutManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -555,17 +579,19 @@ Partial Class CutManagement
     Friend WithEvents Button5 As Button
     Friend WithEvents Button6 As Button
     Friend WithEvents Label11 As Label
-    Friend WithEvents RichTextBox3 As RichTextBox
     Friend WithEvents Label13 As Label
     Friend WithEvents RichTextBox4 As RichTextBox
     Friend WithEvents Label15 As Label
     Friend WithEvents ListBox3 As ListBox
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents Label19 As Label
     Friend WithEvents ComboBox6 As ComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents ComboBox4 As ComboBox
     Friend WithEvents Label18 As Label
     Friend WithEvents ComboBox5 As ComboBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents ComboBox7 As ComboBox
+    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents ListBox1 As ListBox
 End Class

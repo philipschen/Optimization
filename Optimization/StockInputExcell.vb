@@ -42,7 +42,6 @@ Public Class StockInputExcell
             End While
 
             For it = 0 To shXL.UsedRange.Rows.Count - 1
-
                 Dim inputinternal As Integer
                 Dim rn As New Random
                 inputinternal = rn.Next(1000, 9999)

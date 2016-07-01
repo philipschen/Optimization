@@ -156,10 +156,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OptimizationDatabaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="OptimizationDatabaseDataSet1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OptimizationDatabaseDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="OptimizationDatabaseDataSet2.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OptimizationDatabaseDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="partColor.Designer.vb">
+      <DependentUpon>partColor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="partColor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="partColorAll.Designer.vb">
+      <DependentUpon>partColorAll.vb</DependentUpon>
+    </Compile>
+    <Compile Include="partColorAll.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PartInputExcell.Designer.vb">
       <DependentUpon>PartInputExcell.vb</DependentUpon>
@@ -213,6 +230,12 @@
     <EmbeddedResource Include="NewExtrusions.resx">
       <DependentUpon>NewExtrusions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="partColor.resx">
+      <DependentUpon>partColor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="partColorAll.resx">
+      <DependentUpon>partColorAll.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PartInputExcell.resx">
       <DependentUpon>PartInputExcell.vb</DependentUpon>
     </EmbeddedResource>
@@ -241,6 +264,17 @@
     </None>
     <None Include="OptimizationDatabaseDataSet.xss">
       <DependentUpon>OptimizationDatabaseDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="OptimizationDatabaseDataSet1.xsc">
+      <DependentUpon>OptimizationDatabaseDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="OptimizationDatabaseDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OptimizationDatabaseDataSet1.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="OptimizationDatabaseDataSet1.xss">
+      <DependentUpon>OptimizationDatabaseDataSet1.xsd</DependentUpon>
     </None>
     <None Include="OptimizationDatabaseDataSet2.xsc">
       <DependentUpon>OptimizationDatabaseDataSet2.xsd</DependentUpon>

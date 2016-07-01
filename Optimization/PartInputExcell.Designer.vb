@@ -25,16 +25,15 @@ Partial Class PartInputExcell
         Me.Button2 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.stockID1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.stockID2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.stockID3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.partID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.description = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.color = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.size = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.count = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.internalID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.shopNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Location = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.itemNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.itemQuantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.context1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.context2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.context3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -53,7 +52,7 @@ Partial Class PartInputExcell
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.stockID1, Me.stockID2, Me.stockID3, Me.description, Me.color, Me.size, Me.count, Me.internalID, Me.shopNumber, Me.Location, Me.context1, Me.context2, Me.context3})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.partID, Me.description, Me.color, Me.size, Me.count, Me.internalID, Me.shopNumber, Me.itemNumber, Me.itemQuantity, Me.context1, Me.context2, Me.context3})
         Me.DataGridView1.Location = New System.Drawing.Point(12, 41)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(1160, 608)
@@ -68,20 +67,10 @@ Partial Class PartInputExcell
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'stockID1
+        'partID
         '
-        Me.stockID1.HeaderText = "stockID1"
-        Me.stockID1.Name = "stockID1"
-        '
-        'stockID2
-        '
-        Me.stockID2.HeaderText = "stockID2"
-        Me.stockID2.Name = "stockID2"
-        '
-        'stockID3
-        '
-        Me.stockID3.HeaderText = "stockID3"
-        Me.stockID3.Name = "stockID3"
+        Me.partID.HeaderText = "partID"
+        Me.partID.Name = "partID"
         '
         'description
         '
@@ -114,10 +103,15 @@ Partial Class PartInputExcell
         Me.shopNumber.HeaderText = "shopNumber"
         Me.shopNumber.Name = "shopNumber"
         '
-        'Location
+        'itemNumber
         '
-        Me.Location.HeaderText = "Location"
-        Me.Location.Name = "Location"
+        Me.itemNumber.HeaderText = "itemNumber"
+        Me.itemNumber.Name = "itemNumber"
+        '
+        'itemQuantity
+        '
+        Me.itemQuantity.HeaderText = "itemQuantity"
+        Me.itemQuantity.Name = "itemQuantity"
         '
         'context1
         '
@@ -152,16 +146,15 @@ Partial Class PartInputExcell
     Friend WithEvents Button2 As Button
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Button1 As Button
-    Friend WithEvents stockID1 As DataGridViewTextBoxColumn
-    Friend WithEvents stockID2 As DataGridViewTextBoxColumn
-    Friend WithEvents stockID3 As DataGridViewTextBoxColumn
+    Friend WithEvents partID As DataGridViewTextBoxColumn
     Friend WithEvents description As DataGridViewTextBoxColumn
     Friend WithEvents color As DataGridViewTextBoxColumn
     Friend WithEvents size As DataGridViewTextBoxColumn
     Friend WithEvents count As DataGridViewTextBoxColumn
     Friend WithEvents internalID As DataGridViewTextBoxColumn
     Friend WithEvents shopNumber As DataGridViewTextBoxColumn
-    Friend WithEvents Location As DataGridViewTextBoxColumn
+    Friend WithEvents itemNumber As DataGridViewTextBoxColumn
+    Friend WithEvents itemQuantity As DataGridViewTextBoxColumn
     Friend WithEvents context1 As DataGridViewTextBoxColumn
     Friend WithEvents context2 As DataGridViewTextBoxColumn
     Friend WithEvents context3 As DataGridViewTextBoxColumn
