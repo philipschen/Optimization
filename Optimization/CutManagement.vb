@@ -337,42 +337,8 @@ Public Class CutManagement
         Dim pString As String = ""
         ' Sets item full description
         If ListBox1.SelectedIndex >= 0 Then
-            pString = uodescription(ListBox1.SelectedIndex) + vbCrLf + "Color: " + uocolor(ListBox1.SelectedIndex) + vbCrLf + "Size: " + uosize(ListBox1.SelectedIndex) + vbCrLf + "Count: " + uocount(ListBox1.SelectedIndex) + vbCrLf + "Shop Number: " + uoshopnumber(ListBox1.SelectedIndex)
+            pString = uodescription(ListBox1.SelectedIndex) + vbCrLf + "Color: " + uocolor(ListBox1.SelectedIndex) + vbCrLf + "Size: " + uosize(ListBox1.SelectedIndex) + vbCrLf + "Count: " + uocount(ListBox1.SelectedIndex) + vbCrLf + "Shop Number: " + uoshopnumber(ListBox1.SelectedIndex) 
             RichTextBox4.Text = pString
-        End If
-    End Sub
-
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        If ListBox3.SelectedIndex >= 0 Then
-            oUsed.Add(ListBox3.SelectedIndex)
-            ListBox1.Items.Add(ListBox3.SelectedItem)
-
-            'Clears the list of parts to cuts and repopulates list of cut parts
-            uopartID.Add(lopartID(ListBox3.SelectedIndex))
-            uodescription.Add(lodescription(ListBox3.SelectedIndex))
-            uocolor.Add(locolor(ListBox3.SelectedIndex))
-            uosize.Add(losize(ListBox3.SelectedIndex))
-            uocount.Add(locount(ListBox3.SelectedIndex))
-            uointernalID.Add(lointernalID(ListBox3.SelectedIndex))
-            uoshopnumber.Add(loshopnumber(ListBox3.SelectedIndex))
-            uoitemNumber.Add(loitemNumber(ListBox3.SelectedIndex))
-            uoitemQuantity.Add(loitemQuantity(ListBox3.SelectedIndex))
-            uoUsed.Add(ListBox3.SelectedIndex)
-            uolistorderline.Add(lolistorderline(ListBox3.SelectedIndex))
-
-            lopartID.RemoveAt(ListBox3.SelectedIndex)
-            lodescription.RemoveAt(ListBox3.SelectedIndex)
-            locolor.RemoveAt(ListBox3.SelectedIndex)
-            losize.RemoveAt(ListBox3.SelectedIndex)
-            locount.RemoveAt(ListBox3.SelectedIndex)
-            lointernalID.RemoveAt(ListBox3.SelectedIndex)
-            loshopnumber.RemoveAt(ListBox3.SelectedIndex)
-            loitemNumber.RemoveAt(ListBox3.SelectedIndex)
-            loitemQuantity.RemoveAt(ListBox3.SelectedIndex)
-            loselect.RemoveAt(ListBox3.SelectedIndex)
-            lolistorderline.RemoveAt(ListBox3.SelectedIndex)
-
-            ListBox3.Items.RemoveAt(ListBox3.SelectedIndex)
         End If
     End Sub
 
@@ -440,6 +406,40 @@ Public Class CutManagement
             uoitemQuantity.Clear()
             uoUsed.Clear()
             uolistorderline.Clear()
+        End If
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        If ListBox3.SelectedIndex >= 0 Then
+            oUsed.Add(ListBox3.SelectedIndex)
+            ListBox1.Items.Add(ListBox3.SelectedItem)
+
+            'Clears the list of parts to cuts and repopulates list of cut parts
+            uopartID.Add(lopartID(ListBox3.SelectedIndex))
+            uodescription.Add(lodescription(ListBox3.SelectedIndex))
+            uocolor.Add(locolor(ListBox3.SelectedIndex))
+            uosize.Add(losize(ListBox3.SelectedIndex))
+            uocount.Add(locount(ListBox3.SelectedIndex))
+            uointernalID.Add(lointernalID(ListBox3.SelectedIndex))
+            uoshopnumber.Add(loshopnumber(ListBox3.SelectedIndex))
+            uoitemNumber.Add(loitemNumber(ListBox3.SelectedIndex))
+            uoitemQuantity.Add(loitemQuantity(ListBox3.SelectedIndex))
+            uoUsed.Add(ListBox3.SelectedIndex)
+            uolistorderline.Add(lolistorderline(ListBox3.SelectedIndex))
+
+            lopartID.RemoveAt(ListBox3.SelectedIndex)
+            lodescription.RemoveAt(ListBox3.SelectedIndex)
+            locolor.RemoveAt(ListBox3.SelectedIndex)
+            losize.RemoveAt(ListBox3.SelectedIndex)
+            locount.RemoveAt(ListBox3.SelectedIndex)
+            lointernalID.RemoveAt(ListBox3.SelectedIndex)
+            loshopnumber.RemoveAt(ListBox3.SelectedIndex)
+            loitemNumber.RemoveAt(ListBox3.SelectedIndex)
+            loitemQuantity.RemoveAt(ListBox3.SelectedIndex)
+            loselect.RemoveAt(ListBox3.SelectedIndex)
+            lolistorderline.RemoveAt(ListBox3.SelectedIndex)
+
+            ListBox3.Items.RemoveAt(ListBox3.SelectedIndex)
         End If
     End Sub
 
@@ -722,30 +722,45 @@ Public Class CutManagement
         If frm2.ShowDialog() = DialogResult.OK Then
             For it = 0 To frm2.omitted.Count - 1
                 Dim intloc As Integer = partlistd.IndexOf(frm2.omitted(it))
-
+                For it1 = uopartID.Count - 1 To 0
+                    If String.Equals(frm2.omitted(it), uodescription(it1)) Then
+                        uopartID.RemoveAt(it1)
+                        uodescription.RemoveAt(it1)
+                        uocolor.RemoveAt(it1)
+                        uosize.RemoveAt(it1)
+                        uocount.RemoveAt(it1)
+                        uointernalID.RemoveAt(it1)
+                        uoshopnumber.RemoveAt(it1)
+                        uoitemNumber.RemoveAt(it1)
+                        uoitemQuantity.RemoveAt(it1)
+                        uoUsed.RemoveAt(it1)
+                        uolistorderline.RemoveAt(it1)
+                    End If
+                Next
                 partlistd.Remove(frm2.omitted(it))
 
                 For it1 = 0 To xusedinternalID.Count - 1
-                    If String.Equals(xusedinternalID(it1), usedinternalID(intloc)) Then
-                        xusedsize1.RemoveAt(intloc)
-                        xusedcount.RemoveAt(intloc)
-                        xusedinternalID.RemoveAt(intloc)
-                        xusedcontext2.RemoveAt(intloc)
-                    End If
-                Next
+                        If String.Equals(xusedinternalID(it1), usedinternalID(intloc)) Then
+                            xusedsize1.RemoveAt(intloc)
+                            xusedcount.RemoveAt(intloc)
+                            xusedinternalID.RemoveAt(intloc)
+                            xusedcontext2.RemoveAt(intloc)
+                        End If
+                    Next
 
-                usedstockID1.RemoveAt(intloc)
-                usedstockID2.RemoveAt(intloc)
-                usedstockID3.RemoveAt(intloc)
-                useddescription.RemoveAt(intloc)
-                usedcolor.RemoveAt(intloc)
-                usedsize1.RemoveAt(intloc)
-                usedcount.RemoveAt(intloc)
-                usedinternalID.RemoveAt(intloc)
-                usedsaw.RemoveAt(intloc)
-                usedminsize.RemoveAt(intloc)
-                stock_exists.RemoveAt(intloc)
-            Next
+                    usedstockID1.RemoveAt(intloc)
+                    usedstockID2.RemoveAt(intloc)
+                    usedstockID3.RemoveAt(intloc)
+                    useddescription.RemoveAt(intloc)
+                    usedcolor.RemoveAt(intloc)
+                    usedsize1.RemoveAt(intloc)
+                    usedcount.RemoveAt(intloc)
+                    usedinternalID.RemoveAt(intloc)
+                    usedsaw.RemoveAt(intloc)
+                    usedminsize.RemoveAt(intloc)
+                    stock_exists.RemoveAt(intloc)
+
+                Next
         End If
         '
         ' Sort by saw

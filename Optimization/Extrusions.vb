@@ -427,16 +427,16 @@ Public Class Extrusions
             End While
             readerObj.Close()
 
-            Dim stockID2 As ArrayList = New ArrayList
-            Dim internalID As ArrayList = New ArrayList
-            cmd.CommandText = "SELECT stockID2, internalID  FROM stockNew"
-            cmd.ExecuteNonQuery()
-            readerObj = cmd.ExecuteReader
-            While readerObj.Read
-                stockID2.Add(readerObj("stockID2").ToString)
-                internalID.Add(readerObj("internalID").ToString)
-            End While
-            readerObj.Close()
+            'Dim stockID2 As ArrayList = New ArrayList
+            'Dim internalID As ArrayList = New ArrayList
+            'cmd.CommandText = "SELECT stockID2, internalID  FROM stockNew"
+            'cmd.ExecuteNonQuery()
+            'readerObj = cmd.ExecuteReader
+            'While readerObj.Read
+            '    stockID2.Add(readerObj("stockID2").ToString)
+            '    internalID.Add(readerObj("internalID").ToString)
+            'End While
+            'readerObj.Close()
 
             Dim inputinternal As Integer
             Dim rn As New Random
@@ -531,16 +531,16 @@ Public Class Extrusions
             End While
             readerObj.Close()
 
-            Dim stockID2 As ArrayList = New ArrayList
-            Dim internalID As ArrayList = New ArrayList
-            cmd.CommandText = "SELECT stockID2, internalID  FROM stockNew"
-            cmd.ExecuteNonQuery()
-            readerObj = cmd.ExecuteReader
-            While readerObj.Read
-                stockID2.Add(readerObj("stockID2").ToString)
-                internalID.Add(readerObj("internalID").ToString)
-            End While
-            readerObj.Close()
+            'Dim stockID2 As ArrayList = New ArrayList
+            'Dim internalID As ArrayList = New ArrayList
+            'cmd.CommandText = "SELECT stockID2, internalID  FROM stockNew"
+            'cmd.ExecuteNonQuery()
+            'readerObj = cmd.ExecuteReader
+            'While readerObj.Read
+            '    stockID2.Add(readerObj("stockID2").ToString)
+            '    internalID.Add(readerObj("internalID").ToString)
+            'End While
+            'readerObj.Close()
 
             Dim inputinternal As Integer
             Dim rn As New Random
