@@ -1,6 +1,9 @@
 ﻿Imports System.Data.SqlClient
 Public Class DirectlyEdit
     Private Sub DirectlyEdit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'OptimizationDatabaseDataSet3.stockUsed' table. You can move, or remove it, as needed.
+        Me.StockUsedTableAdapter.Fill(Me.OptimizationDatabaseDataSet3.stockUsed)
+        Me.Text = "Easy Cut V1.0"
         'TODO: This line of code loads data into the 'OptimizationDatabaseDataSet1.parts' table. You can move, or remove it, as needed.
         Me.PartsTableAdapter.Fill(Me.OptimizationDatabaseDataSet1.parts)
         'TODO: This line of code loads data into the 'OptimizationDatabaseDataSet.stockNew' table. You can move, or remove it, as needed.
@@ -10,6 +13,9 @@ Public Class DirectlyEdit
 
         Me.DataGridView2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DataGridView2.AutoResizeColumns()
+
+        Me.DataGridView3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DataGridView3.AutoResizeColumns()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs)

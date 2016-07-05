@@ -1,6 +1,9 @@
 ﻿Imports Excel = Microsoft.Office.Interop.Excel
 Imports System.Data.SqlClient
 Public Class PartInputExcell
+    Private Sub this_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Text = "Easy Cut V1.0"
+    End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand

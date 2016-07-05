@@ -22,7 +22,6 @@ Partial Class StockInputExcell
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.DataSet1 = New System.Data.DataSet()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.stockID1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -36,20 +35,13 @@ Partial Class StockInputExcell
         Me.context1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.context2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.context3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(12, 12)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'DataSet1
         '
@@ -59,9 +51,9 @@ Partial Class StockInputExcell
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.stockID1, Me.stockID2, Me.stockID3, Me.description, Me.color, Me.size, Me.count, Me.internalID, Me.context1, Me.context2, Me.context3})
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 41)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 65)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(1160, 608)
+        Me.DataGridView1.Size = New System.Drawing.Size(1160, 584)
         Me.DataGridView1.TabIndex = 1
         '
         'stockID1
@@ -120,32 +112,55 @@ Partial Class StockInputExcell
         Me.context3.HeaderText = "context3"
         Me.context3.Name = "context3"
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(12, 9)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(262, 37)
+        Me.Label2.TabIndex = 13
+        Me.Label2.Text = "Excel Stock Input"
+        '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(93, 12)
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(497, 7)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 2
-        Me.Button2.Text = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(111, 52)
+        Me.Button2.TabIndex = 12
+        Me.Button2.Text = "Upload Table"
         Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(380, 7)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(111, 52)
+        Me.Button1.TabIndex = 11
+        Me.Button1.Text = "Open File"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(281, 17)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(631, 27)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(0, 13)
-        Me.Label1.TabIndex = 3
+        Me.Label1.Size = New System.Drawing.Size(0, 16)
+        Me.Label1.TabIndex = 10
         '
         'StockInputExcell
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1184, 661)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.DataGridView1)
         Me.Name = "StockInputExcell"
         Me.Text = "StockInputExcell"
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -154,11 +169,8 @@ Partial Class StockInputExcell
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents Button1 As Button
     Friend WithEvents DataSet1 As DataSet
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents Button2 As Button
     Friend WithEvents stockID1 As DataGridViewTextBoxColumn
     Friend WithEvents stockID2 As DataGridViewTextBoxColumn
     Friend WithEvents stockID3 As DataGridViewTextBoxColumn
@@ -170,5 +182,8 @@ Partial Class StockInputExcell
     Friend WithEvents context1 As DataGridViewTextBoxColumn
     Friend WithEvents context2 As DataGridViewTextBoxColumn
     Friend WithEvents context3 As DataGridViewTextBoxColumn
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button1 As Button
     Friend WithEvents Label1 As Label
 End Class

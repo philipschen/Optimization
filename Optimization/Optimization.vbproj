@@ -136,6 +136,12 @@
     <Compile Include="inputColor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="inputSaw.Designer.vb">
+      <DependentUpon>inputSaw.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inputSaw.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -171,6 +177,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OptimizationDatabaseDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="OptimizationDatabaseDataSet3.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OptimizationDatabaseDataSet3.xsd</DependentUpon>
     </Compile>
     <Compile Include="partColor.Designer.vb">
       <DependentUpon>partColor.vb</DependentUpon>
@@ -229,6 +240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="inputColor.resx">
       <DependentUpon>inputColor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inputSaw.resx">
+      <DependentUpon>inputSaw.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -295,6 +309,17 @@
     </None>
     <None Include="OptimizationDatabaseDataSet2.xss">
       <DependentUpon>OptimizationDatabaseDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="OptimizationDatabaseDataSet3.xsc">
+      <DependentUpon>OptimizationDatabaseDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="OptimizationDatabaseDataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OptimizationDatabaseDataSet3.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="OptimizationDatabaseDataSet3.xss">
+      <DependentUpon>OptimizationDatabaseDataSet3.xsd</DependentUpon>
     </None>
     <None Include="PartsDataSet.xsc">
       <DependentUpon>PartsDataSet.xsd</DependentUpon>

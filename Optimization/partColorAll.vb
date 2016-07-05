@@ -1,5 +1,7 @@
 ﻿Public Class partColorAll
     Private Sub partColorAll_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Text = "Easy Cut V1.0"
+        Me.ControlBox = False
         AcceptButton = Button1
         CancelButton = Button2
         ListBox1.Items.Add("BRONZE")
@@ -31,4 +33,5 @@
         Me.DialogResult = DialogResult.OK
         Me.Close()
     End Sub
+
 End Class

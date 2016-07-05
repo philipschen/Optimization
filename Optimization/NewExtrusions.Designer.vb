@@ -186,7 +186,7 @@ Partial Class NewExtrusions
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(99, 74)
         Me.Button1.TabIndex = 17
-        Me.Button1.Text = "Accept"
+        Me.Button1.Text = "Confirm"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2

@@ -46,7 +46,8 @@ Partial Class Form1
         '
         'BStock
         '
-        Me.BStock.Location = New System.Drawing.Point(15, 99)
+        Me.BStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BStock.Location = New System.Drawing.Point(12, 86)
         Me.BStock.Name = "BStock"
         Me.BStock.Size = New System.Drawing.Size(112, 64)
         Me.BStock.TabIndex = 1
@@ -55,7 +56,8 @@ Partial Class Form1
         '
         'BPart
         '
-        Me.BPart.Location = New System.Drawing.Point(17, 169)
+        Me.BPart.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BPart.Location = New System.Drawing.Point(12, 156)
         Me.BPart.Name = "BPart"
         Me.BPart.Size = New System.Drawing.Size(112, 64)
         Me.BPart.TabIndex = 2
@@ -64,7 +66,8 @@ Partial Class Form1
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(17, 239)
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(245, 113)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(112, 64)
         Me.Button3.TabIndex = 3
@@ -73,7 +76,7 @@ Partial Class Form1
         '
         'PictureBox1
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(135, 99)
+        Me.PictureBox1.Location = New System.Drawing.Point(135, 86)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(222, 204)
         Me.PictureBox1.TabIndex = 4
@@ -82,16 +85,17 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(25, 52)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(240, 17)
+        Me.Label2.Size = New System.Drawing.Size(246, 18)
         Me.Label2.TabIndex = 5
         Me.Label2.Text = "For your inventory and cutting needs"
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(157, 112)
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(135, 86)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(100, 39)
         Me.Button1.TabIndex = 6
@@ -100,27 +104,29 @@ Partial Class Form1
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(157, 157)
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(135, 131)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(97, 33)
+        Me.Button2.Size = New System.Drawing.Size(100, 39)
         Me.Button2.TabIndex = 7
         Me.Button2.Text = "Stock Input Excell"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(135, 200)
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.Location = New System.Drawing.Point(12, 226)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(151, 33)
+        Me.Button4.Size = New System.Drawing.Size(112, 64)
         Me.Button4.TabIndex = 8
-        Me.Button4.Text = "part input excell"
+        Me.Button4.Text = "Import Shop Orders"
         Me.Button4.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(407, 315)
+        Me.ClientSize = New System.Drawing.Size(384, 315)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)

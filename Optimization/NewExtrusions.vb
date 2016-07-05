@@ -54,11 +54,11 @@ Public Class NewExtrusions
 
 
 
-                inputinternal = rn.Next(1000, 9999)
+                inputinternal = rn.Next(10000, 99999)
                 For it1 = 0 To internalID.Count - 1
                     If internalID(it1) = inputinternal Then
                         it1 = 0
-                        inputinternal = rn.Next(1000, 9999)
+                        inputinternal = rn.Next(10000, 99999)
                     End If
                 Next
 

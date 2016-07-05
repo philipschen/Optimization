@@ -41,7 +41,7 @@ Partial Class inputColor
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(89, 199)
+        Me.Button1.Location = New System.Drawing.Point(93, 97)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(95, 50)
         Me.Button1.TabIndex = 1
@@ -52,9 +52,10 @@ Partial Class inputColor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.ClientSize = New System.Drawing.Size(284, 185)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Name = "inputColor"
         Me.Text = "inputColor"
         Me.ResumeLayout(False)

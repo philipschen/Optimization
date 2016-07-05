@@ -23,12 +23,6 @@ Public Class Form1
 
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        'con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=Parts;Integrated Security=True"
-        'con.Open()
-        'cmd.Connection = con
-
-        'cmd.CommandText = "DELETE FROM Parts"
-        'cmd.ExecuteNonQuery()
 
         con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
         con.Open()

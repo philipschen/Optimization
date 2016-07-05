@@ -346,7 +346,7 @@ Public Class CutManagement
                             Dim image As XImage = XImage.FromFile("test" + tempIt + ".png")
                             imagecount = tempIt
                             imagecountfile.Add(image)
-                            Console.WriteLine("picture index: " + tempIt)
+
                             Dim pos1 As Integer = 0
                             Dim descriptionString As String = ""
                             Dim descriptionString2 As String = ""
@@ -490,7 +490,7 @@ Public Class CutManagement
             oshopnumber.Add(readerObj1("shopNumber").ToString)
             oitemNumber.Add(readerObj1("itemNumber").ToString)
             oitemQuantity.Add(readerObj1("itemQuantity").ToString)
-            oselect.add(it)
+            oselect.Add(it)
 
             lopartID.Add(opartID(it))
             lodescription.Add(odescription(it))
@@ -696,16 +696,6 @@ Public Class CutManagement
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        'uopartID.Add(opartID(oselect(ListBox3.SelectedIndex)))
-        'uodescription.Add(opartID(oselect(ListBox3.SelectedIndex)))
-        'uocolor.Add(opartID(oselect(ListBox3.SelectedIndex)))
-        'uosize.Add(opartID(oselect(ListBox3.SelectedIndex)))
-        'uocount.Add(opartID(oselect(ListBox3.SelectedIndex)))
-        'uointernalID.Add(opartID(oselect(ListBox3.SelectedIndex)))
-        'uoshopnumber.Add(opartID(oselect(ListBox3.SelectedIndex)))
-        'uoitemNumber.Add(opartID(oselect(ListBox3.SelectedIndex)))
-        'uoitemQuantity.Add(opartID(oselect(ListBox3.SelectedIndex)))
-        'uoUsed.Add(oselect(ListBox3.SelectedIndex))
         Dim partcountIndex As ArrayList = New ArrayList
         Dim partlistd As ArrayList = New ArrayList
         Dim partlistid As ArrayList = New ArrayList
@@ -750,7 +740,7 @@ Public Class CutManagement
             con.Open()
             cmd.Connection = con
 
-            cmd.CommandText = "SELECT stockID2, description, color, size, count, internalID FROM stockNew"
+            cmd.CommandText = "SELECT stockID2, description, color, size, count, internalID, context1 FROM stockNew"
             cmd.ExecuteNonQuery()
             Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
 
@@ -763,6 +753,7 @@ Public Class CutManagement
             Dim usedinternalID As ArrayList = New ArrayList
             Dim usedUsed As ArrayList = New ArrayList
             Dim usedcount As ArrayList = New ArrayList
+            Dim usedsaw As ArrayList = New ArrayList
             Dim stock_exists As Boolean = False
             '
             ' Finds Corresponding Stocks
@@ -775,6 +766,7 @@ Public Class CutManagement
                     usedsize1.Add(readerObj("size").ToString)
                     usedcount.Add(readerObj("count").ToString)
                     usedinternalID.Add(readerObj("internalID").ToString)
+                    usedsaw.Add(readerObj("context1").ToString)
                     stock_exists = True
                 End If
             End While
@@ -788,10 +780,12 @@ Public Class CutManagement
                 frm1.des = useddescription
                 frm1.id = usedstockID2
                 frm1.color = usedcolor
-                frm1.part1 = partlistd(it) + "  ID:" + partlistid(it) + "  Color:" + partlistcolor(it)
+                frm1.saw = usedsaw
+                frm1.part1 = partlistd(it) + "  ID: " + partlistid(it) + "  Color: " + partlistcolor(it)
 
                 If frm1.ShowDialog() = DialogResult.OK Then
                     usedstock = frm1.ListBox1.SelectedIndex
+                    usedsaw = frm1.saw
                 End If
             End If
             If usedinternalID.Count > 0 Then
@@ -863,7 +857,7 @@ Public Class CutManagement
                         Dim page As PdfPage
                         Dim gfx As XGraphics
                         partCount = Calculator.GetPartCountOnStock(iStock)
-                        If partCount > 8 Then
+                        If partCount > 10 Then
                             page = document.AddPage
                             gfx = XGraphics.FromPdfPage(page)
                             pos2 = 0
@@ -886,68 +880,71 @@ Public Class CutManagement
                             partCount = Calculator.GetPartCountOnStock(iStock)
 
 
-                            Dim pageNo As String = Convert.ToString(iLayout)
-                                Dim tempIt As String = Convert.ToString(iStock)
-                                ' Dim page As PdfPage = document.AddPage
+                            Dim pageNo As String = Convert.ToString(iLayout + 1)
+                            Dim tempIt As String = Convert.ToString(iStock)
+                            ' Dim page As PdfPage = document.AddPage
 
 
-                                Dim temppic As String = Convert.ToString(picturecount)
-                                Calculator.CreateStockImage(iStock, "test" + temppic + ".png", 1000)
-                                Dim image As XImage = XImage.FromFile("test" + temppic + ".png")
-                                picturecount += 1
-                                imagecountfile.Add(image)
+                            Dim temppic As String = Convert.ToString(picturecount)
+                            Calculator.CreateStockImage(iStock, "test" + temppic + ".png", 1000)
+                            Dim image As XImage = XImage.FromFile("test" + temppic + ".png")
+                            picturecount += 1
+                            imagecountfile.Add(image)
 
-                                Dim temp As String = Convert.ToString(VStockCount)
-                                Dim pos1 As Integer = 0
-                                Dim descriptionString As String = partlistd(it) + " X" '+ typecount
-                                Dim descriptionString2 As String = "ID: " + partlistid(it)
-                                Dim descriptionString3 As String = "Color: " + usedcolor(usedstock)
-                                Dim descriptionString4 As String = "Stock Size: " + usedsize1(usedstock)
-                                Dim descriptionstring5 As String = "Saw number: "
-                                Dim descriptionstring6 As String = "Stock Cut: " + temp
-                                Dim leftanchor As Integer = 50
+                            Dim Stockt As String = Convert.ToString(iStock + 1)
+                            Dim xt As String = Convert.ToString(StockLength)
+                            Dim temp As String = Convert.ToString(VStockCount)
+                            Dim temp1 As String = Convert.ToString(iLayout + 1)
+                            Dim pos1 As Integer = 0
+                            Dim descriptionString As String = partlistd(it)
+                            Dim descriptionString2 As String = "ID: " + partlistid(it)
+                            Dim descriptionString3 As String = "Color: " + usedcolor(usedstock)
+                            Dim descriptionString4 As String = "Stock Size: " + usedsize1(usedstock)
+                            Dim descriptionstring5 As String = "Saw number: " + usedsaw(usedstock)
+                            Dim descriptionstring6 As String = "# Of Stock Cut: " + temp
+                            Dim descriptionstring7 As String = "Layout Number = " + temp1
+                            Dim leftanchor As Integer = 50
 
 
-                                'ListBox3.Items.Add(cutId1)
-                                gfx.DrawImage(image, 50, 370 + pos2, 500, 20)
-                                gfx.DrawString("Page " + pageNo, font, XBrushes.Black, New XRect(leftanchor, 50 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                                gfx.DrawString(descriptionString, font3, XBrushes.Black, New XRect(leftanchor, 65 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                                gfx.DrawString(descriptionString2, font2, XBrushes.Black, New XRect(leftanchor, 80 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                                gfx.DrawString(descriptionString3, font2, XBrushes.Black, New XRect(leftanchor, 95 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                                gfx.DrawString(descriptionString4, font2, XBrushes.Black, New XRect(leftanchor, 110 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                                gfx.DrawString(descriptionstring5, font3, XBrushes.Black, New XRect(leftanchor + 350, 50 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                                gfx.DrawString(descriptionstring6, font3, XBrushes.Black, New XRect(leftanchor + 350, 65 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                                Console.WriteLine("Layout={0}:  Length={1}", iStock, StockLength)
+                            'ListBox3.Items.Add(cutId1)
 
-                                Dim Stockt As String = Convert.ToString(iStock + 1)
-                                Dim xt As String = Convert.ToString(StockLength)
+                            gfx.DrawString("Page " + pageNo, font, XBrushes.Black, New XRect(leftanchor, 50 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                            gfx.DrawString(descriptionString, font3, XBrushes.Black, New XRect(leftanchor, 65 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                            gfx.DrawString(descriptionString2, font2, XBrushes.Black, New XRect(leftanchor, 80 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                            gfx.DrawString(descriptionString3, font2, XBrushes.Black, New XRect(leftanchor, 95 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                            gfx.DrawString(descriptionString4, font2, XBrushes.Black, New XRect(leftanchor, 110 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                            gfx.DrawString(descriptionstring5, font3, XBrushes.Black, New XRect(leftanchor + 360, 50 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                            gfx.DrawString(descriptionstring6, font3, XBrushes.Black, New XRect(leftanchor + 360, 65 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                            gfx.DrawString(descriptionstring7, font, XBrushes.Black, New XRect(leftanchor + 360, 80 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
 
-                                gfx.DrawString("Stock = " + Stockt + "  Length= " + xt + " ", font, XBrushes.Black, New XRect(leftanchor, 125 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                            Console.WriteLine("Layout={0}:  Length={1}", iStock, StockLength)
+
+
+                            ' Output the information about parts cut from this stock
+                            ' First we get quantity of parts cut from the stock
+
+                            ' Iterate by parts and get indices of cut parts
+                            For ViPart = 0 To partCount - 1
+                                ' Get global part index of ViPart cut from the current stock
+                                partIndex = Calculator.GetPartIndexOnStock(iStock, ViPart)
+                                ' Get length and location of the part
+                                ' X - coordinate on the stock where the part beggins.
+
+                                Calculator.GetResultLinearPart(partIndex, tmp, partLength, VX)
+                                ' Output the part information
+                                Console.WriteLine("Part= {0}:  X={1}  Length={2}", partIndex, VX, partLength)
+
+                                Dim partt As String = Convert.ToString(partIndex)
+                                Dim vxt As String = Convert.ToString(VX + partLength)
+                                Dim vpartLength As String = Convert.ToString(partLength)
+                                gfx.DrawString("Cut position= " + vxt + " Length= " + vpartLength, font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                                 pos1 += 15
-                                ' Output the information about parts cut from this stock
-                                ' First we get quantity of parts cut from the stock
-
-                                ' Iterate by parts and get indices of cut parts
-                                For ViPart = 0 To partCount - 1
-                                    ' Get global part index of ViPart cut from the current stock
-                                    partIndex = Calculator.GetPartIndexOnStock(iStock, ViPart)
-                                    ' Get length and location of the part
-                                    ' X - coordinate on the stock where the part beggins.
-
-                                    Calculator.GetResultLinearPart(partIndex, tmp, partLength, VX)
-                                    ' Output the part information
-                                    Console.WriteLine("Part= {0}:  X={1}  Length={2}", partIndex, VX, partLength)
-
-                                    Dim partt As String = Convert.ToString(partIndex)
-                                    Dim vxt As String = Convert.ToString(VX)
-                                    Dim vpartLength As String = Convert.ToString(partLength)
-                                    gfx.DrawString("Cut position= " + vxt + " Length= " + vpartLength, font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                                    pos1 += 15
-                                    '"Part = " + partt + 
-                                    typechecker1.Add(VX)
-                                    typechecker2.Add(partLength)
-                                Next ViPart
-                            End If
+                                '"Part = " + partt + 
+                                typechecker1.Add(VX)
+                                typechecker2.Add(partLength)
+                            Next ViPart
+                            gfx.DrawImage(image, 50, 170 + pos1 + pos2, 500, 20)
+                        End If
 
 
 
