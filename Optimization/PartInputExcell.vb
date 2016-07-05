@@ -56,18 +56,20 @@ Public Class PartInputExcell
             End If
 
             For it = 0 To shXL.UsedRange.Rows.Count - 1
-
+                Dim temp As String = Convert.ToString(it)
+                Dim temp1 As String = Convert.ToString(shXL.UsedRange.Rows.Count - 1)
+                Label1.Text = "Loading " + temp + "/" + temp1
                 DataGridView1.Rows.Add()
                 DataGridView1.Rows(it).Cells(0).Value = shXL.Cells(2 + it, 8).Value
                 DataGridView1.Rows(it).Cells(1).Value = shXL.Cells(2 + it, 9).Value
 
                 Dim inputinternal As Integer
                 Dim rn As New Random
-                inputinternal = rn.Next(1000, 9999)
+                inputinternal = rn.Next(100000, 999999)
                 For it1 = 0 To internalID.Count - 1
                     If internalID(it1) = inputinternal Or usedID.Contains(inputinternal) Then
                         it1 = 0
-                        inputinternal = rn.Next(1000, 9999)
+                        inputinternal = rn.Next(100000, 999999)
                     End If
                 Next
                 usedID.Add(inputinternal)

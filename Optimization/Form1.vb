@@ -35,6 +35,7 @@ Public Class Form1
         cmd.Connection = con
 
         cmd.CommandText = "DELETE FROM stockNew"
+        cmd.CommandText = "DELETE FROM parts"
 
         cmd.ExecuteNonQuery()
     End Sub

@@ -87,6 +87,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChooseStock.Designer.vb">
+      <DependentUpon>ChooseStock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ChooseStock.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CutManagement.Designer.vb">
       <DependentUpon>CutManagement.vb</DependentUpon>
     </Compile>
@@ -200,6 +206,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ChooseStock.resx">
+      <DependentUpon>ChooseStock.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CutManagement.resx">
       <DependentUpon>CutManagement.vb</DependentUpon>
     </EmbeddedResource>

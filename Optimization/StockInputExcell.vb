@@ -44,15 +44,20 @@ Public Class StockInputExcell
             For it = 0 To shXL.UsedRange.Rows.Count - 1
                 Dim inputinternal As Integer
                 Dim rn As New Random
-                inputinternal = rn.Next(1000, 9999)
+                inputinternal = rn.Next(10000, 99999)
                 For it1 = 0 To internalID.Count - 1
                     If internalID(it1) = inputinternal Or usedID.Contains(inputinternal) Then
                         it1 = 0
-                        inputinternal = rn.Next(1000, 9999)
+                        inputinternal = rn.Next(10000, 99999)
                     End If
                 Next
-
                 usedID.Add(inputinternal)
+
+                Dim temp As String = Convert.ToString(it)
+                Dim temp1 As String = Convert.ToString(shXL.UsedRange.Rows.Count - 1)
+                Label1.Text = "Loading " + temp + "/" + temp1
+
+
                 DataGridView1.Rows.Add()
                 DataGridView1.Rows(it).Cells(0).Value = shXL.Cells(1 + it, 6).Value
                 DataGridView1.Rows(it).Cells(1).Value = shXL.Cells(1 + it, 1).Value

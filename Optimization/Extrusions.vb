@@ -12,6 +12,19 @@ Public Class Extrusions
     Dim internalID As ArrayList = New ArrayList
     Dim Used As ArrayList = New ArrayList
 
+    Dim ostockID1 As ArrayList = New ArrayList
+    Dim ostockID2 As ArrayList = New ArrayList
+    Dim ostockID3 As ArrayList = New ArrayList
+    Dim odescription As ArrayList = New ArrayList
+    Dim ocolor As ArrayList = New ArrayList
+    Dim osize1 As ArrayList = New ArrayList
+    Dim ointernalID As ArrayList = New ArrayList
+    Dim oUsed As ArrayList = New ArrayList
+
+    '
+    ' Page 1
+    '
+
     Private Sub Extrusions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TODO: This line of code loads data into the 'OptimizationDatabaseDataSet.stockNew' table. You can move, or remove it, as needed.
         Me.StockNewTableAdapter.Fill(Me.OptimizationDatabaseDataSet.stockNew)
@@ -261,6 +274,10 @@ Public Class Extrusions
         appXL.Quit()
         appXL = Nothing
     End Sub
+
+    '
+    ' Page 2
+    '
 
 
 End Class
