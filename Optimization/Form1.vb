@@ -28,8 +28,8 @@ Public Class Form1
         con.Open()
         cmd.Connection = con
 
-        cmd.CommandText = "DELETE FROM stockNew"
-        cmd.CommandText = "DELETE FROM parts"
+        cmd.CommandText = "DELETE FROM stockUsed"
+        'cmd.CommandText = "DELETE FROM parts"
 
         cmd.ExecuteNonQuery()
     End Sub

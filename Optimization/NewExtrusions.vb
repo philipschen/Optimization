@@ -8,6 +8,12 @@ Public Class NewExtrusions
         ListBox1.Items.Add("White")
         ListBox1.Items.Add("Silver")
         ListBox1.Items.Add("Other")
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+        TextBox3.Text = ""
+        TextBox4.Text = ""
+        TextBox5.Text = ""
+        TextBox6.Text = ""
 
     End Sub
 
@@ -40,13 +46,12 @@ Public Class NewExtrusions
             While readerObj.Read
                 Dim temp1 As Integer = Convert.ToInt64(readerObj("internalID").ToString)
                 internalID.Add(temp1)
-                '   If readerObj.IsDBNull(1) Then
-                '  readerObj.Close()
-                ' Exit While
-                ' End If
             End While
-
-            If vUpdate Then
+            readerObj.Close()
+            If (String.Equals(stockID2, "") Or String.Equals(description, "") Or String.Equals(stockSize, "") Or String.Equals(stockCount, "")) Then
+                Dim warning1 As finishInput = New finishInput()
+                warning1.ShowDialog()
+            Else
                 Dim rn As New Random
                 Dim it1 As Integer
                 Dim boolinternalID As Boolean = True
@@ -65,7 +70,7 @@ Public Class NewExtrusions
 
                 Dim temp1 = Convert.ToString(inputinternal)
 
-                readerObj.Close()
+
                 cmd.CommandText = "INSERT INTO stockNew VALUES('" + stockID1 + "', '" + stockID2 + "' , '" + stockID3 + "', '" + description + "' , '" + stockColor + "', " + stockSize + " , " + stockCount + ", " + temp1 + ", '' , 0, '')"
                 cmd.ExecuteNonQuery()
                 Me.Close()

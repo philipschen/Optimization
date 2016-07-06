@@ -26,12 +26,10 @@ Partial Class Form1
         Me.BStock = New System.Windows.Forms.Button()
         Me.BPart = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -61,26 +59,18 @@ Partial Class Form1
         Me.BPart.Name = "BPart"
         Me.BPart.Size = New System.Drawing.Size(112, 64)
         Me.BPart.TabIndex = 2
-        Me.BPart.Text = "Input Parts To Cut"
+        Me.BPart.Text = "Cut Manager"
         Me.BPart.UseVisualStyleBackColor = True
         '
         'Button3
         '
         Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(245, 113)
+        Me.Button3.Location = New System.Drawing.Point(245, 86)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(112, 64)
         Me.Button3.TabIndex = 3
         Me.Button3.Text = "[Temp] Clean data"
         Me.Button3.UseVisualStyleBackColor = True
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Location = New System.Drawing.Point(135, 86)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(222, 204)
-        Me.PictureBox1.TabIndex = 4
-        Me.PictureBox1.TabStop = False
         '
         'Label2
         '
@@ -131,14 +121,12 @@ Partial Class Form1
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.BPart)
         Me.Controls.Add(Me.BStock)
         Me.Controls.Add(Me.Label1)
         Me.Name = "Form1"
         Me.Text = "Form1"
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -148,7 +136,6 @@ Partial Class Form1
     Friend WithEvents BStock As Button
     Friend WithEvents BPart As Button
     Friend WithEvents Button3 As Button
-    Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button

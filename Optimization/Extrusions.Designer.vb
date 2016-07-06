@@ -39,6 +39,8 @@ Partial Class Extrusions
         Me.Label12 = New System.Windows.Forms.Label()
         Me.ListBox4 = New System.Windows.Forms.ListBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.ComboBox8 = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -68,6 +70,8 @@ Partial Class Extrusions
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.ComboBox7 = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -76,6 +80,21 @@ Partial Class Extrusions
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.StockNewTableAdapter = New Optimization.OptimizationDatabaseDataSetTableAdapters.stockNewTableAdapter()
+        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.StockID1DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StockID2DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StockID3DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescriptionDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColorDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SizeDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CountDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InternalIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Context1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Context2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Context3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OptimizationDatabaseDataSet3 = New Optimization.OptimizationDatabaseDataSet3()
+        Me.StockUsedBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.StockUsedTableAdapter = New Optimization.OptimizationDatabaseDataSet3TableAdapters.stockUsedTableAdapter()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -84,6 +103,9 @@ Partial Class Extrusions
         CType(Me.OptimizationDatabaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.OptimizationDatabaseDataSet3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.StockUsedBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label7
@@ -98,6 +120,7 @@ Partial Class Extrusions
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.DataGridView2)
         Me.TabPage2.Controls.Add(Me.TextBox3)
         Me.TabPage2.Controls.Add(Me.Label16)
         Me.TabPage2.Controls.Add(Me.Button4)
@@ -244,6 +267,8 @@ Partial Class Extrusions
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.Label18)
+        Me.GroupBox2.Controls.Add(Me.ComboBox8)
         Me.GroupBox2.Controls.Add(Me.Label13)
         Me.GroupBox2.Controls.Add(Me.Label14)
         Me.GroupBox2.Controls.Add(Me.Label15)
@@ -258,10 +283,30 @@ Partial Class Extrusions
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Input at least one ID"
         '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(6, 160)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(76, 16)
+        Me.Label18.TabIndex = 9
+        Me.Label18.Text = "Description"
+        '
+        'ComboBox8
+        '
+        Me.ComboBox8.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+        Me.ComboBox8.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.ComboBox8.DropDownWidth = 300
+        Me.ComboBox8.FormattingEnabled = True
+        Me.ComboBox8.Location = New System.Drawing.Point(6, 176)
+        Me.ComboBox8.Name = "ComboBox8"
+        Me.ComboBox8.Size = New System.Drawing.Size(176, 24)
+        Me.ComboBox8.TabIndex = 8
+        '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(6, 151)
+        Me.Label13.Location = New System.Drawing.Point(6, 117)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(97, 16)
         Me.Label13.TabIndex = 5
@@ -270,7 +315,7 @@ Partial Class Extrusions
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(6, 91)
+        Me.Label14.Location = New System.Drawing.Point(6, 74)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(87, 16)
         Me.Label14.TabIndex = 4
@@ -289,7 +334,7 @@ Partial Class Extrusions
         '
         Me.ComboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Location = New System.Drawing.Point(6, 167)
+        Me.ComboBox4.Location = New System.Drawing.Point(6, 133)
         Me.ComboBox4.Name = "ComboBox4"
         Me.ComboBox4.Size = New System.Drawing.Size(176, 24)
         Me.ComboBox4.TabIndex = 2
@@ -300,7 +345,7 @@ Partial Class Extrusions
         Me.ComboBox5.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.ComboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox5.FormattingEnabled = True
-        Me.ComboBox5.Location = New System.Drawing.Point(6, 107)
+        Me.ComboBox5.Location = New System.Drawing.Point(6, 90)
         Me.ComboBox5.Name = "ComboBox5"
         Me.ComboBox5.Size = New System.Drawing.Size(176, 24)
         Me.ComboBox5.TabIndex = 1
@@ -516,6 +561,8 @@ Partial Class Extrusions
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label17)
+        Me.GroupBox1.Controls.Add(Me.ComboBox7)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label4)
@@ -530,10 +577,30 @@ Partial Class Extrusions
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Input at least one ID"
         '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(6, 160)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(76, 16)
+        Me.Label17.TabIndex = 7
+        Me.Label17.Text = "Description"
+        '
+        'ComboBox7
+        '
+        Me.ComboBox7.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+        Me.ComboBox7.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.ComboBox7.DropDownWidth = 300
+        Me.ComboBox7.FormattingEnabled = True
+        Me.ComboBox7.Location = New System.Drawing.Point(6, 176)
+        Me.ComboBox7.Name = "ComboBox7"
+        Me.ComboBox7.Size = New System.Drawing.Size(176, 24)
+        Me.ComboBox7.TabIndex = 6
+        '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(6, 151)
+        Me.Label6.Location = New System.Drawing.Point(6, 117)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(97, 16)
         Me.Label6.TabIndex = 5
@@ -542,7 +609,7 @@ Partial Class Extrusions
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(6, 91)
+        Me.Label5.Location = New System.Drawing.Point(6, 74)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(87, 16)
         Me.Label5.TabIndex = 4
@@ -561,7 +628,7 @@ Partial Class Extrusions
         '
         Me.ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(6, 167)
+        Me.ComboBox3.Location = New System.Drawing.Point(6, 133)
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(176, 24)
         Me.ComboBox3.TabIndex = 2
@@ -572,7 +639,7 @@ Partial Class Extrusions
         Me.ComboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(6, 107)
+        Me.ComboBox2.Location = New System.Drawing.Point(6, 90)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(176, 24)
         Me.ComboBox2.TabIndex = 1
@@ -602,6 +669,97 @@ Partial Class Extrusions
         '
         Me.StockNewTableAdapter.ClearBeforeFill = True
         '
+        'DataGridView2
+        '
+        Me.DataGridView2.AutoGenerateColumns = False
+        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.StockID1DataGridViewTextBoxColumn1, Me.StockID2DataGridViewTextBoxColumn1, Me.StockID3DataGridViewTextBoxColumn1, Me.DescriptionDataGridViewTextBoxColumn1, Me.ColorDataGridViewTextBoxColumn1, Me.SizeDataGridViewTextBoxColumn1, Me.CountDataGridViewTextBoxColumn1, Me.InternalIDDataGridViewTextBoxColumn, Me.Context1DataGridViewTextBoxColumn, Me.Context2DataGridViewTextBoxColumn, Me.Context3DataGridViewTextBoxColumn})
+        Me.DataGridView2.DataSource = Me.StockUsedBindingSource
+        Me.DataGridView2.Location = New System.Drawing.Point(545, 6)
+        Me.DataGridView2.Name = "DataGridView2"
+        Me.DataGridView2.Size = New System.Drawing.Size(601, 514)
+        Me.DataGridView2.TabIndex = 27
+        '
+        'StockID1DataGridViewTextBoxColumn1
+        '
+        Me.StockID1DataGridViewTextBoxColumn1.DataPropertyName = "stockID1"
+        Me.StockID1DataGridViewTextBoxColumn1.HeaderText = "stockID1"
+        Me.StockID1DataGridViewTextBoxColumn1.Name = "StockID1DataGridViewTextBoxColumn1"
+        '
+        'StockID2DataGridViewTextBoxColumn1
+        '
+        Me.StockID2DataGridViewTextBoxColumn1.DataPropertyName = "stockID2"
+        Me.StockID2DataGridViewTextBoxColumn1.HeaderText = "stockID2"
+        Me.StockID2DataGridViewTextBoxColumn1.Name = "StockID2DataGridViewTextBoxColumn1"
+        '
+        'StockID3DataGridViewTextBoxColumn1
+        '
+        Me.StockID3DataGridViewTextBoxColumn1.DataPropertyName = "stockID3"
+        Me.StockID3DataGridViewTextBoxColumn1.HeaderText = "stockID3"
+        Me.StockID3DataGridViewTextBoxColumn1.Name = "StockID3DataGridViewTextBoxColumn1"
+        '
+        'DescriptionDataGridViewTextBoxColumn1
+        '
+        Me.DescriptionDataGridViewTextBoxColumn1.DataPropertyName = "description"
+        Me.DescriptionDataGridViewTextBoxColumn1.HeaderText = "description"
+        Me.DescriptionDataGridViewTextBoxColumn1.Name = "DescriptionDataGridViewTextBoxColumn1"
+        '
+        'ColorDataGridViewTextBoxColumn1
+        '
+        Me.ColorDataGridViewTextBoxColumn1.DataPropertyName = "color"
+        Me.ColorDataGridViewTextBoxColumn1.HeaderText = "color"
+        Me.ColorDataGridViewTextBoxColumn1.Name = "ColorDataGridViewTextBoxColumn1"
+        '
+        'SizeDataGridViewTextBoxColumn1
+        '
+        Me.SizeDataGridViewTextBoxColumn1.DataPropertyName = "size"
+        Me.SizeDataGridViewTextBoxColumn1.HeaderText = "size"
+        Me.SizeDataGridViewTextBoxColumn1.Name = "SizeDataGridViewTextBoxColumn1"
+        '
+        'CountDataGridViewTextBoxColumn1
+        '
+        Me.CountDataGridViewTextBoxColumn1.DataPropertyName = "count"
+        Me.CountDataGridViewTextBoxColumn1.HeaderText = "count"
+        Me.CountDataGridViewTextBoxColumn1.Name = "CountDataGridViewTextBoxColumn1"
+        '
+        'InternalIDDataGridViewTextBoxColumn
+        '
+        Me.InternalIDDataGridViewTextBoxColumn.DataPropertyName = "internalID"
+        Me.InternalIDDataGridViewTextBoxColumn.HeaderText = "internalID"
+        Me.InternalIDDataGridViewTextBoxColumn.Name = "InternalIDDataGridViewTextBoxColumn"
+        '
+        'Context1DataGridViewTextBoxColumn
+        '
+        Me.Context1DataGridViewTextBoxColumn.DataPropertyName = "context1"
+        Me.Context1DataGridViewTextBoxColumn.HeaderText = "context1"
+        Me.Context1DataGridViewTextBoxColumn.Name = "Context1DataGridViewTextBoxColumn"
+        '
+        'Context2DataGridViewTextBoxColumn
+        '
+        Me.Context2DataGridViewTextBoxColumn.DataPropertyName = "context2"
+        Me.Context2DataGridViewTextBoxColumn.HeaderText = "context2"
+        Me.Context2DataGridViewTextBoxColumn.Name = "Context2DataGridViewTextBoxColumn"
+        '
+        'Context3DataGridViewTextBoxColumn
+        '
+        Me.Context3DataGridViewTextBoxColumn.DataPropertyName = "context3"
+        Me.Context3DataGridViewTextBoxColumn.HeaderText = "context3"
+        Me.Context3DataGridViewTextBoxColumn.Name = "Context3DataGridViewTextBoxColumn"
+        '
+        'OptimizationDatabaseDataSet3
+        '
+        Me.OptimizationDatabaseDataSet3.DataSetName = "OptimizationDatabaseDataSet3"
+        Me.OptimizationDatabaseDataSet3.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'StockUsedBindingSource
+        '
+        Me.StockUsedBindingSource.DataMember = "stockUsed"
+        Me.StockUsedBindingSource.DataSource = Me.OptimizationDatabaseDataSet3
+        '
+        'StockUsedTableAdapter
+        '
+        Me.StockUsedTableAdapter.ClearBeforeFill = True
+        '
         'Extrusions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -623,6 +781,9 @@ Partial Class Extrusions
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.OptimizationDatabaseDataSet3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.StockUsedBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -680,4 +841,23 @@ Partial Class Extrusions
     Friend WithEvents ComboBox6 As ComboBox
     Friend WithEvents TextBox3 As TextBox
     Friend WithEvents Label16 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents ComboBox7 As ComboBox
+    Friend WithEvents Label18 As Label
+    Friend WithEvents ComboBox8 As ComboBox
+    Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents StockID1DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents StockID2DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents StockID3DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents DescriptionDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents ColorDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents SizeDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents CountDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents InternalIDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents Context1DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents Context2DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents Context3DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents OptimizationDatabaseDataSet3 As OptimizationDatabaseDataSet3
+    Friend WithEvents StockUsedBindingSource As BindingSource
+    Friend WithEvents StockUsedTableAdapter As OptimizationDatabaseDataSet3TableAdapters.stockUsedTableAdapter
 End Class

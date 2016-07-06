@@ -3,6 +3,8 @@ Imports System.Data.SqlClient
 Imports PdfSharp.Drawing
 Imports PdfSharp.Pdf
 Public Class CutManagement
+    ' page 1
+    ' all from Newstock table
     Dim stockID1 As ArrayList = New ArrayList
     Dim stockID2 As ArrayList = New ArrayList
     Dim stockID3 As ArrayList = New ArrayList
@@ -11,7 +13,7 @@ Public Class CutManagement
     Dim size1 As ArrayList = New ArrayList
     Dim internalID As ArrayList = New ArrayList
     Dim Used As ArrayList = New ArrayList
-
+    ' cut stock
     Dim cutstockID1 As ArrayList = New ArrayList
     Dim cutstockID2 As ArrayList = New ArrayList
     Dim cutstockID3 As ArrayList = New ArrayList
@@ -22,6 +24,8 @@ Public Class CutManagement
     Dim cutUsed As ArrayList = New ArrayList
     Dim cutcount As ArrayList = New ArrayList
 
+    ' page 2
+    ' all from newparts table
     Dim opartID As ArrayList = New ArrayList
     Dim odescription As ArrayList = New ArrayList
     Dim ocolor As ArrayList = New ArrayList
@@ -34,7 +38,7 @@ Public Class CutManagement
     Dim osetNumber As ArrayList = New ArrayList
     Dim oUsed As ArrayList = New ArrayList
     Dim oselect As ArrayList = New ArrayList
-
+    ' everything in the listbox
     Dim lopartID As ArrayList = New ArrayList
     Dim lodescription As ArrayList = New ArrayList
     Dim locolor As ArrayList = New ArrayList
@@ -47,8 +51,7 @@ Public Class CutManagement
     Dim losetNumber As ArrayList = New ArrayList
     Dim loUsed As ArrayList = New ArrayList
     Dim loselect As ArrayList = New ArrayList
-
-
+    ' calculation parts list
     Dim uopartID As ArrayList = New ArrayList
     Dim uodescription As ArrayList = New ArrayList
     Dim uocolor As ArrayList = New ArrayList
@@ -217,9 +220,9 @@ Public Class CutManagement
         con.Open()
         cmd.Connection = con
 
-        Dim it1 As String = ""
         Dim it As Integer = 0
         Dim it2 As Integer = 0
+        Dim itWorks As Boolean = False
 
         Dim stockID As ArrayList = New ArrayList()
         Dim stockColor As ArrayList = New ArrayList()
@@ -314,7 +317,7 @@ Public Class CutManagement
         '
 
         If (result = "") Then
-
+            itWorks = True
             '
             'Printing output
             '
@@ -407,17 +410,18 @@ Public Class CutManagement
 
                 End If
             Next iLayout
+            If itWorks Then
+                document.Save(filename)
+                document.Close()
+                Process.Start(filename)
+                Calculator.Clear()
 
-            document.Save(filename)
-            document.Close()
-            Process.Start(filename)
-            Calculator.Clear()
-            For it = 0 To imagecount
-                Dim temp As String = Convert.ToString(it)
-                imagecountfile(it).Dispose()
-                My.Computer.FileSystem.DeleteFile("test" + temp + ".png")
-            Next
-
+                For it = 0 To imagecount
+                    Dim temp As String = Convert.ToString(it)
+                    imagecountfile(it).Dispose()
+                    My.Computer.FileSystem.DeleteFile("test" + temp + ".png")
+                Next
+            End If
         Else
             Console.WriteLine("calculate fail")
         End If
@@ -441,6 +445,18 @@ Public Class CutManagement
     '
 
     Private Sub ComboBox6_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox6.SelectedValueChanged
+        ListBox1.Items.Clear()
+        uopartID.Clear()
+        uodescription.Clear()
+        uocolor.Clear()
+        uosize.Clear()
+        uocount.Clear()
+        uointernalID.Clear()
+        uoshopnumber.Clear()
+        uoitemNumber.Clear()
+        uoitemQuantity.Clear()
+
+
         lopartID.Clear()
         lodescription.Clear()
         locolor.Clear()
@@ -508,6 +524,17 @@ Public Class CutManagement
     End Sub
 
     Private Sub ComboBox5_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox5.SelectedValueChanged
+        ListBox1.Items.Clear()
+        uopartID.Clear()
+        uodescription.Clear()
+        uocolor.Clear()
+        uosize.Clear()
+        uocount.Clear()
+        uointernalID.Clear()
+        uoshopnumber.Clear()
+        uoitemNumber.Clear()
+        uoitemQuantity.Clear()
+
         lopartID.Clear()
         lodescription.Clear()
         locolor.Clear()
@@ -539,6 +566,17 @@ Public Class CutManagement
     End Sub
 
     Private Sub ComboBox4_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox4.SelectedValueChanged
+        ListBox1.Items.Clear()
+        uopartID.Clear()
+        uodescription.Clear()
+        uocolor.Clear()
+        uosize.Clear()
+        uocount.Clear()
+        uointernalID.Clear()
+        uoshopnumber.Clear()
+        uoitemNumber.Clear()
+        uoitemQuantity.Clear()
+
         lopartID.Clear()
         lodescription.Clear()
         locolor.Clear()
@@ -569,6 +607,17 @@ Public Class CutManagement
 
     End Sub
     Private Sub ComboBox7_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox7.SelectedIndexChanged
+        ListBox1.Items.Clear()
+        uopartID.Clear()
+        uodescription.Clear()
+        uocolor.Clear()
+        uosize.Clear()
+        uocount.Clear()
+        uointernalID.Clear()
+        uoshopnumber.Clear()
+        uoitemNumber.Clear()
+        uoitemQuantity.Clear()
+
         lopartID.Clear()
         lodescription.Clear()
         locolor.Clear()
@@ -599,9 +648,18 @@ Public Class CutManagement
     End Sub
 
     Private Sub ListBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox3.SelectedIndexChanged
+        'ListBox1.ClearSelected()
         Dim pString As String = ""
         If ListBox3.SelectedIndex >= 0 Then
-            pString = odescription(oselect(ListBox3.SelectedIndex)) + vbCrLf + "Color: " + ocolor(oselect(ListBox3.SelectedIndex)) + " Size: " + osize(oselect(ListBox3.SelectedIndex)) + vbCrLf + "Count: " + ocount(oselect(ListBox3.SelectedIndex)) + vbCrLf + "Shop Number: " + oshopnumber(oselect(ListBox3.SelectedIndex))
+            pString = odescription(oselect(ListBox3.SelectedIndex)) + vbCrLf + "Color: " + ocolor(oselect(ListBox3.SelectedIndex)) + vbCrLf + "Size: " + osize(oselect(ListBox3.SelectedIndex)) + vbCrLf + "Count: " + ocount(oselect(ListBox3.SelectedIndex)) + vbCrLf + "Shop Number: " + oshopnumber(oselect(ListBox3.SelectedIndex))
+            RichTextBox4.Text = pString
+        End If
+    End Sub
+    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
+        'ListBox3.ClearSelected()
+        Dim pString As String = ""
+        If ListBox1.SelectedIndex >= 0 Then
+            pString = uodescription(ListBox1.SelectedIndex) + vbCrLf + "Color: " + uocolor(ListBox1.SelectedIndex) + vbCrLf + " Size: " + uosize(ListBox1.SelectedIndex) + vbCrLf + "Count: " + uocount(ListBox1.SelectedIndex) + vbCrLf + "Shop Number: " + uoshopnumber(ListBox1.SelectedIndex)
             RichTextBox4.Text = pString
         End If
     End Sub
@@ -620,7 +678,7 @@ Public Class CutManagement
             uoshopnumber.Add(loshopnumber(ListBox3.SelectedIndex))
             uoitemNumber.Add(loitemNumber(ListBox3.SelectedIndex))
             uoitemQuantity.Add(loitemQuantity(ListBox3.SelectedIndex))
-            uoUsed.Add(oUsed(ListBox3.SelectedIndex))
+            uoUsed.Add(ListBox3.SelectedIndex)
 
             lopartID.RemoveAt(ListBox3.SelectedIndex)
             lodescription.RemoveAt(ListBox3.SelectedIndex)
@@ -676,11 +734,13 @@ Public Class CutManagement
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        While ListBox1.Items.Count > 0
-            ListBox1.SelectedIndex = 0
-            ListBox3.Items.Add(ListBox1.SelectedItem)
-            ListBox1.Items.RemoveAt(ListBox1.SelectedIndex)
-        End While
+        'While ListBox1.Items.Count > 0
+        '    ListBox1.SelectedIndex = 0
+        '    ListBox3.Items.Add(ListBox1.SelectedItem)
+        '    ListBox1.Items.RemoveAt(ListBox1.SelectedIndex)
+        'End While
+        ListBox3.Items.Clear()
+        ListBox1.Items.Clear()
 
         oUsed.Clear()
         uopartID.Clear()
@@ -700,6 +760,7 @@ Public Class CutManagement
         Dim partlistd As ArrayList = New ArrayList
         Dim partlistid As ArrayList = New ArrayList
         Dim partlistcolor As ArrayList = New ArrayList
+        Dim itWorks As Boolean = False
         partcountIndex.Add(0)
         For it = 0 To uopartID.Count - 1
             If Not partlistd.Contains(uodescription(it)) Then
@@ -716,22 +777,26 @@ Public Class CutManagement
         'Initialize PDF
         '
 
+
+        Dim clock As DateTime = New DateTime
+        clock = My.Computer.Clock.LocalTime
         Dim imagecountfile As ArrayList = New ArrayList
         Dim picturecount As Integer = 0
         Dim document As PdfDocument = New PdfDocument
         document.Info.Title = "Cut Instructions"
 
+
         Dim font As XFont = New XFont("Verdana", 12, XFontStyle.Regular)
         Dim font2 As XFont = New XFont("Verdana", 12, XFontStyle.Regular)
         Dim font3 As XFont = New XFont("Verdana", 14, XFontStyle.Regular)
-        Dim filename As String = "CutInstructions.pdf"
+        Dim filename As String = clock.Year.ToString + clock.Month.ToString + clock.Day.ToString + clock.Minute.ToString + clock.Second.ToString + "CutInstructions.pdf"
 
         '
         'Loops for individual types
         '
 
         For it = 0 To partlistd.Count - 1
-
+            Label14.Text = "Processing Request..."
             Dim Calculator As CutGLib.CutEngine
             Calculator = New CutGLib.CutEngine
             Dim con As New SqlConnection
@@ -740,7 +805,7 @@ Public Class CutManagement
             con.Open()
             cmd.Connection = con
 
-            cmd.CommandText = "SELECT stockID2, description, color, size, count, internalID, context1 FROM stockNew"
+            cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, count, internalID, context1 FROM stockNew"
             cmd.ExecuteNonQuery()
             Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
 
@@ -760,8 +825,10 @@ Public Class CutManagement
             '
             While readerObj.Read
                 If (readerObj("description").ToString.Contains(partlistd(it)) Or readerObj("stockID2").ToString.Contains(partlistid(it))) Then
-                    useddescription.Add(readerObj("description").ToString)
+                    usedstockID1.Add(readerObj("stockID1").ToString)
                     usedstockID2.Add(readerObj("stockID2").ToString)
+                    usedstockID3.Add(readerObj("stockID3").ToString)
+                    useddescription.Add(readerObj("description").ToString)
                     usedcolor.Add(readerObj("color").ToString)
                     usedsize1.Add(readerObj("size").ToString)
                     usedcount.Add(readerObj("count").ToString)
@@ -786,6 +853,8 @@ Public Class CutManagement
                 If frm1.ShowDialog() = DialogResult.OK Then
                     usedstock = frm1.ListBox1.SelectedIndex
                     usedsaw = frm1.saw
+                    cmd.CommandText = "UPDATE stockNew SET context1 = '" + usedsaw(usedstock) + "' WHERE internalID = '" + usedinternalID(usedstock) + "'"
+                    cmd.ExecuteNonQuery()
                 End If
             End If
             If usedinternalID.Count > 0 Then
@@ -826,10 +895,11 @@ Public Class CutManagement
             'Formats Outputs
             '
             If (result = "") Then
-
+                itWorks = True
                 '
                 'Printing output
                 '
+                Dim remainder As Double = 0
                 Dim StockIndex, VStockCount, ViPart, iLayout, partCount, partIndex, tmp, iStock, sectioncount As Integer
                 Dim partLength, VX, StockLength As Double
                 Dim StockActive As Boolean
@@ -846,10 +916,6 @@ Public Class CutManagement
                     If VStockCount > 0 Then
 
                         Console.WriteLine("Layout={0}:  Start Stock={1};  Count of Stock={2}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", iLayout, StockIndex, VStockCount)
-                        ' Output information about each stock, such as stock Length
-                        Dim typechecker1 As ArrayList = New ArrayList
-                        Dim typechecker2 As ArrayList = New ArrayList
-
 
                         '
                         ' Add Page
@@ -939,11 +1005,45 @@ Public Class CutManagement
                                 Dim vpartLength As String = Convert.ToString(partLength)
                                 gfx.DrawString("Cut position= " + vxt + " Length= " + vpartLength, font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                                 pos1 += 15
-                                '"Part = " + partt + 
-                                typechecker1.Add(VX)
-                                typechecker2.Add(partLength)
+                                If VX + partLength > remainder Then
+                                    remainder = VX + partLength
+                                End If
                             Next ViPart
+
                             gfx.DrawImage(image, 50, 170 + pos1 + pos2, 500, 20)
+
+                            readerObj.Close()
+
+                            If usedsize1(usedstock) - remainder > 12 Then
+                                Dim internalID As ArrayList = New ArrayList
+                                Dim rn As New Random
+                                Dim it1 As Integer
+                                Dim boolinternalID As Boolean = True
+                                Dim inputusedID As Integer
+
+                                cmd.CommandText = "SELECT context2  FROM stockUsed"
+                                cmd.ExecuteNonQuery()
+
+                                'This will loop through all returned records 
+                                readerObj = cmd.ExecuteReader
+                                While readerObj.Read
+                                    Dim temp4 As Integer = Convert.ToInt64(readerObj("context2").ToString)
+                                    internalID.Add(temp4)
+                                End While
+                                readerObj.Close()
+                                inputusedID = rn.Next(100000, 999999)
+                                For it1 = 0 To internalID.Count - 1
+                                    If internalID(it1) = inputusedID Then
+                                        it1 = 0
+                                        inputusedID = rn.Next(100000, 999999)
+                                    End If
+                                Next
+
+                                Dim temp3 = Convert.ToString(inputusedID)
+                                Dim temp2 As String = Convert.ToString(usedsize1(usedstock) - remainder)
+                                cmd.CommandText = "INSERT INTO stockUsed VALUES('" + usedstockID1(usedstock) + "', '" + usedstockID2(usedstock) + "' , '" + usedstockID3(usedstock) + "', '" + useddescription(usedstock) + "' , '" + usedcolor(usedstock) + "', " + temp2 + ", " + temp + ", " + usedinternalID(usedstock) + " , '' , '" + usedsaw(usedstock) + "' , " + temp3 + ", '')"
+                                cmd.ExecuteNonQuery()
+                            End If
                         End If
 
 
@@ -960,15 +1060,19 @@ Public Class CutManagement
             Calculator.Clear()
 
         Next
-        document.Save(filename)
-        document.Close()
-        Process.Start(filename)
+        If itWorks Then
+            Label14.Text = "Request Complete"
+            document.Save(filename)
+            document.Close()
+            Process.Start(filename)
 
-        For it = 0 To picturecount - 1
-            Dim temp As String = Convert.ToString(it)
-            imagecountfile(it).Dispose()
-            My.Computer.FileSystem.DeleteFile("test" + temp + ".png")
-        Next
-
+            For it = 0 To picturecount - 1
+                Dim temp As String = Convert.ToString(it)
+                imagecountfile(it).Dispose()
+                My.Computer.FileSystem.DeleteFile("test" + temp + ".png")
+            Next
+        End If
     End Sub
+
+
 End Class
