@@ -68,23 +68,31 @@ Public Class PartInputExcell
 
                 Dim inputinternal As Integer
                 Dim rn As New Random
-                inputinternal = rn.Next(100000, 999999)
+                inputinternal = rn.Next(1000000, 9999999)
                 For it1 = 0 To internalID.Count - 1
                     If internalID(it1) = inputinternal Or usedID.Contains(inputinternal) Then
                         it1 = 0
-                        inputinternal = rn.Next(100000, 999999)
+                        inputinternal = rn.Next(1000000, 9999999)
                     End If
                 Next
                 usedID.Add(inputinternal)
 
-                Dim frm2 As partColor = New partColor()
+
                 If Not colorall And (shXL.Cells(2 + it, 3).Value <> set1 Or shXL.Cells(2 + it, 4).Value <> set2) Then
+                    DataGridView1.FirstDisplayedScrollingRowIndex = it
+                    If it > 0 Then
+                        DataGridView1.Rows(it - 1).Cells(0).Selected = False
+                    End If
+                    Dim frm2 As partColor = New partColor()
                     If frm2.ShowDialog() = DialogResult.OK Then
+
                         color1 = frm2.ListBox1.SelectedItem
                     Else
                         color1 = ""
                     End If
+                    DataGridView1.FirstDisplayedScrollingRowIndex = 0
                 End If
+
                 set1 = shXL.Cells(2 + it, 3).Value
                 set2 = shXL.Cells(2 + it, 4).Value
 
@@ -100,21 +108,20 @@ Public Class PartInputExcell
                 DataGridView1.Rows(it).Cells(10).Value = 0
                 DataGridView1.Rows(it).Cells(11).Value = ""
 
-                DataGridView1.FirstDisplayedScrollingRowIndex = it
-                If it > 0 Then
-                    DataGridView1.Rows(it - 1).Cells(0).Selected = False
-                End If
-            Next
 
+            Next
+            Label1.Text = "Loading Complete"
             DataGridView1.AutoResizeColumns()
             readerObj.Close()
             wbXl.Close()
+            appXL.Quit()
             DataGridView1.Rows(0).Cells(0).Selected = True
         End If
 
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Label1.Text = "Uploading..."
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
         con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
@@ -127,6 +134,9 @@ Public Class PartInputExcell
                 cmd.ExecuteNonQuery()
             End If
         Next
-
+        Label1.Text = "Upload Complete"
+        Dim frmNewExtr As uploadComplete = New uploadComplete()
+        frmNewExtr.ShowDialog()
+        Me.Close()
     End Sub
 End Class

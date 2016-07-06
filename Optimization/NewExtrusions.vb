@@ -57,8 +57,6 @@ Public Class NewExtrusions
                 Dim boolinternalID As Boolean = True
                 Dim inputinternal As Integer
 
-
-
                 inputinternal = rn.Next(10000, 99999)
                 For it1 = 0 To internalID.Count - 1
                     If internalID(it1) = inputinternal Then
@@ -66,10 +64,7 @@ Public Class NewExtrusions
                         inputinternal = rn.Next(10000, 99999)
                     End If
                 Next
-
-
                 Dim temp1 = Convert.ToString(inputinternal)
-
 
                 cmd.CommandText = "INSERT INTO stockNew VALUES('" + stockID1 + "', '" + stockID2 + "' , '" + stockID3 + "', '" + description + "' , '" + stockColor + "', " + stockSize + " , " + stockCount + ", " + temp1 + ", '' , 0, '')"
                 cmd.ExecuteNonQuery()

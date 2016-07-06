@@ -39,6 +39,7 @@ Partial Class NewExtrusions
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -83,9 +84,9 @@ Partial Class NewExtrusions
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.Label3.Location = New System.Drawing.Point(13, 139)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(256, 17)
+        Me.Label3.Size = New System.Drawing.Size(261, 17)
         Me.Label3.TabIndex = 4
-        Me.Label3.Text = "ID2 Internal ID: 1240-572-000000-F201"
+        Me.Label3.Text = "*ID2 Internal ID: 1240-572-000000-F201"
         '
         'Label4
         '
@@ -93,9 +94,9 @@ Partial Class NewExtrusions
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.Label4.Location = New System.Drawing.Point(13, 273)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(251, 17)
+        Me.Label4.Size = New System.Drawing.Size(256, 17)
         Me.Label4.TabIndex = 8
-        Me.Label4.Text = "Description: SILL WITH 2 1/2 INCH FIN"
+        Me.Label4.Text = "*Description: SILL WITH 2 1/2 INCH FIN"
         '
         'Label5
         '
@@ -129,9 +130,9 @@ Partial Class NewExtrusions
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.Label6.Location = New System.Drawing.Point(350, 72)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(116, 17)
+        Me.Label6.Size = New System.Drawing.Size(121, 17)
         Me.Label6.TabIndex = 12
-        Me.Label6.Text = "Default Size: 240"
+        Me.Label6.Text = "*Default Size: 240"
         '
         'TextBox5
         '
@@ -147,9 +148,9 @@ Partial Class NewExtrusions
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.Label9.Location = New System.Drawing.Point(350, 139)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(121, 17)
+        Me.Label9.Size = New System.Drawing.Size(126, 17)
         Me.Label9.TabIndex = 15
-        Me.Label9.Text = "Initial Quantity: 10"
+        Me.Label9.Text = "*Initial Quantity: 10"
         '
         'TextBox6
         '
@@ -165,9 +166,9 @@ Partial Class NewExtrusions
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.Label7.Location = New System.Drawing.Point(13, 355)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(41, 17)
+        Me.Label7.Size = New System.Drawing.Size(46, 17)
         Me.Label7.TabIndex = 11
-        Me.Label7.Text = "Color"
+        Me.Label7.Text = "*Color"
         '
         'ListBox1
         '
@@ -199,11 +200,22 @@ Partial Class NewExtrusions
         Me.Button2.Text = "Close"
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(13, 29)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(134, 16)
+        Me.Label8.TabIndex = 19
+        Me.Label8.Text = "* Fields must be filled"
+        '
         'NewExtrusions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(506, 530)
+        Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ListBox1)
@@ -246,4 +258,5 @@ Partial Class NewExtrusions
     Friend WithEvents ListBox1 As ListBox
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
+    Friend WithEvents Label8 As Label
 End Class

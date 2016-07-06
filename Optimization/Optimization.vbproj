@@ -221,6 +221,12 @@
     <Compile Include="StockInputExcell.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="uploadComplete.Designer.vb">
+      <DependentUpon>uploadComplete.vb</DependentUpon>
+    </Compile>
+    <Compile Include="uploadComplete.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ChooseStock.resx">
@@ -273,6 +279,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StockInputExcell.resx">
       <DependentUpon>StockInputExcell.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uploadComplete.resx">
+      <DependentUpon>uploadComplete.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

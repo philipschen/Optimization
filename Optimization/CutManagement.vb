@@ -820,6 +820,12 @@ Public Class CutManagement
             Dim usedcount As ArrayList = New ArrayList
             Dim usedsaw As ArrayList = New ArrayList
             Dim stock_exists As Boolean = False
+
+            Dim xusedsize1 As ArrayList = New ArrayList
+            Dim xusedcount As ArrayList = New ArrayList
+            Dim xusedinternalID As ArrayList = New ArrayList
+            Dim xusedcontext2 As ArrayList = New ArrayList
+
             '
             ' Finds Corresponding Stocks
             '
@@ -838,6 +844,8 @@ Public Class CutManagement
                 End If
             End While
             readerObj.Close()
+
+
             '
             ' Decides Which Stock to Use Then inserts
             '
@@ -850,6 +858,21 @@ Public Class CutManagement
                 frm1.saw = usedsaw
                 frm1.part1 = partlistd(it) + "  ID: " + partlistid(it) + "  Color: " + partlistcolor(it)
 
+
+                cmd.CommandText = "SELECT size, count, internalID, context2 FROM stockUsed"
+                cmd.ExecuteNonQuery()
+                readerObj = cmd.ExecuteReader
+                While readerObj.Read
+                    If String.Equals(usedinternalID(usedstock), readerObj("internalID").ToString) Then
+                        xusedsize1.Add(readerObj("size").ToString)
+                        xusedcount.Add(readerObj("count").ToString)
+                        xusedinternalID.Add(readerObj("internalID").ToString)
+                        xusedcontext2.Add(readerObj("context2").ToString)
+
+                    End If
+                End While
+                readerObj.Close()
+
                 If frm1.ShowDialog() = DialogResult.OK Then
                     usedstock = frm1.ListBox1.SelectedIndex
                     usedsaw = frm1.saw
@@ -857,10 +880,19 @@ Public Class CutManagement
                     cmd.ExecuteNonQuery()
                 End If
             End If
+
+            If xusedinternalID.Count > 0 Then
+                For it1 = 0 To xusedinternalID.Count - 1
+                    Dim temp3 As Double = Convert.ToDouble(xusedsize1(it1))
+                    Dim temp4 As Integer = Convert.ToInt32(xusedcount(it1))
+                    Calculator.AddLinearStock(temp3, temp4)
+                Next
+            End If
             If usedinternalID.Count > 0 Then
-                Dim temp1 As Integer = Convert.ToInt32(usedsize1(usedstock))
-                Dim temp2 As Double = Convert.ToDouble(usedcount(usedstock))
+                Dim temp1 As Double = Convert.ToDouble(usedsize1(usedstock))
+                Dim temp2 As Integer = Convert.ToInt32(usedcount(usedstock))
                 Calculator.AddLinearStock(temp1, temp2)
+
             Else
 
                 '
@@ -869,7 +901,7 @@ Public Class CutManagement
 
                 Dim page As PdfPage = document.AddPage
                 Dim gfx As XGraphics = XGraphics.FromPdfPage(page)
-                gfx.DrawString("No stock: " + partlistd(it), font2, XBrushes.Black, New XRect(50, 50, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                gfx.DrawString("No stock/is not a cut extrusion: " + partlistd(it), font2, XBrushes.Black, New XRect(50, 50, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
             End If
 
             '
@@ -962,10 +994,16 @@ Public Class CutManagement
                             Dim temp As String = Convert.ToString(VStockCount)
                             Dim temp1 As String = Convert.ToString(iLayout + 1)
                             Dim pos1 As Integer = 0
+                            Dim sizestring As String = xt
+                            If Not String.Equals(xt, usedsize1(usedstock)) Then
+                                sizestring = xt + "  Used Part Check Bin"
+                            End If
+
+
                             Dim descriptionString As String = partlistd(it)
                             Dim descriptionString2 As String = "ID: " + partlistid(it)
                             Dim descriptionString3 As String = "Color: " + usedcolor(usedstock)
-                            Dim descriptionString4 As String = "Stock Size: " + usedsize1(usedstock)
+                            Dim descriptionString4 As String = "Stock Size: " + sizestring
                             Dim descriptionstring5 As String = "Saw number: " + usedsaw(usedstock)
                             Dim descriptionstring6 As String = "# Of Stock Cut: " + temp
                             Dim descriptionstring7 As String = "Layout Number = " + temp1
@@ -1031,11 +1069,11 @@ Public Class CutManagement
                                     internalID.Add(temp4)
                                 End While
                                 readerObj.Close()
-                                inputusedID = rn.Next(100000, 999999)
+                                inputusedID = rn.Next(1000000, 9999999)
                                 For it1 = 0 To internalID.Count - 1
                                     If internalID(it1) = inputusedID Then
                                         it1 = 0
-                                        inputusedID = rn.Next(100000, 999999)
+                                        inputusedID = rn.Next(1000000, 9999999)
                                     End If
                                 Next
 
@@ -1045,8 +1083,6 @@ Public Class CutManagement
                                 cmd.ExecuteNonQuery()
                             End If
                         End If
-
-
 
                     End If
                 Next iLayout
@@ -1073,6 +1109,4 @@ Public Class CutManagement
             Next
         End If
     End Sub
-
-
 End Class

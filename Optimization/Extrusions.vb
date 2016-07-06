@@ -27,6 +27,7 @@ Public Class Extrusions
         ' Set the caption bar text of the form.  
         Me.Text = "Easy Cut V1.0"
 
+        Button5.Visible = False
         ListBox1.Items.Add("Bronze")
         ListBox1.Items.Add("White")
         ListBox1.Items.Add("Silver")
@@ -389,11 +390,11 @@ Public Class Extrusions
             internalID.Add(temp4)
         End While
         readerObj.Close()
-        inputusedID = rn.Next(100000, 999999)
+        inputusedID = rn.Next(1000000, 9999999)
         For it1 = 0 To internalID.Count - 1
             If internalID(it1) = inputusedID Then
                 it1 = 0
-                inputusedID = rn.Next(100000, 999999)
+                inputusedID = rn.Next(1000000, 9999999)
             End If
         Next
 
@@ -410,7 +411,7 @@ Public Class Extrusions
         con.Open()
         cmd.Connection = con
 
-        cmd.CommandText = "SELECT count, internalID FROM stockNew"
+        cmd.CommandText = "SELECT count, internalID FROM stockUsed"
         cmd.ExecuteNonQuery()
 
 
@@ -426,7 +427,7 @@ Public Class Extrusions
                     temp2 = Convert.ToString(temp3)
                     readerObj.Close()
 
-                    cmd.CommandText = "UPDATE stockNew SET count = " + temp2 + " WHERE internalID = " + internalID(Used(ListBox2.SelectedIndex - 1))
+                    cmd.CommandText = "UPDATE stockUsed SET count = " + temp2 + " WHERE context2 = " + internalID(Used(ListBox2.SelectedIndex - 1))
                     cmd.ExecuteNonQuery()
                     Exit While
                 End If

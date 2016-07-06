@@ -74,14 +74,17 @@ Public Class StockInputExcell
                 DataGridView1.Rows(it).Cells(9).Value = 0
                 DataGridView1.Rows(it).Cells(10).Value = ""
             Next
-
+            Label1.Text = "Loading Complete"
             DataGridView1.AutoResizeColumns()
             readerObj.Close()
+            wbXl.Close()
+            appXL.Quit()
         End If
 
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Label1.Text = "Uploading..."
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
         con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
@@ -94,6 +97,9 @@ Public Class StockInputExcell
                 cmd.ExecuteNonQuery()
             End If
         Next
-
+        Label1.Text = "Upload Complete"
+        Dim frmNewExtr As uploadComplete = New uploadComplete()
+        frmNewExtr.ShowDialog()
+        Me.Close()
     End Sub
 End Class
