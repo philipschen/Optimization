@@ -130,18 +130,6 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.vb">
-      <DependentUpon>Form2.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form2.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form3.Designer.vb">
-      <DependentUpon>Form3.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form3.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="inputColor.Designer.vb">
       <DependentUpon>inputColor.vb</DependentUpon>
     </Compile>
@@ -185,11 +173,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OptimizationDatabaseDataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Include="OptimizationDatabaseDataSet2.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OptimizationDatabaseDataSet2.xsd</DependentUpon>
-    </Compile>
     <Compile Include="OptimizationDatabaseDataSet3.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -212,14 +195,6 @@
     </Compile>
     <Compile Include="PartInputExcell.vb">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PartsDataSet.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PartsDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="PartsDataSet.vb">
-      <DependentUpon>PartsDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="StockInputExcell.Designer.vb">
       <DependentUpon>StockInputExcell.vb</DependentUpon>
@@ -261,12 +236,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
-      <DependentUpon>Form3.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="inputColor.resx">
       <DependentUpon>inputColor.vb</DependentUpon>
@@ -335,17 +304,6 @@
     <None Include="OptimizationDatabaseDataSet1.xss">
       <DependentUpon>OptimizationDatabaseDataSet1.xsd</DependentUpon>
     </None>
-    <None Include="OptimizationDatabaseDataSet2.xsc">
-      <DependentUpon>OptimizationDatabaseDataSet2.xsd</DependentUpon>
-    </None>
-    <None Include="OptimizationDatabaseDataSet2.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>OptimizationDatabaseDataSet2.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="OptimizationDatabaseDataSet2.xss">
-      <DependentUpon>OptimizationDatabaseDataSet2.xsd</DependentUpon>
-    </None>
     <None Include="OptimizationDatabaseDataSet3.xsc">
       <DependentUpon>OptimizationDatabaseDataSet3.xsd</DependentUpon>
     </None>
@@ -356,17 +314,6 @@
     </None>
     <None Include="OptimizationDatabaseDataSet3.xss">
       <DependentUpon>OptimizationDatabaseDataSet3.xsd</DependentUpon>
-    </None>
-    <None Include="PartsDataSet.xsc">
-      <DependentUpon>PartsDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="PartsDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PartsDataSet.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="PartsDataSet.xss">
-      <DependentUpon>PartsDataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -76,7 +76,6 @@ Partial Class DirectlyEdit
         Me.OptimizationDatabaseDataSet1 = New Optimization.OptimizationDatabaseDataSet1()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.PartBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.OptimizationDatabaseDataSet2 = New Optimization.OptimizationDatabaseDataSet2()
         Me.StockID1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StockID2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StockID3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -89,7 +88,6 @@ Partial Class DirectlyEdit
         Me.Context2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Context3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StockNewTableAdapter = New Optimization.OptimizationDatabaseDataSetTableAdapters.stockNewTableAdapter()
-        Me.PartTableAdapter = New Optimization.OptimizationDatabaseDataSet2TableAdapters.partTableAdapter()
         Me.PartsTableAdapter = New Optimization.OptimizationDatabaseDataSet1TableAdapters.partsTableAdapter()
         Me.StockUsedTableAdapter = New Optimization.OptimizationDatabaseDataSet3TableAdapters.stockUsedTableAdapter()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -109,7 +107,6 @@ Partial Class DirectlyEdit
         CType(Me.PartsBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.OptimizationDatabaseDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PartBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.OptimizationDatabaseDataSet2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -471,16 +468,7 @@ Partial Class DirectlyEdit
         Me.Button2.TabIndex = 8
         Me.Button2.Text = "Save Changes"
         Me.Button2.UseVisualStyleBackColor = True
-        '
-        'PartBindingSource
-        '
-        Me.PartBindingSource.DataMember = "part"
-        Me.PartBindingSource.DataSource = Me.OptimizationDatabaseDataSet2
-        '
-        'OptimizationDatabaseDataSet2
-        '
-        Me.OptimizationDatabaseDataSet2.DataSetName = "OptimizationDatabaseDataSet2"
-        Me.OptimizationDatabaseDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+
         '
         'StockID1DataGridViewTextBoxColumn
         '
@@ -552,10 +540,6 @@ Partial Class DirectlyEdit
         '
         Me.StockNewTableAdapter.ClearBeforeFill = True
         '
-        'PartTableAdapter
-        '
-        Me.PartTableAdapter.ClearBeforeFill = True
-        '
         'PartsTableAdapter
         '
         Me.PartsTableAdapter.ClearBeforeFill = True
@@ -605,7 +589,6 @@ Partial Class DirectlyEdit
         CType(Me.PartsBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.OptimizationDatabaseDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PartBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.OptimizationDatabaseDataSet2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -632,9 +615,7 @@ Partial Class DirectlyEdit
     Friend WithEvents Context3DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
-    Friend WithEvents OptimizationDatabaseDataSet2 As OptimizationDatabaseDataSet2
     Friend WithEvents PartBindingSource As BindingSource
-    Friend WithEvents PartTableAdapter As OptimizationDatabaseDataSet2TableAdapters.partTableAdapter
     Friend WithEvents DataGridView2 As DataGridView
     Friend WithEvents OptimizationDatabaseDataSet1 As OptimizationDatabaseDataSet1
     Friend WithEvents PartsBindingSource1 As BindingSource

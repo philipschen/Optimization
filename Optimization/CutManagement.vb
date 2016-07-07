@@ -1004,7 +1004,7 @@ Public Class CutManagement
 
 
                             Dim descriptionString As String = partlistd(it)
-                            Dim descriptionString2 As String = "ID: " + partlistid(it)
+                            Dim descriptionString2 As String = "ID: " + usedstockID2(usedstock)
                             Dim descriptionString3 As String = "ID2: " + usedstockID3(usedstock)
                             Dim descriptionString4 As String = "Stock Size: " + sizestring + "  Color: " + usedcolor(usedstock)
                             Dim descriptionstring5 As String = "Saw number: " + usedsaw(usedstock)

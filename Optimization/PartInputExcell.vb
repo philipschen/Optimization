@@ -62,6 +62,7 @@ Public Class PartInputExcell
                 Dim temp As String = Convert.ToString(it)
                 Dim temp1 As String = Convert.ToString(shXL.UsedRange.Rows.Count - 1)
                 Label1.Text = "Loading " + temp + "/" + temp1
+
                 DataGridView1.Rows.Add()
                 DataGridView1.Rows(it).Cells(0).Value = shXL.Cells(2 + it, 8).Value
                 DataGridView1.Rows(it).Cells(1).Value = shXL.Cells(2 + it, 9).Value
@@ -77,8 +78,10 @@ Public Class PartInputExcell
                 Next
                 usedID.Add(inputinternal)
 
+                Dim cell3 As String = shXL.Cells(2 + it, 3).Value
+                Dim cell4 As String = shXL.Cells(2 + it, 4).Value
 
-                If Not colorall And (shXL.Cells(2 + it, 3).Value <> set1 Or shXL.Cells(2 + it, 4).Value <> set2) Then
+                If Not colorall And (cell3 <> set1 Or cell4 <> set2) Then
                     DataGridView1.FirstDisplayedScrollingRowIndex = it
                     If it > 0 Then
                         DataGridView1.Rows(it - 1).Cells(0).Selected = False
@@ -93,8 +96,8 @@ Public Class PartInputExcell
                     DataGridView1.FirstDisplayedScrollingRowIndex = 0
                 End If
 
-                set1 = shXL.Cells(2 + it, 3).Value
-                set2 = shXL.Cells(2 + it, 4).Value
+                set1 = cell3
+                set2 = cell4
 
 
                 DataGridView1.Rows(it).Cells(2).Value = color1
@@ -102,8 +105,8 @@ Public Class PartInputExcell
                 DataGridView1.Rows(it).Cells(4).Value = shXL.Cells(2 + it, 10).Value
                 DataGridView1.Rows(it).Cells(5).Value = inputinternal
                 DataGridView1.Rows(it).Cells(6).Value = shXL.Cells(2 + it, 1).Value
-                DataGridView1.Rows(it).Cells(7).Value = shXL.Cells(2 + it, 3).Value
-                DataGridView1.Rows(it).Cells(8).Value = shXL.Cells(2 + it, 4).Value
+                DataGridView1.Rows(it).Cells(7).Value = cell3
+                DataGridView1.Rows(it).Cells(8).Value = cell4
                 DataGridView1.Rows(it).Cells(9).Value = ""
                 DataGridView1.Rows(it).Cells(10).Value = 0
                 DataGridView1.Rows(it).Cells(11).Value = ""
@@ -113,8 +116,11 @@ Public Class PartInputExcell
             Label1.Text = "Loading Complete"
             DataGridView1.AutoResizeColumns()
             readerObj.Close()
-            wbXl.Close()
+
+            shXL = Nothing
+            wbXl = Nothing
             appXL.Quit()
+            appXL = Nothing
             DataGridView1.Rows(0).Cells(0).Selected = True
         End If
 

@@ -28,11 +28,15 @@ Public Class Extrusions
         Me.Text = "Easy Cut V1.0"
 
         Button5.Visible = False
-        ListBox1.Items.Add("Bronze")
-        ListBox1.Items.Add("White")
-        ListBox1.Items.Add("Silver")
-        ListBox1.Items.Add("Other")
-        ListBox2.Items.Add("New Part")
+        ListBox1.Visible = False
+        ListBox4.Visible = False
+        Label1.Visible = False
+        Label12.Visible = False
+        'ListBox1.Items.Add("Bronze")
+        'ListBox1.Items.Add("White")
+        'ListBox1.Items.Add("Silver")
+        'ListBox1.Items.Add("Other")
+        'ListBox2.Items.Add("New Part")
 
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
@@ -106,7 +110,6 @@ Public Class Extrusions
         Next
 
     End Sub
-
     Private Sub comboBox2_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedValueChanged
         ListBox2.Items.Clear()
         ListBox2.Items.Add("New Part")
@@ -122,7 +125,6 @@ Public Class Extrusions
         Next
 
     End Sub
-
     Private Sub comboBox3_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedValueChanged
         ListBox2.Items.Clear()
         ListBox2.Items.Add("New Part")
@@ -150,6 +152,13 @@ Public Class Extrusions
                 Used.Remove(it1)
             End If
         Next
+    End Sub
+
+    Private Sub TextBox1_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox1.KeyPress
+        If Asc(e.KeyChar) <> 13 AndAlso Asc(e.KeyChar) <> 8 AndAlso Not IsNumeric(e.KeyChar) Then
+            MessageBox.Show("Please enter numbers only")
+            e.Handled = True
+        End If
     End Sub
 
     Private Sub ListBox2_SelectedValueChanged(sender As Object, e As EventArgs) Handles ListBox2.SelectedValueChanged
@@ -370,6 +379,18 @@ Public Class Extrusions
         Next
     End Sub
 
+    Private Sub TextBox2_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox2.KeyPress
+        If Asc(e.KeyChar) <> 13 AndAlso Asc(e.KeyChar) <> 8 AndAlso Not IsNumeric(e.KeyChar) AndAlso Not e.KeyChar = "." Then
+            MessageBox.Show("Please enter numbers only")
+            e.Handled = True
+        End If
+    End Sub
+    Private Sub TextBox3_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox3.KeyPress
+        If Asc(e.KeyChar) <> 13 AndAlso Asc(e.KeyChar) <> 8 AndAlso Not IsNumeric(e.KeyChar) Then
+            MessageBox.Show("Please enter numbers only")
+            e.Handled = True
+        End If
+    End Sub
     Private Sub ListBox3_SelectedValueChanged(sender As Object, e As EventArgs) Handles ListBox3.SelectedValueChanged
         Dim pString As String = ""
         pString = description(oUsed(ListBox3.SelectedIndex)) + vbCrLf + color(oUsed(ListBox3.SelectedIndex)) + vbCrLf + size1(oUsed(ListBox3.SelectedIndex)) + vbCrLf + stockID1(oUsed(ListBox3.SelectedIndex)) + vbCrLf + stockID2(oUsed(ListBox3.SelectedIndex)) + vbCrLf + stockID3(oUsed(ListBox3.SelectedIndex))
@@ -406,6 +427,12 @@ Public Class Extrusions
             End If
         Next
 
+        cmd.CommandText = "SELECT stockID2, internalID  FROM stockNew"
+        cmd.ExecuteNonQuery()
+        While readerObj.Read
+            Dim temp4 As Integer = Convert.ToInt64(readerObj("context2").ToString)
+            internalID.Add(temp4)
+        End While
         Dim temp3 = Convert.ToString(inputusedID)
         cmd.CommandText = "INSERT INTO stockUsed VALUES('" + stockID1(oUsed(ListBox3.SelectedIndex)) + "', '" + stockID2(oUsed(ListBox3.SelectedIndex)) + "' , '" + stockID3(oUsed(ListBox3.SelectedIndex)) + "', '" + description(oUsed(ListBox3.SelectedIndex)) + "' , '" + color(oUsed(ListBox3.SelectedIndex)) + "', " + TextBox2.Text + ", " + TextBox3.Text + ", " + internalID(ListBox3.SelectedIndex).ToString + " , '' , '" + sawnumber(oUsed(ListBox3.SelectedIndex)) + "', " + temp3 + ", '')"
         cmd.ExecuteNonQuery()
@@ -427,7 +454,7 @@ Public Class Extrusions
 
             Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
             While readerObj.Read
-                If String.Equals(internalID(Used(ListBox2.SelectedIndex - 1)), readerObj("internalID").ToString) Then
+                If String.Equals(internalID(Used(ListBox2.SelectedIndex - 1)), readerObj("context2").ToString) Then
                     Dim temp1 As Integer = Convert.ToInt32(TextBox1.Text)
                     Dim temp2 As String = readerObj("count").ToString
                     Dim temp3 As Integer = Convert.ToInt32(temp2)

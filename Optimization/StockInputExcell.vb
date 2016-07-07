@@ -44,7 +44,18 @@ Public Class StockInputExcell
                 internalID.Add(temp1)
             End While
 
+            Dim totalcount As String = Convert.ToString(shXL.UsedRange.Rows.Count - 1)
             For it = 0 To shXL.UsedRange.Rows.Count - 1
+                Dim c0 As String = shXL.Cells(2 + it, 1).Value
+                Dim c1 As String = shXL.Cells(2 + it, 2).Value
+                Dim c2 As String = shXL.Cells(2 + it, 3).Value
+                Dim c3 As String = shXL.Cells(2 + it, 4).Value
+                Dim c4 As String = shXL.Cells(2 + it, 5).Value
+                Dim c5 As String = shXL.Cells(2 + it, 6).Value
+                Dim c6 As String = shXL.Cells(2 + it, 7).Value
+                Dim c8 As String = shXL.Cells(2 + it, 8).Value
+                Dim c10 As String = shXL.Cells(2 + it, 9).Value
+
                 Dim inputinternal As Integer
                 Dim rn As New Random
                 inputinternal = rn.Next(10000, 99999)
@@ -57,45 +68,44 @@ Public Class StockInputExcell
                 usedID.Add(inputinternal)
 
                 Dim temp As String = Convert.ToString(it)
-                Dim temp1 As String = Convert.ToString(shXL.UsedRange.Rows.Count - 1)
-                Label1.Text = "Loading " + temp + "/" + temp1
+                Label1.Text = "Loading " + temp + "/" + totalcount
 
                 Dim in0 As String = ""
                 Dim in1 As String = ""
                 Dim in2 As String = ""
                 Dim in3 As String = ""
                 Dim in4 As String = ""
-                Dim in5 As Double = 0
-                Dim in6 As Integer = 0
+                Dim in5 As String = ""
+                Dim in6 As String = ""
                 Dim in8 As String = ""
                 Dim in10 As String = ""
 
-                If shXL.Cells(2 + it, 1).Value IsNot Nothing Then
-                    in0 = shXL.Cells(2 + it, 1).Value
+                If c0 IsNot Nothing Then
+                    in0 = c0
                 End If
-                If shXL.Cells(2 + it, 2).Value IsNot Nothing Then
-                    in1 = shXL.Cells(2 + it, 2).Value
+                If c1 IsNot Nothing Then
+                    in1 = c1
                 End If
-                If shXL.Cells(2 + it, 3).Value IsNot Nothing Then
-                    in2 = shXL.Cells(2 + it, 3).Value
+                If c2 IsNot Nothing Then
+                    in2 = c2
                 End If
-                If shXL.Cells(2 + it, 4).Value IsNot Nothing Then
-                    in3 = shXL.Cells(2 + it, 4).Value
+                If c3 IsNot Nothing Then
+                    in3 = c3
                 End If
-                If shXL.Cells(2 + it, 5).Value IsNot Nothing Then
-                    in4 = shXL.Cells(2 + it, 5).Value
+                If c4 IsNot Nothing Then
+                    in4 = c4
                 End If
-                If shXL.Cells(2 + it, 6).Value IsNot Nothing Then
-                    in5 = shXL.Cells(2 + it, 6).Value
+                If c5 IsNot Nothing Then
+                    in5 = c5
                 End If
-                If shXL.Cells(2 + it, 7).Value IsNot Nothing Then
-                    in6 = shXL.Cells(2 + it, 7).Value
+                If c6 IsNot Nothing Then
+                    in6 = c6
                 End If
-                If shXL.Cells(2 + it, 8).Value IsNot Nothing Then
-                    in8 = shXL.Cells(2 + it, 8).Value
+                If c8 IsNot Nothing Then
+                    in8 = c8
                 End If
-                If shXL.Cells(2 + it, 9).Value IsNot Nothing Then
-                    in10 = shXL.Cells(2 + it, 9).Value
+                If c10 IsNot Nothing Then
+                    in10 = c10
                 End If
 
                 DataGridView1.Rows.Add()
@@ -114,8 +124,10 @@ Public Class StockInputExcell
             Label1.Text = "Loading Complete"
             DataGridView1.AutoResizeColumns()
             readerObj.Close()
-            wbXl.Close()
+            shXL = Nothing
+            wbXl = Nothing
             appXL.Quit()
+            appXL = Nothing
         End If
 
     End Sub
@@ -127,13 +139,72 @@ Public Class StockInputExcell
         con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
         con.Open()
         cmd.Connection = con
-
+        Dim con1 As New SqlConnection
+        Dim cmd1 As New SqlCommand
+        con1.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con1.Open()
+        cmd1.Connection = con1
+        Dim ar0 As ArrayList = New ArrayList
+        Dim ar1 As ArrayList = New ArrayList
+        Dim ar2 As ArrayList = New ArrayList
+        Dim ar3 As ArrayList = New ArrayList
+        Dim ar4 As ArrayList = New ArrayList
+        Dim ar5 As ArrayList = New ArrayList
+        Dim ar6 As ArrayList = New ArrayList
+        Dim ar7 As ArrayList = New ArrayList
+        Dim ar8 As ArrayList = New ArrayList
+        Dim ar9 As ArrayList = New ArrayList
+        Dim ar10 As ArrayList = New ArrayList
         For it = 0 To DataGridView1.RowCount - 1
             If Not String.Equals(DataGridView1.Rows(it).Cells(3).Value, "") And DataGridView1.Rows(it).Cells(3).Value IsNot Nothing Then
-                cmd.CommandText = "INSERT INTO stockNew VALUES('" + DataGridView1.Rows(it).Cells(0).Value.ToString.ToUpper() + "', '" + DataGridView1.Rows(it).Cells(1).Value.ToString.ToUpper() + "' , '" + DataGridView1.Rows(it).Cells(2).Value.ToString.ToUpper() + "', '" + DataGridView1.Rows(it).Cells(3).Value.ToString.ToUpper() + "' , '" + DataGridView1.Rows(it).Cells(4).Value.ToString.ToUpper() + "', " + DataGridView1.Rows(it).Cells(5).Value.ToString.ToUpper() + " , " + DataGridView1.Rows(it).Cells(6).Value.ToString.ToUpper() + ", " + DataGridView1.Rows(it).Cells(7).Value.ToString.ToUpper() + ", '" + DataGridView1.Rows(it).Cells(8).Value.ToString.ToUpper() + "'," + DataGridView1.Rows(it).Cells(9).Value.ToString.ToUpper() + ",'" + DataGridView1.Rows(it).Cells(10).Value.ToString.ToUpper() + "')"
-                cmd.ExecuteNonQuery()
+                ar0.Add(DataGridView1.Rows(it).Cells(0).Value.ToString.ToUpper())
+                ar1.Add(DataGridView1.Rows(it).Cells(1).Value.ToString.ToUpper())
+                ar2.Add(DataGridView1.Rows(it).Cells(2).Value.ToString.ToUpper())
+                ar3.Add(DataGridView1.Rows(it).Cells(3).Value.ToString.ToUpper())
+                ar4.Add(DataGridView1.Rows(it).Cells(4).Value.ToString.ToUpper())
+                ar5.Add(DataGridView1.Rows(it).Cells(5).Value.ToString.ToUpper())
+                ar6.Add(DataGridView1.Rows(it).Cells(6).Value.ToString.ToUpper())
+                ar7.Add(DataGridView1.Rows(it).Cells(7).Value.ToString.ToUpper())
+                ar8.Add(DataGridView1.Rows(it).Cells(8).Value.ToString.ToUpper())
+                ar9.Add(DataGridView1.Rows(it).Cells(9).Value.ToString.ToUpper())
+                ar10.Add(DataGridView1.Rows(it).Cells(10).Value.ToString.ToUpper())
             End If
         Next
+        cmd.CommandText = "SELECT stockID2, count, internalID  FROM stockNew"
+        cmd.ExecuteNonQuery()
+        Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
+        While readerObj.Read
+            For it = 0 To ar1.Count - 1
+                If String.Equals(ar1(it), readerObj("stockID2").ToString) Then
+                    'Dim temp1 As Integer = Convert.ToInt32(ar6(it))
+                    'Dim temp2 As String = readerObj("count").ToString
+                    'Dim temp3 As Integer = Convert.ToInt32(temp2)
+                    'temp3 = temp3 + temp1
+                    'temp2 = Convert.ToString(temp3)
+                    cmd1.CommandText = "UPDATE stockNew SET count = " + ar6(it) + " WHERE internalID = " + readerObj("internalID").ToString
+                    cmd1.ExecuteNonQuery()
+                    ar0.RemoveAt(it)
+                    ar1.RemoveAt(it)
+                    ar2.RemoveAt(it)
+                    ar3.RemoveAt(it)
+                    ar4.RemoveAt(it)
+                    ar5.RemoveAt(it)
+                    ar6.RemoveAt(it)
+                    ar7.RemoveAt(it)
+                    ar8.RemoveAt(it)
+                    ar9.RemoveAt(it)
+                    ar10.RemoveAt(it)
+                    Exit For
+                End If
+            Next
+        End While
+
+        For it = 0 To ar1.Count - 1
+            cmd1.CommandText = "INSERT INTO stockNew VALUES('" + ar0(it) + "', '" + ar1(it) + "' , '" + ar2(it) + "', '" + ar3(it) + "' , '" + ar4(it) + "', " + ar5(it) + " , " + ar6(it) + ", " + ar7(it) + ", '" + ar8(it) + "'," + ar9(it) + ",'" + ar10(it) + "')"
+            cmd1.ExecuteNonQuery()
+        Next
+
+
         Label1.Text = "Upload Complete"
         Dim frmNewExtr As uploadComplete = New uploadComplete()
         frmNewExtr.ShowDialog()

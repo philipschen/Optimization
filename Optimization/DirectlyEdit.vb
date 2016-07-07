@@ -127,11 +127,10 @@ Public Class DirectlyEdit
 
         End While
 
-        ' AutoFit columns A:D.
+        ' AutoFit columns
         raXL = shXL.Range("A1", "I1")
         raXL.EntireColumn.AutoFit()
         ' Make sure Excel is visible and give the user control
-        ' of Excel's lifetime.
         appXL.Visible = True
         appXL.UserControl = True
         ' Release object references.
