@@ -1,5 +1,4 @@
-﻿
-Imports System.Data.SqlClient
+﻿Imports System.Data.SqlClient
 Imports PdfSharp.Drawing
 Imports PdfSharp.Pdf
 Public Class CutManagement
@@ -67,6 +66,8 @@ Public Class CutManagement
     Private Sub CutManagement_load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set the caption bar text of the form.  
         Me.Text = "Easy Cut V1.0"
+        ' removes single cuts
+        TabControl1.TabPages.RemoveAt(0)
 
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
@@ -902,6 +903,7 @@ Public Class CutManagement
                 Dim page As PdfPage = document.AddPage
                 Dim gfx As XGraphics = XGraphics.FromPdfPage(page)
                 gfx.DrawString("No stock/is not a cut extrusion: " + partlistd(it), font2, XBrushes.Black, New XRect(50, 50, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                Label14.Text = "Calculate Fail, No Stock"
             End If
 
             '
@@ -922,6 +924,7 @@ Public Class CutManagement
             Dim result As String = "1"
             If stock_exists Then
                 result = Calculator.ExecuteLinear()
+
             End If
             '
             'Formats Outputs
@@ -1002,8 +1005,8 @@ Public Class CutManagement
 
                             Dim descriptionString As String = partlistd(it)
                             Dim descriptionString2 As String = "ID: " + partlistid(it)
-                            Dim descriptionString3 As String = "Color: " + usedcolor(usedstock)
-                            Dim descriptionString4 As String = "Stock Size: " + sizestring
+                            Dim descriptionString3 As String = "ID2: " + usedstockID3(usedstock)
+                            Dim descriptionString4 As String = "Stock Size: " + sizestring + "  Color: " + usedcolor(usedstock)
                             Dim descriptionstring5 As String = "Saw number: " + usedsaw(usedstock)
                             Dim descriptionstring6 As String = "# Of Stock Cut: " + temp
                             Dim descriptionstring7 As String = "Layout Number = " + temp1
@@ -1050,7 +1053,7 @@ Public Class CutManagement
 
                             gfx.DrawImage(image, 50, 170 + pos1 + pos2, 500, 20)
 
-                            readerObj.Close()
+
 
                             If usedsize1(usedstock) - remainder > 12 Then
                                 Dim internalID As ArrayList = New ArrayList
@@ -1087,11 +1090,12 @@ Public Class CutManagement
                     End If
                 Next iLayout
 
-            ElseIf result <> "1" Then
+            ElseIf result = "1" And stock_exists Then
                 Console.WriteLine("calculate fail")
                 Dim page As PdfPage = document.AddPage
                 Dim gfx As XGraphics = XGraphics.FromPdfPage(page)
                 gfx.DrawString("Not enough stock: " + partlistd(it), font2, XBrushes.Black, New XRect(50, 50, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+
             End If
             Calculator.Clear()
 
@@ -1107,6 +1111,7 @@ Public Class CutManagement
                 imagecountfile(it).Dispose()
                 My.Computer.FileSystem.DeleteFile("test" + temp + ".png")
             Next
+
         End If
     End Sub
 End Class

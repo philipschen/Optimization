@@ -240,7 +240,7 @@ Public Class Extrusions
         con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
         con.Open()
         cmd.Connection = con
-        cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, count, internalID FROM stockNew"
+        cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, count, internalID, context1, context3 FROM stockNew"
         cmd.ExecuteNonQuery()
 
         Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
@@ -256,24 +256,25 @@ Public Class Extrusions
         wbXl = appXL.Workbooks.Add
         shXL = wbXl.ActiveSheet
 
+        ' Add table headers going cell by cell.
+        shXL.Cells(1, 1).Value = "ID1"
+        shXL.Cells(1, 2).Value = "ID2"
+        shXL.Cells(1, 3).Value = "ID3"
+        shXL.Cells(1, 4).Value = "Description"
+        shXL.Cells(1, 5).Value = "Color"
+        shXL.Cells(1, 6).Value = "Size"
+        shXL.Cells(1, 7).Value = "Count"
+        shXL.Cells(1, 8).Value = "Saw Number"
+        shXL.Cells(1, 9).Value = "Location of Used Parts"
+        ' Format A1:D1 as bold, vertical alignment = center.
+        With shXL.Range("A1", "I1")
+            .Font.Bold = True
+            .ColumnWidth = 20
+            .VerticalAlignment = Excel.XlVAlign.xlVAlignCenter
+        End With
+
         Dim it1 As Integer = 2
         While readerObj.Read
-            ' Add table headers going cell by cell.
-            shXL.Cells(1, 1).Value = "ID1"
-            shXL.Cells(1, 2).Value = "ID2"
-            shXL.Cells(1, 3).Value = "ID3"
-            shXL.Cells(1, 4).Value = "Description"
-            shXL.Cells(1, 5).Value = "Color"
-            shXL.Cells(1, 6).Value = "Size"
-            shXL.Cells(1, 7).Value = "Count"
-
-            ' Format A1:D1 as bold, vertical alignment = center.
-            With shXL.Range("A1", "G1")
-                .Font.Bold = True
-                .ColumnWidth = 20
-                .VerticalAlignment = Excel.XlVAlign.xlVAlignCenter
-            End With
-
             ' Fill values.
             With shXL
                 .Cells(it1, 1).Value = readerObj("stockID1").ToString
@@ -283,13 +284,16 @@ Public Class Extrusions
                 .Cells(it1, 5).Value = readerObj("color").ToString
                 .Cells(it1, 6).Value = readerObj("size").ToString
                 .Cells(it1, 7).Value = readerObj("count").ToString
+                .Cells(it1, 8).Value = readerObj("context1").ToString
+                .Cells(it1, 9).Value = readerObj("context3").ToString
+
             End With
             it1 += 1
 
         End While
 
         ' AutoFit columns A:D.
-        raXL = shXL.Range("A1", "G1")
+        raXL = shXL.Range("A1", "I1")
         raXL.EntireColumn.AutoFit()
         ' Make sure Excel is visible and give the user control
         ' of Excel's lifetime.
@@ -308,57 +312,61 @@ Public Class Extrusions
     '
     Private Sub comboBox6_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox6.SelectedValueChanged
         ListBox3.Items.Clear()
+        oUsed.Clear()
         For it1 = 0 To description.Count - 1
             If String.Equals(ComboBox6.SelectedItem, stockID1(it1)) And Not oUsed.Contains(it1) Then
                 ListBox3.Items.Add(description(it1) + " " + color(it1) + " ")
                 oUsed.Add(it1)
             End If
-            If Not String.Equals(ComboBox6.SelectedItem, stockID1(it1)) Then
-                oUsed.Remove(it1)
-            End If
+            'If Not String.Equals(ComboBox6.SelectedItem, stockID1(it1)) Then
+            '    oUsed.Remove(it1)
+            'End If
         Next
 
     End Sub
 
     Private Sub comboBox5_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox5.SelectedValueChanged
         ListBox3.Items.Clear()
+        oUsed.Clear()
         For it1 = 0 To description.Count - 1
 
             If String.Equals(ComboBox3.SelectedItem, stockID2(it1)) And Not oUsed.Contains(it1) Then
                 ListBox2.Items.Add(description(it1) + " " + color(it1) + " ")
                 oUsed.Add(it1)
             End If
-            If Not String.Equals(ComboBox3.SelectedItem, stockID2(it1)) Then
-                oUsed.Remove(it1)
-            End If
+            'If Not String.Equals(ComboBox3.SelectedItem, stockID2(it1)) Then
+            '    oUsed.Remove(it1)
+            'End If
         Next
 
     End Sub
 
     Private Sub comboBox4_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox4.SelectedValueChanged
         ListBox3.Items.Clear()
+        oUsed.Clear()
         For it1 = 0 To description.Count - 1
 
             If String.Equals(ComboBox4.SelectedItem, stockID3(it1)) And Not oUsed.Contains(it1) Then
                 ListBox3.Items.Add(description(it1) + " " + color(it1) + " ")
                 oUsed.Add(it1)
-
-            ElseIf Not String.Equals(ComboBox4.SelectedItem, stockID3(it1)) Then
-                oUsed.Remove(it1)
             End If
+            'ElseIf Not String.Equals(ComboBox4.SelectedItem, stockID3(it1)) Then
+            '    oUsed.Remove(it1)
+            'End If
         Next
     End Sub
     Private Sub ComboBox8_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox8.SelectedIndexChanged
-
         ListBox3.Items.Clear()
+        oUsed.Clear()
         For it1 = 0 To description.Count - 1
 
             If String.Equals(ComboBox8.SelectedItem, description(it1)) And Not oUsed.Contains(it1) Then
                 ListBox3.Items.Add(description(it1) + " " + color(it1) + " ")
                 oUsed.Add(it1)
-            ElseIf Not String.Equals(ComboBox8.SelectedItem, stockID3(it1)) Then
-                oUsed.Remove(it1)
             End If
+            'ElseIf Not String.Equals(ComboBox8.SelectedItem, stockID3(it1)) Then
+            '    oUsed.Remove(it1)
+            'End If
         Next
     End Sub
 

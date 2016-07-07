@@ -27,7 +27,8 @@ Public Class Form1
         con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
         con.Open()
         cmd.Connection = con
-        'cmd.CommandText = "DELETE FROM stockNew"
+        cmd.CommandText = "DELETE FROM stockNew"
+        cmd.ExecuteNonQuery()
         cmd.CommandText = "DELETE FROM stockUsed"
         'cmd.CommandText = "DELETE FROM parts"
 
@@ -46,6 +47,11 @@ Public Class Form1
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Dim excellin1 As PartInputExcell = New PartInputExcell()
+        excellin1.Show()
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim excellin1 As UsedStockInputExcel = New UsedStockInputExcel()
         excellin1.Show()
     End Sub
 End Class

@@ -87,6 +87,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CannotFind.Designer.vb">
+      <DependentUpon>CannotFind.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CannotFind.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ChooseStock.Designer.vb">
       <DependentUpon>ChooseStock.vb</DependentUpon>
     </Compile>
@@ -227,8 +233,17 @@
     <Compile Include="uploadComplete.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UsedStockInputExcel.Designer.vb">
+      <DependentUpon>UsedStockInputExcel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UsedStockInputExcel.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CannotFind.resx">
+      <DependentUpon>CannotFind.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChooseStock.resx">
       <DependentUpon>ChooseStock.vb</DependentUpon>
     </EmbeddedResource>
@@ -282,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="uploadComplete.resx">
       <DependentUpon>uploadComplete.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsedStockInputExcel.resx">
+      <DependentUpon>UsedStockInputExcel.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

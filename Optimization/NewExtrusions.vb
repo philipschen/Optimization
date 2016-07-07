@@ -66,7 +66,7 @@ Public Class NewExtrusions
                 Next
                 Dim temp1 = Convert.ToString(inputinternal)
 
-                cmd.CommandText = "INSERT INTO stockNew VALUES('" + stockID1 + "', '" + stockID2 + "' , '" + stockID3 + "', '" + description + "' , '" + stockColor + "', " + stockSize + " , " + stockCount + ", " + temp1 + ", '' , 0, '')"
+                cmd.CommandText = "INSERT INTO stockNew VALUES('" + stockID1.ToUpper() + "', '" + stockID2.ToUpper() + "' , '" + stockID3.ToUpper() + "', '" + description.ToUpper() + "' , '" + stockColor.ToUpper() + "', " + stockSize.ToUpper() + " , " + stockCount.ToUpper() + ", " + temp1.ToUpper() + ", '' , 0, '')"
                 cmd.ExecuteNonQuery()
                 Me.Close()
             End If
