@@ -474,7 +474,7 @@ Public Class CutManagement
         con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
         con.Open()
         cmd.Connection = con
-        cmd.CommandText = "SELECT partID, description, color, size, count, internalID, shopNumber, itemNumber, itemQuantity FROM parts"
+        cmd.CommandText = "SELECT partID, description, color, size, count, internalID, shopNumber, itemNumber, itemQuantity FROM parts ORDER BY itemNumber, itemQuantity, description"
         cmd.ExecuteNonQuery()
         Dim readerObj1 As SqlClient.SqlDataReader = cmd.ExecuteReader
 
@@ -760,20 +760,30 @@ Public Class CutManagement
         Dim partcountIndex As ArrayList = New ArrayList
         Dim partlistd As ArrayList = New ArrayList
         Dim partlistid As ArrayList = New ArrayList
+        Dim partlistcount As ArrayList = New ArrayList
         Dim partlistcolor As ArrayList = New ArrayList
         Dim itWorks As Boolean = False
         partcountIndex.Add(0)
+        Dim itpart As Integer = 0
         For it = 0 To uopartID.Count - 1
             If Not partlistd.Contains(uodescription(it)) Then
                 partlistd.Add(uodescription(it))
                 partlistid.Add(uopartID(it))
+
+                Dim tempcount As Integer = 0
+                For it1 = 0 To uodescription.Count - 1
+                    If String.Equals(partlistd(itpart), uodescription(it1)) Then
+                        tempcount += uocount(it1)
+                    End If
+                Next
+                partlistcount.Add(tempcount)
                 partlistcolor.Add(uocolor(it))
+                itpart += 1
                 If it > 0 Then
                     partcountIndex.Add(it)
                 End If
             End If
         Next
-
         '
         'Initialize PDF
         '
@@ -796,7 +806,12 @@ Public Class CutManagement
         'Loops for individual types
         '
 
+        Dim exdlist As ArrayList = New ArrayList
+        Dim excountlist As ArrayList = New ArrayList
+        Dim excountlistu As ArrayList = New ArrayList
+        Dim excountwork As ArrayList = New ArrayList
         For it = 0 To partlistd.Count - 1
+
             Label14.Text = "Processing Request..."
             Dim Calculator As CutGLib.CutEngine
             Calculator = New CutGLib.CutEngine
@@ -826,6 +841,7 @@ Public Class CutManagement
             Dim xusedcount As ArrayList = New ArrayList
             Dim xusedinternalID As ArrayList = New ArrayList
             Dim xusedcontext2 As ArrayList = New ArrayList
+
 
             '
             ' Finds Corresponding Stocks
@@ -859,27 +875,27 @@ Public Class CutManagement
                 frm1.saw = usedsaw
                 frm1.part1 = partlistd(it) + "  ID: " + partlistid(it) + "  Color: " + partlistcolor(it)
 
-
-                cmd.CommandText = "SELECT size, count, internalID, context2 FROM stockUsed"
-                cmd.ExecuteNonQuery()
-                readerObj = cmd.ExecuteReader
-                While readerObj.Read
-                    If String.Equals(usedinternalID(usedstock), readerObj("internalID").ToString) Then
-                        xusedsize1.Add(readerObj("size").ToString)
-                        xusedcount.Add(readerObj("count").ToString)
-                        xusedinternalID.Add(readerObj("internalID").ToString)
-                        xusedcontext2.Add(readerObj("context2").ToString)
-
-                    End If
-                End While
-                readerObj.Close()
-
                 If frm1.ShowDialog() = DialogResult.OK Then
                     usedstock = frm1.ListBox1.SelectedIndex
                     usedsaw = frm1.saw
                     cmd.CommandText = "UPDATE stockNew SET context1 = '" + usedsaw(usedstock) + "' WHERE internalID = '" + usedinternalID(usedstock) + "'"
                     cmd.ExecuteNonQuery()
+
+                    cmd.CommandText = "SELECT size, count, internalID, context2 FROM stockUsed"
+                    cmd.ExecuteNonQuery()
+                    readerObj = cmd.ExecuteReader
+                    While readerObj.Read
+                        If String.Equals(usedinternalID(usedstock), readerObj("internalID").ToString) Then
+                            xusedsize1.Add(readerObj("size").ToString)
+                            xusedcount.Add(readerObj("count").ToString)
+                            xusedinternalID.Add(readerObj("internalID").ToString)
+                            xusedcontext2.Add(readerObj("context2").ToString)
+
+                        End If
+                    End While
+                    readerObj.Close()
                 End If
+
             End If
 
             If xusedinternalID.Count > 0 Then
@@ -887,6 +903,7 @@ Public Class CutManagement
                     Dim temp3 As Double = Convert.ToDouble(xusedsize1(it1))
                     Dim temp4 As Integer = Convert.ToInt32(xusedcount(it1))
                     Calculator.AddLinearStock(temp3, temp4)
+
                 Next
             End If
             If usedinternalID.Count > 0 Then
@@ -897,13 +914,16 @@ Public Class CutManagement
             Else
 
                 '
-                ' Adds Page
+                ' Adds Page if can't find stock
                 '
 
                 Dim page As PdfPage = document.AddPage
                 Dim gfx As XGraphics = XGraphics.FromPdfPage(page)
                 gfx.DrawString("No stock/is not a cut extrusion: " + partlistd(it), font2, XBrushes.Black, New XRect(50, 50, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                 Label14.Text = "Calculate Fail, No Stock"
+                excountlist.Add(partlistcount(it))
+                excountlistu.Add(0)
+                excountwork.Add(1)
             End If
 
             '
@@ -912,11 +932,14 @@ Public Class CutManagement
 
             For it1 = 0 To uodescription.Count - 1
                 If String.Equals(partlistd(it), uodescription(it1)) Then
+
                     Dim temp3 As Double = Convert.ToDouble(uosize(it1))
                     Dim temp4 As Integer = Convert.ToInt32(uocount(it1))
+
                     Calculator.AddLinearPart(temp3, temp4)
                 End If
             Next
+
             '
             'Calculates Cuts 
             '
@@ -931,6 +954,7 @@ Public Class CutManagement
             '
             If (result = "") Then
                 itWorks = True
+
                 '
                 'Printing output
                 '
@@ -944,163 +968,203 @@ Public Class CutManagement
                 Console.WriteLine("Created {0} different layouts", Calculator.LayoutCount)
                 ' Iterate by each layout and output information about each layout,
                 ' such as number and length of used stocks and part indices cut from the stocks
+
+                Dim itemcount As Integer = 0
+                Dim itemcount2 As Integer = 0
                 For iLayout = 0 To Calculator.LayoutCount - 1
                     Calculator.GetLayoutInfo(iLayout, StockIndex, VStockCount)
                     ' StockIndex is global index of the first stock used in the layout iLayout
-                    ' VStockCount is quantity of stocks of the same length as StockIndex used for this layout
-                    If VStockCount > 0 Then
+                    ' VStockCount is quantity of stocks of the same length as StockIndex us                                        If VStockCount > 0 Then
+                    Dim slength As Double
+                    Calculator.GetLinearStockInfo(StockIndex, slength, StockActive)
+                    If String.Equals(slength.ToString, usedsize1(usedstock)) Then
+                        itemcount += VStockCount
+                    End If
+                    If Not String.Equals(slength.ToString, usedsize1(usedstock)) Then
+                        itemcount2 += VStockCount
+                    End If
 
-                        Console.WriteLine("Layout={0}:  Start Stock={1};  Count of Stock={2}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", iLayout, StockIndex, VStockCount)
+                    Console.WriteLine("Layout={0}:  Start Stock={1};  Count of Stock={2}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", iLayout, StockIndex, VStockCount)
 
-                        '
-                        ' Add Page
-                        '
-                        Dim page As PdfPage
-                        Dim gfx As XGraphics
-                        partCount = Calculator.GetPartCountOnStock(iStock)
-                        If partCount > 10 Then
+                    '
+                    ' Add Page
+                    '
+                    Dim page As PdfPage
+                    Dim gfx As XGraphics
+                    partCount = Calculator.GetPartCountOnStock(iStock)
+                    If partCount > 10 Then
+                        page = document.AddPage
+                        gfx = XGraphics.FromPdfPage(page)
+                        pos2 = 0
+                        sectioncount = 0
+                    Else
+                        If sectioncount = 0 Then
                             page = document.AddPage
                             gfx = XGraphics.FromPdfPage(page)
                             pos2 = 0
-                            sectioncount = 0
+                            sectioncount += 1
                         Else
-                            If sectioncount = 0 Then
-                                page = document.AddPage
-                                gfx = XGraphics.FromPdfPage(page)
-                                pos2 = 0
-                                sectioncount += 1
-                            Else
-                                pos2 = 350
-                                sectioncount = 0
-                            End If
-
-                        End If
-
-                        iStock = StockIndex
-                        If Calculator.GetLinearStockInfo(StockIndex, StockLength, StockActive) Then
-                            partCount = Calculator.GetPartCountOnStock(iStock)
-
-
-                            Dim pageNo As String = Convert.ToString(iLayout + 1)
-                            Dim tempIt As String = Convert.ToString(iStock)
-                            ' Dim page As PdfPage = document.AddPage
-
-
-                            Dim temppic As String = Convert.ToString(picturecount)
-                            Calculator.CreateStockImage(iStock, "test" + temppic + ".png", 1000)
-                            Dim image As XImage = XImage.FromFile("test" + temppic + ".png")
-                            picturecount += 1
-                            imagecountfile.Add(image)
-
-                            Dim Stockt As String = Convert.ToString(iStock + 1)
-                            Dim xt As String = Convert.ToString(StockLength)
-                            Dim temp As String = Convert.ToString(VStockCount)
-                            Dim temp1 As String = Convert.ToString(iLayout + 1)
-                            Dim pos1 As Integer = 0
-                            Dim sizestring As String = xt
-                            If Not String.Equals(xt, usedsize1(usedstock)) Then
-                                sizestring = xt + "  Used Part Check Bin"
-                            End If
-
-
-                            Dim descriptionString As String = partlistd(it)
-                            Dim descriptionString2 As String = "ID: " + usedstockID2(usedstock)
-                            Dim descriptionString3 As String = "ID2: " + usedstockID3(usedstock)
-                            Dim descriptionString4 As String = "Stock Size: " + sizestring + "  Color: " + usedcolor(usedstock)
-                            Dim descriptionstring5 As String = "Saw number: " + usedsaw(usedstock)
-                            Dim descriptionstring6 As String = "# Of Stock Cut: " + temp
-                            Dim descriptionstring7 As String = "Layout Number = " + temp1
-                            Dim leftanchor As Integer = 50
-
-
-                            'ListBox3.Items.Add(cutId1)
-
-                            gfx.DrawString("Page " + pageNo, font, XBrushes.Black, New XRect(leftanchor, 50 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                            gfx.DrawString(descriptionString, font3, XBrushes.Black, New XRect(leftanchor, 65 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                            gfx.DrawString(descriptionString2, font2, XBrushes.Black, New XRect(leftanchor, 80 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                            gfx.DrawString(descriptionString3, font2, XBrushes.Black, New XRect(leftanchor, 95 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                            gfx.DrawString(descriptionString4, font2, XBrushes.Black, New XRect(leftanchor, 110 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                            gfx.DrawString(descriptionstring5, font3, XBrushes.Black, New XRect(leftanchor + 360, 50 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                            gfx.DrawString(descriptionstring6, font3, XBrushes.Black, New XRect(leftanchor + 360, 65 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                            gfx.DrawString(descriptionstring7, font, XBrushes.Black, New XRect(leftanchor + 360, 80 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-
-                            Console.WriteLine("Layout={0}:  Length={1}", iStock, StockLength)
-
-
-                            ' Output the information about parts cut from this stock
-                            ' First we get quantity of parts cut from the stock
-
-                            ' Iterate by parts and get indices of cut parts
-                            For ViPart = 0 To partCount - 1
-                                ' Get global part index of ViPart cut from the current stock
-                                partIndex = Calculator.GetPartIndexOnStock(iStock, ViPart)
-                                ' Get length and location of the part
-                                ' X - coordinate on the stock where the part beggins.
-
-                                Calculator.GetResultLinearPart(partIndex, tmp, partLength, VX)
-                                ' Output the part information
-                                Console.WriteLine("Part= {0}:  X={1}  Length={2}", partIndex, VX, partLength)
-
-                                Dim partt As String = Convert.ToString(partIndex)
-                                Dim vxt As String = Convert.ToString(VX + partLength)
-                                Dim vpartLength As String = Convert.ToString(partLength)
-                                gfx.DrawString("Cut position= " + vxt + " Length= " + vpartLength, font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                                pos1 += 15
-                                If VX + partLength > remainder Then
-                                    remainder = VX + partLength
-                                End If
-                            Next ViPart
-
-                            gfx.DrawImage(image, 50, 170 + pos1 + pos2, 500, 20)
-
-
-
-                            If usedsize1(usedstock) - remainder > 12 Then
-                                Dim internalID As ArrayList = New ArrayList
-                                Dim rn As New Random
-                                Dim it1 As Integer
-                                Dim boolinternalID As Boolean = True
-                                Dim inputusedID As Integer
-
-                                cmd.CommandText = "SELECT context2  FROM stockUsed"
-                                cmd.ExecuteNonQuery()
-
-                                'This will loop through all returned records 
-                                readerObj = cmd.ExecuteReader
-                                While readerObj.Read
-                                    Dim temp4 As Integer = Convert.ToInt64(readerObj("context2").ToString)
-                                    internalID.Add(temp4)
-                                End While
-                                readerObj.Close()
-                                inputusedID = rn.Next(1000000, 9999999)
-                                For it1 = 0 To internalID.Count - 1
-                                    If internalID(it1) = inputusedID Then
-                                        it1 = 0
-                                        inputusedID = rn.Next(1000000, 9999999)
-                                    End If
-                                Next
-
-                                Dim temp3 = Convert.ToString(inputusedID)
-                                Dim temp2 As String = Convert.ToString(usedsize1(usedstock) - remainder)
-                                cmd.CommandText = "INSERT INTO stockUsed VALUES('" + usedstockID1(usedstock) + "', '" + usedstockID2(usedstock) + "' , '" + usedstockID3(usedstock) + "', '" + useddescription(usedstock) + "' , '" + usedcolor(usedstock) + "', " + temp2 + ", " + temp + ", " + usedinternalID(usedstock) + " , '' , '" + usedsaw(usedstock) + "' , " + temp3 + ", '')"
-                                cmd.ExecuteNonQuery()
-                            End If
+                            pos2 = 350
+                            sectioncount = 0
                         End If
 
                     End If
-                Next iLayout
 
-            ElseIf result = "1" And stock_exists Then
+                    iStock = StockIndex
+                    If Calculator.GetLinearStockInfo(StockIndex, StockLength, StockActive) Then
+                        partCount = Calculator.GetPartCountOnStock(iStock)
+
+
+                        Dim pageNo As String = Convert.ToString(iLayout + 1)
+                        Dim tempIt As String = Convert.ToString(iStock)
+                        ' Dim page As PdfPage = document.AddPage
+
+
+                        Dim temppic As String = Convert.ToString(picturecount)
+                        Calculator.CreateStockImage(iStock, "test" + temppic + ".png", 1000)
+                        Dim image As XImage = XImage.FromFile("test" + temppic + ".png")
+                        picturecount += 1
+                        imagecountfile.Add(image)
+
+                        Dim Stockt As String = Convert.ToString(iStock + 1)
+                        Dim xt As String = Convert.ToString(StockLength)
+                        Dim temp As String = Convert.ToString(VStockCount)
+                        Dim temp1 As String = Convert.ToString(iLayout + 1)
+                        Dim pos1 As Integer = 0
+                        Dim sizestring As String = xt
+
+
+
+                        If Not String.Equals(slength.ToString, usedsize1(usedstock)) Then
+                            sizestring = xt + "  Used Part Check Bin"
+                        End If
+
+                        Dim descriptionString As String = partlistd(it)
+                        Dim descriptionString2 As String = "ID: " + usedstockID2(usedstock)
+                        Dim descriptionString3 As String = "ID2: " + usedstockID3(usedstock)
+                        Dim descriptionString4 As String = "Stock Size: " + sizestring + "  Color: " + usedcolor(usedstock)
+                        Dim descriptionstring5 As String = "Saw number: " + usedsaw(usedstock)
+                        Dim descriptionstring6 As String = "# Of Stock Cut: " + temp
+                        Dim descriptionstring7 As String = "Layout Number = " + temp1
+                        Dim leftanchor As Integer = 50
+
+
+
+                        'ListBox3.Items.Add(cutId1)
+
+                        gfx.DrawString("Page " + pageNo, font, XBrushes.Black, New XRect(leftanchor, 50 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionString, font3, XBrushes.Black, New XRect(leftanchor, 65 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionString2, font2, XBrushes.Black, New XRect(leftanchor, 80 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionString3, font2, XBrushes.Black, New XRect(leftanchor, 95 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionString4, font2, XBrushes.Black, New XRect(leftanchor, 110 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionstring5, font3, XBrushes.Black, New XRect(leftanchor + 360, 50 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionstring6, font3, XBrushes.Black, New XRect(leftanchor + 360, 65 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionstring7, font, XBrushes.Black, New XRect(leftanchor + 360, 80 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+
+                        Console.WriteLine("Layout={0}:  Length={1}", iStock, StockLength)
+
+
+                        ' Output the information about parts cut from this stock
+                        ' First we get quantity of parts cut from the stock
+
+                        ' Iterate by parts and get indices of cut parts
+                        For ViPart = 0 To partCount - 1
+                            ' Get global part index of ViPart cut from the current stock
+                            partIndex = Calculator.GetPartIndexOnStock(iStock, ViPart)
+                            ' Get length and location of the part
+                            ' X - coordinate on the stock where the part beggins.
+
+                            Calculator.GetResultLinearPart(partIndex, tmp, partLength, VX)
+                            ' Output the part information
+                            Console.WriteLine("Part= {0}:  X={1}  Length={2}", partIndex, VX, partLength)
+
+                            Dim partt As String = Convert.ToString(partIndex)
+                            Dim vxt As String = Convert.ToString(VX + partLength)
+                            Dim vpartLength As String = Convert.ToString(partLength)
+                            gfx.DrawString("Cut position= " + vxt + " Length= " + vpartLength, font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                            pos1 += 15
+                            If VX + partLength > remainder Then
+                                remainder = VX + partLength
+                            End If
+                        Next ViPart
+
+                        gfx.DrawImage(image, 50, 170 + pos1 + pos2, 500, 20)
+
+
+
+                        If usedsize1(usedstock) - remainder > 12 Then
+                            Dim internalID As ArrayList = New ArrayList
+                            Dim rn As New Random
+                            Dim it1 As Integer
+                            Dim boolinternalID As Boolean = True
+                            Dim inputusedID As Integer
+
+                            cmd.CommandText = "SELECT context2  FROM stockUsed"
+                            cmd.ExecuteNonQuery()
+
+                            'This will loop through all returned records 
+                            readerObj = cmd.ExecuteReader
+                            While readerObj.Read
+                                Dim temp4 As Integer = Convert.ToInt64(readerObj("context2").ToString)
+                                internalID.Add(temp4)
+                            End While
+                            readerObj.Close()
+                            inputusedID = rn.Next(1000000, 9999999)
+                            For it1 = 0 To internalID.Count - 1
+                                If internalID(it1) = inputusedID Then
+                                    it1 = 0
+                                    inputusedID = rn.Next(1000000, 9999999)
+                                End If
+                            Next
+
+                            Dim temp3 = Convert.ToString(inputusedID)
+                            Dim temp2 As String = Convert.ToString(usedsize1(usedstock) - remainder)
+                            cmd.CommandText = "INSERT INTO stockUsed VALUES('" + usedstockID1(usedstock) + "', '" + usedstockID2(usedstock) + "' , '" + usedstockID3(usedstock) + "', '" + useddescription(usedstock) + "' , '" + usedcolor(usedstock) + "', " + temp2 + ", " + temp + ", " + usedinternalID(usedstock) + " , '' , '" + usedsaw(usedstock) + "' , " + temp3 + ", '')"
+                            cmd.ExecuteNonQuery()
+                        End If
+                    End If
+
+                Next iLayout
+                excountlist.Add(itemcount)
+                excountlistu.Add(itemcount2)
+                excountwork.Add(0)
+
+            ElseIf stock_exists Then
+
                 Console.WriteLine("calculate fail")
                 Dim page As PdfPage = document.AddPage
                 Dim gfx As XGraphics = XGraphics.FromPdfPage(page)
                 gfx.DrawString("Not enough stock: " + partlistd(it), font2, XBrushes.Black, New XRect(50, 50, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-
+                excountlist.Add(usedcount(usedstock))
+                excountlistu.Add(0)
+                excountwork.Add(2)
+            Else
+                Console.WriteLine(result)
             End If
+
             Calculator.Clear()
 
         Next
+
         If itWorks Then
+            Dim page As PdfPage = document.AddPage
+            Dim gfx As XGraphics = XGraphics.FromPdfPage(page)
+            Dim pos1 As Integer = 0
+            gfx.DrawString("Total Part List", font3, XBrushes.Black, New XRect(50, 50, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+            For it = 0 To partlistd.Count - 1
+                If excountwork(it) = 0 Then
+                    gfx.DrawString((it + 1).ToString + ". New Count: " + excountlist(it).ToString + " " + "Used count: " + excountlistu(it).ToString + " " + partlistd(it), font, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                    pos1 += 15
+                ElseIf excountwork(it) = 1 Then
+                    gfx.DrawString((it + 1).ToString + ". Not Cut, Partcount: " + excountlist(it).ToString + "  " + partlistd(it), font, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                    pos1 += 15
+                ElseIf excountwork(it) = 2 Then
+                    gfx.DrawString((it + 1).ToString + ". Not Enough Stock, current count: " + excountlist(it).ToString + "  " + partlistd(it), font, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                    pos1 += 15
+                End If
+
+            Next
+
             Label14.Text = "Request Complete"
             document.Save(filename)
             document.Close()

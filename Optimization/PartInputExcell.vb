@@ -108,7 +108,7 @@ Public Class PartInputExcell
                 DataGridView1.Rows(it).Cells(7).Value = cell3
                 DataGridView1.Rows(it).Cells(8).Value = cell4
                 DataGridView1.Rows(it).Cells(9).Value = ""
-                DataGridView1.Rows(it).Cells(10).Value = 0
+                DataGridView1.Rows(it).Cells(10).Value = it
                 DataGridView1.Rows(it).Cells(11).Value = ""
 
 
@@ -128,6 +128,8 @@ Public Class PartInputExcell
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Label1.Text = "Uploading..."
+        'DataGridView1.ClearSelection()
+        'DataGridView1.Rows(0).Cells(0).Selected = True
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
         con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
