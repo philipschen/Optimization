@@ -525,7 +525,7 @@ Public Class CutManagement
 
         Dim font As XFont = New XFont("Verdana", 11, XFontStyle.Regular)
         Dim font2 As XFont = New XFont("Verdana", 12, XFontStyle.Regular)
-        Dim font3 As XFont = New XFont("Verdana", 14, XFontStyle.Regular)
+        Dim font3 As XFont = New XFont("Verdana", 13, XFontStyle.Regular)
         Dim filename As String = clock.Year.ToString + clock.Month.ToString + clock.Day.ToString + clock.Minute.ToString + clock.Second.ToString + "CutInstructions.pdf"
 
         '
@@ -612,7 +612,7 @@ Public Class CutManagement
                     pusedinternalID.Add(readerObj("internalID").ToString)
                     pusedsaw.Add(readerObj("context1").ToString)
                     pusedminsize.Add(readerObj("context2").ToString)
-                    stock_exists(it) = True
+
                 End If
             End While
             readerObj.Close()
@@ -647,7 +647,7 @@ Public Class CutManagement
                     usedinternalID.Add(pusedinternalID(pusedstock))
                     usedsaw.Add(pusedsaw(pusedstock))
                     usedminsize.Add(pusedminsize(pusedstock))
-
+                    stock_exists(it) = True
                     '
                     ' Selects which used stock to use
                     '
@@ -689,6 +689,41 @@ Public Class CutManagement
                 usedminsize.Add("")
             End If
         Next
+
+        '
+        ' Checks if any parts are omited and then sorts by saw
+        '
+        Dim frm2 As OmitParts = New OmitParts()
+        frm2.des = partlistd
+        If frm2.ShowDialog() = DialogResult.OK Then
+            For it = 0 To frm2.omitted.Count - 1
+                Dim intloc As Integer = partlistd.IndexOf(frm2.omitted(it))
+
+                partlistd.Remove(frm2.omitted(it))
+
+                For it1 = 0 To xusedinternalID.Count - 1
+                    If String.Equals(xusedinternalID(it1), usedinternalID(intloc)) Then
+                        xusedsize1.RemoveAt(intloc)
+                        xusedcount.RemoveAt(intloc)
+                        xusedinternalID.RemoveAt(intloc)
+                        xusedcontext2.RemoveAt(intloc)
+                    End If
+                Next
+
+                usedstockID1.RemoveAt(intloc)
+                usedstockID2.RemoveAt(intloc)
+                usedstockID3.RemoveAt(intloc)
+                useddescription.RemoveAt(intloc)
+                usedcolor.RemoveAt(intloc)
+                usedsize1.RemoveAt(intloc)
+                usedcount.RemoveAt(intloc)
+                usedinternalID.RemoveAt(intloc)
+                usedsaw.RemoveAt(intloc)
+                usedminsize.RemoveAt(intloc)
+                stock_exists.RemoveAt(intloc)
+            Next
+        End If
+
         '
         ' Loops for individual parts
         '
@@ -855,7 +890,7 @@ Public Class CutManagement
                         Dim descriptionString2 As String = "ID: " + usedstockID2(it)
                         Dim descriptionString3 As String = "ID2: " + usedstockID3(it)
                         Dim descriptionString4 As String = "Stock Size: " + sizestring + "  Color: " + usedcolor(it)
-                        Dim descriptionstring5 As String = "Saw number: " + usedsaw(it)
+                        Dim descriptionstring5 As String = "Saw Used: " + usedsaw(it)
                         Dim descriptionstring6 As String = "# Of Stock Cut: " + temp
                         Dim descriptionstring7 As String = "Layout Number = " + temp1
                         Dim leftanchor As Integer = 40
@@ -865,9 +900,9 @@ Public Class CutManagement
                         gfx.DrawString(descriptionString2, font2, XBrushes.Black, New XRect(leftanchor, 80 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                         gfx.DrawString(descriptionString3, font2, XBrushes.Black, New XRect(leftanchor, 95 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                         gfx.DrawString(descriptionString4, font2, XBrushes.Black, New XRect(leftanchor, 110 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                        gfx.DrawString(descriptionstring5, font2, XBrushes.Black, New XRect(leftanchor + 360, 50 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                        gfx.DrawString(descriptionstring6, font2, XBrushes.Black, New XRect(leftanchor + 360, 65 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                        gfx.DrawString(descriptionstring7, font2, XBrushes.Black, New XRect(leftanchor + 360, 80 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionstring5, font2, XBrushes.Black, New XRect(leftanchor + 355, 65 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionstring6, font2, XBrushes.Black, New XRect(leftanchor + 355, 80 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionstring7, font2, XBrushes.Black, New XRect(leftanchor + 355, 95 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
 
                         Console.WriteLine("Layout={0}:  Length={1}", iStock, StockLength)
                         Dim lengthlist As ArrayList = New ArrayList
@@ -890,7 +925,7 @@ Public Class CutManagement
                                 lengthlist.Add(partLength)
                             End If
 
-                            gfx.DrawString("Cut position= " + VX.ToString + " Length= " + partLength.ToString, font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                            gfx.DrawString("Cut position= " + VX.ToString + " Length= " + partLength.ToString, font, XBrushes.Black, New XRect(leftanchor, 135 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                             If over20 Then
                                 pos1 += 10
                             Else
@@ -902,7 +937,7 @@ Public Class CutManagement
                             End If
                         Next ViPart
                         If usedsize1(it) - remainder > usedminsize(it) Then
-                            gfx.DrawString("Save Remainder Piece ", font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                            gfx.DrawString("Save Remainder Piece ", font, XBrushes.Black, New XRect(leftanchor, 135 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                             If over20 Then
                                 pos1 += 10
                             Else
@@ -910,7 +945,7 @@ Public Class CutManagement
                             End If
                         End If
 
-                        gfx.DrawImage(image, leftanchor, 150 + pos1 + pos2 - 10, 520, 20)
+                        gfx.DrawImage(image, leftanchor, 145 + pos1 + pos2 - 10, 520, 20)
                         '
                         ' Prints out which quote and line number the part corresponds to
                         '
@@ -918,7 +953,7 @@ Public Class CutManagement
                             Dim correspondingnum As String = "Orders: "
                             Dim tempstring As ArrayList = New ArrayList
                             For it1 = 0 To uosize.Count - 1
-                                If lengthlist(it2) = uosize(it1) AndAlso Not tempstring.Contains(uolistorderline(it1) + "-" + uoitemNumber(it1).ToString + "  ") Then
+                                If lengthlist(it2) = uosize(it1) AndAlso Not tempstring.Contains(uolistorderline(it1) + "-" + uoitemNumber(it1).ToString + " ") Then
                                     tempstring.Add(uolistorderline(it1) + "-" + uoitemNumber(it1).ToString + "  ")
                                 End If
                             Next
@@ -937,7 +972,7 @@ Public Class CutManagement
                                 End If
 
                                 If line1 AndAlso (count1 = 4 Or it1 = tempstring.Count - 1) Then
-                                    gfx.DrawString("Size: " + lengthlist(it2).ToString + " " + correspondingnum, font, XBrushes.Black, New XRect(leftanchor, 175 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                                    gfx.DrawString("Size: " + lengthlist(it2).ToString + " " + correspondingnum, font, XBrushes.Black, New XRect(leftanchor, 170 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                                     If over20 Then
                                         pos1 += 10
                                     Else
@@ -945,7 +980,7 @@ Public Class CutManagement
                                     End If
                                     line1 = False
                                 ElseIf line2 AndAlso (count1 = 4 Or it1 = tempstring.Count - 1) Then
-                                    gfx.DrawString("    " + correspondingnum, font, XBrushes.Black, New XRect(leftanchor, 175 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                                    gfx.DrawString("  " + correspondingnum, font, XBrushes.Black, New XRect(leftanchor, 170 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                                     If over20 Then
                                         pos1 += 10
                                     Else

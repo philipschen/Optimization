@@ -191,6 +191,12 @@
     <Compile Include="NewExtrusions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="OmitParts.Designer.vb">
+      <DependentUpon>OmitParts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OmitParts.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="OptimizationDatabaseDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -291,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewExtrusions.resx">
       <DependentUpon>NewExtrusions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OmitParts.resx">
+      <DependentUpon>OmitParts.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="partColor.resx">
       <DependentUpon>partColor.vb</DependentUpon>
