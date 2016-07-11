@@ -17,5 +17,16 @@ Public Class Form1
         'Dim excellin1 As StockInputExcell = New StockInputExcell()
         'excellin1.Show()
     End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim con As New SqlConnection
+        Dim cmd As New SqlCommand
+        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=InventoryManagement;Integrated Security=True"
+        con.Open()
+        cmd.Connection = con
+
+        cmd.CommandText = "DELETE FROM Nav"
+        cmd.ExecuteNonQuery()
+    End Sub
 End Class
 

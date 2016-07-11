@@ -37,36 +37,18 @@ Public Class NavInput
             Dim internalID As ArrayList = New ArrayList
             Dim usedID As ArrayList = New ArrayList
 
-            'cmd.CommandText = "SELECT internalID  FROM stockNew"
-            'cmd.ExecuteNonQuery()
-            'Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
-            'While readerObj.Read
-            '    Dim temp1 As Integer = Convert.ToInt64(readerObj("internalID").ToString)
-            '    internalID.Add(temp1)
-            'End While
 
             Dim totalcount As String = Convert.ToString(shXL.UsedRange.Rows.Count - 1)
             For it = 0 To shXL.UsedRange.Rows.Count - 1
                 Dim c0 As String = shXL.Cells(2 + it, 1).Value
                 Dim c1 As String = shXL.Cells(2 + it, 2).Value
-                Dim c2 As String = shXL.Cells(2 + it, 6).Value
+                Dim c2 As String = shXL.Cells(2 + it, 10).Value
                 Dim c3 As String = shXL.Cells(2 + it, 7).Value
                 Dim c4 As String = shXL.Cells(2 + it, 8).Value
                 Dim c5 As String = shXL.Cells(2 + it, 16).Value
                 Dim c6 As String = ""
                 Dim c7 As String = 0
                 Dim c8 As String = ""
-
-                'Dim inputinternal As Integer
-                'Dim rn As New Random
-                'inputinternal = rn.Next(10000, 99999)
-                'For it1 = 0 To internalID.Count - 1
-                '    If internalID(it1) = inputinternal Or usedID.Contains(inputinternal) Then
-                '        it1 = 0
-                '        inputinternal = rn.Next(10000, 99999)
-                '    End If
-                'Next
-                'usedID.Add(inputinternal)
 
                 Dim temp As String = Convert.ToString(it)
                 Label1.Text = "Loading " + temp + "/" + totalcount
@@ -171,11 +153,7 @@ Public Class NavInput
         While readerObj.Read
             For it = 0 To ar1.Count - 1
                 If String.Equals(ar1(it), readerObj("ID1").ToString) Then
-                    'Dim temp1 As Integer = Convert.ToInt32(ar6(it))
-                    'Dim temp2 As String = readerObj("count").ToString
-                    'Dim temp3 As Integer = Convert.ToInt32(temp2)
-                    'temp3 = temp3 + temp1
-                    'temp2 = Convert.ToString(temp3)
+
                     cmd1.CommandText = "UPDATE Nav SET count = " + ar5(it) + " WHERE ID1 = " + readerObj("ID1").ToString
                     cmd1.ExecuteNonQuery()
                     ar0.RemoveAt(it)
@@ -193,10 +171,10 @@ Public Class NavInput
         End While
 
         For it = 0 To ar1.Count - 1
-            cmd1.CommandText = "INSERT INTO stockNew VALUES('" + ar0(it) + "', '" + ar1(it) + "' , '" + ar2(it) + "', '" + ar3(it) + "' , '" + ar4(it) + "', " + ar5(it) + " , '" + ar6(it) + "', " + ar7(it) + ", '" + ar8(it) + "')"
+            cmd1.CommandText = "INSERT INTO Nav VALUES('" + ar0(it) + "', '" + ar1(it) + "' , '" + ar2(it) + "', @description" + it.ToString + " , '" + ar4(it) + "', " + ar5(it) + " , '" + ar6(it) + "', " + ar7(it) + ", '" + ar8(it) + "')"
+            cmd1.Parameters.Add("@description" + it.ToString + "", SqlDbType.NVarChar).Value = ar3(it)
             cmd1.ExecuteNonQuery()
         Next
-
 
         Label1.Text = "Upload Complete"
         MessageBox.Show("Upload Complete!")
