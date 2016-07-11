@@ -984,7 +984,7 @@ Public Class CutManagement
                         itemcount2 += VStockCount
                     End If
 
-                    Console.WriteLine("Layout={0}:  Start Stock={1};  Count of Stock={2}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", iLayout, StockIndex, VStockCount)
+                    Console.WriteLine("Layout={0}:  Start Stock={1};  Count of Stock={2}", iLayout, StockIndex, VStockCount)
 
                     '
                     ' Add Page
@@ -1139,7 +1139,7 @@ Public Class CutManagement
                 excountlistu.Add(0)
                 excountwork.Add(2)
             Else
-                Console.WriteLine(result)
+
             End If
 
             Calculator.Clear()
@@ -1153,13 +1153,13 @@ Public Class CutManagement
             gfx.DrawString("Total Part List", font3, XBrushes.Black, New XRect(50, 50, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
             For it = 0 To partlistd.Count - 1
                 If excountwork(it) = 0 Then
-                    gfx.DrawString((it + 1).ToString + ". New Count: " + excountlist(it).ToString + " " + "Used count: " + excountlistu(it).ToString + " " + partlistd(it), font, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                    gfx.DrawString((it + 1).ToString + ". New Stock: " + excountlist(it).ToString + " " + "Used Stock: " + excountlistu(it).ToString + " " + partlistd(it), font, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                     pos1 += 15
                 ElseIf excountwork(it) = 1 Then
                     gfx.DrawString((it + 1).ToString + ". Not Cut, Partcount: " + excountlist(it).ToString + "  " + partlistd(it), font, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                     pos1 += 15
                 ElseIf excountwork(it) = 2 Then
-                    gfx.DrawString((it + 1).ToString + ". Not Enough Stock, current count: " + excountlist(it).ToString + "  " + partlistd(it), font, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                    gfx.DrawString((it + 1).ToString + ". Not Enough Stock, current Stock: " + excountlist(it).ToString + "  " + partlistd(it), font, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                     pos1 += 15
                 End If
 

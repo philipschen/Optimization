@@ -27,8 +27,8 @@ Public Class Form1
         con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
         con.Open()
         cmd.Connection = con
-        'cmd.CommandText = "DELETE FROM stockNew"
-        'cmd.ExecuteNonQuery()
+        cmd.CommandText = "DELETE FROM stockNew"
+        cmd.ExecuteNonQuery()
         cmd.CommandText = "DELETE FROM stockUsed"
         'cmd.CommandText = "DELETE FROM parts"
 
