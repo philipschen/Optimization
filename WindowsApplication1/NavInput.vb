@@ -115,6 +115,7 @@ Public Class NavInput
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Label1.Text = "Uploading..."
+
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
         con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=InventoryManagement;Integrated Security=True"
@@ -151,10 +152,10 @@ Public Class NavInput
         cmd.ExecuteNonQuery()
         Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
         While readerObj.Read
-            For it = 0 To ar1.Count - 1
-                If String.Equals(ar1(it), readerObj("ID1").ToString) Then
+            For it = 0 To ar0.Count - 1
+                If String.Equals(ar0(it), readerObj("ID1").ToString) Then
 
-                    cmd1.CommandText = "UPDATE Nav SET count = " + ar5(it) + " WHERE ID1 = " + readerObj("ID1").ToString
+                    cmd1.CommandText = "UPDATE Nav SET count = " + ar5(it) + " WHERE ID1 = '" + readerObj("ID1").ToString + "'"
                     cmd1.ExecuteNonQuery()
                     ar0.RemoveAt(it)
                     ar1.RemoveAt(it)

@@ -45,9 +45,9 @@ Partial Class NavInput
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(12, 9)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(348, 37)
+        Me.Label2.Size = New System.Drawing.Size(239, 37)
         Me.Label2.TabIndex = 19
-        Me.Label2.Text = "Excel Shop Order Input"
+        Me.Label2.Text = "Excel Nav Input"
         '
         'Button2
         '
