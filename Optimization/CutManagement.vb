@@ -125,7 +125,6 @@ Public Class CutManagement
     '
     ' Page 1
     '
-
     Private Sub comboBox1_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedValueChanged
 
         For it1 = 0 To description.Count - 1
@@ -484,6 +483,7 @@ Public Class CutManagement
         ComboBox5.Items.Clear()
         ComboBox4.Items.Clear()
         ComboBox7.Items.Clear()
+        osetNumber.Clear()
 
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
@@ -687,7 +687,7 @@ Public Class CutManagement
         Dim pString As String = ""
         ' Sets item full description
         If ListBox1.SelectedIndex >= 0 Then
-            pString = uodescription(ListBox1.SelectedIndex) + vbCrLf + "Color: " + uocolor(ListBox1.SelectedIndex) + vbCrLf + " Size: " + uosize(ListBox1.SelectedIndex) + vbCrLf + "Count: " + uocount(ListBox1.SelectedIndex) + vbCrLf + "Shop Number: " + uoshopnumber(ListBox1.SelectedIndex)
+            pString = uodescription(ListBox1.SelectedIndex) + vbCrLf + "Color: " + uocolor(ListBox1.SelectedIndex) + vbCrLf + "Size: " + uosize(ListBox1.SelectedIndex) + vbCrLf + "Count: " + uocount(ListBox1.SelectedIndex) + vbCrLf + "Shop Number: " + uoshopnumber(ListBox1.SelectedIndex)
             RichTextBox4.Text = pString
         End If
     End Sub
@@ -1136,6 +1136,14 @@ Public Class CutManagement
                                 remainder = VX + partLength
                             End If
                         Next ViPart
+                        If usedsize1(usedstock) - remainder > connectionstring.usedsize Then
+                            gfx.DrawString("Save Remainder Piece ", font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                            If over20 Then
+                                pos1 += 10
+                            Else
+                                pos1 += 15
+                            End If
+                        End If
 
                         gfx.DrawImage(image, 50, 160 + pos1 + pos2, 500, 20)
 
@@ -1219,6 +1227,7 @@ Public Class CutManagement
                 excountwork.Add(0)
 
             ElseIf stock_exists Then
+                itWorks = True
                 Console.WriteLine("calculate fail")
                 Dim page As PdfPage = document.AddPage
                 Dim gfx As XGraphics = XGraphics.FromPdfPage(page)
