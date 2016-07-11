@@ -21,18 +21,20 @@ Public Class Form1
 
     Private Sub set_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
-        Dim con As New SqlConnection
-        Dim cmd As New SqlCommand
-
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
-        con.Open()
-        cmd.Connection = con
-        cmd.CommandText = "DELETE FROM stockNew"
-        cmd.ExecuteNonQuery()
-        cmd.CommandText = "DELETE FROM stockUsed"
-        'cmd.CommandText = "DELETE FROM parts"
-
-        cmd.ExecuteNonQuery()
+        Dim result1 As DialogResult = MessageBox.Show("Are you certain you want to delete all tables?", "Confirm Deletion", MessageBoxButtons.YesNo)
+        If result1 = DialogResult.Yes Then
+            Dim con As New SqlConnection
+            Dim cmd As New SqlCommand
+            con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+            con.Open()
+            cmd.Connection = con
+            cmd.CommandText = "DELETE FROM stockNew"
+            cmd.ExecuteNonQuery()
+            cmd.CommandText = "DELETE FROM stockUsed"
+            cmd.ExecuteNonQuery()
+            cmd.CommandText = "DELETE FROM parts"
+            cmd.ExecuteNonQuery()
+        End If
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -52,6 +54,11 @@ Public Class Form1
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Dim excellin1 As UsedStockInputExcel = New UsedStockInputExcel()
+        excellin1.Show()
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Dim excellin1 As NavInput = New NavInput()
         excellin1.Show()
     End Sub
 End Class

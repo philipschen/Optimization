@@ -31,6 +31,9 @@ Partial Class Form1
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -46,7 +49,7 @@ Partial Class Form1
         'BStock
         '
         Me.BStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BStock.Location = New System.Drawing.Point(12, 86)
+        Me.BStock.Location = New System.Drawing.Point(12, 107)
         Me.BStock.Name = "BStock"
         Me.BStock.Size = New System.Drawing.Size(112, 64)
         Me.BStock.TabIndex = 1
@@ -56,7 +59,7 @@ Partial Class Form1
         'BPart
         '
         Me.BPart.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BPart.Location = New System.Drawing.Point(12, 156)
+        Me.BPart.Location = New System.Drawing.Point(12, 177)
         Me.BPart.Name = "BPart"
         Me.BPart.Size = New System.Drawing.Size(112, 64)
         Me.BPart.TabIndex = 2
@@ -66,11 +69,11 @@ Partial Class Form1
         'Button3
         '
         Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(245, 86)
+        Me.Button3.Location = New System.Drawing.Point(248, 177)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(112, 64)
+        Me.Button3.Size = New System.Drawing.Size(100, 64)
         Me.Button3.TabIndex = 3
-        Me.Button3.Text = "[Temp] Clean data"
+        Me.Button3.Text = "Clear All Data"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Label2
@@ -86,9 +89,9 @@ Partial Class Form1
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(135, 86)
+        Me.Button1.Location = New System.Drawing.Point(248, 107)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(100, 39)
+        Me.Button1.Size = New System.Drawing.Size(100, 64)
         Me.Button1.TabIndex = 6
         Me.Button1.Text = "Directly Edit Tables"
         Me.Button1.UseVisualStyleBackColor = True
@@ -96,19 +99,19 @@ Partial Class Form1
         'Button2
         '
         Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(135, 131)
+        Me.Button2.Location = New System.Drawing.Point(6, 81)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(100, 54)
         Me.Button2.TabIndex = 7
-        Me.Button2.Text = "Stock Input Excell"
+        Me.Button2.Text = "New Stock Input"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button4
         '
         Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(12, 226)
+        Me.Button4.Location = New System.Drawing.Point(6, 21)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(112, 64)
+        Me.Button4.Size = New System.Drawing.Size(100, 54)
         Me.Button4.TabIndex = 8
         Me.Button4.Text = "Import Shop Orders"
         Me.Button4.UseVisualStyleBackColor = True
@@ -116,21 +119,43 @@ Partial Class Form1
         'Button5
         '
         Me.Button5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button5.Location = New System.Drawing.Point(135, 191)
+        Me.Button5.Location = New System.Drawing.Point(6, 141)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(100, 54)
         Me.Button5.TabIndex = 9
-        Me.Button5.Text = "Used Stock Input Excell"
+        Me.Button5.Text = "Used Stock Input"
         Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        Me.Button6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button6.Location = New System.Drawing.Point(6, 201)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(100, 54)
+        Me.Button6.TabIndex = 10
+        Me.Button6.Text = "Nav Input"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.Button2)
+        Me.GroupBox1.Controls.Add(Me.Button6)
+        Me.GroupBox1.Controls.Add(Me.Button4)
+        Me.GroupBox1.Controls.Add(Me.Button5)
+        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(130, 86)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(112, 268)
+        Me.GroupBox1.TabIndex = 11
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Excel Inputs"
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(384, 315)
-        Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.Button2)
+        Me.ClientSize = New System.Drawing.Size(483, 397)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Button3)
@@ -139,6 +164,7 @@ Partial Class Form1
         Me.Controls.Add(Me.Label1)
         Me.Name = "Form1"
         Me.Text = "Form1"
+        Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -153,4 +179,6 @@ Partial Class Form1
     Friend WithEvents Button2 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
+    Friend WithEvents Button6 As Button
+    Friend WithEvents GroupBox1 As GroupBox
 End Class

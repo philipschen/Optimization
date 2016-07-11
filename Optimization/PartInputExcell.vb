@@ -35,13 +35,16 @@ Public Class PartInputExcell
 
             Dim internalID As ArrayList = New ArrayList
             Dim usedID As ArrayList = New ArrayList
-
-            cmd.CommandText = "SELECT internalID  FROM parts"
+            Dim shopnumbers As ArrayList = New ArrayList
+            cmd.CommandText = "SELECT internalID, shopNumber  FROM parts"
             cmd.ExecuteNonQuery()
             Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
             While readerObj.Read
                 Dim temp1 As Integer = Convert.ToInt64(readerObj("internalID").ToString)
                 internalID.Add(temp1)
+                If Not shopnumbers.Contains(readerObj("shopNumber").ToString) Then
+                    shopnumbers.Add(readerObj("shopNumber").ToString)
+                End If
             End While
 
             Dim color1 As String = ""
@@ -58,6 +61,8 @@ Public Class PartInputExcell
                 color1 = ""
             End If
 
+
+            Dim alreadyentered As Boolean = False
             For it = 0 To shXL.UsedRange.Rows.Count - 1
                 Dim temp As String = Convert.ToString(it)
                 Dim temp1 As String = Convert.ToString(shXL.UsedRange.Rows.Count - 1)
@@ -105,23 +110,35 @@ Public Class PartInputExcell
                 DataGridView1.Rows(it).Cells(4).Value = shXL.Cells(2 + it, 10).Value
                 DataGridView1.Rows(it).Cells(5).Value = inputinternal
                 DataGridView1.Rows(it).Cells(6).Value = shXL.Cells(2 + it, 1).Value
+                If shopnumbers.Contains(DataGridView1.Rows(it).Cells(6).Value) Then
+                    Dim result1 As DialogResult = MessageBox.Show("This Shop Number BOM has already been entered do you want to Continue?", "ShopNumber Already Entered", MessageBoxButtons.YesNo)
+                    If result1 = DialogResult.Yes Then
+                        shopnumbers.Remove(DataGridView1.Rows(it).Cells(6).Value)
+                    ElseIf result1 = DialogResult.No Then
+                        alreadyentered = True
+                        Exit For
+                    End If
+                End If
                 DataGridView1.Rows(it).Cells(7).Value = cell3
                 DataGridView1.Rows(it).Cells(8).Value = cell4
                 DataGridView1.Rows(it).Cells(9).Value = ""
                 DataGridView1.Rows(it).Cells(10).Value = it
                 DataGridView1.Rows(it).Cells(11).Value = ""
-
-
             Next
-            Label1.Text = "Loading Complete"
-            DataGridView1.AutoResizeColumns()
-            readerObj.Close()
+            If alreadyentered Then
+                Me.Close()
+            Else
 
-            shXL = Nothing
-            wbXl = Nothing
-            appXL.Quit()
-            appXL = Nothing
-            DataGridView1.Rows(0).Cells(0).Selected = True
+                Label1.Text = "Loading Complete"
+                DataGridView1.AutoResizeColumns()
+                readerObj.Close()
+
+                shXL = Nothing
+                wbXl = Nothing
+                appXL.Quit()
+                appXL = Nothing
+                DataGridView1.Rows(0).Cells(0).Selected = True
+            End If
         End If
 
     End Sub
