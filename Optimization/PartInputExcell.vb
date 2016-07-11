@@ -146,8 +146,7 @@ Public Class PartInputExcell
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Label1.Text = "Uploading..."
-        'DataGridView1.ClearSelection()
-        'DataGridView1.Rows(0).Cells(0).Selected = True
+
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
         con.ConnectionString = connectionstring.connect1

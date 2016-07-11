@@ -29,7 +29,6 @@ Public Class StockInputExcell
             Dim shXL As Excel.Worksheet
             ' Start Excel and get Application object.
             appXL = CreateObject("Excel.Application")
-            'appXL.Visible = True
             ' Add a new workbook.
             wbXl = appXL.Workbooks.Open(strFileName)
             shXL = wbXl.ActiveSheet
