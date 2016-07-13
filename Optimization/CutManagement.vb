@@ -989,15 +989,25 @@ Public Class CutManagement
                     '
                     ' Add Page
                     '
+                    Dim over20 As Boolean = False
                     Dim page As PdfPage
                     Dim gfx As XGraphics
                     partCount = Calculator.GetPartCountOnStock(iStock)
-                    If partCount > 10 Then
+                    If partCount > 20 Then
+                        page = document.AddPage
+                        gfx = XGraphics.FromPdfPage(page)
+                        over20 = True
+                        font = New XFont("Verdana", 11, XFontStyle.Regular)
+                        sectioncount = 0
+
+                    ElseIf partCount > 12 Then
                         page = document.AddPage
                         gfx = XGraphics.FromPdfPage(page)
                         pos2 = 0
                         sectioncount = 0
+                        font = New XFont("Verdana", 12, XFontStyle.Regular)
                     Else
+                        font = New XFont("Verdana", 12, XFontStyle.Regular)
                         If sectioncount = 0 Then
                             page = document.AddPage
                             gfx = XGraphics.FromPdfPage(page)
@@ -1052,14 +1062,14 @@ Public Class CutManagement
 
                         'ListBox3.Items.Add(cutId1)
 
-                        gfx.DrawString("Page " + pageNo, font, XBrushes.Black, New XRect(leftanchor, 50 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString("Page " + pageNo, font2, XBrushes.Black, New XRect(leftanchor, 50 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                         gfx.DrawString(descriptionString, font3, XBrushes.Black, New XRect(leftanchor, 65 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                         gfx.DrawString(descriptionString2, font2, XBrushes.Black, New XRect(leftanchor, 80 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                         gfx.DrawString(descriptionString3, font2, XBrushes.Black, New XRect(leftanchor, 95 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                         gfx.DrawString(descriptionString4, font2, XBrushes.Black, New XRect(leftanchor, 110 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                         gfx.DrawString(descriptionstring5, font3, XBrushes.Black, New XRect(leftanchor + 360, 50 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                         gfx.DrawString(descriptionstring6, font3, XBrushes.Black, New XRect(leftanchor + 360, 65 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                        gfx.DrawString(descriptionstring7, font, XBrushes.Black, New XRect(leftanchor + 360, 80 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionstring7, font2, XBrushes.Black, New XRect(leftanchor + 360, 80 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
 
                         Console.WriteLine("Layout={0}:  Length={1}", iStock, StockLength)
 
@@ -1082,13 +1092,17 @@ Public Class CutManagement
                             Dim vxt As String = Convert.ToString(VX + partLength)
                             Dim vpartLength As String = Convert.ToString(partLength)
                             gfx.DrawString("Cut position= " + vxt + " Length= " + vpartLength, font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                            pos1 += 15
+                            If over20 Then
+                                pos1 += 11
+                            Else
+                                pos1 += 15
+                            End If
                             If VX + partLength > remainder Then
                                 remainder = VX + partLength
                             End If
                         Next ViPart
 
-                        gfx.DrawImage(image, 50, 170 + pos1 + pos2, 500, 20)
+                        gfx.DrawImage(image, 50, 160 + pos1 + pos2, 500, 20)
 
 
 
@@ -1153,13 +1167,13 @@ Public Class CutManagement
             gfx.DrawString("Total Part List", font3, XBrushes.Black, New XRect(50, 50, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
             For it = 0 To partlistd.Count - 1
                 If excountwork(it) = 0 Then
-                    gfx.DrawString((it + 1).ToString + ". New Stock: " + excountlist(it).ToString + " " + "Used Stock: " + excountlistu(it).ToString + " " + partlistd(it), font, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                    gfx.DrawString((it + 1).ToString + ". New Stock: " + excountlist(it).ToString + " " + "Used Stock: " + excountlistu(it).ToString + " " + partlistd(it), font2, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                     pos1 += 15
                 ElseIf excountwork(it) = 1 Then
-                    gfx.DrawString((it + 1).ToString + ". Not Cut, Partcount: " + excountlist(it).ToString + "  " + partlistd(it), font, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                    gfx.DrawString((it + 1).ToString + ". Not Cut, Partcount: " + excountlist(it).ToString + "  " + partlistd(it), font2, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                     pos1 += 15
                 ElseIf excountwork(it) = 2 Then
-                    gfx.DrawString((it + 1).ToString + ". Not Enough Stock, current Stock: " + excountlist(it).ToString + "  " + partlistd(it), font, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                    gfx.DrawString((it + 1).ToString + ". Not Enough Stock, current Stock: " + excountlist(it).ToString + "  " + partlistd(it), font2, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                     pos1 += 15
                 End If
 
