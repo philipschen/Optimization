@@ -94,11 +94,14 @@ Partial Class Extrusions
         Me.TabPage2.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.OptimizationDatabaseDataSet = New OptimizationDatabaseDataSet()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.StockNewBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.OptimizationDatabaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
+        Me.OptimizationDatabaseDataSet3 = New OptimizationDatabaseDataSet3()
+
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.OptimizationDatabaseDataSet3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.StockUsedBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -663,6 +666,7 @@ Partial Class Extrusions
         '
         'StockNewTableAdapter
         '
+        Me.StockNewTableAdapter = New OptimizationDatabaseDataSetTableAdapters.stockNewTableAdapter()
         Me.StockNewTableAdapter.ClearBeforeFill = True
         '
         'DataGridView2
@@ -754,6 +758,7 @@ Partial Class Extrusions
         '
         'StockUsedTableAdapter
         '
+        Me.StockUsedTableAdapter = New OptimizationDatabaseDataSet3TableAdapters.stockUsedTableAdapter()
         Me.StockUsedTableAdapter.ClearBeforeFill = True
         '
         'Extrusions

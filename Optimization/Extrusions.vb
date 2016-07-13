@@ -12,7 +12,6 @@ Public Class Extrusions
     Dim internalID As ArrayList = New ArrayList
     Dim sawnumber As ArrayList = New ArrayList
     Dim Used As ArrayList = New ArrayList
-
     Dim oUsed As ArrayList = New ArrayList
 
     Private Sub Extrusions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
