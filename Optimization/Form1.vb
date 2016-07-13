@@ -67,5 +67,17 @@ Public Class Form1
         Dim excellin1 As NavInput = New NavInput()
         excellin1.Show()
     End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Dim con As New SqlConnection
+        Dim cmd As New SqlCommand
+        con.ConnectionString = connectionstring.connect1
+        con.Open()
+        cmd.Connection = con
+
+        cmd.CommandText = "DELETE FROM stockUsed"
+        cmd.ExecuteNonQuery()
+
+    End Sub
 End Class
 

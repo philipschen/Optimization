@@ -160,7 +160,7 @@ Public Class CutManagement
                 ointernalID.Add(readerObj1("internalID").ToString)
                 oshopnumber.Add(readerObj1("shopNumber").ToString)
                 oitemNumber.Add(readerObj1("itemNumber").ToString)
-                oitemQuantity.Add(readerObj1("itemQuantity").ToString)
+                oitemQuantity.Add(readerObj1("itemQuantity"))
                 oselect.Add(it)
                 olistorderline.Add(readerObj1("context1").ToString)
 
@@ -476,9 +476,13 @@ Public Class CutManagement
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
-        Dim uocountdown As ArrayList = New ArrayList
+        Dim uocountdownrep As ArrayList = New ArrayList
         For it = 0 To uocount.Count - 1
-            uocountdown.Add(uoitemQuantity(it))
+            uocountdownrep.Add(uocount(it) / uoitemQuantity(it))
+        Next
+        Dim uocountdown As ArrayList = New ArrayList
+        For it = 0 To uoitemQuantity.Count - 1
+            uocountdown.Add(1)
         Next
         '
         ' lists of nonduplicate, combined parts
@@ -895,7 +899,7 @@ Public Class CutManagement
                         itemcount2 += VStockCount
                     End If
 
-                    Console.WriteLine("Layout={0}:  Start Stock={1};  Count of Stock={2}", iLayout, StockIndex, VStockCount)
+                    'Console.WriteLine("Layout={0}:  Start Stock={1};  Count of Stock={2}", iLayout, StockIndex, VStockCount)
 
                     '
                     ' Determines if 1 or 2 layouts per page
@@ -986,25 +990,80 @@ Public Class CutManagement
                             ' Output the part information
                             Console.WriteLine("Part= {0}:  X={1}  Length={2}", partIndex, VX, partLength)
 
-
                             '
-                            ' Finds different sizes to print numbers
+                            ' Prints parts and positions
                             '
-                            If Not lengthlist.Contains(partLength) Then
-                                lengthlist.Add(partLength)
-                            End If
-
                             gfx.DrawString("Cut position= " + VX.ToString + " Length= " + partLength.ToString, font, XBrushes.Black, New XRect(leftanchor, 135 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                            '
+                            ' Prints corresponding Quote window line
+                            '
+                            Dim correspondingnum As String = ""
+                            Dim tempstring As ArrayList = New ArrayList
+                            Dim layoutit As Integer = VStockCount
+                            Dim remove1 As Integer = 0
+                            Dim remove2 As Integer = 0
 
-                            gfx.DrawString("Format Output", font2, XBrushes.Black, New XRect(leftanchor + 250, 135 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
 
-                            If over20 Then
-                                pos1 += 10
-                            Else
-                                pos1 += 14
-                            End If
+                            For it1 = 0 To uosize.Count - 1
+                                If layoutit > 0 Then
+                                    If partLength = uosize(it1) AndAlso String.Equals(partlistid(it), uopartID(it1)) Then
+                                        For it2 = uocountdown(it1) To uoitemQuantity(it1)
+                                            If layoutit > 0 Then
+                                                Dim remove3 As Integer = 0
+
+                                                For it3 = 1 To uocountdownrep(it1)
+                                                    If layoutit > 0 Then
+                                                        tempstring.Add(uolistorderline(it1) + "-" + uoitemNumber(it1).ToString + "-" + it2.ToString)
+                                                        layoutit -= 1
+                                                        remove2 += 1
+                                                        remove3 += 1
+                                                    End If
+                                                    If layoutit = 0 Then
+                                                    End If
+                                                Next
+                                                'uocountdownrep(it1) -= remove3
+                                                'remove3 = 0
+                                            End If
+                                        Next
+                                        uocountdown(it1) += remove2
+                                        remove2 = 0
+                                    End If
+
+                                End If
+                            Next
 
 
+                            Dim count1 As Integer = 1
+                            Dim line1 As Boolean = True
+                            Dim line2 As Boolean = False
+                            For it1 = 0 To tempstring.Count - 1
+                                If count1 < 3 Then
+                                    correspondingnum = correspondingnum + tempstring(it1) + " "
+                                    count1 += 1
+                                Else
+                                    correspondingnum = ""
+                                    correspondingnum = tempstring(it1) + " "
+                                    count1 = 0
+                                    line2 = True
+                                End If
+
+                                If line1 AndAlso (count1 = 3 Or it1 = tempstring.Count - 1) Then
+                                    gfx.DrawString("Orders: " + correspondingnum, font, XBrushes.Black, New XRect(leftanchor + 260, 135 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                                    If over20 Then
+                                        pos1 += 10
+                                    Else
+                                        pos1 += 14
+                                    End If
+                                    line1 = False
+                                ElseIf line2 AndAlso (count1 = 4 Or it1 = tempstring.Count - 1) Then
+                                    gfx.DrawString("  " + correspondingnum, font, XBrushes.Black, New XRect(leftanchor, 135 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                                    If over20 Then
+                                        pos1 += 10
+                                    Else
+                                        pos1 += 14
+                                    End If
+                                End If
+                            Next
 
                             If VX + partLength > remainder Then
                                 remainder = VX + partLength
@@ -1024,48 +1083,50 @@ Public Class CutManagement
                         '
                         ' Prints out which quote and line number the part corresponds to
                         '
-                        For it2 = 0 To lengthlist.Count - 1
-                            Dim correspondingnum As String = "Orders: "
-                            Dim tempstring As ArrayList = New ArrayList
-                            For it1 = 0 To uosize.Count - 1
-                                If lengthlist(it2) = uosize(it1) AndAlso Not tempstring.Contains(uolistorderline(it1) + "-" + uoitemNumber(it1).ToString + " ") Then
-                                    tempstring.Add(uolistorderline(it1) + "-" + uoitemNumber(it1).ToString + "  ")
-                                End If
-                            Next
-                            Dim count1 As Integer = 1
-                            Dim line1 As Boolean = True
-                            Dim line2 As Boolean = False
-                            For it1 = 0 To tempstring.Count - 1
-                                If count1 < 4 Then
-                                    correspondingnum = correspondingnum + tempstring(it1)
-                                    count1 += 1
-                                Else
-                                    correspondingnum = ""
-                                    correspondingnum = tempstring(it1)
-                                    count1 = 0
-                                    line2 = True
-                                End If
+                        'For it2 = 0 To lengthlist.Count - 1
+                        '    Dim correspondingnum As String = "Orders: "
+                        '    Dim tempstring As ArrayList = New ArrayList
+                        '    For it1 = 0 To uosize.Count - 1
+                        '        If lengthlist(it2) = uosize(it1) AndAlso Not tempstring.Contains(uolistorderline(it1) + "-" + uoitemNumber(it1).ToString + " ") Then
+                        '            For it3 = 0 To uocount(it1) / uoitemQuantity(it1)
+                        '                tempstring.Add(uolistorderline(it1) + "-" + uoitemNumber(it1).ToString + "  " + uocountdown(it1))
+                        '                uocountdown(it1) -= 1
+                        '            Next
+                        '        End If
+                        '    Next
+                        '    Dim count1 As Integer = 1
+                        '    Dim line1 As Boolean = True
+                        '    Dim line2 As Boolean = False
+                        '    For it1 = 0 To tempstring.Count - 1
+                        '        If count1 < 4 Then
+                        '            correspondingnum = correspondingnum + tempstring(it1)
+                        '            count1 += 1
+                        '        Else
+                        '            correspondingnum = ""
+                        '            correspondingnum = tempstring(it1)
+                        '            count1 = 0
+                        '            line2 = True
+                        '        End If
 
-                                If line1 AndAlso (count1 = 4 Or it1 = tempstring.Count - 1) Then
-                                    gfx.DrawString("Size: " + lengthlist(it2).ToString + " " + correspondingnum, font, XBrushes.Black, New XRect(leftanchor, 170 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                                    If over20 Then
-                                        pos1 += 10
-                                    Else
-                                        pos1 += 14
-                                    End If
-                                    line1 = False
-                                ElseIf line2 AndAlso (count1 = 4 Or it1 = tempstring.Count - 1) Then
-                                    gfx.DrawString("  " + correspondingnum, font, XBrushes.Black, New XRect(leftanchor, 170 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                                    If over20 Then
-                                        pos1 += 10
-                                    Else
-                                        pos1 += 14
-                                    End If
-                                End If
-                            Next
+                        '        If line1 AndAlso (count1 = 4 Or it1 = tempstring.Count - 1) Then
+                        '            gfx.DrawString("Size: " + lengthlist(it2).ToString + " " + correspondingnum, font, XBrushes.Black, New XRect(leftanchor, 170 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        '            If over20 Then
+                        '                pos1 += 10
+                        '            Else
+                        '                pos1 += 14
+                        '            End If
+                        '            line1 = False
+                        '        ElseIf line2 AndAlso (count1 = 4 Or it1 = tempstring.Count - 1) Then
+                        '            gfx.DrawString("  " + correspondingnum, font, XBrushes.Black, New XRect(leftanchor, 170 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        '            If over20 Then
+                        '                pos1 += 10
+                        '            Else
+                        '                pos1 += 14
+                        '            End If
+                        '        End If
+                        '    Next
+                        'Next
 
-
-                        Next
                         '
                         ' Saves list of used stock that was actually used
                         '
