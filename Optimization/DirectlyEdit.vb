@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports Excel = Microsoft.Office.Interop.Excel
 Public Class DirectlyEdit
+    Dim connectionstring As Class1 = New Class1
     Private Sub DirectlyEdit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TODO: This line of code loads data into the 'OptimizationDatabaseDataSet3.stockUsed' table. You can move, or remove it, as needed.
         Me.StockUsedTableAdapter.Fill(Me.OptimizationDatabaseDataSet3.stockUsed)
@@ -21,7 +22,7 @@ Public Class DirectlyEdit
     Private Sub Button1_Click(sender As Object, e As EventArgs)
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
 
@@ -38,7 +39,7 @@ Public Class DirectlyEdit
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
 
@@ -55,7 +56,7 @@ Public Class DirectlyEdit
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
 
@@ -72,7 +73,7 @@ Public Class DirectlyEdit
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
         cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, count, internalID, context1, context3 FROM stockNew"
@@ -144,7 +145,7 @@ Public Class DirectlyEdit
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
         cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, count, internalID, location, context1, FROM stockUsed"
