@@ -2,6 +2,7 @@
 Imports PdfSharp.Drawing
 Imports PdfSharp.Pdf
 Public Class CutManagement
+    Dim connectionstring As Class1 = New Class1
     ' page 1
     ' all from Newstock table
     Dim stockID1 As ArrayList = New ArrayList
@@ -71,7 +72,7 @@ Public Class CutManagement
 
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
 
@@ -217,7 +218,7 @@ Public Class CutManagement
         Calculator = New CutGLib.CutEngine
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
 
@@ -471,7 +472,7 @@ Public Class CutManagement
         ListBox3.Items.Clear()
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
         cmd.CommandText = "SELECT partID, description, color, size, count, internalID, shopNumber, itemNumber, itemQuantity FROM parts ORDER BY itemNumber, itemQuantity, description"
@@ -817,7 +818,7 @@ Public Class CutManagement
             Calculator = New CutGLib.CutEngine
             Dim con As New SqlConnection
             Dim cmd As New SqlCommand
-            con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+            con.ConnectionString = connectionstring.connect1
             con.Open()
             cmd.Connection = con
 

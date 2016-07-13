@@ -1,13 +1,14 @@
 ﻿Imports Excel = Microsoft.Office.Interop.Excel
 Imports System.Data.SqlClient
 Public Class NavInput
+    Dim connectionstring As Class1 = New Class1
     Private Sub this_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = "Easy Cut V1.0"
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
 
@@ -124,12 +125,12 @@ Public Class NavInput
         Label1.Text = "Uploading..."
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
         Dim con1 As New SqlConnection
         Dim cmd1 As New SqlCommand
-        con1.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con1.ConnectionString = connectionstring.connect1
         con1.Open()
         cmd1.Connection = con1
         Dim ar0 As ArrayList = New ArrayList

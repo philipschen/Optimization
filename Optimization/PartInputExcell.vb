@@ -1,13 +1,14 @@
 ﻿Imports Excel = Microsoft.Office.Interop.Excel
 Imports System.Data.SqlClient
 Public Class PartInputExcell
+    Dim connectionstring As Class1 = New Class1
     Private Sub this_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = "Easy Cut V1.0"
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
 
@@ -149,7 +150,7 @@ Public Class PartInputExcell
         'DataGridView1.Rows(0).Cells(0).Selected = True
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
 

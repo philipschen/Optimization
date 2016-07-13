@@ -2,7 +2,7 @@
 Imports System.Data.SqlClient
 
 Public Class Extrusions
-
+    Dim connectionstring As Class1 = New Class1
     Dim stockID1 As ArrayList = New ArrayList
     Dim stockID2 As ArrayList = New ArrayList
     Dim stockID3 As ArrayList = New ArrayList
@@ -40,7 +40,7 @@ Public Class Extrusions
 
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
 
@@ -176,7 +176,7 @@ Public Class Extrusions
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
 
@@ -213,7 +213,7 @@ Public Class Extrusions
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
 
@@ -246,7 +246,7 @@ Public Class Extrusions
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
         cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, count, internalID, context1, context3 FROM stockNew"
@@ -400,12 +400,12 @@ Public Class Extrusions
 
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
         Dim con1 As New SqlConnection
         Dim cmd1 As New SqlCommand
-        con1.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con1.ConnectionString = connectionstring.connect1
         con1.Open()
         cmd1.Connection = con1
 
@@ -499,7 +499,7 @@ Public Class Extrusions
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
 
@@ -531,7 +531,7 @@ Public Class Extrusions
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+        con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
         cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, count, internalID, location, context1 FROM stockUsed"

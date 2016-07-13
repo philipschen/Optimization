@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Public Class Form1
+    Dim connectionstring As Class1 = New Class1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set the caption bar text of the form.  
         Me.Text = "Easy Cut V1.0"
@@ -25,7 +26,7 @@ Public Class Form1
         If result1 = DialogResult.Yes Then
             Dim con As New SqlConnection
             Dim cmd As New SqlCommand
-            con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrated Security=True"
+            con.ConnectionString = connectionstring.connect1
             con.Open()
             cmd.Connection = con
             cmd.CommandText = "DELETE FROM stockNew"

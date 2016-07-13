@@ -114,6 +114,7 @@
     <Compile Include="ChooseStock.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Class1.vb" />
     <Compile Include="CutManagement.Designer.vb">
       <DependentUpon>CutManagement.vb</DependentUpon>
     </Compile>
@@ -195,6 +196,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OptimizationDatabaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="OptimizationDatabaseDataSet.vb">
+      <DependentUpon>OptimizationDatabaseDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="OptimizationDatabaseDataSet1.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -203,6 +207,9 @@
     <Compile Include="OptimizationDatabaseDataSet3.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>OptimizationDatabaseDataSet3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="OptimizationDatabaseDataSet3.vb">
       <DependentUpon>OptimizationDatabaseDataSet3.xsd</DependentUpon>
     </Compile>
     <Compile Include="partColor.Designer.vb">
