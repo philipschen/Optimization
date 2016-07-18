@@ -15,8 +15,8 @@ Public Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        'Dim excellin1 As StockInputExcell = New StockInputExcell()
-        'excellin1.Show()
+        Dim excellin1 As BomInput = New BomInput()
+        excellin1.Show()
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
