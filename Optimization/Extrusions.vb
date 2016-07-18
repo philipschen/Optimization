@@ -585,7 +585,7 @@ Public Class Extrusions
 
         End While
         readerObj.Close()
-        ' AutoFit columns A:D.
+        ' AutoFit columns
         raXL = shXL.Range("A1", "I1")
         raXL.EntireColumn.AutoFit()
         ' Make sure Excel is visible and give the user control

@@ -182,7 +182,7 @@ Public Class BomInput
                     If ftotalsize(it) = 0 Or Description(it).Contains("GLASS") Then
                         amount.Add(amountmade * fpartcount(it))
                     ElseIf String.Equals(uom(it), "BAR") Then
-                        amount.Add(Math.Round(amountmade * ftotalsize(it) / 180) + 1)
+                        amount.Add(Math.Round(amountmade * ftotalsize(it) / 150) + 1)
                     Else
                         amount.Add(Math.Round(amountmade * ftotalsize(it)))
                     End If
