@@ -7,6 +7,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Optimization", "Optimizatio
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WindowsApplication1", "WindowsApplication1\WindowsApplication1.vbproj", "{87F7A2DB-E046-49C9-BAA8-D7DD8FF8A0C7}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MobileInventory", "MobileInventory\MobileInventory.vbproj", "{C6A72A7C-39CC-4E8A-A3B8-3333761E1179}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{87F7A2DB-E046-49C9-BAA8-D7DD8FF8A0C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87F7A2DB-E046-49C9-BAA8-D7DD8FF8A0C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87F7A2DB-E046-49C9-BAA8-D7DD8FF8A0C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6A72A7C-39CC-4E8A-A3B8-3333761E1179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6A72A7C-39CC-4E8A-A3B8-3333761E1179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6A72A7C-39CC-4E8A-A3B8-3333761E1179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6A72A7C-39CC-4E8A-A3B8-3333761E1179}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

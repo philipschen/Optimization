@@ -127,6 +127,10 @@ Public Class NavInput
         con1.ConnectionString = connectionstring.connect1
         con1.Open()
         cmd1.Connection = con1
+
+        cmd.CommandText = "DELETE FROM Nav"
+        cmd.ExecuteNonQuery()
+
         Dim ar0 As ArrayList = New ArrayList
         Dim ar1 As ArrayList = New ArrayList
         Dim ar2 As ArrayList = New ArrayList

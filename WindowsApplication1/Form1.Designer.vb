@@ -29,6 +29,7 @@ Partial Class Form1
         '
         'Button2
         '
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.Location = New System.Drawing.Point(12, 67)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(88, 49)
@@ -38,6 +39,7 @@ Partial Class Form1
         '
         'Button1
         '
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.Location = New System.Drawing.Point(12, 12)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(88, 49)
@@ -47,11 +49,12 @@ Partial Class Form1
         '
         'Button3
         '
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button3.Location = New System.Drawing.Point(106, 12)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(88, 49)
         Me.Button3.TabIndex = 4
-        Me.Button3.Text = "clear"
+        Me.Button3.Text = "Clear"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Form1
