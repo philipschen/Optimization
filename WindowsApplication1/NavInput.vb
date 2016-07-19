@@ -4,7 +4,7 @@ Imports System.Data.SqlClient
 Public Class NavInput
     Dim connectionstring As Class1 = New Class1
     Private Sub this_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = "Easy Cut V1.0"
+        Me.Text = connectionstring.version
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim con As New SqlConnection

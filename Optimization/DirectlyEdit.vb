@@ -148,7 +148,7 @@ Public Class DirectlyEdit
         con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
-        cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, count, internalID, location, context1, FROM stockUsed"
+        cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, count, internalID, location, context1 FROM stockUsed"
         cmd.ExecuteNonQuery()
 
         Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
@@ -200,7 +200,7 @@ Public Class DirectlyEdit
 
         End While
         readerObj.Close()
-        ' AutoFit columns A:D.
+        ' AutoFit columns
         raXL = shXL.Range("A1", "I1")
         raXL.EntireColumn.AutoFit()
         ' Make sure Excel is visible and give the user control

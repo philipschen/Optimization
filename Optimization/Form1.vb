@@ -29,12 +29,12 @@ Public Class Form1
             con.ConnectionString = connectionstring.connect1
             con.Open()
             cmd.Connection = con
-            'cmd.CommandText = "DELETE FROM stockNew"
-            'cmd.ExecuteNonQuery()
+            cmd.CommandText = "DELETE FROM stockNew"
+            cmd.ExecuteNonQuery()
             cmd.CommandText = "DELETE FROM stockUsed"
             cmd.ExecuteNonQuery()
-            'cmd.CommandText = "DELETE FROM parts"
-            'cmd.ExecuteNonQuery()
+            cmd.CommandText = "DELETE FROM parts"
+            cmd.ExecuteNonQuery()
         End If
     End Sub
 

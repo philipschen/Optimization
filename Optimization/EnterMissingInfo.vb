@@ -53,18 +53,32 @@
         End If
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        If ListBox2.SelectedValue >= 0 Then
+
+        If ListBox2.SelectedValue >= 0 And ListBox2.SelectedItem <> "OTHER" Then
             If ListBox1.SelectedIndex >= 0 And ListBox1.SelectedItem <> "DON'T KNOW" Then
                 saw = ListBox1.Text
             Else
                 saw = ""
             End If
 
-            If ListBox2.SelectedIndex >= 0 And ListBox2.SelectedItem <> "OTHER" Then
-                size1 = ListBox2.Text
+            size1 = ListBox2.Text
+
+            If ListBox3.SelectedIndex >= 0 And ListBox1.SelectedItem <> "DON'T KNOW" Then
+                color = ListBox3.Text
             Else
-                size1 = TextBox3.Text
+                color = ""
             End If
+
+            Me.DialogResult = DialogResult.OK
+            Me.Close()
+        ElseIf ListBox2.SelectedValue >= 0 And ListBox2.SelectedItem = "OTHER" And TextBox3.Text IsNot Nothing Then
+            If ListBox1.SelectedIndex >= 0 And ListBox1.SelectedItem <> "DON'T KNOW" Then
+                saw = ListBox1.Text
+            Else
+                saw = ""
+            End If
+
+            size1 = TextBox3.Text
 
             If ListBox3.SelectedIndex >= 0 And ListBox1.SelectedItem <> "DON'T KNOW" Then
                 color = ListBox3.Text

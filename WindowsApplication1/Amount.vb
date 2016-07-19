@@ -1,8 +1,9 @@
 ﻿Public Class Amount
     Public Property amount As Integer
+    Dim connectionstring As Class1 = New Class1
 
     Private Sub chooseStock_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = "Easy Cut V1.0"
+        Me.Text = connectionstring.version
 
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

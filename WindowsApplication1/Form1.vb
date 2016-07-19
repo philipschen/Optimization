@@ -3,7 +3,7 @@ Public Class Form1
     Dim connectionstring As Class1 = New Class1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set the caption bar text of the form.  
-        Me.Text = "Easy Cut V1.0"
+        Me.Text = connectionstring.version
         '  PictureBox1.Image = Image.FromFile("test.png")
         '  PictureBox1.SizeMode = PictureBoxSizeMode.AutoSize
 
