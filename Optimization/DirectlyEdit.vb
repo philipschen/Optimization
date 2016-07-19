@@ -26,7 +26,7 @@ Public Class DirectlyEdit
         con.Open()
         cmd.Connection = con
 
-        cmd.CommandText = "DELETE FROM stockNew"
+        cmd.CommandText = connectionstring.version
         cmd.ExecuteNonQuery()
 
         For it = 0 To DataGridView1.RowCount - 1

@@ -3,7 +3,7 @@ Public Class NewExtrusions
     Dim connectionstring As Class1 = New Class1
     Private Sub NewExtrusions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set the caption bar text of the form.  
-        Me.Text = "Easy Cut V1.0"
+        Me.Text = connectionstring.version
 
         ListBox1.Items.Add("Bronze")
         ListBox1.Items.Add("White")

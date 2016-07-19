@@ -1,4 +1,5 @@
 ﻿Public Class ChooseStock
+    Dim connectionstring As Class1 = New Class1
     Public Property des As ArrayList
     Public Property id As ArrayList
     Public Property color As ArrayList
@@ -6,7 +7,7 @@
     Public Property saw As ArrayList
 
     Private Sub ChooseStock_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = "Easy Cut V1.0"
+        Me.Text = connectionstring.version
         Me.ControlBox = False
         AcceptButton = Button1
         CancelButton = Button2

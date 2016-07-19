@@ -66,7 +66,7 @@ Public Class CutManagement
 
     Private Sub CutManagement_load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set the caption bar text of the form.  
-        Me.Text = "Easy Cut V1.0"
+        Me.Text = connectionstring.version
         ' Removes single cuts tab
         TabControl1.TabPages.RemoveAt(0)
 
@@ -975,7 +975,7 @@ Public Class CutManagement
                 '
                 ' Printing output
                 '
-                Dim remainder As Double = 0
+
                 Dim StockIndex, VStockCount, ViPart, iLayout, partCount, partIndex, tmp, iStock, sectioncount As Integer
                 Dim partLength, VX, StockLength As Double
                 Dim StockActive As Boolean
@@ -989,6 +989,7 @@ Public Class CutManagement
                 Dim itemcount As Integer = 0
                 Dim itemcount2 As Integer = 0
                 For iLayout = 0 To Calculator.LayoutCount - 1
+                    Dim remainder As Double = 0
                     Calculator.GetLayoutInfo(iLayout, StockIndex, VStockCount)
                     ' StockIndex is global index of the first stock used in the layout iLayout
                     ' VStockCount is quantity of stocks of the same length as StockIndex us                                        If VStockCount > 0 Then
@@ -1122,12 +1123,19 @@ Public Class CutManagement
                             Dim it1 As Integer
                             Dim boolinternalID As Boolean = True
                             Dim inputusedID As Integer
+                            Dim stockid2 As ArrayList = New ArrayList
+                            Dim size As ArrayList = New ArrayList
+                            Dim count As ArrayList = New ArrayList
+                            Dim boolupdatetable As Boolean = False
 
-                            cmd.CommandText = "SELECT context2  FROM stockUsed"
+                            cmd.CommandText = "SELECT stockID2, size, count, context2  FROM stockUsed"
                             cmd.ExecuteNonQuery()
 
                             readerObj = cmd.ExecuteReader
                             While readerObj.Read
+                                stockid2.Add(readerObj("stockID2").ToString)
+                                size.Add(readerObj("size").ToString)
+                                count.Add(readerObj("count"))
                                 Dim temp4 As Integer = Convert.ToInt64(readerObj("context2").ToString)
                                 internalID.Add(temp4)
                             End While
@@ -1140,11 +1148,25 @@ Public Class CutManagement
                                 End If
                             Next
 
-                            Dim temp3 = Convert.ToString(inputusedID)
+                            Dim temp3 As String = Convert.ToString(inputusedID)
                             Dim temp2 As String = Convert.ToString(usedsize1(usedstock) - remainder)
-                            cmd.CommandText = "INSERT INTO stockUsed VALUES('" + usedstockID1(usedstock) + "', '" + usedstockID2(usedstock) + "' , '" + usedstockID3(usedstock) + "', '" + useddescription(usedstock) + "' , '" + usedcolor(usedstock) + "', " + temp2 + ", " + temp + ", " + usedinternalID(usedstock) + " , '' , '" + usedsaw(usedstock) + "' , " + temp3 + ", '')"
-                            cmd.ExecuteNonQuery()
-                            usedstockinternalIDcreated.Add(inputusedID)
+                            If stockid2.Count > 1 Then
+                                For it2 = 0 To stockid2.Count - 1
+                                    If String.Equals(stockid2(it2), usedstockID2(usedstock)) AndAlso String.Equals(size(it2), temp2) Then
+                                        count(it2) += Convert.ToInt64(temp)
+                                        cmd.CommandText = "UPDATE stockUsed SET count = " + count(it2).ToString + " WHERE context2 = " + internalID(it2).ToString
+                                        cmd.ExecuteNonQuery()
+                                        usedstockinternalIDcreated.Add(inputusedID)
+                                        boolupdatetable = True
+                                    End If
+                                Next
+                            End If
+                            'Console.WriteLine(usedsize1(usedstock))
+                            If Not boolupdatetable Then
+                                cmd.CommandText = "INSERT INTO stockUsed VALUES('" + usedstockID1(usedstock) + "', '" + usedstockID2(usedstock) + "' , '" + usedstockID3(usedstock) + "', '" + useddescription(usedstock) + "' , '" + usedcolor(usedstock) + "', " + temp2 + ", " + temp + ", " + usedinternalID(usedstock) + " , '' , '" + usedsaw(usedstock) + "' , " + temp3 + ", '')"
+                                cmd.ExecuteNonQuery()
+                                usedstockinternalIDcreated.Add(inputusedID)
+                            End If
                         End If
                     End If
 
@@ -1227,7 +1249,7 @@ Public Class CutManagement
                         End While
                         readerObj.Close()
                         count = count - excountlist(it)
-                        Console.WriteLine(excountlist(it).ToString + "  " + newstockinternalID(it).ToString)
+
                         cmd.CommandText = "Update stockNew SET count = " + count.ToString + " WHERE internalID = " + newstockinternalID(it).ToString
                         cmd.ExecuteNonQuery()
                     End If
@@ -1254,6 +1276,7 @@ Public Class CutManagement
                         End If
                     End If
                 Next
+                Me.Close()
             Else
                 Dim con As New SqlConnection
                 Dim cmd As New SqlCommand
@@ -1261,9 +1284,10 @@ Public Class CutManagement
                 con.Open()
                 cmd.Connection = con
                 For it = 0 To usedstockinternalID.Count - 1
-                    cmd.CommandText = "DELETE FROM stockNew WHERE context2 = " + usedstockinternalID(it).ToString
+                    cmd.CommandText = "DELETE FROM stockUsed WHERE context2 = " + usedstockinternalID(it).ToString
                     cmd.ExecuteNonQuery()
                 Next
+                Me.Close()
             End If
 
         End If

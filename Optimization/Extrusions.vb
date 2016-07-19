@@ -24,7 +24,7 @@ Public Class Extrusions
         Me.DataGridView2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DataGridView2.AutoResizeColumns()
         ' Set the caption bar text of the form.  
-        Me.Text = "Easy Cut V1.0"
+        Me.Text = connectionstring.version
 
         Button5.Visible = False
         ListBox1.Visible = False

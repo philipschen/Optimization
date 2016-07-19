@@ -1,4 +1,5 @@
 ﻿Public Class EnterMissingInfo
+    Dim connectionstring As Class1 = New Class1
     Public Property des As ArrayList
     Public Property id As ArrayList
     Public Property color As String
@@ -7,7 +8,7 @@
     Public Property size1 As String
 
     Private Sub ChooseStock_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = "Easy Cut V1.0"
+        Me.Text = connectionstring.version
         Me.ControlBox = False
         AcceptButton = Button1
         'CancelButton = Button2
@@ -25,7 +26,7 @@
         ListBox2.Items.Add("216")
         ListBox2.Items.Add("230")
         ListBox2.Items.Add("240")
-        ListBox2.Items.Add("Other")
+        ListBox2.Items.Add("OTHER")
         ListBox2.SelectedIndex = 0
 
         ListBox3.Items.Add("BRONZE")
@@ -33,7 +34,7 @@
         ListBox3.Items.Add("SILVER")
         ListBox3.Items.Add("BLACK")
         ListBox3.Items.Add("OTHER")
-        ListBox1.Items.Add("DON'T KNOW")
+        ListBox3.Items.Add("DON'T KNOW")
 
         TextBox1.Text = part1
         TextBox2.Text = "F201 = BRONZE" + vbCrLf + "F202 = WHITE" + vbCrLf + "FSP2 = OTHER"

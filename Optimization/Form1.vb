@@ -3,7 +3,7 @@ Public Class Form1
     Dim connectionstring As Class1 = New Class1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set the caption bar text of the form.  
-        Me.Text = "Easy Cut V1.0"
+        Me.Text = connectionstring.version
         Button3.Visible = True
         PictureBox1.Image = Image.FromFile("temp.jpg")
         PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
@@ -29,12 +29,12 @@ Public Class Form1
             con.ConnectionString = connectionstring.connect1
             con.Open()
             cmd.Connection = con
-            cmd.CommandText = "DELETE FROM stockNew"
-            cmd.ExecuteNonQuery()
+            'cmd.CommandText = "DELETE FROM stockNew"
+            'cmd.ExecuteNonQuery()
             cmd.CommandText = "DELETE FROM stockUsed"
             cmd.ExecuteNonQuery()
-            cmd.CommandText = "DELETE FROM parts"
-            cmd.ExecuteNonQuery()
+            'cmd.CommandText = "DELETE FROM parts"
+            'cmd.ExecuteNonQuery()
         End If
     End Sub
 

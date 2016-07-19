@@ -1,6 +1,7 @@
 ﻿Public Class inputSaw
+    Dim connectionstring As Class1 = New Class1
     Private Sub inputSaw_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = "Easy Cut V1.0"
+        Me.Text = connectionstring.version
         Me.ControlBox = False
         AcceptButton = Button1
         CancelButton = Button2
