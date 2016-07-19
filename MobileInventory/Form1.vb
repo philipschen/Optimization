@@ -1,5 +1,4 @@
 ﻿Imports Excel = Microsoft.Office.Interop.Excel
-Imports System.Data.SqlClient
 Public Class Form1
     Dim connectionstring As Class1 = New Class1
     Dim ar0 As ArrayList = New ArrayList
