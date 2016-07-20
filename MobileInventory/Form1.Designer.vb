@@ -39,6 +39,7 @@ Partial Class Form1
         Me.Context2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Context3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -49,7 +50,8 @@ Partial Class Form1
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -177,6 +179,8 @@ Partial Class Form1
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.Label9)
+        Me.TabPage2.Controls.Add(Me.RichTextBox3)
         Me.TabPage2.Controls.Add(Me.Label8)
         Me.TabPage2.Controls.Add(Me.RichTextBox2)
         Me.TabPage2.Controls.Add(Me.Label5)
@@ -196,12 +200,21 @@ Partial Class Form1
         Me.TabPage2.Text = "Step 2 BOM"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(857, 10)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(289, 18)
+        Me.Label8.TabIndex = 41
+        Me.Label8.Text = "Note: Extrusion count may not be accurate"
+        '
         'RichTextBox2
         '
         Me.RichTextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RichTextBox2.Location = New System.Drawing.Point(459, 360)
+        Me.RichTextBox2.Location = New System.Drawing.Point(762, 108)
         Me.RichTextBox2.Name = "RichTextBox2"
-        Me.RichTextBox2.Size = New System.Drawing.Size(473, 235)
+        Me.RichTextBox2.Size = New System.Drawing.Size(368, 487)
         Me.RichTextBox2.TabIndex = 40
         Me.RichTextBox2.Text = ""
         '
@@ -209,7 +222,7 @@ Partial Class Form1
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(455, 341)
+        Me.Label5.Location = New System.Drawing.Point(758, 84)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(96, 16)
         Me.Label5.TabIndex = 39
@@ -219,7 +232,7 @@ Partial Class Form1
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(456, 87)
+        Me.Label4.Location = New System.Drawing.Point(390, 84)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(95, 16)
         Me.Label4.TabIndex = 38
@@ -228,9 +241,9 @@ Partial Class Form1
         'RichTextBox1
         '
         Me.RichTextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RichTextBox1.Location = New System.Drawing.Point(459, 111)
+        Me.RichTextBox1.Location = New System.Drawing.Point(393, 108)
         Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(473, 227)
+        Me.RichTextBox1.Size = New System.Drawing.Size(363, 227)
         Me.RichTextBox1.TabIndex = 37
         Me.RichTextBox1.Text = ""
         '
@@ -293,14 +306,24 @@ Partial Class Form1
         Me.Label7.Size = New System.Drawing.Size(0, 16)
         Me.Label7.TabIndex = 31
         '
-        'Label8
+        'Label9
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(857, 10)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(289, 18)
-        Me.Label8.TabIndex = 41
-        Me.Label8.Text = "Note: Extrusion count may not be accurate"
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(390, 338)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(107, 16)
+        Me.Label9.TabIndex = 43
+        Me.Label9.Text = "Stock Not Found"
+        '
+        'RichTextBox3
+        '
+        Me.RichTextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RichTextBox3.Location = New System.Drawing.Point(393, 362)
+        Me.RichTextBox3.Name = "RichTextBox3"
+        Me.RichTextBox3.Size = New System.Drawing.Size(363, 233)
+        Me.RichTextBox3.TabIndex = 42
+        Me.RichTextBox3.Text = ""
         '
         'Form1
         '
@@ -348,4 +371,6 @@ Partial Class Form1
     Friend WithEvents Button4 As Button
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents RichTextBox3 As RichTextBox
 End Class

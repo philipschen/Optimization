@@ -306,7 +306,7 @@ Public Class Form1
                         Else
                             ID2.Add(fpartID(it))
                             Description.Add(fpartDescription(it))
-                            count.Add(0)
+                            count.Add(-1)
                             uom.Add("")
                         End If
                     Next
@@ -327,6 +327,7 @@ Public Class Form1
 
                     Dim pstring As String = ""
                     Dim pstring2 As String = ""
+                    Dim pstring3 As String = ""
 
                     For it = 0 To amount.Count - 1
 
@@ -334,17 +335,23 @@ Public Class Form1
                             enough.Add(True)
                             pstring2 = pstring2 + "In Stock: " + ID2(it) + "   " + Description(it) + vbCrLf
                             pstring2 = pstring2 + "   In stock: " + count(it).ToString + "  Need: " + amount(it).ToString + vbCrLf
-                        Else
+                        ElseIf count(it) <> -1 Then
                             enough.Add(False)
                             Dim temp As Integer = amount(it) - count(it)
                             pstring = pstring + "Limited by: " + ID2(it) + "   " + Description(it) + vbCrLf
                             pstring = pstring + "   Instock: " + count(it).ToString + "  Need: " + amount(it).ToString + "  Order: " + temp.ToString + vbCrLf
+                        Else
+                            enough.Add(False)
+                            Dim temp As Integer = amount(it) - count(it) + 1
+                            pstring3 = pstring3 + "Not in NAV: " + ID2(it) + "   " + Description(it) + vbCrLf
+                            pstring3 = pstring3 + "  Need: " + amount(it).ToString + "  Order: " + temp.ToString + vbCrLf
                         End If
 
                     Next
 
                     RichTextBox1.Text = pstring
                     RichTextBox2.Text = pstring2
+                    RichTextBox3.Text = pstring3
                     Label7.Text = "Calculation Complete"
 
 
