@@ -107,6 +107,7 @@ Public Class NavInput
             DataGridView1.AutoResizeColumns()
             'readerObj.Close()
             shXL = Nothing
+            wbXl.Close()
             wbXl = Nothing
             appXL.Quit()
             appXL = Nothing

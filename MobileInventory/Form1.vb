@@ -24,6 +24,11 @@ Public Class Form1
         ar6.Clear()
         ar7.Clear()
         ar8.Clear()
+        DataGridView1.Rows.Clear()
+        ListBox1.Items.Clear()
+        RichTextBox1.Text = ""
+        RichTextBox2.Text = ""
+        RichTextBox3.Text = ""
 
         Dim fd As OpenFileDialog = New OpenFileDialog()
         Dim strFileName As String
@@ -42,6 +47,7 @@ Public Class Form1
             Dim shXL As Excel.Worksheet
             ' Start Excel and get Application object.
             appXL = CreateObject("Excel.Application")
+            'appXL.DisplayAlerts = False
             'appXL.Visible = True
             ' Add a new workbook.
             wbXl = appXL.Workbooks.Open(strFileName)
@@ -118,10 +124,14 @@ Public Class Form1
             Label1.Text = "Loading Complete"
             DataGridView1.AutoResizeColumns()
             'readerObj.Close()
+
+            If Not wbXl Is Nothing Then wbXl.Close()
+            appXL.Quit()
+
             shXL = Nothing
             wbXl = Nothing
-            appXL.Quit()
             appXL = Nothing
+            GC.Collect()
         End If
 
     End Sub
@@ -136,7 +146,11 @@ Public Class Form1
         ar6.Clear()
         ar7.Clear()
         ar8.Clear()
-
+        ListBox1.Items.Clear()
+        RichTextBox1.Text = ""
+        RichTextBox2.Text = ""
+        RichTextBox3.Text = ""
+        Label1.Text = "Upload Complete, Go to Step 2"
         For it = 0 To DataGridView1.RowCount - 1
             If Not String.Equals(DataGridView1.Rows(it).Cells(3).Value, "") And DataGridView1.Rows(it).Cells(3).Value IsNot Nothing Then
                 ar0.Add(DataGridView1.Rows(it).Cells(0).Value.ToString.ToUpper())
@@ -156,6 +170,11 @@ Public Class Form1
         If ar1.Count = 0 Then
             MessageBox.Show("First Enter Inventory NAV")
         Else
+            ListBox1.Items.Clear()
+            RichTextBox1.Text = ""
+            RichTextBox2.Text = ""
+            RichTextBox3.Text = ""
+
             Dim fd As OpenFileDialog = New OpenFileDialog()
             Dim strFileName As String
 
@@ -170,11 +189,13 @@ Public Class Form1
                 strFileName = fd.FileName
 
                 Dim appXL As Excel.Application
+
                 Dim wbXl As Excel.Workbook
                 Dim shXL As Excel.Worksheet
                 Dim shXLName As ArrayList = New ArrayList
                 ' Start Excel and get Application object.
                 appXL = CreateObject("Excel.Application")
+                'appXL.DisplayAlerts = False
                 'appXL.Visible = True
                 ' Add a new workbook.
                 wbXl = appXL.Workbooks.Open(strFileName)
@@ -231,7 +252,7 @@ Public Class Form1
                                     If c0 IsNot Nothing Then
                                         partID.Add(c0)
                                     Else
-                                        partID.Add("NONE")
+                                        partID.Add("NO-ID")
                                     End If
                                     partDescription.Add(c1)
                                     partcount.Add(c2)
@@ -287,8 +308,8 @@ Public Class Form1
                         If cID2.Count > 1 Then
                             Dim frm1 As chooseStock = New chooseStock()
                             Dim usedstock
-                            frm1.des = cID2
-                            frm1.id = cDescription
+                            frm1.id = cID2
+                            frm1.des = cDescription
                             frm1.part1 = fpartDescription(it) + "  ID: " + fpartID(it)
 
                             If frm1.ShowDialog() = DialogResult.OK Then
@@ -330,7 +351,6 @@ Public Class Form1
                     Dim pstring3 As String = ""
 
                     For it = 0 To amount.Count - 1
-
                         If amount(it) < count(it) Then
                             enough.Add(True)
                             pstring2 = pstring2 + "In Stock: " + ID2(it) + "   " + Description(it) + vbCrLf
@@ -346,7 +366,6 @@ Public Class Form1
                             pstring3 = pstring3 + "Not in NAV: " + ID2(it) + "   " + Description(it) + vbCrLf
                             pstring3 = pstring3 + "  Need: " + amount(it).ToString + "  Order: " + temp.ToString + vbCrLf
                         End If
-
                     Next
 
                     RichTextBox1.Text = pstring
@@ -354,11 +373,13 @@ Public Class Form1
                     RichTextBox3.Text = pstring3
                     Label7.Text = "Calculation Complete"
 
+                    'If Not wbXl Is Nothing Then wbXl.Close()
+                    appXL.Quit()
 
                     shXL = Nothing
                     wbXl = Nothing
-                    appXL.Quit()
                     appXL = Nothing
+                    GC.Collect()
                 End If
             End If
         End If

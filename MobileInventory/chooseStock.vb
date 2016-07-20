@@ -9,11 +9,11 @@
         AcceptButton = Button1
         CancelButton = Button2
         For it = 0 To des.Count - 1
-            ListBox1.Items.Add(des(it) + " " + id(it))
+            ListBox1.Items.Add(id(it) + " " + des(it))
         Next
         ListBox1.SelectedIndex = 0
         TextBox1.Text = part1
-        TextBox2.Text = "F201 = BRONZE" + vbCrLf + "F202 = WHITE" + vbCrLf + "FSP2 = OTHER"
+        TextBox2.Text = "F201 = BRONZE" + vbCrLf + "F202 = WHITE" + vbCrLf + "FSP2 = OTHER/Special Color"
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.DialogResult = DialogResult.OK
