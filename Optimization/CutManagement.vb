@@ -79,32 +79,32 @@ Public Class CutManagement
         '
         ' Reads stock from database 
         '
-        cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, internalID FROM stockNew"
-        cmd.ExecuteNonQuery()
-        Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
+        'cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, internalID FROM stockNew"
+        'cmd.ExecuteNonQuery()
+        'Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
 
-        While readerObj.Read
-            Dim tempSize As Integer = Convert.ToInt32(readerObj("Size").ToString)
+        'While readerObj.Read
+        '    Dim tempSize As Integer = Convert.ToInt32(readerObj("Size").ToString)
 
-            If Not ComboBox1.Items.Contains(readerObj("stockID1").ToString) Then
-                ComboBox1.Items.Add(readerObj("stockID1").ToString)
-            End If
-            If Not ComboBox2.Items.Contains(readerObj("stockID2").ToString) Then
-                ComboBox2.Items.Add(readerObj("stockID2").ToString)
-            End If
-            If Not ComboBox3.Items.Contains(readerObj("stockID3").ToString) Then
-                ComboBox3.Items.Add(readerObj("stockID3").ToString)
-            End If
-            description.Add(readerObj("description").ToString)
-            stockID1.Add(readerObj("stockID1").ToString)
-            stockID2.Add(readerObj("stockID2").ToString)
-            stockID3.Add(readerObj("stockID3").ToString)
-            color.Add(readerObj("color").ToString)
-            size1.Add(readerObj("size").ToString)
-            internalID.Add(readerObj("internalID").ToString)
+        '    If Not ComboBox1.Items.Contains(readerObj("stockID1").ToString) Then
+        '        ComboBox1.Items.Add(readerObj("stockID1").ToString)
+        '    End If
+        '    If Not ComboBox2.Items.Contains(readerObj("stockID2").ToString) Then
+        '        ComboBox2.Items.Add(readerObj("stockID2").ToString)
+        '    End If
+        '    If Not ComboBox3.Items.Contains(readerObj("stockID3").ToString) Then
+        '        ComboBox3.Items.Add(readerObj("stockID3").ToString)
+        '    End If
+        '    description.Add(readerObj("description").ToString)
+        '    stockID1.Add(readerObj("stockID1").ToString)
+        '    stockID2.Add(readerObj("stockID2").ToString)
+        '    stockID3.Add(readerObj("stockID3").ToString)
+        '    color.Add(readerObj("color").ToString)
+        '    size1.Add(readerObj("size").ToString)
+        '    internalID.Add(readerObj("internalID").ToString)
 
-        End While
-        readerObj.Close()
+        'End While
+        'readerObj.Close()
 
         '
         ' Reads parts from database 
