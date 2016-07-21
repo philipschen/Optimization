@@ -138,6 +138,7 @@ Public Class PartInputExcell
                 wbXl = Nothing
                 appXL.Quit()
                 appXL = Nothing
+                GC.Collect()
                 DataGridView1.Rows(0).Cells(0).Selected = True
             End If
         End If

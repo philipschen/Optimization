@@ -216,6 +216,7 @@ Public Class CutManagement
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Dim Calculator As CutGLib.CutEngine
         Calculator = New CutGLib.CutEngine
+        'Calculator.SetSiteLicenseKey("1234")
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
         con.ConnectionString = connectionstring.connect1
@@ -811,7 +812,7 @@ Public Class CutManagement
         document.Info.Title = "Cut Instructions"
 
 
-        Dim font As XFont = New XFont("Verdana", 12, XFontStyle.Regular)
+        Dim font As XFont = New XFont("Verdana", 11, XFontStyle.Regular)
         Dim font2 As XFont = New XFont("Verdana", 12, XFontStyle.Regular)
         Dim font3 As XFont = New XFont("Verdana", 14, XFontStyle.Regular)
         Dim filename As String = clock.Year.ToString + clock.Month.ToString + clock.Day.ToString + clock.Minute.ToString + clock.Second.ToString + "CutInstructions.pdf"
@@ -845,6 +846,7 @@ Public Class CutManagement
             Label14.Text = "Processing Request..."
             Dim Calculator As CutGLib.CutEngine
             Calculator = New CutGLib.CutEngine
+            'Calculator.SetSiteLicenseKey("1234")
             Dim con As New SqlConnection
             Dim cmd As New SqlCommand
             con.ConnectionString = connectionstring.connect1
@@ -1030,7 +1032,7 @@ Public Class CutManagement
                         page = document.AddPage
                         gfx = XGraphics.FromPdfPage(page)
                         over20 = True
-                        font = New XFont("Verdana", 11, XFontStyle.Regular)
+                        font = New XFont("Verdana", 10, XFontStyle.Regular)
                         sectioncount = 0
 
                     ElseIf partCount > 12 Then
@@ -1038,9 +1040,9 @@ Public Class CutManagement
                         gfx = XGraphics.FromPdfPage(page)
                         pos2 = 0
                         sectioncount = 0
-                        font = New XFont("Verdana", 12, XFontStyle.Regular)
+                        font = New XFont("Verdana", 11, XFontStyle.Regular)
                     Else
-                        font = New XFont("Verdana", 12, XFontStyle.Regular)
+                        font = New XFont("Verdana", 11, XFontStyle.Regular)
                         If sectioncount = 0 Then
                             page = document.AddPage
                             gfx = XGraphics.FromPdfPage(page)
@@ -1117,7 +1119,7 @@ Public Class CutManagement
                             Dim vpartLength As String = Convert.ToString(partLength)
                             gfx.DrawString("Cut position= " + vxt + " Length= " + vpartLength, font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                             If over20 Then
-                                pos1 += 11
+                                pos1 += 10
                             Else
                                 pos1 += 15
                             End If
@@ -1230,13 +1232,13 @@ Public Class CutManagement
             gfx.DrawString("Total Part List", font3, XBrushes.Black, New XRect(50, 50, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
             For it = 0 To partlistd.Count - 1
                 If excountwork(it) = 0 Then
-                    gfx.DrawString((it + 1).ToString + ". New Stock: " + excountlist(it).ToString + " " + "Used Stock: " + excountlistu(it).ToString + " " + partlistd(it), font2, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                    gfx.DrawString((it + 1).ToString + ". New: " + excountlist(it).ToString + " " + "Used: " + excountlistu(it).ToString + " " + partlistd(it) + " ID:" + partlistid(it), font, XBrushes.Black, New XRect(40, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                     pos1 += 15
                 ElseIf excountwork(it) = 1 Then
-                    gfx.DrawString((it + 1).ToString + ". Not Cut, Partcount: " + excountlist(it).ToString + "  " + partlistd(it), font2, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                    gfx.DrawString((it + 1).ToString + ". Not Cut, Partcount: " + excountlist(it).ToString + "  " + partlistd(it) + " ID:" + partlistid(it), font, XBrushes.Black, New XRect(40, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                     pos1 += 15
                 ElseIf excountwork(it) = 2 Then
-                    gfx.DrawString((it + 1).ToString + ". Not Enough Stock, current Stock: " + excountlist(it).ToString + "  " + partlistd(it), font2, XBrushes.Black, New XRect(50, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                    gfx.DrawString((it + 1).ToString + ". Not Enough, current Stock: " + excountlist(it).ToString + "  " + partlistd(it) + " ID:" + partlistid(it), font, XBrushes.Black, New XRect(40, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                     pos1 += 15
                 End If
 
@@ -1329,9 +1331,9 @@ Public Class CutManagement
                 cmd.CommandText = "SELECT count, context2 FROM stockUsed"
                 cmd.ExecuteNonQuery()
                 Dim count As Integer
-                Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
 
                 For it = 0 To usedstockinternalID.Count - 1
+                    Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
                     While readerObj.Read
                         If String.Equals(readerObj("context2").ToString, usedcontext2(it)) Then
                             count = readerObj("count")

@@ -140,6 +140,7 @@ Public Class DirectlyEdit
         wbXl = Nothing
         appXL.Quit()
         appXL = Nothing
+        GC.Collect()
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
@@ -213,5 +214,6 @@ Public Class DirectlyEdit
         wbXl = Nothing
         appXL.Quit()
         appXL = Nothing
+        GC.Collect()
     End Sub
 End Class

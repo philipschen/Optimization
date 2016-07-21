@@ -137,33 +137,37 @@ Public Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        ar0.Clear()
-        ar1.Clear()
-        ar2.Clear()
-        ar3.Clear()
-        ar4.Clear()
-        ar5.Clear()
-        ar6.Clear()
-        ar7.Clear()
-        ar8.Clear()
-        ListBox1.Items.Clear()
-        RichTextBox1.Text = ""
-        RichTextBox2.Text = ""
-        RichTextBox3.Text = ""
-        Label1.Text = "Upload Complete, Go to Step 2"
-        For it = 0 To DataGridView1.RowCount - 1
-            If Not String.Equals(DataGridView1.Rows(it).Cells(3).Value, "") And DataGridView1.Rows(it).Cells(3).Value IsNot Nothing Then
-                ar0.Add(DataGridView1.Rows(it).Cells(0).Value.ToString.ToUpper())
-                ar1.Add(DataGridView1.Rows(it).Cells(1).Value.ToString.ToUpper())
-                ar2.Add(DataGridView1.Rows(it).Cells(2).Value.ToString.ToUpper())
-                ar3.Add(DataGridView1.Rows(it).Cells(3).Value.ToString.ToUpper())
-                ar4.Add(DataGridView1.Rows(it).Cells(4).Value.ToString.ToUpper())
-                ar5.Add(DataGridView1.Rows(it).Cells(5).Value.ToString.ToUpper())
-                ar6.Add(DataGridView1.Rows(it).Cells(6).Value.ToString.ToUpper())
-                ar7.Add(DataGridView1.Rows(it).Cells(7).Value.ToString.ToUpper())
-                ar8.Add(DataGridView1.Rows(it).Cells(8).Value.ToString.ToUpper())
-            End If
-        Next
+        If DataGridView1.RowCount < 2 Then
+            MessageBox.Show("First Open Inventory NAV")
+        Else
+            ar0.Clear()
+            ar1.Clear()
+            ar2.Clear()
+            ar3.Clear()
+            ar4.Clear()
+            ar5.Clear()
+            ar6.Clear()
+            ar7.Clear()
+            ar8.Clear()
+            ListBox1.Items.Clear()
+            RichTextBox1.Text = ""
+            RichTextBox2.Text = ""
+            RichTextBox3.Text = ""
+            Label1.Text = "Upload Complete, Go to Step 2"
+            For it = 0 To DataGridView1.RowCount - 1
+                If Not String.Equals(DataGridView1.Rows(it).Cells(3).Value, "") And DataGridView1.Rows(it).Cells(3).Value IsNot Nothing Then
+                    ar0.Add(DataGridView1.Rows(it).Cells(0).Value.ToString.ToUpper())
+                    ar1.Add(DataGridView1.Rows(it).Cells(1).Value.ToString.ToUpper())
+                    ar2.Add(DataGridView1.Rows(it).Cells(2).Value.ToString.ToUpper())
+                    ar3.Add(DataGridView1.Rows(it).Cells(3).Value.ToString.ToUpper())
+                    ar4.Add(DataGridView1.Rows(it).Cells(4).Value.ToString.ToUpper())
+                    ar5.Add(DataGridView1.Rows(it).Cells(5).Value.ToString.ToUpper())
+                    ar6.Add(DataGridView1.Rows(it).Cells(6).Value.ToString.ToUpper())
+                    ar7.Add(DataGridView1.Rows(it).Cells(7).Value.ToString.ToUpper())
+                    ar8.Add(DataGridView1.Rows(it).Cells(8).Value.ToString.ToUpper())
+                End If
+            Next
+        End If
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
@@ -318,6 +322,11 @@ Public Class Form1
                                 Description.Add(cDescription(usedstock))
                                 count.Add(ccount(usedstock))
                                 uom.Add(cuom(usedstock))
+                            Else
+                                ID2.Add(fpartID(it))
+                                Description.Add(fpartDescription(it))
+                                count.Add(-1)
+                                uom.Add("")
                             End If
                         ElseIf cID2.Count = 1 Then
                             ID2.Add(cID2(0))
@@ -362,7 +371,7 @@ Public Class Form1
                             pstring = pstring + "   Instock: " + count(it).ToString + "  Need: " + amount(it).ToString + "  Order: " + temp.ToString + vbCrLf
                         Else
                             enough.Add(False)
-                            Dim temp As Integer = amount(it) - count(it) + 1
+                            Dim temp As Integer = amount(it) - count(it) - 1
                             pstring3 = pstring3 + "Not in NAV: " + ID2(it) + "   " + Description(it) + vbCrLf
                             pstring3 = pstring3 + "  Need: " + amount(it).ToString + "  Order: " + temp.ToString + vbCrLf
                         End If

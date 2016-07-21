@@ -117,6 +117,7 @@ Public Class NavInput
             wbXl = Nothing
             appXL.Quit()
             appXL = Nothing
+            GC.Collect()
         End If
 
     End Sub

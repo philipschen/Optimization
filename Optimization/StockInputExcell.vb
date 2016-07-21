@@ -129,6 +129,7 @@ Public Class StockInputExcell
             wbXl = Nothing
             appXL.Quit()
             appXL = Nothing
+            GC.Collect()
         End If
 
     End Sub

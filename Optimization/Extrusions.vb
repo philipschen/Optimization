@@ -312,6 +312,7 @@ Public Class Extrusions
         wbXl = Nothing
         appXL.Quit()
         appXL = Nothing
+        GC.Collect()
     End Sub
 
     '
@@ -598,6 +599,7 @@ Public Class Extrusions
         wbXl = Nothing
         appXL.Quit()
         appXL = Nothing
+        GC.Collect()
     End Sub
 
 End Class
