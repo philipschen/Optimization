@@ -25,6 +25,7 @@ Partial Class DirectlyEdit
         Me.components = New System.ComponentModel.Container()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.StockID1DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -42,6 +43,7 @@ Partial Class DirectlyEdit
         Me.OptimizationDatabaseDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.OptimizationDatabaseDataSet = New OptimizationDatabaseDataSet()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.DataGridView3 = New System.Windows.Forms.DataGridView()
         Me.StockID1DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -90,8 +92,7 @@ Partial Class DirectlyEdit
         Me.StockNewTableAdapter = New OptimizationDatabaseDataSetTableAdapters.stockNewTableAdapter()
         Me.PartsTableAdapter = New OptimizationDatabaseDataSet1TableAdapters.partsTableAdapter()
         Me.StockUsedTableAdapter = New OptimizationDatabaseDataSet3TableAdapters.stockUsedTableAdapter()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -116,10 +117,10 @@ Partial Class DirectlyEdit
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.ItemSize = New System.Drawing.Size(100, 40)
-        Me.TabControl1.Location = New System.Drawing.Point(12, 12)
+        Me.TabControl1.Location = New System.Drawing.Point(12, 9)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1160, 637)
+        Me.TabControl1.Size = New System.Drawing.Size(1160, 640)
         Me.TabControl1.TabIndex = 3
         '
         'TabPage1
@@ -130,10 +131,19 @@ Partial Class DirectlyEdit
         Me.TabPage1.Location = New System.Drawing.Point(4, 44)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1152, 589)
+        Me.TabPage1.Size = New System.Drawing.Size(1152, 592)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "New Stock"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(6, 530)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(1140, 53)
+        Me.Button4.TabIndex = 6
+        Me.Button4.Text = "Export to Excel"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -246,10 +256,19 @@ Partial Class DirectlyEdit
         Me.TabPage2.Location = New System.Drawing.Point(4, 44)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1152, 589)
+        Me.TabPage2.Size = New System.Drawing.Size(1152, 592)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Used Stock"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(6, 530)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(1140, 56)
+        Me.Button5.TabIndex = 7
+        Me.Button5.Text = "Export to Excel"
+        Me.Button5.UseVisualStyleBackColor = True
         '
         'Button3
         '
@@ -361,7 +380,7 @@ Partial Class DirectlyEdit
         Me.TabPage3.Location = New System.Drawing.Point(4, 44)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(1152, 589)
+        Me.TabPage3.Size = New System.Drawing.Size(1152, 592)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Cut Parts"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -468,7 +487,6 @@ Partial Class DirectlyEdit
         Me.Button2.TabIndex = 8
         Me.Button2.Text = "Save Changes"
         Me.Button2.UseVisualStyleBackColor = True
-
         '
         'StockID1DataGridViewTextBoxColumn
         '
@@ -548,29 +566,22 @@ Partial Class DirectlyEdit
         '
         Me.StockUsedTableAdapter.ClearBeforeFill = True
         '
-        'Button4
+        'Label1
         '
-        Me.Button4.Location = New System.Drawing.Point(580, 530)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(566, 53)
-        Me.Button4.TabIndex = 6
-        Me.Button4.Text = "Export to Excel"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Button5
-        '
-        Me.Button5.Location = New System.Drawing.Point(578, 530)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(568, 56)
-        Me.Button5.TabIndex = 7
-        Me.Button5.Text = "Export to Excel"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(948, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(106, 24)
+        Me.Label1.TabIndex = 4
+        Me.Label1.Text = "Exporting..."
         '
         'DirectlyEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1184, 661)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "DirectlyEdit"
         Me.Text = "DirectlyEdit"
@@ -590,6 +601,7 @@ Partial Class DirectlyEdit
         CType(Me.OptimizationDatabaseDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PartBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -662,4 +674,5 @@ Partial Class DirectlyEdit
     Friend WithEvents Button3 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
+    Friend WithEvents Label1 As Label
 End Class

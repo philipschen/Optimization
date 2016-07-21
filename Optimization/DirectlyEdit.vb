@@ -3,6 +3,10 @@ Imports Excel = Microsoft.Office.Interop.Excel
 Public Class DirectlyEdit
     Dim connectionstring As Class1 = New Class1
     Private Sub DirectlyEdit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Label1.Visible = False
+        Button1.Visible = False
+        Button2.Visible = False
+        Button3.Visible = False
         'TODO: This line of code loads data into the 'OptimizationDatabaseDataSet3.stockUsed' table. You can move, or remove it, as needed.
         Me.StockUsedTableAdapter.Fill(Me.OptimizationDatabaseDataSet3.stockUsed)
         Me.Text = "Easy Cut V1.0"
@@ -17,6 +21,7 @@ Public Class DirectlyEdit
         Me.DataGridView2.AutoResizeColumns()
         Me.DataGridView3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DataGridView3.AutoResizeColumns()
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs)
@@ -71,6 +76,7 @@ Public Class DirectlyEdit
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Label1.Visible = True
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
         con.ConnectionString = connectionstring.connect1
@@ -87,7 +93,7 @@ Public Class DirectlyEdit
         Dim raXL As Excel.Range
         ' Start Excel and get Application object.
         appXL = CreateObject("Excel.Application")
-        appXL.Visible = True
+
         ' Add a new workbook.
         wbXl = appXL.Workbooks.Add
         shXL = wbXl.ActiveSheet
@@ -141,9 +147,11 @@ Public Class DirectlyEdit
         appXL.Quit()
         appXL = Nothing
         GC.Collect()
+        Label1.Visible = False
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Label1.Visible = True
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
         con.ConnectionString = connectionstring.connect1
@@ -160,7 +168,6 @@ Public Class DirectlyEdit
         Dim raXL As Excel.Range
         ' Start Excel and get Application object.
         appXL = CreateObject("Excel.Application")
-        appXL.Visible = True
         ' Add a new workbook.
         wbXl = appXL.Workbooks.Add
         shXL = wbXl.ActiveSheet
@@ -215,5 +222,6 @@ Public Class DirectlyEdit
         appXL.Quit()
         appXL = Nothing
         GC.Collect()
+        Label1.Visible = False
     End Sub
 End Class

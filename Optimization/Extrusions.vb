@@ -26,6 +26,7 @@ Public Class Extrusions
         ' Set the caption bar text of the form.  
         Me.Text = connectionstring.version
 
+        Label19.Visible = False
         Button5.Visible = False
         ListBox1.Visible = False
         ListBox4.Visible = False
@@ -243,6 +244,7 @@ Public Class Extrusions
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Label19.Visible = True
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
         con.ConnectionString = connectionstring.connect1
@@ -259,7 +261,6 @@ Public Class Extrusions
         Dim raXL As Excel.Range
         ' Start Excel and get Application object.
         appXL = CreateObject("Excel.Application")
-        appXL.Visible = True
         ' Add a new workbook.
         wbXl = appXL.Workbooks.Add
         shXL = wbXl.ActiveSheet
@@ -313,6 +314,7 @@ Public Class Extrusions
         appXL.Quit()
         appXL = Nothing
         GC.Collect()
+        Label19.Visible = False
     End Sub
 
     '
@@ -529,6 +531,7 @@ Public Class Extrusions
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Label19.Visible = True
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
         con.ConnectionString = connectionstring.connect1
@@ -545,7 +548,6 @@ Public Class Extrusions
         Dim raXL As Excel.Range
         ' Start Excel and get Application object.
         appXL = CreateObject("Excel.Application")
-        appXL.Visible = True
         ' Add a new workbook.
         wbXl = appXL.Workbooks.Add
         shXL = wbXl.ActiveSheet
@@ -600,6 +602,7 @@ Public Class Extrusions
         appXL.Quit()
         appXL = Nothing
         GC.Collect()
+        Label19.Visible = False
     End Sub
 
 End Class

@@ -1150,7 +1150,7 @@ Public Class CutManagement
                         '
                         ' Saves remainder parts to table
                         '
-                        If usedsize1(usedstock) - remainder > 12 Then
+                        If usedsize1(usedstock) - remainder > connectionstring.usedsize Then
                             Dim internalID As ArrayList = New ArrayList
                             Dim rn As New Random
                             Dim it1 As Integer

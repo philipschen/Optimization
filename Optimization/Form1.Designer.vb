@@ -95,7 +95,7 @@ Partial Class Form1
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(112, 64)
         Me.Button1.TabIndex = 6
-        Me.Button1.Text = "Directly Edit Tables"
+        Me.Button1.Text = "View Tables"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
