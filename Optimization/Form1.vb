@@ -5,8 +5,13 @@ Public Class Form1
         ' Set the caption bar text of the form.  
         Me.Text = connectionstring.version
         Button3.Visible = True
-        'PictureBox1.Image = Image.FromFile("temp.jpg")
-        'PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
+
+        Try
+            PictureBox1.Image = Image.FromFile("temp.jpg")
+            PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
+        Catch
+
+        End Try
 
     End Sub
 

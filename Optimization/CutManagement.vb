@@ -216,7 +216,7 @@ Public Class CutManagement
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Dim Calculator As CutGLib.CutEngine
         Calculator = New CutGLib.CutEngine
-        'Calculator.SetSiteLicenseKey("1234")
+        'Calculator.SetComputerLicenseKey("1234")
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
         con.ConnectionString = connectionstring.connect1
@@ -846,7 +846,7 @@ Public Class CutManagement
             Label14.Text = "Processing Request..."
             Dim Calculator As CutGLib.CutEngine
             Calculator = New CutGLib.CutEngine
-            'Calculator.SetSiteLicenseKey("1234")
+            'Calculator.SetComputerLicenseKey("1234")
             Dim con As New SqlConnection
             Dim cmd As New SqlCommand
             con.ConnectionString = connectionstring.connect1
