@@ -27,7 +27,6 @@ Public Class Extrusions
         Me.Text = connectionstring.version
 
         Label19.Visible = False
-        Button5.Visible = False
         ListBox1.Visible = False
         ListBox4.Visible = False
         Label1.Visible = False
@@ -188,26 +187,28 @@ Public Class Extrusions
             frmNewExtr.ShowDialog()
 
         ElseIf ListBox2.SelectedIndex >= 0 Then
+            If TextBox1.Text Is Nothing OrElse TextBox1.Text = "" Then
+                MessageBox.Show("Enter a count")
+            Else
+                Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
+                While readerObj.Read
+                    If String.Equals(internalID(Used(ListBox2.SelectedIndex - 1)), readerObj("internalID").ToString) Then
+                        Dim temp1 As Integer = Convert.ToInt32(TextBox1.Text)
+                        Dim temp2 As String = readerObj("count").ToString
+                        Dim temp3 As Integer = Convert.ToInt32(temp2)
+                        temp3 = temp3 + temp1
+                        temp2 = Convert.ToString(temp3)
+                        readerObj.Close()
 
-            Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
-            While readerObj.Read
-                If String.Equals(internalID(Used(ListBox2.SelectedIndex - 1)), readerObj("internalID").ToString) Then
-                    Dim temp1 As Integer = Convert.ToInt32(TextBox1.Text)
-                    Dim temp2 As String = readerObj("count").ToString
-                    Dim temp3 As Integer = Convert.ToInt32(temp2)
-                    temp3 = temp3 + temp1
-                    temp2 = Convert.ToString(temp3)
-                    readerObj.Close()
-
-                    cmd.CommandText = "UPDATE stockNew SET count = " + temp2 + " WHERE internalID = " + internalID(Used(ListBox2.SelectedIndex - 1))
-                    cmd.ExecuteNonQuery()
-                    Exit While
-                End If
-            End While
-            readerObj.Close()
-            Me.StockNewTableAdapter.Fill(Me.OptimizationDatabaseDataSet.stockNew)
+                        cmd.CommandText = "UPDATE stockNew SET count = " + temp2 + " WHERE internalID = " + internalID(Used(ListBox2.SelectedIndex - 1))
+                        cmd.ExecuteNonQuery()
+                        Exit While
+                    End If
+                End While
+                readerObj.Close()
+                Me.StockNewTableAdapter.Fill(Me.OptimizationDatabaseDataSet.stockNew)
+            End If
         End If
-
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -222,24 +223,28 @@ Public Class Extrusions
 
 
         If ListBox2.SelectedIndex >= 0 Then
+            If TextBox1.Text Is Nothing OrElse TextBox1.Text = "" Then
+                MessageBox.Show("Enter a count")
+            Else
+                Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
+                While readerObj.Read
+                    If String.Equals(internalID(Used(ListBox2.SelectedIndex - 1)), readerObj("internalID").ToString) Then
+                        Dim temp1 As Integer = Convert.ToInt32(TextBox1.Text)
+                        Dim temp2 As String = readerObj("count").ToString
+                        Dim temp3 As Integer = Convert.ToInt32(temp2)
+                        temp3 = temp3 - temp1
+                        temp2 = Convert.ToString(temp3)
+                        readerObj.Close()
 
-            Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
-            While readerObj.Read
-                If String.Equals(internalID(Used(ListBox2.SelectedIndex - 1)), readerObj("internalID").ToString) Then
-                    Dim temp1 As Integer = Convert.ToInt32(TextBox1.Text)
-                    Dim temp2 As String = readerObj("count").ToString
-                    Dim temp3 As Integer = Convert.ToInt32(temp2)
-                    temp3 = temp3 - temp1
-                    temp2 = Convert.ToString(temp3)
-                    readerObj.Close()
+                        cmd.CommandText = "UPDATE stockNew SET count = " + temp2 + " WHERE internalID = " + internalID(Used(ListBox2.SelectedIndex - 1))
+                        cmd.ExecuteNonQuery()
+                        Exit While
+                    End If
 
-                    cmd.CommandText = "UPDATE stockNew SET count = " + temp2 + " WHERE internalID = " + internalID(Used(ListBox2.SelectedIndex - 1))
-                    cmd.ExecuteNonQuery()
-                    Exit While
-                End If
-            End While
-            readerObj.Close()
-            Me.StockNewTableAdapter.Fill(Me.OptimizationDatabaseDataSet.stockNew)
+                End While
+                readerObj.Close()
+                Me.StockNewTableAdapter.Fill(Me.OptimizationDatabaseDataSet.stockNew)
+            End If
         End If
     End Sub
 
@@ -399,134 +404,207 @@ Public Class Extrusions
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        If TextBox2 Is Nothing Or TextBox3.Text Is Nothing OrElse TextBox2.Text = "" OrElse TextBox3.Text = "" Then
+            MessageBox.Show("Enter a size and count")
+        Else
+            Dim con As New SqlConnection
+            Dim cmd As New SqlCommand
+            con.ConnectionString = connectionstring.connect1
+            con.Open()
+            cmd.Connection = con
+            Dim con1 As New SqlConnection
+            Dim cmd1 As New SqlCommand
+            con1.ConnectionString = connectionstring.connect1
+            con1.Open()
+            cmd1.Connection = con1
 
-        Dim con As New SqlConnection
-        Dim cmd As New SqlCommand
-        con.ConnectionString = connectionstring.connect1
-        con.Open()
-        cmd.Connection = con
-        Dim con1 As New SqlConnection
-        Dim cmd1 As New SqlCommand
-        con1.ConnectionString = connectionstring.connect1
-        con1.Open()
-        cmd1.Connection = con1
+            Dim context2 As ArrayList = New ArrayList
+            Dim usedID As ArrayList = New ArrayList
 
-        Dim context2 As ArrayList = New ArrayList
-        Dim usedID As ArrayList = New ArrayList
+            cmd.CommandText = "SELECT context2  FROM stockUsed"
+            cmd.ExecuteNonQuery()
+            Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
+            While readerObj.Read
+                Dim temp2 As Integer = Convert.ToInt64(readerObj("context2").ToString)
+                context2.Add(temp2)
+            End While
+            readerObj.Close()
 
-        cmd.CommandText = "SELECT context2  FROM stockUsed"
-        cmd.ExecuteNonQuery()
-        Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
-        While readerObj.Read
-            Dim temp2 As Integer = Convert.ToInt64(readerObj("context2").ToString)
-            context2.Add(temp2)
-        End While
-        readerObj.Close()
+            Dim stockID2 As ArrayList = New ArrayList
+            Dim internalID As ArrayList = New ArrayList
+            cmd.CommandText = "SELECT stockID2, internalID  FROM stockNew"
+            cmd.ExecuteNonQuery()
+            readerObj = cmd.ExecuteReader
+            While readerObj.Read
+                stockID2.Add(readerObj("stockID2").ToString)
+                internalID.Add(readerObj("internalID").ToString)
+            End While
+            readerObj.Close()
 
-        Dim stockID2 As ArrayList = New ArrayList
-        Dim internalID As ArrayList = New ArrayList
-        cmd.CommandText = "SELECT stockID2, internalID  FROM stockNew"
-        cmd.ExecuteNonQuery()
-        readerObj = cmd.ExecuteReader
-        While readerObj.Read
-            stockID2.Add(readerObj("stockID2").ToString)
-            internalID.Add(readerObj("internalID").ToString)
-        End While
-        readerObj.Close()
+            Dim inputinternal As Integer
+            Dim rn As New Random
+            inputinternal = rn.Next(1000000, 9999999)
+            For it1 = 0 To context2.Count - 1
+                If context2(it1) = inputinternal Or usedID.Contains(inputinternal) Then
+                    it1 = 0
+                    inputinternal = rn.Next(1000000, 9999999)
+                End If
+            Next
+            usedID.Add(inputinternal)
 
-        Dim inputinternal As Integer
-        Dim rn As New Random
-        inputinternal = rn.Next(1000000, 9999999)
-        For it1 = 0 To context2.Count - 1
-            If context2(it1) = inputinternal Or usedID.Contains(inputinternal) Then
-                it1 = 0
-                inputinternal = rn.Next(1000000, 9999999)
+            Dim in0 As String = stockID1(oUsed(ListBox3.SelectedIndex))
+            Dim in1 As String = stockID2(oUsed(ListBox3.SelectedIndex))
+            Dim in2 As String = stockID3(oUsed(ListBox3.SelectedIndex))
+            Dim in3 As String = description(oUsed(ListBox3.SelectedIndex))
+            Dim in4 As String = color(oUsed(ListBox3.SelectedIndex))
+            Dim in5 As String = TextBox2.Text
+            Dim in6 As String = TextBox3.Text
+            Dim in7 As String = ""
+            Dim in8 As String = ""
+            Dim in9 As String = sawnumber(oUsed(ListBox3.SelectedIndex))
+            Dim in10 As String = inputinternal
+            Dim in11 As String = ""
+            Dim validrow As Boolean = False
+            Dim notempty As Boolean = False
+            Dim found As Boolean = False
+
+
+            found = False
+            For it1 = 0 To stockID2.Count - 1
+                If String.Equals(stockID2(it1), in1) Then
+                    in7 = internalID(it1)
+                    found = True
+                End If
+            Next
+            If Not found Then
+                Dim exitfrm As CannotFind = New CannotFind()
+                exitfrm.ShowDialog()
             End If
-        Next
-        usedID.Add(inputinternal)
+            cmd.CommandText = "SELECT stockID2, size, count, context2  FROM stockUsed"
+            cmd.ExecuteNonQuery()
+            readerObj = cmd.ExecuteReader
+            Dim inlist As Boolean = False
+            While readerObj.Read
+                If String.Equals(in1, readerObj("stockID2").ToString) And String.Equals(in5, readerObj("size").ToString) Then
+                    Dim temp1 As Integer = Convert.ToInt32(in6)
+                    Dim temp2 As String = readerObj("count").ToString
+                    Dim temp3 As Integer = Convert.ToInt32(temp2)
+                    temp3 = temp3 + temp1
+                    cmd1.CommandText = "UPDATE stockUsed SET count = " + temp3.ToString + " WHERE context2 = " + readerObj("context2").ToString
+                    cmd1.ExecuteNonQuery()
+                    inlist = True
+                End If
+            End While
+            readerObj.Close()
 
-        Dim in0 As String = stockID1(oUsed(ListBox3.SelectedIndex))
-        Dim in1 As String = stockID2(oUsed(ListBox3.SelectedIndex))
-        Dim in2 As String = stockID3(oUsed(ListBox3.SelectedIndex))
-        Dim in3 As String = description(oUsed(ListBox3.SelectedIndex))
-        Dim in4 As String = color(oUsed(ListBox3.SelectedIndex))
-        Dim in5 As String = TextBox2.Text
-        Dim in6 As String = TextBox3.Text
-        Dim in7 As String = ""
-        Dim in8 As String = ""
-        Dim in9 As String = sawnumber(oUsed(ListBox3.SelectedIndex))
-        Dim in10 As String = inputinternal
-        Dim in11 As String = ""
-        Dim validrow As Boolean = False
-        Dim notempty As Boolean = False
-        Dim found As Boolean = False
-
-
-        found = False
-        For it1 = 0 To stockID2.Count - 1
-            If String.Equals(stockID2(it1), in1) Then
-                in7 = internalID(it1)
-                found = True
+            If Not inlist Then
+                If in6 > 0 Then
+                    cmd1.CommandText = "INSERT INTO stockUsed VALUES('" + in0 + "', '" + in1 + "', '" + in2 + "', '" + in3 + "', '" + "" + "', " + in5 + ", " + in6 + ", " + in7 + ", '" + "" + "', '" + "" + "', " + in10 + ", '" + "" + "')"
+                    cmd1.ExecuteNonQuery()
+                End If
             End If
-        Next
-        If Not found Then
-            Dim exitfrm As CannotFind = New CannotFind()
-            exitfrm.ShowDialog()
+                Me.StockUsedTableAdapter.Fill(Me.OptimizationDatabaseDataSet3.stockUsed)
         End If
-        cmd.CommandText = "SELECT stockID2, size, count, context2  FROM stockUsed"
-        cmd.ExecuteNonQuery()
-        readerObj = cmd.ExecuteReader
-        Dim inlist As Boolean = False
-        While readerObj.Read
-            If String.Equals(in1, readerObj("stockID2").ToString) And String.Equals(in5, readerObj("size").ToString) Then
-                Dim temp1 As Integer = Convert.ToInt32(in6)
-                Dim temp2 As String = readerObj("count").ToString
-                Dim temp3 As Integer = Convert.ToInt32(temp2)
-                temp3 = temp3 + temp1
-                temp2 = Convert.ToString(temp3)
-                cmd1.CommandText = "UPDATE stockUsed SET count = " + in6.ToString + " WHERE context2 = " + readerObj("context2").ToString
-                cmd1.ExecuteNonQuery()
-                inlist = True
-            End If
-        End While
-        readerObj.Close()
-
-        If Not inlist Then
-            cmd1.CommandText = "INSERT INTO stockUsed VALUES('" + in0 + "', '" + in1 + "', '" + in2 + "', '" + in3 + "', '" + "" + "', " + in5 + ", " + in6 + ", " + in7 + ", '" + "" + "', '" + "" + "', " + in10 + ", '" + "" + "')"
-            cmd1.ExecuteNonQuery()
-        End If
-        Me.StockUsedTableAdapter.Fill(Me.OptimizationDatabaseDataSet3.stockUsed)
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Dim con As New SqlConnection
-        Dim cmd As New SqlCommand
-        con.ConnectionString = connectionstring.connect1
-        con.Open()
-        cmd.Connection = con
+        If TextBox2 Is Nothing Or TextBox3.Text Is Nothing OrElse TextBox2.Text = "" OrElse TextBox3.Text = "" Then
+            MessageBox.Show("Enter a size and count")
+        Else
+            Dim con As New SqlConnection
+            Dim cmd As New SqlCommand
+            con.ConnectionString = connectionstring.connect1
+            con.Open()
+            cmd.Connection = con
+            Dim con1 As New SqlConnection
+            Dim cmd1 As New SqlCommand
+            con1.ConnectionString = connectionstring.connect1
+            con1.Open()
+            cmd1.Connection = con1
 
-        cmd.CommandText = "SELECT count, internalID FROM stockUsed"
-        cmd.ExecuteNonQuery()
+            Dim context2 As ArrayList = New ArrayList
+            Dim usedID As ArrayList = New ArrayList
 
-
-        If ListBox2.SelectedIndex >= 0 Then
-
+            cmd.CommandText = "SELECT context2  FROM stockUsed"
+            cmd.ExecuteNonQuery()
             Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
             While readerObj.Read
-                If String.Equals(internalID(Used(ListBox2.SelectedIndex - 1)), readerObj("context2").ToString) Then
-                    Dim temp1 As Integer = Convert.ToInt32(TextBox1.Text)
+                Dim temp2 As Integer = Convert.ToInt64(readerObj("context2").ToString)
+                context2.Add(temp2)
+            End While
+            readerObj.Close()
+
+            Dim stockID2 As ArrayList = New ArrayList
+            Dim internalID As ArrayList = New ArrayList
+            cmd.CommandText = "SELECT stockID2, internalID  FROM stockNew"
+            cmd.ExecuteNonQuery()
+            readerObj = cmd.ExecuteReader
+            While readerObj.Read
+                stockID2.Add(readerObj("stockID2").ToString)
+                internalID.Add(readerObj("internalID").ToString)
+            End While
+            readerObj.Close()
+
+            Dim inputinternal As Integer
+            Dim rn As New Random
+            inputinternal = rn.Next(1000000, 9999999)
+            For it1 = 0 To context2.Count - 1
+                If context2(it1) = inputinternal Or usedID.Contains(inputinternal) Then
+                    it1 = 0
+                    inputinternal = rn.Next(1000000, 9999999)
+                End If
+            Next
+            usedID.Add(inputinternal)
+
+            Dim in0 As String = stockID1(oUsed(ListBox3.SelectedIndex))
+            Dim in1 As String = stockID2(oUsed(ListBox3.SelectedIndex))
+            Dim in2 As String = stockID3(oUsed(ListBox3.SelectedIndex))
+            Dim in3 As String = description(oUsed(ListBox3.SelectedIndex))
+            Dim in4 As String = color(oUsed(ListBox3.SelectedIndex))
+            Dim in5 As String = TextBox2.Text
+            Dim in6 As String = TextBox3.Text
+            Dim in7 As String = ""
+            Dim in8 As String = ""
+            Dim in9 As String = sawnumber(oUsed(ListBox3.SelectedIndex))
+            Dim in10 As String = inputinternal
+            Dim in11 As String = ""
+            Dim validrow As Boolean = False
+            Dim notempty As Boolean = False
+            Dim found As Boolean = False
+
+            found = False
+            For it1 = 0 To stockID2.Count - 1
+                If String.Equals(stockID2(it1), in1) Then
+                    in7 = internalID(it1)
+                    found = True
+                End If
+            Next
+            If Not found Then
+                Dim exitfrm As CannotFind = New CannotFind()
+                exitfrm.ShowDialog()
+            End If
+
+            cmd.CommandText = "SELECT stockID2, size, count, context2  FROM stockUsed"
+            cmd.ExecuteNonQuery()
+            readerObj = cmd.ExecuteReader
+
+            While readerObj.Read
+                If String.Equals(in1, readerObj("stockID2").ToString) And String.Equals(in5, readerObj("size").ToString) Then
+                    Dim temp1 As Integer = Convert.ToInt32(in6)
                     Dim temp2 As String = readerObj("count").ToString
                     Dim temp3 As Integer = Convert.ToInt32(temp2)
                     temp3 = temp3 - temp1
-                    temp2 = Convert.ToString(temp3)
-                    readerObj.Close()
-
-                    cmd.CommandText = "UPDATE stockUsed SET count = " + temp2 + " WHERE context2 = " + internalID(Used(ListBox2.SelectedIndex - 1))
-                    cmd.ExecuteNonQuery()
-                    Exit While
+                    If temp3.ToString > 0 Then
+                        cmd1.CommandText = "UPDATE stockUsed SET count = " + temp3.ToString + " WHERE context2 = " + readerObj("context2").ToString
+                        cmd1.ExecuteNonQuery()
+                    Else
+                        cmd1.CommandText = "DELETE FROM stockUsed WHERE context2 = " + readerObj("context2").ToString
+                        cmd1.ExecuteNonQuery()
+                    End If
                 End If
             End While
-            Me.StockNewTableAdapter.Fill(Me.OptimizationDatabaseDataSet.stockNew)
+            readerObj.Close()
+            Me.StockUsedTableAdapter.Fill(Me.OptimizationDatabaseDataSet3.stockUsed)
         End If
     End Sub
 
