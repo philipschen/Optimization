@@ -35,7 +35,7 @@ Public Class Extrusions
         'ListBox1.Items.Add("White")
         'ListBox1.Items.Add("Silver")
         'ListBox1.Items.Add("Other")
-        'ListBox2.Items.Add("New Part")
+        ListBox2.Items.Add("New Part")
 
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand

@@ -68,8 +68,7 @@ Public Class StockInputExcell
                 Next
                 usedID.Add(inputinternal)
 
-                Dim temp As String = Convert.ToString(it)
-                Label1.Text = "Loading " + temp + "/" + totalcount
+                Label1.Text = "Loading " + it.ToString + "/" + totalcount
 
                 Dim in0 As String = ""
                 Dim in1 As String = ""
@@ -178,11 +177,7 @@ Public Class StockInputExcell
         While readerObj.Read
             For it = 0 To ar1.Count - 1
                 If String.Equals(ar1(it), readerObj("stockID2").ToString) Then
-                    'Dim temp1 As Integer = Convert.ToInt32(ar6(it))
-                    'Dim temp2 As String = readerObj("count").ToString
-                    'Dim temp3 As Integer = Convert.ToInt32(temp2)
-                    'temp3 = temp3 + temp1
-                    'temp2 = Convert.ToString(temp3)
+
                     cmd1.CommandText = "UPDATE stockNew SET count = " + ar6(it) + " WHERE internalID = " + readerObj("internalID").ToString
                     cmd1.ExecuteNonQuery()
                     ar0.RemoveAt(it)

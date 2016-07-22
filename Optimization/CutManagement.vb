@@ -383,7 +383,6 @@ Public Class CutManagement
 
                             Dim Stockt As String = Convert.ToString(iStock)
                             Dim xt As String = Convert.ToString(StockLength)
-                            'Dim Lengtht As String = Convert.ToString(cutLength(it2))
                             gfx.DrawString("Stock = " + Stockt + "  Length= " + xt + " ", font, XBrushes.Black, New XRect(50, 150 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                             pos1 += 20
                             ' Output the information about parts cut from this stock
@@ -400,10 +399,7 @@ Public Class CutManagement
                                 ' Output the part information
                                 Console.WriteLine("Part= {0}:  X={1}  Length={2}", partIndex, VX, partLength)
 
-                                Dim partt As String = Convert.ToString(partIndex)
-                                Dim vxt As String = Convert.ToString(VX)
-                                Dim vpartLength As String = Convert.ToString(partLength)
-                                gfx.DrawString("Part = " + Stockt + "  x= " + vxt + " Length= " + vpartLength, font, XBrushes.Black, New XRect(50, 150 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                                gfx.DrawString("Part = " + Stockt + "  x= " + VX.ToString + " Length= " + partLength.ToString, font, XBrushes.Black, New XRect(50, 150 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                                 pos1 += 20
 
                             Next ViPart
@@ -450,6 +446,8 @@ Public Class CutManagement
     Private Sub ComboBox6_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox6.SelectedValueChanged
         'parts to be cut
         ListBox1.Items.Clear()
+        ListBox3.Items.Clear()
+
         uopartID.Clear()
         uodescription.Clear()
         uocolor.Clear()
@@ -459,6 +457,17 @@ Public Class CutManagement
         uoshopnumber.Clear()
         uoitemNumber.Clear()
         uoitemQuantity.Clear()
+
+        opartID.Clear()
+        odescription.Clear()
+        ocolor.Clear()
+        osize.Clear()
+        ocount.Clear()
+        ointernalID.Clear()
+        oshopnumber.Clear()
+        oitemNumber.Clear()
+        oitemQuantity.Clear()
+        oselect.Clear()
 
         'parts in list
         lopartID.Clear()
@@ -471,7 +480,11 @@ Public Class CutManagement
         loitemNumber.Clear()
         loitemQuantity.Clear()
         loselect.Clear()
-        ListBox3.Items.Clear()
+
+        ComboBox5.Items.Clear()
+        ComboBox4.Items.Clear()
+        ComboBox7.Items.Clear()
+
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
         con.ConnectionString = connectionstring.connect1
@@ -485,52 +498,53 @@ Public Class CutManagement
         'imports shop order parts
         Dim it As Integer = 0
         While readerObj1.Read
-            Dim tempSize As Double = Convert.ToDouble(readerObj1("Size").ToString)
+            If String.Equals(ComboBox6.SelectedItem, readerObj1("shopNumber").ToString) Then
+                Dim tempSize As Double = Convert.ToDouble(readerObj1("Size").ToString)
+                osetNumber.Add("ItemNumber: " + readerObj1("itemNumber").ToString + "item Quantity: " + readerObj1("itemQuantity").ToString)
 
-            ListBox3.Items.Add(readerObj1("description").ToString)
+                ListBox3.Items.Add(readerObj1("description").ToString)
 
+                If String.Equals(ComboBox6.SelectedItem, readerObj1("shopNumber").ToString) And Not ComboBox5.Items.Contains(readerObj1("partID").ToString) Then
+                    ComboBox5.Items.Add(readerObj1("partID").ToString)
+                End If
+                If String.Equals(ComboBox6.SelectedItem, readerObj1("shopNumber").ToString) And Not ComboBox4.Items.Contains(readerObj1("description").ToString) Then
+                    ComboBox4.Items.Add(readerObj1("description").ToString)
+                End If
+                If String.Equals(ComboBox6.SelectedItem, readerObj1("shopNumber").ToString) And Not ComboBox7.Items.Contains(osetNumber(it)) Then
+                    ComboBox7.Items.Add(osetNumber(it))
+                End If
 
-            osetNumber.Add("ItemNumber: " + readerObj1("itemNumber").ToString + "item Quantity: " + readerObj1("itemQuantity").ToString)
+                opartID.Add(readerObj1("partID").ToString)
+                odescription.Add(readerObj1("description").ToString)
+                ocolor.Add(readerObj1("color").ToString)
+                osize.Add(readerObj1("size").ToString)
+                ocount.Add(readerObj1("count").ToString)
+                ointernalID.Add(readerObj1("internalID").ToString)
+                oshopnumber.Add(readerObj1("shopNumber").ToString)
+                oitemNumber.Add(readerObj1("itemNumber").ToString)
+                oitemQuantity.Add(readerObj1("itemQuantity").ToString)
+                oselect.Add(it)
 
+                lopartID.Add(opartID(it))
+                lodescription.Add(odescription(it))
+                locolor.Add(ocolor(it))
+                losize.Add(osize(it))
+                locount.Add(ocount(it))
+                lointernalID.Add(ointernalID(it))
+                loshopnumber.Add(oshopnumber(it))
+                loitemNumber.Add(oitemNumber(it))
+                loitemQuantity.Add(oitemQuantity(it))
+                loselect.Add(it)
 
-            If String.Equals(ComboBox6.SelectedItem, readerObj1("shopNumber").ToString) And Not ComboBox5.Items.Contains(readerObj1("partID").ToString) Then
-                ComboBox5.Items.Add(readerObj1("partID").ToString)
+                it += 1
             End If
-            If String.Equals(ComboBox6.SelectedItem, readerObj1("shopNumber").ToString) And Not ComboBox4.Items.Contains(readerObj1("description").ToString) Then
-                ComboBox4.Items.Add(readerObj1("description").ToString)
-            End If
-            If String.Equals(ComboBox6.SelectedItem, readerObj1("shopNumber").ToString) And Not ComboBox7.Items.Contains(osetNumber(it)) Then
-                ComboBox7.Items.Add(osetNumber(it))
-            End If
-
-            opartID.Add(readerObj1("partID").ToString)
-            odescription.Add(readerObj1("description").ToString)
-            ocolor.Add(readerObj1("color").ToString)
-            osize.Add(readerObj1("size").ToString)
-            ocount.Add(readerObj1("count").ToString)
-            ointernalID.Add(readerObj1("internalID").ToString)
-            oshopnumber.Add(readerObj1("shopNumber").ToString)
-            oitemNumber.Add(readerObj1("itemNumber").ToString)
-            oitemQuantity.Add(readerObj1("itemQuantity").ToString)
-            oselect.Add(it)
-
-            lopartID.Add(opartID(it))
-            lodescription.Add(odescription(it))
-            locolor.Add(ocolor(it))
-            losize.Add(osize(it))
-            locount.Add(ocount(it))
-            lointernalID.Add(ointernalID(it))
-            loshopnumber.Add(oshopnumber(it))
-            loitemNumber.Add(oitemNumber(it))
-            loitemQuantity.Add(oitemQuantity(it))
-            loselect.Add(it)
-
-            it += 1
         End While
     End Sub
 
     Private Sub ComboBox5_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox5.SelectedValueChanged
         ListBox1.Items.Clear()
+        ListBox3.Items.Clear()
+
         uopartID.Clear()
         uodescription.Clear()
         uocolor.Clear()
@@ -551,7 +565,7 @@ Public Class CutManagement
         loitemNumber.Clear()
         loitemQuantity.Clear()
         loselect.Clear()
-        ListBox3.Items.Clear()
+
         'Adds parts by partID
         For it = 0 To ointernalID.Count - 1
             If String.Equals(ComboBox5.SelectedItem, opartID(it)) Then
@@ -574,6 +588,8 @@ Public Class CutManagement
 
     Private Sub ComboBox4_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox4.SelectedValueChanged
         ListBox1.Items.Clear()
+        ListBox3.Items.Clear()
+
         uopartID.Clear()
         uodescription.Clear()
         uocolor.Clear()
@@ -594,7 +610,6 @@ Public Class CutManagement
         loitemNumber.Clear()
         loitemQuantity.Clear()
         loselect.Clear()
-        ListBox3.Items.Clear()
 
         ' Adds parts by Description
         For it = 0 To ointernalID.Count - 1
@@ -617,6 +632,8 @@ Public Class CutManagement
     End Sub
     Private Sub ComboBox7_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox7.SelectedIndexChanged
         ListBox1.Items.Clear()
+        ListBox3.Items.Clear()
+
         uopartID.Clear()
         uodescription.Clear()
         uocolor.Clear()
@@ -637,7 +654,6 @@ Public Class CutManagement
         loitemNumber.Clear()
         loitemQuantity.Clear()
         loselect.Clear()
-        ListBox3.Items.Clear()
 
         ' Adds parts by shopitem number
         For it = 0 To ointernalID.Count - 1
@@ -1060,14 +1076,10 @@ Public Class CutManagement
                     If Calculator.GetLinearStockInfo(StockIndex, StockLength, StockActive) Then
                         partCount = Calculator.GetPartCountOnStock(iStock)
 
-
                         Dim pageNo As String = Convert.ToString(iLayout + 1)
-                        Dim tempIt As String = Convert.ToString(iStock)
 
-
-                        Dim temppic As String = Convert.ToString(picturecount)
-                        Calculator.CreateStockImage(iStock, "test" + temppic + ".png", 1000)
-                        Dim image As XImage = XImage.FromFile("test" + temppic + ".png")
+                        Calculator.CreateStockImage(iStock, "test" + picturecount.ToString + ".png", 1000)
+                        Dim image As XImage = XImage.FromFile("test" + picturecount.ToString + ".png")
                         picturecount += 1
                         imagecountfile.Add(image)
 
@@ -1114,10 +1126,7 @@ Public Class CutManagement
                             ' Output the part information
                             Console.WriteLine("Part= {0}:  X={1}  Length={2}", partIndex, VX, partLength)
 
-                            Dim partt As String = Convert.ToString(partIndex)
-                            Dim vxt As String = Convert.ToString(VX + partLength)
-                            Dim vpartLength As String = Convert.ToString(partLength)
-                            gfx.DrawString("Cut position= " + vxt + " Length= " + vpartLength, font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                            gfx.DrawString("Cut position= " + VX.ToString + " Length= " + partLength.ToString, font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                             If over20 Then
                                 pos1 += 10
                             Else
@@ -1253,9 +1262,8 @@ Public Class CutManagement
             Process.Start(filename)
 
             For it = 0 To picturecount - 1
-                Dim temp As String = Convert.ToString(it)
                 imagecountfile(it).Dispose()
-                My.Computer.FileSystem.DeleteFile("test" + temp + ".png")
+                My.Computer.FileSystem.DeleteFile("test" + it.ToString + ".png")
             Next
 
             '
