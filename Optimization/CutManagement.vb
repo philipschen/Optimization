@@ -393,7 +393,7 @@ Public Class CutManagement
                 uoitemNumber.Add(loitemNumber(ListBox3.SelectedIndex))
                 uoitemQuantity.Add(loitemQuantity(ListBox3.SelectedIndex))
                 uoUsed.Add(oUsed(ListBox3.SelectedIndex))
-                uolistorderline.Add(ListBox3.SelectedIndex)
+                uolistorderline.Add(lolistorderline(ListBox3.SelectedIndex))
             Next
 
             lopartID.Clear()
@@ -692,6 +692,7 @@ Public Class CutManagement
         '
         ' Loops for individual parts
         '
+        Label14.Text = "Calculating Cuts..."
         For it = 0 To partlistd.Count - 1
             Label14.Text = "Calculating Cuts..."
             Dim Calculator As CutGLib.CutEngine
@@ -799,14 +800,14 @@ Public Class CutManagement
                     Dim page As PdfPage
                     Dim gfx As XGraphics
                     partCount = Calculator.GetPartCountOnStock(iStock)
-                    If partCount > 20 Then
+                    If partCount > 18 Then
                         page = document.AddPage
                         gfx = XGraphics.FromPdfPage(page)
                         over20 = True
                         font = New XFont("Verdana", 10, XFontStyle.Regular)
                         sectioncount = 0
 
-                    ElseIf partCount > 12 Then
+                    ElseIf partCount > 8 Then
                         page = document.AddPage
                         gfx = XGraphics.FromPdfPage(page)
                         pos2 = 0
@@ -857,19 +858,19 @@ Public Class CutManagement
                         Dim descriptionstring5 As String = "Saw number: " + usedsaw(it)
                         Dim descriptionstring6 As String = "# Of Stock Cut: " + temp
                         Dim descriptionstring7 As String = "Layout Number = " + temp1
-                        Dim leftanchor As Integer = 50
+                        Dim leftanchor As Integer = 40
 
-                        gfx.DrawString("Page " + pageNo, font2, XBrushes.Black, New XRect(leftanchor, 50 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                        gfx.DrawString(descriptionString, font3, XBrushes.Black, New XRect(leftanchor, 65 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                        gfx.DrawString(descriptionString2, font2, XBrushes.Black, New XRect(leftanchor, 80 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                        gfx.DrawString(descriptionString3, font2, XBrushes.Black, New XRect(leftanchor, 95 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                        gfx.DrawString(descriptionString4, font2, XBrushes.Black, New XRect(leftanchor, 110 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                        gfx.DrawString(descriptionstring5, font3, XBrushes.Black, New XRect(leftanchor + 360, 50 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                        gfx.DrawString(descriptionstring6, font3, XBrushes.Black, New XRect(leftanchor + 360, 65 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                        gfx.DrawString(descriptionstring7, font2, XBrushes.Black, New XRect(leftanchor + 360, 80 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString("Page " + pageNo, font2, XBrushes.Black, New XRect(leftanchor, 50 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionString, font3, XBrushes.Black, New XRect(leftanchor, 65 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionString2, font2, XBrushes.Black, New XRect(leftanchor, 80 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionString3, font2, XBrushes.Black, New XRect(leftanchor, 95 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionString4, font2, XBrushes.Black, New XRect(leftanchor, 110 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionstring5, font2, XBrushes.Black, New XRect(leftanchor + 360, 50 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionstring6, font2, XBrushes.Black, New XRect(leftanchor + 360, 65 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        gfx.DrawString(descriptionstring7, font2, XBrushes.Black, New XRect(leftanchor + 360, 80 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
 
                         Console.WriteLine("Layout={0}:  Length={1}", iStock, StockLength)
-
+                        Dim lengthlist As ArrayList = New ArrayList
                         ' Iterate by parts and get indices of cut parts
                         For ViPart = 0 To partCount - 1
                             ' Get global part index of ViPart cut from the current stock
@@ -881,27 +882,80 @@ Public Class CutManagement
                             ' Output the part information
                             Console.WriteLine("Part= {0}:  X={1}  Length={2}", partIndex, VX, partLength)
 
-                            gfx.DrawString("Cut position= " + VX.ToString + " Length= " + partLength.ToString, font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+
+                            '
+                            ' Finds different sizes to print numbers
+                            '
+                            If Not lengthlist.Contains(partLength) Then
+                                lengthlist.Add(partLength)
+                            End If
+
+                            gfx.DrawString("Cut position= " + VX.ToString + " Length= " + partLength.ToString, font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                             If over20 Then
                                 pos1 += 10
                             Else
-                                pos1 += 15
+                                pos1 += 14
                             End If
+
                             If VX + partLength > remainder Then
                                 remainder = VX + partLength
                             End If
                         Next ViPart
                         If usedsize1(it) - remainder > usedminsize(it) Then
-                            gfx.DrawString("Save Remainder Piece ", font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                            gfx.DrawString("Save Remainder Piece ", font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                             If over20 Then
                                 pos1 += 10
                             Else
-                                pos1 += 15
+                                pos1 += 14
                             End If
                         End If
 
-                        gfx.DrawImage(image, 50, 160 + pos1 + pos2, 500, 20)
+                        gfx.DrawImage(image, leftanchor, 150 + pos1 + pos2 - 10, 520, 20)
+                        '
+                        ' Prints out which quote and line number the part corresponds to
+                        '
+                        For it2 = 0 To lengthlist.Count - 1
+                            Dim correspondingnum As String = "Orders: "
+                            Dim tempstring As ArrayList = New ArrayList
+                            For it1 = 0 To uosize.Count - 1
+                                If lengthlist(it2) = uosize(it1) AndAlso Not tempstring.Contains(uolistorderline(it1) + "-" + uoitemNumber(it1).ToString + "  ") Then
+                                    tempstring.Add(uolistorderline(it1) + "-" + uoitemNumber(it1).ToString + "  ")
+                                End If
+                            Next
+                            Dim count1 As Integer = 1
+                            Dim line1 As Boolean = True
+                            Dim line2 As Boolean = False
+                            For it1 = 0 To tempstring.Count - 1
+                                If count1 < 4 Then
+                                    correspondingnum = correspondingnum + tempstring(it1)
+                                    count1 += 1
+                                Else
+                                    correspondingnum = ""
+                                    correspondingnum = tempstring(it1)
+                                    count1 = 0
+                                    line2 = True
+                                End If
 
+                                If line1 AndAlso (count1 = 4 Or it1 = tempstring.Count - 1) Then
+                                    gfx.DrawString("Size: " + lengthlist(it2).ToString + " " + correspondingnum, font, XBrushes.Black, New XRect(leftanchor, 175 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                                    If over20 Then
+                                        pos1 += 10
+                                    Else
+                                        pos1 += 14
+                                    End If
+                                    line1 = False
+                                ElseIf line2 AndAlso (count1 = 4 Or it1 = tempstring.Count - 1) Then
+                                    gfx.DrawString("    " + correspondingnum, font, XBrushes.Black, New XRect(leftanchor, 175 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                                    If over20 Then
+                                        pos1 += 10
+                                    Else
+                                        pos1 += 14
+                                    End If
+                                End If
+                            Next
+
+
+                        Next
                         '
                         ' Saves list of used stock that was actually used
                         '
