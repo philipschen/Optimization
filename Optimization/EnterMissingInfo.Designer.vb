@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class EnterMissingInfo
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class EnterMissingInfo
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -33,16 +33,18 @@ Partial Class EnterMissingInfo
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.ListBox4 = New System.Windows.Forms.ListBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'TextBox2
         '
         Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(487, 92)
+        Me.TextBox2.Location = New System.Drawing.Point(635, 67)
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ReadOnly = True
-        Me.TextBox2.Size = New System.Drawing.Size(180, 102)
+        Me.TextBox2.Size = New System.Drawing.Size(180, 189)
         Me.TextBox2.TabIndex = 11
         '
         'TextBox1
@@ -51,7 +53,7 @@ Partial Class EnterMissingInfo
         Me.TextBox1.Location = New System.Drawing.Point(15, 37)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(652, 22)
+        Me.TextBox1.Size = New System.Drawing.Size(800, 22)
         Me.TextBox1.TabIndex = 10
         '
         'Button1
@@ -142,11 +144,33 @@ Partial Class EnterMissingInfo
         Me.TextBox3.Size = New System.Drawing.Size(149, 22)
         Me.TextBox3.TabIndex = 17
         '
+        'ListBox4
+        '
+        Me.ListBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListBox4.FormattingEnabled = True
+        Me.ListBox4.ItemHeight = 16
+        Me.ListBox4.Location = New System.Drawing.Point(480, 92)
+        Me.ListBox4.Name = "ListBox4"
+        Me.ListBox4.Size = New System.Drawing.Size(149, 164)
+        Me.ListBox4.TabIndex = 18
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(477, 73)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(150, 16)
+        Me.Label5.TabIndex = 19
+        Me.Label5.Text = "Minimum Size To Save*"
+        '
         'EnterMissingInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(698, 353)
+        Me.ClientSize = New System.Drawing.Size(824, 322)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.ListBox4)
         Me.Controls.Add(Me.TextBox3)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
@@ -176,4 +200,6 @@ Partial Class EnterMissingInfo
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents ListBox4 As ListBox
+    Friend WithEvents Label5 As Label
 End Class

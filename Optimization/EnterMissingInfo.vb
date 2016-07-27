@@ -6,6 +6,7 @@
     Public Property part1 As String
     Public Property saw As String
     Public Property size1 As String
+    Public Property minsize As String
 
     Private Sub ChooseStock_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = connectionstring.version
@@ -13,12 +14,12 @@
         AcceptButton = Button1
         'CancelButton = Button2
         TextBox3.Visible = False
-        ListBox1.Items.Add("SAW 1")
-        ListBox1.Items.Add("SAW 2")
-        ListBox1.Items.Add("SAW 3")
-        ListBox1.Items.Add("SAW 4")
-        ListBox1.Items.Add("SAW 5")
-        ListBox1.Items.Add("SAW 6")
+        ListBox1.Items.Add("DOOR SAW")
+        ListBox1.Items.Add("WINDOW SAW")
+        ListBox1.Items.Add("ACCESSORY SAW")
+        ListBox1.Items.Add("PANEL SAW")
+        ListBox1.Items.Add("SCREEN SAW")
+        ListBox1.Items.Add("OTHER SAW")
         ListBox1.Items.Add("DON'T KNOW")
 
         ListBox2.Items.Add("180")
@@ -35,6 +36,12 @@
         ListBox3.Items.Add("BLACK")
         ListBox3.Items.Add("OTHER")
         ListBox3.Items.Add("DON'T KNOW")
+
+        ListBox4.Items.Add("12")
+        ListBox4.Items.Add("24")
+        ListBox4.Items.Add("36")
+        ListBox4.Items.Add("48")
+        ListBox4.SelectedIndex = 1
 
         TextBox1.Text = part1
         TextBox2.Text = "F201 = BRONZE" + vbCrLf + "F202 = WHITE" + vbCrLf + "FSP2 = OTHER"
@@ -69,6 +76,8 @@
                 color = ""
             End If
 
+            minsize = ListBox4.SelectedItem
+
             Me.DialogResult = DialogResult.OK
             Me.Close()
         ElseIf ListBox2.SelectedValue >= 0 And ListBox2.SelectedItem = "OTHER" And TextBox3.Text IsNot Nothing Then
@@ -84,7 +93,9 @@
                 color = ListBox3.Text
             Else
                 color = ""
-            End If
+            End If '
+
+            minsize = ListBox4.SelectedItem
 
             Me.DialogResult = DialogResult.OK
             Me.Close()
@@ -92,4 +103,5 @@
             MessageBox.Show("Enter A Value for Size")
         End If
     End Sub
+
 End Class

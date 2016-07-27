@@ -121,8 +121,8 @@ Public Class PartInputExcell
                 End If
                 DataGridView1.Rows(it).Cells(7).Value = cell3
                 DataGridView1.Rows(it).Cells(8).Value = cell4
-                DataGridView1.Rows(it).Cells(9).Value = ""
-                DataGridView1.Rows(it).Cells(10).Value = it
+                DataGridView1.Rows(it).Cells(9).Value = shXL.Cells(2 + it, 2).Value
+                DataGridView1.Rows(it).Cells(10).Value = 0
                 DataGridView1.Rows(it).Cells(11).Value = ""
             Next
             If alreadyentered Then

@@ -82,7 +82,7 @@ Public Class DirectlyEdit
         con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
-        cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, count, internalID, context1, context3 FROM stockNew"
+        cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, count, internalID, context1, context2, context3 FROM stockNew"
         cmd.ExecuteNonQuery()
 
         Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
@@ -93,7 +93,6 @@ Public Class DirectlyEdit
         Dim raXL As Excel.Range
         ' Start Excel and get Application object.
         appXL = CreateObject("Excel.Application")
-
         ' Add a new workbook.
         wbXl = appXL.Workbooks.Add
         shXL = wbXl.ActiveSheet
@@ -107,9 +106,10 @@ Public Class DirectlyEdit
         shXL.Cells(1, 6).Value = "Size"
         shXL.Cells(1, 7).Value = "Count"
         shXL.Cells(1, 8).Value = "Saw Number"
-        shXL.Cells(1, 9).Value = "Location of Used Parts"
-        ' Format A1:D1 as bold, vertical alignment = center.
-        With shXL.Range("A1", "I1")
+        shXL.Cells(1, 9).Value = "Minimum Save Size"
+        shXL.Cells(1, 10).Value = "Context 3"
+        ' Format as bold, vertical alignment = center.
+        With shXL.Range("A1", "J1")
             .Font.Bold = True
             .ColumnWidth = 20
             .VerticalAlignment = Excel.XlVAlign.xlVAlignCenter
@@ -127,7 +127,8 @@ Public Class DirectlyEdit
                 .Cells(it1, 6).Value = readerObj("size").ToString
                 .Cells(it1, 7).Value = readerObj("count").ToString
                 .Cells(it1, 8).Value = readerObj("context1").ToString
-                .Cells(it1, 9).Value = readerObj("context3").ToString
+                .Cells(it1, 9).Value = readerObj("context2").ToString
+                .Cells(it1, 10).Value = readerObj("context3").ToString
 
             End With
             it1 += 1

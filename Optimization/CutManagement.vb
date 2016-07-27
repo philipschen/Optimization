@@ -3,27 +3,6 @@ Imports PdfSharp.Drawing
 Imports PdfSharp.Pdf
 Public Class CutManagement
     Dim connectionstring As Class1 = New Class1
-    ' page 1
-    ' lists from Newstock table
-    Dim stockID1 As ArrayList = New ArrayList
-    Dim stockID2 As ArrayList = New ArrayList
-    Dim stockID3 As ArrayList = New ArrayList
-    Dim description As ArrayList = New ArrayList
-    Dim color As ArrayList = New ArrayList
-    Dim size1 As ArrayList = New ArrayList
-    Dim internalID As ArrayList = New ArrayList
-    Dim Used As ArrayList = New ArrayList
-    ' lists form cut stock
-    Dim cutstockID1 As ArrayList = New ArrayList
-    Dim cutstockID2 As ArrayList = New ArrayList
-    Dim cutstockID3 As ArrayList = New ArrayList
-    Dim cutdescription As ArrayList = New ArrayList
-    Dim cutcolor As ArrayList = New ArrayList
-    Dim cutsize1 As ArrayList = New ArrayList
-    Dim cutinternalID As ArrayList = New ArrayList
-    Dim cutUsed As ArrayList = New ArrayList
-    Dim cutcount As ArrayList = New ArrayList
-
     ' page 2
     ' lists from newparts table
     Dim opartID As ArrayList = New ArrayList
@@ -38,6 +17,7 @@ Public Class CutManagement
     Dim osetNumber As ArrayList = New ArrayList
     Dim oUsed As ArrayList = New ArrayList
     Dim oselect As ArrayList = New ArrayList
+    Dim olistorderline As ArrayList = New ArrayList
     ' lists of everything in the listbox
     Dim lopartID As ArrayList = New ArrayList
     Dim lodescription As ArrayList = New ArrayList
@@ -51,6 +31,7 @@ Public Class CutManagement
     Dim losetNumber As ArrayList = New ArrayList
     Dim loUsed As ArrayList = New ArrayList
     Dim loselect As ArrayList = New ArrayList
+    Dim lolistorderline As ArrayList = New ArrayList
     ' list of parts used in calculation
     Dim uopartID As ArrayList = New ArrayList
     Dim uodescription As ArrayList = New ArrayList
@@ -63,6 +44,7 @@ Public Class CutManagement
     Dim uoitemQuantity As ArrayList = New ArrayList
     Dim uosetNumber As ArrayList = New ArrayList
     Dim uoUsed As ArrayList = New ArrayList
+    Dim uolistorderline As ArrayList = New ArrayList
 
     Private Sub CutManagement_load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set the caption bar text of the form.  
@@ -75,36 +57,6 @@ Public Class CutManagement
         con.ConnectionString = connectionstring.connect1
         con.Open()
         cmd.Connection = con
-
-        '
-        ' Reads stock from database 
-        '
-        'cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, internalID FROM stockNew"
-        'cmd.ExecuteNonQuery()
-        'Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
-
-        'While readerObj.Read
-        '    Dim tempSize As Integer = Convert.ToInt32(readerObj("Size").ToString)
-
-        '    If Not ComboBox1.Items.Contains(readerObj("stockID1").ToString) Then
-        '        ComboBox1.Items.Add(readerObj("stockID1").ToString)
-        '    End If
-        '    If Not ComboBox2.Items.Contains(readerObj("stockID2").ToString) Then
-        '        ComboBox2.Items.Add(readerObj("stockID2").ToString)
-        '    End If
-        '    If Not ComboBox3.Items.Contains(readerObj("stockID3").ToString) Then
-        '        ComboBox3.Items.Add(readerObj("stockID3").ToString)
-        '    End If
-        '    description.Add(readerObj("description").ToString)
-        '    stockID1.Add(readerObj("stockID1").ToString)
-        '    stockID2.Add(readerObj("stockID2").ToString)
-        '    stockID3.Add(readerObj("stockID3").ToString)
-        '    color.Add(readerObj("color").ToString)
-        '    size1.Add(readerObj("size").ToString)
-        '    internalID.Add(readerObj("internalID").ToString)
-
-        'End While
-        'readerObj.Close()
 
         '
         ' Reads parts from database 
@@ -123,11 +75,7 @@ Public Class CutManagement
     End Sub
 
     '
-    ' Page 1
-    '
-
-    '
-    ' Page 2
+    ' Page 2: Cut by Shop Oder
     '
 
     Private Sub ComboBox6_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox6.SelectedValueChanged
@@ -144,6 +92,7 @@ Public Class CutManagement
         uoshopnumber.Clear()
         uoitemNumber.Clear()
         uoitemQuantity.Clear()
+        uolistorderline.Clear()
 
         opartID.Clear()
         odescription.Clear()
@@ -155,7 +104,7 @@ Public Class CutManagement
         oitemNumber.Clear()
         oitemQuantity.Clear()
         oselect.Clear()
-
+        olistorderline.Clear()
         'parts in list
         lopartID.Clear()
         lodescription.Clear()
@@ -167,6 +116,7 @@ Public Class CutManagement
         loitemNumber.Clear()
         loitemQuantity.Clear()
         loselect.Clear()
+        lolistorderline.Clear()
 
         ComboBox5.Items.Clear()
         ComboBox4.Items.Clear()
@@ -179,7 +129,7 @@ Public Class CutManagement
         con.Open()
         cmd.Connection = con
 
-        cmd.CommandText = "SELECT partID, description, color, size, count, internalID, shopNumber, itemNumber, itemQuantity FROM parts ORDER BY itemNumber, itemQuantity, description"
+        cmd.CommandText = "SELECT partID, description, color, size, count, internalID, shopNumber, itemNumber, itemQuantity, context1 FROM parts ORDER BY itemNumber, itemQuantity, description"
         cmd.ExecuteNonQuery()
         Dim readerObj1 As SqlClient.SqlDataReader = cmd.ExecuteReader
 
@@ -212,6 +162,8 @@ Public Class CutManagement
                 oitemNumber.Add(readerObj1("itemNumber").ToString)
                 oitemQuantity.Add(readerObj1("itemQuantity").ToString)
                 oselect.Add(it)
+                olistorderline.Add(readerObj1("context1").ToString)
+
 
                 lopartID.Add(opartID(it))
                 lodescription.Add(odescription(it))
@@ -223,6 +175,7 @@ Public Class CutManagement
                 loitemNumber.Add(oitemNumber(it))
                 loitemQuantity.Add(oitemQuantity(it))
                 loselect.Add(it)
+                lolistorderline.Add(olistorderline(it))
 
                 it += 1
             End If
@@ -242,6 +195,7 @@ Public Class CutManagement
         uoshopnumber.Clear()
         uoitemNumber.Clear()
         uoitemQuantity.Clear()
+        uolistorderline.Clear()
 
         lopartID.Clear()
         lodescription.Clear()
@@ -253,6 +207,7 @@ Public Class CutManagement
         loitemNumber.Clear()
         loitemQuantity.Clear()
         loselect.Clear()
+        lolistorderline.Clear()
 
         'Adds parts by partID
         For it = 0 To ointernalID.Count - 1
@@ -269,6 +224,7 @@ Public Class CutManagement
                 loitemNumber.Add(oitemNumber(it))
                 loitemQuantity.Add(oitemQuantity(it))
                 loselect.Add(it)
+                lolistorderline.Add(olistorderline(it))
             End If
         Next
 
@@ -287,6 +243,7 @@ Public Class CutManagement
         uoshopnumber.Clear()
         uoitemNumber.Clear()
         uoitemQuantity.Clear()
+        uolistorderline.Clear()
 
         lopartID.Clear()
         lodescription.Clear()
@@ -298,6 +255,7 @@ Public Class CutManagement
         loitemNumber.Clear()
         loitemQuantity.Clear()
         loselect.Clear()
+        lolistorderline.Clear()
 
         ' Adds parts by Description
         For it = 0 To ointernalID.Count - 1
@@ -314,6 +272,7 @@ Public Class CutManagement
                 loitemNumber.Add(oitemNumber(it))
                 loitemQuantity.Add(oitemQuantity(it))
                 loselect.Add(it)
+                lolistorderline.Add(olistorderline(it))
             End If
         Next
 
@@ -331,6 +290,7 @@ Public Class CutManagement
         uoshopnumber.Clear()
         uoitemNumber.Clear()
         uoitemQuantity.Clear()
+        uolistorderline.Clear()
 
         lopartID.Clear()
         lodescription.Clear()
@@ -342,6 +302,7 @@ Public Class CutManagement
         loitemNumber.Clear()
         loitemQuantity.Clear()
         loselect.Clear()
+        lolistorderline.Clear()
 
         ' Adds parts by shopitem number
         For it = 0 To ointernalID.Count - 1
@@ -358,6 +319,7 @@ Public Class CutManagement
                 loitemNumber.Add(oitemNumber(it))
                 loitemQuantity.Add(oitemQuantity(it))
                 loselect.Add(it)
+                lolistorderline.Add(olistorderline(it))
             End If
         Next
     End Sub
@@ -396,6 +358,7 @@ Public Class CutManagement
             uoitemNumber.Add(loitemNumber(ListBox3.SelectedIndex))
             uoitemQuantity.Add(loitemQuantity(ListBox3.SelectedIndex))
             uoUsed.Add(ListBox3.SelectedIndex)
+            uolistorderline.Add(lolistorderline(ListBox3.SelectedIndex))
 
             lopartID.RemoveAt(ListBox3.SelectedIndex)
             lodescription.RemoveAt(ListBox3.SelectedIndex)
@@ -407,6 +370,8 @@ Public Class CutManagement
             loitemNumber.RemoveAt(ListBox3.SelectedIndex)
             loitemQuantity.RemoveAt(ListBox3.SelectedIndex)
             loselect.RemoveAt(ListBox3.SelectedIndex)
+            lolistorderline.RemoveAt(ListBox3.SelectedIndex)
+
             ListBox3.Items.RemoveAt(ListBox3.SelectedIndex)
         End If
     End Sub
@@ -428,7 +393,21 @@ Public Class CutManagement
                 uoitemNumber.Add(loitemNumber(ListBox3.SelectedIndex))
                 uoitemQuantity.Add(loitemQuantity(ListBox3.SelectedIndex))
                 uoUsed.Add(oUsed(ListBox3.SelectedIndex))
+                uolistorderline.Add(ListBox3.SelectedIndex)
             Next
+
+            lopartID.Clear()
+            lodescription.Clear()
+            locolor.Clear()
+            losize.Clear()
+            locount.Clear()
+            lointernalID.Clear()
+            loshopnumber.Clear()
+            loitemNumber.Clear()
+            loitemQuantity.Clear()
+            loselect.Clear()
+            lolistorderline.Clear()
+
             ListBox3.Items.Clear()
         ElseIf CheckBox1.Checked = False Then
             oUsed.Clear()
@@ -437,6 +416,19 @@ Public Class CutManagement
                 ListBox3.Items.Add(ListBox1.SelectedItem)
                 ListBox1.Items.RemoveAt(ListBox1.SelectedIndex)
             End While
+            For it = 0 To uopartID.Count - 1
+                lopartID.Add(uopartID(it))
+                lodescription.Add(uodescription(it))
+                locolor.Add(uocolor(it))
+                losize.Add(uosize(it))
+                locount.Add(uocount(it))
+                lointernalID.Add(uointernalID(it))
+                loshopnumber.Add(uoshopnumber(it))
+                loitemNumber.Add(uoitemNumber(it))
+                loitemQuantity.Add(uoitemQuantity(it))
+                loselect.Add(it)
+                lolistorderline.Add(uolistorderline(it))
+            Next
             uopartID.Clear()
             uodescription.Clear()
             uocolor.Clear()
@@ -447,6 +439,7 @@ Public Class CutManagement
             uoitemNumber.Clear()
             uoitemQuantity.Clear()
             uoUsed.Clear()
+            uolistorderline.Clear()
         End If
     End Sub
 
@@ -454,6 +447,18 @@ Public Class CutManagement
         ' Clears All Cuts
         ListBox3.Items.Clear()
         ListBox1.Items.Clear()
+
+        lopartID.Clear()
+        lodescription.Clear()
+        locolor.Clear()
+        losize.Clear()
+        locount.Clear()
+        lointernalID.Clear()
+        loshopnumber.Clear()
+        loitemNumber.Clear()
+        loitemQuantity.Clear()
+        loselect.Clear()
+        lolistorderline.Clear()
 
         oUsed.Clear()
         uopartID.Clear()
@@ -466,6 +471,7 @@ Public Class CutManagement
         uoitemNumber.Clear()
         uoitemQuantity.Clear()
         uoUsed.Clear()
+        uolistorderline.Clear()
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
@@ -499,6 +505,7 @@ Public Class CutManagement
                 partlistcount.Add(tempcount)
                 partlistcolor.Add(uocolor(it))
                 itpart += 1
+
                 If it > 0 Then
                     partcountIndex.Add(it)
                 End If
@@ -543,80 +550,103 @@ Public Class CutManagement
         Dim usedcontext2 As ArrayList = New ArrayList
         Dim usedcontextamount As ArrayList = New ArrayList
 
+
+        ' List of new stock that is used
+        Dim usedstockID1 As ArrayList = New ArrayList
+        Dim usedstockID2 As ArrayList = New ArrayList
+        Dim usedstockID3 As ArrayList = New ArrayList
+        Dim useddescription As ArrayList = New ArrayList
+        Dim usedcolor As ArrayList = New ArrayList
+        Dim usedsize1 As ArrayList = New ArrayList
+        Dim usedinternalID As ArrayList = New ArrayList
+        Dim usedUsed As ArrayList = New ArrayList
+        Dim usedcount As ArrayList = New ArrayList
+        Dim usedsaw As ArrayList = New ArrayList
+        Dim usedminsize As ArrayList = New ArrayList
+        Dim stock_exists As ArrayList = New ArrayList
+
+
+        ' List of used stock that is used
+        Dim xusedsize1 As ArrayList = New ArrayList
+        Dim xusedcount As ArrayList = New ArrayList
+        Dim xusedinternalID As ArrayList = New ArrayList
+        Dim xusedcontext2 As ArrayList = New ArrayList
         '
-        ' Loops for individual parts
+        ' Populates list of corresponding new and used stocks
         '
         For it = 0 To partlistd.Count - 1
-            Label14.Text = "Processing Request..."
-            Dim Calculator As CutGLib.CutEngine
-            Calculator = New CutGLib.CutEngine
-            'Calculator.SetComputerLicenseKey("1234")
+            ' List of possible new stocks
+            Dim pusedstockID1 As ArrayList = New ArrayList
+            Dim pusedstockID2 As ArrayList = New ArrayList
+            Dim pusedstockID3 As ArrayList = New ArrayList
+            Dim puseddescription As ArrayList = New ArrayList
+            Dim pusedcolor As ArrayList = New ArrayList
+            Dim pusedsize1 As ArrayList = New ArrayList
+            Dim pusedinternalID As ArrayList = New ArrayList
+            Dim pusedUsed As ArrayList = New ArrayList
+            Dim pusedcount As ArrayList = New ArrayList
+            Dim pusedsaw As ArrayList = New ArrayList
+            Dim pusedminsize As ArrayList = New ArrayList
+
+            stock_exists.Add(False)
             Dim con As New SqlConnection
             Dim cmd As New SqlCommand
             con.ConnectionString = connectionstring.connect1
             con.Open()
             cmd.Connection = con
-
-            ' List of new stock that is used
-            Dim usedstockID1 As ArrayList = New ArrayList
-            Dim usedstockID2 As ArrayList = New ArrayList
-            Dim usedstockID3 As ArrayList = New ArrayList
-            Dim useddescription As ArrayList = New ArrayList
-            Dim usedcolor As ArrayList = New ArrayList
-            Dim usedsize1 As ArrayList = New ArrayList
-            Dim usedinternalID As ArrayList = New ArrayList
-            Dim usedUsed As ArrayList = New ArrayList
-            Dim usedcount As ArrayList = New ArrayList
-            Dim usedsaw As ArrayList = New ArrayList
-            Dim stock_exists As Boolean = False
-
-            ' List of used stock that is used
-            Dim xusedsize1 As ArrayList = New ArrayList
-            Dim xusedcount As ArrayList = New ArrayList
-            Dim xusedinternalID As ArrayList = New ArrayList
-            Dim xusedcontext2 As ArrayList = New ArrayList
-
-
             '
             ' Finds Corresponding new Stocks
             '
-            cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, count, internalID, context1 FROM stockNew"
+            cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, count, internalID, context1, context2 FROM stockNew"
             cmd.ExecuteNonQuery()
             Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
             While readerObj.Read
                 If (readerObj("description").ToString.Contains(partlistd(it)) Or readerObj("stockID2").ToString.Contains(partlistid(it))) Then
-                    usedstockID1.Add(readerObj("stockID1").ToString)
-                    usedstockID2.Add(readerObj("stockID2").ToString)
-                    usedstockID3.Add(readerObj("stockID3").ToString)
-                    useddescription.Add(readerObj("description").ToString)
-                    usedcolor.Add(readerObj("color").ToString)
-                    usedsize1.Add(readerObj("size").ToString)
-                    usedcount.Add(readerObj("count").ToString)
-                    usedinternalID.Add(readerObj("internalID").ToString)
-                    usedsaw.Add(readerObj("context1").ToString)
-                    stock_exists = True
+                    pusedstockID1.Add(readerObj("stockID1").ToString)
+                    pusedstockID2.Add(readerObj("stockID2").ToString)
+                    pusedstockID3.Add(readerObj("stockID3").ToString)
+                    puseddescription.Add(readerObj("description").ToString)
+                    pusedcolor.Add(readerObj("color").ToString)
+                    pusedsize1.Add(readerObj("size").ToString)
+                    pusedcount.Add(readerObj("count").ToString)
+                    pusedinternalID.Add(readerObj("internalID").ToString)
+                    pusedsaw.Add(readerObj("context1").ToString)
+                    pusedminsize.Add(readerObj("context2").ToString)
+                    stock_exists(it) = True
                 End If
             End While
             readerObj.Close()
 
-
             '
             ' Decides Which new Stock to Use and inserts saw if applicable
             '
-            Dim usedstock As Integer = 0
-            If usedinternalID.Count > 1 Then
+            Dim pusedstock As Integer = 0
+            If pusedinternalID.Count > 1 Then
                 Dim frm1 As ChooseStock = New ChooseStock()
-                frm1.des = useddescription
-                frm1.id = usedstockID2
-                frm1.color = usedcolor
-                frm1.saw = usedsaw
+                frm1.des = puseddescription
+                frm1.id = pusedstockID2
+                frm1.color = pusedcolor
+                frm1.saw = pusedsaw
                 frm1.part1 = partlistd(it) + "  ID: " + partlistid(it) + "  Color: " + partlistcolor(it)
 
                 If frm1.ShowDialog() = DialogResult.OK Then
-                    usedstock = frm1.ListBox1.SelectedIndex
-                    usedsaw = frm1.saw
-                    cmd.CommandText = "UPDATE stockNew SET context1 = '" + usedsaw(usedstock) + "' WHERE internalID = '" + usedinternalID(usedstock) + "'"
+                    pusedstock = frm1.ListBox1.SelectedIndex
+                    pusedsaw = frm1.saw
+                    cmd.CommandText = "UPDATE stockNew SET context1 = '" + pusedsaw(pusedstock) + "' WHERE internalID = '" + pusedinternalID(pusedstock) + "'"
                     cmd.ExecuteNonQuery()
+                    '
+                    ' Adds chosen stock to used new stock list
+                    '
+                    usedstockID1.Add(pusedstockID1(pusedstock))
+                    usedstockID2.Add(pusedstockID2(pusedstock))
+                    usedstockID3.Add(pusedstockID3(pusedstock))
+                    useddescription.Add(puseddescription(pusedstock))
+                    usedcolor.Add(pusedcolor(pusedstock))
+                    usedsize1.Add(pusedsize1(pusedstock))
+                    usedcount.Add(pusedcount(pusedstock))
+                    usedinternalID.Add(pusedinternalID(pusedstock))
+                    usedsaw.Add(pusedsaw(pusedstock))
+                    usedminsize.Add(pusedminsize(pusedstock))
 
                     '
                     ' Selects which used stock to use
@@ -625,7 +655,7 @@ Public Class CutManagement
                     cmd.ExecuteNonQuery()
                     readerObj = cmd.ExecuteReader
                     While readerObj.Read
-                        If String.Equals(usedinternalID(usedstock), readerObj("internalID").ToString) Then
+                        If String.Equals(pusedinternalID(pusedstock), readerObj("internalID").ToString) Then
                             xusedsize1.Add(readerObj("size").ToString)
                             xusedcount.Add(readerObj("count").ToString)
                             xusedinternalID.Add(readerObj("internalID").ToString)
@@ -634,26 +664,63 @@ Public Class CutManagement
                         End If
                     End While
                     readerObj.Close()
+                Else
+                    usedstockID1.Add("")
+                    usedstockID2.Add("")
+                    usedstockID3.Add("")
+                    useddescription.Add("")
+                    usedcolor.Add("")
+                    usedsize1.Add("")
+                    usedcount.Add("")
+                    usedinternalID.Add("")
+                    usedsaw.Add("")
+                    usedminsize.Add("")
                 End If
-
+            Else
+                usedstockID1.Add("")
+                usedstockID2.Add("")
+                usedstockID3.Add("")
+                useddescription.Add("")
+                usedcolor.Add("")
+                usedsize1.Add("")
+                usedcount.Add("")
+                usedinternalID.Add("")
+                usedsaw.Add("")
+                usedminsize.Add("")
             End If
+        Next
+        '
+        ' Loops for individual parts
+        '
+        For it = 0 To partlistd.Count - 1
+            Label14.Text = "Calculating Cuts..."
+            Dim Calculator As CutGLib.CutEngine
+            Calculator = New CutGLib.CutEngine
+            'Calculator.SetComputerLicenseKey("1234")
+            Dim con As New SqlConnection
+            Dim cmd As New SqlCommand
+            con.ConnectionString = connectionstring.connect1
+            con.Open()
+            cmd.Connection = con
+            Dim readerObj As SqlClient.SqlDataReader
             '
             ' Adds Stocks
             '
             If xusedinternalID.Count > 0 Then
                 For it1 = 0 To xusedinternalID.Count - 1
-                    Dim temp3 As Double = Convert.ToDouble(xusedsize1(it1))
-                    Dim temp4 As Integer = Convert.ToInt32(xusedcount(it1))
-                    Calculator.AddLinearStock(temp3, temp4)
+                    If String.Equals(xusedinternalID(it1), usedinternalID(it)) Then
+                        Dim temp3 As Double = Convert.ToDouble(xusedsize1(it1))
+                        Dim temp4 As Integer = Convert.ToInt32(xusedcount(it1))
+                        Calculator.AddLinearStock(temp3, temp4)
+                    End If
 
                 Next
             End If
-            If usedinternalID.Count > 0 Then
-                newstockinternalID.Add(usedinternalID(usedstock))
-                Dim temp1 As Double = Convert.ToDouble(usedsize1(usedstock))
-                Dim temp2 As Integer = Convert.ToInt32(usedcount(usedstock))
+            If stock_exists(it) Then
+                newstockinternalID.Add(usedinternalID(it))
+                Dim temp1 As Double = Convert.ToDouble(usedsize1(it))
+                Dim temp2 As Integer = Convert.ToInt32(usedcount(it))
                 Calculator.AddLinearStock(temp1, temp2)
-
             Else
                 '
                 ' Adds Page if can't find stock
@@ -684,7 +751,7 @@ Public Class CutManagement
             '
 
             Dim result As String = "1"
-            If stock_exists Then
+            If stock_exists(it) Then
                 result = Calculator.ExecuteLinear()
 
             End If
@@ -716,10 +783,10 @@ Public Class CutManagement
 
                     Dim slength As Double
                     Calculator.GetLinearStockInfo(StockIndex, slength, StockActive)
-                    If String.Equals(slength.ToString, usedsize1(usedstock)) Then
+                    If String.Equals(slength.ToString, usedsize1(it)) Then
                         itemcount += VStockCount
                     End If
-                    If Not String.Equals(slength.ToString, usedsize1(usedstock)) Then
+                    If Not String.Equals(slength.ToString, usedsize1(it)) Then
                         itemcount2 += VStockCount
                     End If
 
@@ -779,15 +846,15 @@ Public Class CutManagement
                         Dim sizestring As String = xt
 
 
-                        If Not String.Equals(slength.ToString, usedsize1(usedstock)) Then
+                        If Not String.Equals(slength.ToString, usedsize1(it)) Then
                             sizestring = xt + "  Used Part Check Bin"
                         End If
 
                         Dim descriptionString As String = partlistd(it)
-                        Dim descriptionString2 As String = "ID: " + usedstockID2(usedstock)
-                        Dim descriptionString3 As String = "ID2: " + usedstockID3(usedstock)
-                        Dim descriptionString4 As String = "Stock Size: " + sizestring + "  Color: " + usedcolor(usedstock)
-                        Dim descriptionstring5 As String = "Saw number: " + usedsaw(usedstock)
+                        Dim descriptionString2 As String = "ID: " + usedstockID2(it)
+                        Dim descriptionString3 As String = "ID2: " + usedstockID3(it)
+                        Dim descriptionString4 As String = "Stock Size: " + sizestring + "  Color: " + usedcolor(it)
+                        Dim descriptionstring5 As String = "Saw number: " + usedsaw(it)
                         Dim descriptionstring6 As String = "# Of Stock Cut: " + temp
                         Dim descriptionstring7 As String = "Layout Number = " + temp1
                         Dim leftanchor As Integer = 50
@@ -824,7 +891,7 @@ Public Class CutManagement
                                 remainder = VX + partLength
                             End If
                         Next ViPart
-                        If usedsize1(usedstock) - remainder > connectionstring.usedsize Then
+                        If usedsize1(it) - remainder > usedminsize(it) Then
                             gfx.DrawString("Save Remainder Piece ", font, XBrushes.Black, New XRect(leftanchor, 140 + pos1 + pos2, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                             If over20 Then
                                 pos1 += 10
@@ -838,13 +905,14 @@ Public Class CutManagement
                         '
                         ' Saves list of used stock that was actually used
                         '
-                        If StockLength <> usedsize1(usedstock) Then
+                        If StockLength <> usedsize1(it) Then
                             cmd.CommandText = "SELECT stockID2, size, count, internalID, context2  FROM stockUsed"
                             cmd.ExecuteNonQuery()
 
+
                             readerObj = cmd.ExecuteReader
                             While readerObj.Read
-                                If String.Equals(usedinternalID(usedstock), readerObj("internalID").ToString) And StockLength = readerObj("size") Then
+                                If String.Equals(usedinternalID(it), readerObj("internalID").ToString) And StockLength = readerObj("size") Then
                                     usedcontext2.Add(readerObj("context2").ToString)
                                     usedcontextamount.Add(temp)
                                 End If
@@ -855,7 +923,7 @@ Public Class CutManagement
                         '
                         ' Saves remainder parts to table
                         '
-                        If usedsize1(usedstock) - remainder > connectionstring.usedsize Then
+                        If usedsize1(it) - remainder > usedminsize(it) Then
                             Dim internalID As ArrayList = New ArrayList
                             Dim rn As New Random
                             Dim it1 As Integer
@@ -887,10 +955,10 @@ Public Class CutManagement
                             Next
 
                             Dim temp3 As String = Convert.ToString(inputusedID)
-                            Dim temp2 As String = Convert.ToString(usedsize1(usedstock) - remainder)
+                            Dim temp2 As String = Convert.ToString(usedsize1(it) - remainder)
                             If stockid2.Count > 1 Then
                                 For it2 = 0 To stockid2.Count - 1
-                                    If String.Equals(stockid2(it2), usedstockID2(usedstock)) AndAlso String.Equals(size(it2), temp2) Then
+                                    If String.Equals(stockid2(it2), usedstockID2(it)) AndAlso String.Equals(size(it2), temp2) Then
                                         count(it2) += Convert.ToInt64(temp)
                                         cmd.CommandText = "UPDATE stockUsed SET count = " + count(it2).ToString + " WHERE context2 = " + internalID(it2).ToString
                                         cmd.ExecuteNonQuery()
@@ -902,7 +970,7 @@ Public Class CutManagement
                             End If
 
                             If Not boolupdatetable Then
-                                cmd.CommandText = "INSERT INTO stockUsed VALUES('" + usedstockID1(usedstock) + "', '" + usedstockID2(usedstock) + "' , '" + usedstockID3(usedstock) + "', '" + useddescription(usedstock) + "' , '" + usedcolor(usedstock) + "', " + temp2 + ", " + temp + ", " + usedinternalID(usedstock) + " , '' , '" + usedsaw(usedstock) + "' , " + temp3 + ", '')"
+                                cmd.CommandText = "INSERT INTO stockUsed VALUES('" + usedstockID1(it) + "', '" + usedstockID2(it) + "' , '" + usedstockID3(it) + "', '" + useddescription(it) + "' , '" + usedcolor(it) + "', " + temp2 + ", " + temp + ", " + usedinternalID(it) + " , '' , '" + usedsaw(it) + "' , " + temp3 + ", '')"
                                 cmd.ExecuteNonQuery()
                                 usedstockinternalIDcreated.Add(inputusedID)
                             End If
@@ -914,13 +982,13 @@ Public Class CutManagement
                 excountlistu.Add(itemcount2)
                 excountwork.Add(0)
 
-            ElseIf stock_exists Then
+            ElseIf stock_exists(it) Then
                 itWorks = True
                 Console.WriteLine("calculate fail")
                 Dim page As PdfPage = document.AddPage
                 Dim gfx As XGraphics = XGraphics.FromPdfPage(page)
                 gfx.DrawString("Not enough stock: " + partlistd(it), font2, XBrushes.Black, New XRect(50, 50, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
-                excountlist.Add(usedcount(usedstock))
+                excountlist.Add(usedcount(it))
                 excountlistu.Add(0)
                 excountwork.Add(2)
             End If

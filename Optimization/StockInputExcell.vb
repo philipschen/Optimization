@@ -54,7 +54,8 @@ Public Class StockInputExcell
                 Dim c5 As String = shXL.Cells(2 + it, 6).Value
                 Dim c6 As String = shXL.Cells(2 + it, 7).Value
                 Dim c8 As String = shXL.Cells(2 + it, 8).Value
-                Dim c10 As String = shXL.Cells(2 + it, 9).Value
+                Dim c9 As String = shXL.Cells(2 + it, 9).Value
+                Dim c10 As String = shXL.Cells(2 + it, 10).Value
 
                 Dim inputinternal As Integer
                 Dim rn As New Random
@@ -77,6 +78,7 @@ Public Class StockInputExcell
                 Dim in5 As String = ""
                 Dim in6 As String = ""
                 Dim in8 As String = ""
+                Dim in9 As String = ""
                 Dim in10 As String = ""
 
                 If c0 IsNot Nothing Then
@@ -103,6 +105,9 @@ Public Class StockInputExcell
                 If c8 IsNot Nothing Then
                     in8 = c8
                 End If
+                If c9 IsNot Nothing Then
+                    in9 = c9
+                End If
                 If c10 IsNot Nothing Then
                     in10 = c10
                 End If
@@ -117,7 +122,7 @@ Public Class StockInputExcell
                 DataGridView1.Rows(it).Cells(6).Value = in6
                 DataGridView1.Rows(it).Cells(7).Value = inputinternal
                 DataGridView1.Rows(it).Cells(8).Value = in8
-                DataGridView1.Rows(it).Cells(9).Value = 0
+                DataGridView1.Rows(it).Cells(9).Value = in9
                 DataGridView1.Rows(it).Cells(10).Value = in10
             Next
             Label1.Text = "Loading Complete"

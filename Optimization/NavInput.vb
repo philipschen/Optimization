@@ -191,6 +191,7 @@ Public Class NavInput
             ar4(it) = frminfo.color
             ar5(it) = frminfo.size1
             ar8(it) = frminfo.saw
+            ar9(it) = frminfo.minsize
             cmd1.CommandText = "INSERT INTO stockNew VALUES('" + ar0(it) + "', '" + ar1(it) + "' , '" + ar2(it) + "', '" + ar3(it) + "' , '" + ar4(it) + "', " + ar5(it) + " , " + ar6(it) + ", " + ar7(it) + ", '" + ar8(it) + "'," + ar9(it) + ",'" + ar10(it) + "')"
             cmd1.ExecuteNonQuery()
         Next
