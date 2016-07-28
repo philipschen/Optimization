@@ -129,7 +129,7 @@ Public Class CutManagement
         con.Open()
         cmd.Connection = con
 
-        cmd.CommandText = "SELECT partID, description, color, size, count, internalID, shopNumber, itemNumber, itemQuantity, context1 FROM parts ORDER BY itemNumber, itemQuantity, description"
+        cmd.CommandText = "SELECT partID, description, color, size, count, internalID, shopNumber, itemNumber, itemQuantity, context1 FROM parts ORDER BY context1, itemNumber"
         cmd.ExecuteNonQuery()
         Dim readerObj1 As SqlClient.SqlDataReader = cmd.ExecuteReader
 
@@ -138,7 +138,7 @@ Public Class CutManagement
         While readerObj1.Read
             If String.Equals(ComboBox6.SelectedItem, readerObj1("shopNumber").ToString) Then
                 Dim tempSize As Double = Convert.ToDouble(readerObj1("Size").ToString)
-                osetNumber.Add("ItemNumber: " + readerObj1("itemNumber").ToString + "item Quantity: " + readerObj1("itemQuantity").ToString)
+                osetNumber.Add("Quote:" + readerObj1("context1").ToString + " Line :" + readerObj1("itemNumber").ToString + " Count :" + readerObj1("itemQuantity").ToString)
 
                 ListBox3.Items.Add(readerObj1("description").ToString)
 
@@ -475,6 +475,11 @@ Public Class CutManagement
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+
+        Dim uocountdown As ArrayList = New ArrayList
+        For it = 0 To uocount.Count - 1
+            uocountdown.Add(uoitemQuantity(it))
+        Next
         '
         ' lists of nonduplicate, combined parts
         '
@@ -691,7 +696,7 @@ Public Class CutManagement
         Next
 
         '
-        ' Checks if any parts are omited and then sorts by saw
+        ' Checks if any parts are omited
         '
         Dim frm2 As OmitParts = New OmitParts()
         frm2.des = partlistd
@@ -723,7 +728,71 @@ Public Class CutManagement
                 stock_exists.RemoveAt(intloc)
             Next
         End If
+        '
+        ' Sort by saw
+        '
+        Dim switchpos As ArrayList = New ArrayList
+        Dim alreadyin As ArrayList = New ArrayList
+        Dim sorted As SortedList(Of String, Integer) = New SortedList(Of String, Integer)
+        For it = 0 To usedsaw.Count - 1
+            sorted.Add(usedsaw(it) + it.ToString, it)
+        Next
+        ' Loop over pairs in the collection.
+        For Each pair As KeyValuePair(Of String, Integer) In sorted
+            switchpos.Add(pair.Value)
+        Next
 
+        Dim tusedstockid1 As ArrayList = New ArrayList
+        Dim tusedstockid2 As ArrayList = New ArrayList
+        Dim tusedstockid3 As ArrayList = New ArrayList
+        Dim tuseddescription As ArrayList = New ArrayList
+        Dim tusedcolor As ArrayList = New ArrayList
+        Dim tusedsize1 As ArrayList = New ArrayList
+        Dim tusedcount As ArrayList = New ArrayList
+        Dim tusedinternalID As ArrayList = New ArrayList
+        Dim tusedsaw As ArrayList = New ArrayList
+        Dim tusedminsize As ArrayList = New ArrayList
+        Dim tstock_exists As ArrayList = New ArrayList
+
+        For it = 0 To usedstockID1.Count - 1
+            tusedstockid1.Add(usedstockID1(it))
+            tusedstockid2.Add(usedstockID2(it))
+            tusedstockid3.Add(usedstockID3(it))
+            tuseddescription.Add(useddescription(it))
+            tusedcolor.Add(usedcolor(it))
+            tusedsize1.Add(usedsize1(it))
+            tusedcount.Add(usedcount(it))
+            tusedinternalID.Add(usedinternalID(it))
+            tusedsaw.Add(usedsaw(it))
+            tusedminsize.Add(usedminsize(it))
+            tstock_exists.Add(stock_exists(it))
+        Next
+
+        usedstockID1.Clear()
+        usedstockID2.Clear()
+        usedstockID3.Clear()
+        useddescription.Clear()
+        usedcolor.Clear()
+        usedsize1.Clear()
+        usedcount.Clear()
+        usedinternalID.Clear()
+        usedsaw.Clear()
+        usedminsize.Clear()
+        stock_exists.Clear()
+
+        For it = 0 To switchpos.Count - 1
+            usedstockID1.Add(tusedstockid1(switchpos(it)))
+            usedstockID2.Add(tusedstockid2(switchpos(it)))
+            usedstockID3.Add(tusedstockid3(switchpos(it)))
+            useddescription.Add(tuseddescription(switchpos(it)))
+            usedcolor.Add(tusedcolor(switchpos(it)))
+            usedsize1.Add(tusedsize1(switchpos(it)))
+            usedcount.Add(tusedcount(switchpos(it)))
+            usedinternalID.Add(tusedinternalID(switchpos(it)))
+            usedsaw.Add(tusedsaw(switchpos(it)))
+            usedminsize.Add(tusedminsize(switchpos(it)))
+            stock_exists.Add(tstock_exists(switchpos(it)))
+        Next
         '
         ' Loops for individual parts
         '
@@ -926,16 +995,22 @@ Public Class CutManagement
                             End If
 
                             gfx.DrawString("Cut position= " + VX.ToString + " Length= " + partLength.ToString, font, XBrushes.Black, New XRect(leftanchor, 135 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+
+                            gfx.DrawString("Format Output", font2, XBrushes.Black, New XRect(leftanchor + 250, 135 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+
                             If over20 Then
                                 pos1 += 10
                             Else
                                 pos1 += 14
                             End If
 
+
+
                             If VX + partLength > remainder Then
                                 remainder = VX + partLength
                             End If
                         Next ViPart
+
                         If usedsize1(it) - remainder > usedminsize(it) Then
                             gfx.DrawString("Save Remainder Piece ", font, XBrushes.Black, New XRect(leftanchor, 135 + pos1 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                             If over20 Then
