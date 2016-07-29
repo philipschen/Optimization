@@ -1009,20 +1009,21 @@ Public Class CutManagement
                                     If partLength = uosize(it1) AndAlso String.Equals(partlistid(it), uopartID(it1)) Then
                                         For it2 = uocountdown(it1) To uoitemQuantity(it1)
                                             If layoutit > 0 Then
+                                                Dim itcount As Integer = uocountdownrep(it1)
                                                 Dim remove3 As Integer = 0
 
-                                                For it3 = 1 To uocountdownrep(it1)
+                                                For it3 = 1 To itcount
                                                     If layoutit > 0 Then
                                                         tempstring.Add(uolistorderline(it1) + "-" + uoitemNumber(it1).ToString + "-" + it2.ToString)
                                                         layoutit -= 1
-                                                        remove2 += 1
+
                                                         remove3 += 1
                                                     End If
                                                     If layoutit = 0 Then
                                                     End If
                                                 Next
-                                                'uocountdownrep(it1) -= remove3
-                                                'remove3 = 0
+                                                remove2 += 1
+                                                itcount -= remove3
                                             End If
                                         Next
                                         uocountdown(it1) += remove2
