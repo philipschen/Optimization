@@ -30,7 +30,6 @@ Partial Class Extrusions
         Me.StockID2DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StockID3DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescriptionDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColorDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SizeDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CountDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.InternalIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -38,7 +37,7 @@ Partial Class Extrusions
         Me.Context2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Context3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StockUsedBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.OptimizationDatabaseDataSet3 = New OptimizationDatabaseDataSet3()
+        Me.OptimizationDatabaseDataSet3 = New Optimization.OptimizationDatabaseDataSet3()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -50,8 +49,6 @@ Partial Class Extrusions
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.ListBox3 = New System.Windows.Forms.ListBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.ListBox4 = New System.Windows.Forms.ListBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.ComboBox8 = New System.Windows.Forms.ComboBox()
@@ -71,7 +68,7 @@ Partial Class Extrusions
         Me.SizeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StockNewBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.OptimizationDatabaseDataSet = New OptimizationDatabaseDataSet()
+        Me.OptimizationDatabaseDataSet = New Optimization.OptimizationDatabaseDataSet()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
@@ -81,8 +78,6 @@ Partial Class Extrusions
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ListBox2 = New System.Windows.Forms.ListBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.ComboBox7 = New System.Windows.Forms.ComboBox()
@@ -93,9 +88,13 @@ Partial Class Extrusions
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.StockNewTableAdapter = New OptimizationDatabaseDataSetTableAdapters.stockNewTableAdapter()
-        Me.StockUsedTableAdapter = New OptimizationDatabaseDataSet3TableAdapters.stockUsedTableAdapter()
+        Me.StockNewTableAdapter = New Optimization.OptimizationDatabaseDataSetTableAdapters.stockNewTableAdapter()
+        Me.StockUsedTableAdapter = New Optimization.OptimizationDatabaseDataSet3TableAdapters.stockUsedTableAdapter()
         Me.Label19 = New System.Windows.Forms.Label()
+        Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
+        Me.RichTextBox4 = New System.Windows.Forms.RichTextBox()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
         Me.TabPage2.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.StockUsedBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -121,6 +120,9 @@ Partial Class Extrusions
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.Button8)
+        Me.TabPage2.Controls.Add(Me.Button7)
+        Me.TabPage2.Controls.Add(Me.RichTextBox3)
         Me.TabPage2.Controls.Add(Me.DataGridView2)
         Me.TabPage2.Controls.Add(Me.TextBox3)
         Me.TabPage2.Controls.Add(Me.Label16)
@@ -133,8 +135,6 @@ Partial Class Extrusions
         Me.TabPage2.Controls.Add(Me.Label10)
         Me.TabPage2.Controls.Add(Me.Label11)
         Me.TabPage2.Controls.Add(Me.ListBox3)
-        Me.TabPage2.Controls.Add(Me.Label12)
-        Me.TabPage2.Controls.Add(Me.ListBox4)
         Me.TabPage2.Controls.Add(Me.GroupBox2)
         Me.TabPage2.Location = New System.Drawing.Point(4, 44)
         Me.TabPage2.Name = "TabPage2"
@@ -150,7 +150,7 @@ Partial Class Extrusions
         Me.DataGridView2.AllowUserToDeleteRows = False
         Me.DataGridView2.AutoGenerateColumns = False
         Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.StockID1DataGridViewTextBoxColumn1, Me.StockID2DataGridViewTextBoxColumn1, Me.StockID3DataGridViewTextBoxColumn1, Me.DescriptionDataGridViewTextBoxColumn1, Me.ColorDataGridViewTextBoxColumn1, Me.SizeDataGridViewTextBoxColumn1, Me.CountDataGridViewTextBoxColumn1, Me.InternalIDDataGridViewTextBoxColumn, Me.Context1DataGridViewTextBoxColumn, Me.Context2DataGridViewTextBoxColumn, Me.Context3DataGridViewTextBoxColumn})
+        Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.StockID1DataGridViewTextBoxColumn1, Me.StockID2DataGridViewTextBoxColumn1, Me.StockID3DataGridViewTextBoxColumn1, Me.DescriptionDataGridViewTextBoxColumn1, Me.SizeDataGridViewTextBoxColumn1, Me.CountDataGridViewTextBoxColumn1, Me.InternalIDDataGridViewTextBoxColumn, Me.Context1DataGridViewTextBoxColumn, Me.Context2DataGridViewTextBoxColumn, Me.Context3DataGridViewTextBoxColumn})
         Me.DataGridView2.DataSource = Me.StockUsedBindingSource
         Me.DataGridView2.Location = New System.Drawing.Point(545, 6)
         Me.DataGridView2.Name = "DataGridView2"
@@ -185,13 +185,6 @@ Partial Class Extrusions
         Me.DescriptionDataGridViewTextBoxColumn1.HeaderText = "description"
         Me.DescriptionDataGridViewTextBoxColumn1.Name = "DescriptionDataGridViewTextBoxColumn1"
         Me.DescriptionDataGridViewTextBoxColumn1.ReadOnly = True
-        '
-        'ColorDataGridViewTextBoxColumn1
-        '
-        Me.ColorDataGridViewTextBoxColumn1.DataPropertyName = "color"
-        Me.ColorDataGridViewTextBoxColumn1.HeaderText = "color"
-        Me.ColorDataGridViewTextBoxColumn1.Name = "ColorDataGridViewTextBoxColumn1"
-        Me.ColorDataGridViewTextBoxColumn1.ReadOnly = True
         '
         'SizeDataGridViewTextBoxColumn1
         '
@@ -347,26 +340,6 @@ Partial Class Extrusions
         Me.ListBox3.Size = New System.Drawing.Size(330, 100)
         Me.ListBox3.TabIndex = 16
         '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(9, 247)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(40, 16)
-        Me.Label12.TabIndex = 15
-        Me.Label12.Text = "Color"
-        '
-        'ListBox4
-        '
-        Me.ListBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListBox4.FormattingEnabled = True
-        Me.ListBox4.ItemHeight = 16
-        Me.ListBox4.Location = New System.Drawing.Point(12, 270)
-        Me.ListBox4.Name = "ListBox4"
-        Me.ListBox4.Size = New System.Drawing.Size(132, 84)
-        Me.ListBox4.TabIndex = 14
-        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.Label18)
@@ -463,6 +436,7 @@ Partial Class Extrusions
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.RichTextBox4)
         Me.TabPage1.Controls.Add(Me.DataGridView1)
         Me.TabPage1.Controls.Add(Me.Button3)
         Me.TabPage1.Controls.Add(Me.Label8)
@@ -473,8 +447,6 @@ Partial Class Extrusions
         Me.TabPage1.Controls.Add(Me.Label3)
         Me.TabPage1.Controls.Add(Me.Label2)
         Me.TabPage1.Controls.Add(Me.ListBox2)
-        Me.TabPage1.Controls.Add(Me.Label1)
-        Me.TabPage1.Controls.Add(Me.ListBox1)
         Me.TabPage1.Controls.Add(Me.GroupBox1)
         Me.TabPage1.Location = New System.Drawing.Point(4, 44)
         Me.TabPage1.Name = "TabPage1"
@@ -641,26 +613,6 @@ Partial Class Extrusions
         Me.ListBox2.Size = New System.Drawing.Size(330, 100)
         Me.ListBox2.TabIndex = 3
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(9, 247)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(40, 16)
-        Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Color"
-        '
-        'ListBox1
-        '
-        Me.ListBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.ItemHeight = 16
-        Me.ListBox1.Location = New System.Drawing.Point(12, 270)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(132, 84)
-        Me.ListBox1.TabIndex = 1
-        '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.Label17)
@@ -785,6 +737,42 @@ Partial Class Extrusions
         Me.Label19.TabIndex = 2
         Me.Label19.Text = "Loading..."
         '
+        'RichTextBox3
+        '
+        Me.RichTextBox3.Location = New System.Drawing.Point(12, 244)
+        Me.RichTextBox3.Name = "RichTextBox3"
+        Me.RichTextBox3.ReadOnly = True
+        Me.RichTextBox3.Size = New System.Drawing.Size(176, 108)
+        Me.RichTextBox3.TabIndex = 28
+        Me.RichTextBox3.Text = ""
+        '
+        'RichTextBox4
+        '
+        Me.RichTextBox4.Location = New System.Drawing.Point(12, 244)
+        Me.RichTextBox4.Name = "RichTextBox4"
+        Me.RichTextBox4.ReadOnly = True
+        Me.RichTextBox4.Size = New System.Drawing.Size(176, 108)
+        Me.RichTextBox4.TabIndex = 29
+        Me.RichTextBox4.Text = ""
+        '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(167, 358)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(129, 68)
+        Me.Button7.TabIndex = 29
+        Me.Button7.Text = "Clear This ID"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'Button8
+        '
+        Me.Button8.Location = New System.Drawing.Point(320, 360)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(129, 68)
+        Me.Button8.TabIndex = 30
+        Me.Button8.Text = "Clear Table"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
         'Extrusions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -824,8 +812,6 @@ Partial Class Extrusions
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents ListBox2 As ListBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents ListBox1 As ListBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
@@ -856,8 +842,6 @@ Partial Class Extrusions
     Friend WithEvents Label10 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents ListBox3 As ListBox
-    Friend WithEvents Label12 As Label
-    Friend WithEvents ListBox4 As ListBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents Label13 As Label
     Friend WithEvents Label14 As Label
@@ -872,19 +856,22 @@ Partial Class Extrusions
     Friend WithEvents Label18 As Label
     Friend WithEvents ComboBox8 As ComboBox
     Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents OptimizationDatabaseDataSet3 As OptimizationDatabaseDataSet3
+    Friend WithEvents StockUsedBindingSource As BindingSource
+    Friend WithEvents StockUsedTableAdapter As OptimizationDatabaseDataSet3TableAdapters.stockUsedTableAdapter
+    Friend WithEvents Label19 As Label
     Friend WithEvents StockID1DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents StockID2DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents StockID3DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents DescriptionDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-    Friend WithEvents ColorDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents SizeDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents CountDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents InternalIDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents Context1DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents Context2DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents Context3DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents OptimizationDatabaseDataSet3 As OptimizationDatabaseDataSet3
-    Friend WithEvents StockUsedBindingSource As BindingSource
-    Friend WithEvents StockUsedTableAdapter As OptimizationDatabaseDataSet3TableAdapters.stockUsedTableAdapter
-    Friend WithEvents Label19 As Label
+    Friend WithEvents RichTextBox3 As RichTextBox
+    Friend WithEvents RichTextBox4 As RichTextBox
+    Friend WithEvents Button8 As Button
+    Friend WithEvents Button7 As Button
 End Class

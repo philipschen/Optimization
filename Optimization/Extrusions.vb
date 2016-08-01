@@ -27,14 +27,9 @@ Public Class Extrusions
         Me.Text = connectionstring.version
 
         Label19.Visible = False
-        ListBox1.Visible = False
-        ListBox4.Visible = False
-        Label1.Visible = False
-        Label12.Visible = False
-        'ListBox1.Items.Add("Bronze")
-        'ListBox1.Items.Add("White")
-        'ListBox1.Items.Add("Silver")
-        'ListBox1.Items.Add("Other")
+        RichTextBox3.Text = "F201 = BRONZE" + vbCrLf + "F202 = WHITE" + vbCrLf + "FSP2 = OTHER"
+        RichTextBox3.Text = "F201 = BRONZE" + vbCrLf + "F202 = WHITE" + vbCrLf + "FSP2 = OTHER"
+
         ListBox2.Items.Add("New Part")
 
         Dim con As New SqlConnection
@@ -684,4 +679,34 @@ Public Class Extrusions
         Label19.Visible = False
     End Sub
 
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+
+        Dim result1 As DialogResult = MessageBox.Show("Are you certain you want to clear this extrusion of all used parts?", "Confirm Deletion", MessageBoxButtons.YesNo)
+        If result1 = DialogResult.Yes Then
+            Dim con As New SqlConnection
+            Dim cmd As New SqlCommand
+            con.ConnectionString = connectionstring.connect1
+            con.Open()
+            cmd.Connection = con
+
+            cmd.CommandText = "DELETE FROM stockUsed WHERE stockID2 = '" + stockID2(oUsed(ListBox3.SelectedIndex)) + "'"
+            cmd.ExecuteNonQuery()
+
+            Me.StockUsedTableAdapter.Fill(Me.OptimizationDatabaseDataSet3.stockUsed)
+        End If
+
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        Dim con As New SqlConnection
+        Dim cmd As New SqlCommand
+        con.ConnectionString = connectionstring.connect1
+        con.Open()
+        cmd.Connection = con
+
+        cmd.CommandText = "DELETE FROM stockUsed"
+        cmd.ExecuteNonQuery()
+
+        Me.StockUsedTableAdapter.Fill(Me.OptimizationDatabaseDataSet3.stockUsed)
+    End Sub
 End Class

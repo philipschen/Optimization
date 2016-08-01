@@ -115,6 +115,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Class1.vb" />
+    <Compile Include="Confirm1.Designer.vb">
+      <DependentUpon>Confirm1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Confirm1.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CutManagement.Designer.vb">
       <DependentUpon>CutManagement.vb</DependentUpon>
     </Compile>
@@ -261,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChooseStock.resx">
       <DependentUpon>ChooseStock.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Confirm1.resx">
+      <DependentUpon>Confirm1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CutManagement.resx">
       <DependentUpon>CutManagement.vb</DependentUpon>

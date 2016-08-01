@@ -158,12 +158,14 @@ Partial Class DirectlyEdit
         'DataGridView1
         '
         Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.AutoGenerateColumns = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.StockID1DataGridViewTextBoxColumn1, Me.StockID2DataGridViewTextBoxColumn1, Me.StockID3DataGridViewTextBoxColumn1, Me.DescriptionDataGridViewTextBoxColumn1, Me.ColorDataGridViewTextBoxColumn1, Me.SizeDataGridViewTextBoxColumn1, Me.CountDataGridViewTextBoxColumn1, Me.InternalIDDataGridViewTextBoxColumn1, Me.Context1DataGridViewTextBoxColumn1, Me.Context2DataGridViewTextBoxColumn1, Me.Context3DataGridViewTextBoxColumn1})
         Me.DataGridView1.DataSource = Me.StockNewBindingSource
         Me.DataGridView1.Location = New System.Drawing.Point(6, 6)
         Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.Size = New System.Drawing.Size(1140, 518)
         Me.DataGridView1.TabIndex = 0
         '
@@ -172,66 +174,77 @@ Partial Class DirectlyEdit
         Me.StockID1DataGridViewTextBoxColumn1.DataPropertyName = "stockID1"
         Me.StockID1DataGridViewTextBoxColumn1.HeaderText = "stockID1"
         Me.StockID1DataGridViewTextBoxColumn1.Name = "StockID1DataGridViewTextBoxColumn1"
+        Me.StockID1DataGridViewTextBoxColumn1.ReadOnly = True
         '
         'StockID2DataGridViewTextBoxColumn1
         '
         Me.StockID2DataGridViewTextBoxColumn1.DataPropertyName = "stockID2"
         Me.StockID2DataGridViewTextBoxColumn1.HeaderText = "stockID2"
         Me.StockID2DataGridViewTextBoxColumn1.Name = "StockID2DataGridViewTextBoxColumn1"
+        Me.StockID2DataGridViewTextBoxColumn1.ReadOnly = True
         '
         'StockID3DataGridViewTextBoxColumn1
         '
         Me.StockID3DataGridViewTextBoxColumn1.DataPropertyName = "stockID3"
         Me.StockID3DataGridViewTextBoxColumn1.HeaderText = "stockID3"
         Me.StockID3DataGridViewTextBoxColumn1.Name = "StockID3DataGridViewTextBoxColumn1"
+        Me.StockID3DataGridViewTextBoxColumn1.ReadOnly = True
         '
         'DescriptionDataGridViewTextBoxColumn1
         '
         Me.DescriptionDataGridViewTextBoxColumn1.DataPropertyName = "description"
         Me.DescriptionDataGridViewTextBoxColumn1.HeaderText = "description"
         Me.DescriptionDataGridViewTextBoxColumn1.Name = "DescriptionDataGridViewTextBoxColumn1"
+        Me.DescriptionDataGridViewTextBoxColumn1.ReadOnly = True
         '
         'ColorDataGridViewTextBoxColumn1
         '
         Me.ColorDataGridViewTextBoxColumn1.DataPropertyName = "color"
         Me.ColorDataGridViewTextBoxColumn1.HeaderText = "color"
         Me.ColorDataGridViewTextBoxColumn1.Name = "ColorDataGridViewTextBoxColumn1"
+        Me.ColorDataGridViewTextBoxColumn1.ReadOnly = True
         '
         'SizeDataGridViewTextBoxColumn1
         '
         Me.SizeDataGridViewTextBoxColumn1.DataPropertyName = "size"
         Me.SizeDataGridViewTextBoxColumn1.HeaderText = "size"
         Me.SizeDataGridViewTextBoxColumn1.Name = "SizeDataGridViewTextBoxColumn1"
+        Me.SizeDataGridViewTextBoxColumn1.ReadOnly = True
         '
         'CountDataGridViewTextBoxColumn1
         '
         Me.CountDataGridViewTextBoxColumn1.DataPropertyName = "count"
         Me.CountDataGridViewTextBoxColumn1.HeaderText = "count"
         Me.CountDataGridViewTextBoxColumn1.Name = "CountDataGridViewTextBoxColumn1"
+        Me.CountDataGridViewTextBoxColumn1.ReadOnly = True
         '
         'InternalIDDataGridViewTextBoxColumn1
         '
         Me.InternalIDDataGridViewTextBoxColumn1.DataPropertyName = "internalID"
         Me.InternalIDDataGridViewTextBoxColumn1.HeaderText = "internalID"
         Me.InternalIDDataGridViewTextBoxColumn1.Name = "InternalIDDataGridViewTextBoxColumn1"
+        Me.InternalIDDataGridViewTextBoxColumn1.ReadOnly = True
         '
         'Context1DataGridViewTextBoxColumn1
         '
         Me.Context1DataGridViewTextBoxColumn1.DataPropertyName = "context1"
         Me.Context1DataGridViewTextBoxColumn1.HeaderText = "context1"
         Me.Context1DataGridViewTextBoxColumn1.Name = "Context1DataGridViewTextBoxColumn1"
+        Me.Context1DataGridViewTextBoxColumn1.ReadOnly = True
         '
         'Context2DataGridViewTextBoxColumn1
         '
         Me.Context2DataGridViewTextBoxColumn1.DataPropertyName = "context2"
         Me.Context2DataGridViewTextBoxColumn1.HeaderText = "context2"
         Me.Context2DataGridViewTextBoxColumn1.Name = "Context2DataGridViewTextBoxColumn1"
+        Me.Context2DataGridViewTextBoxColumn1.ReadOnly = True
         '
         'Context3DataGridViewTextBoxColumn1
         '
         Me.Context3DataGridViewTextBoxColumn1.DataPropertyName = "context3"
         Me.Context3DataGridViewTextBoxColumn1.HeaderText = "context3"
         Me.Context3DataGridViewTextBoxColumn1.Name = "Context3DataGridViewTextBoxColumn1"
+        Me.Context3DataGridViewTextBoxColumn1.ReadOnly = True
         '
         'StockNewBindingSource
         '
@@ -282,12 +295,15 @@ Partial Class DirectlyEdit
         '
         'DataGridView3
         '
+        Me.DataGridView3.AllowUserToAddRows = False
+        Me.DataGridView3.AllowUserToDeleteRows = False
         Me.DataGridView3.AutoGenerateColumns = False
         Me.DataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView3.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.StockID1DataGridViewTextBoxColumn2, Me.StockID2DataGridViewTextBoxColumn2, Me.StockID3DataGridViewTextBoxColumn2, Me.DescriptionDataGridViewTextBoxColumn3, Me.ColorDataGridViewTextBoxColumn3, Me.SizeDataGridViewTextBoxColumn3, Me.CountDataGridViewTextBoxColumn3, Me.InternalIDDataGridViewTextBoxColumn3, Me.LocationDataGridViewTextBoxColumn, Me.Context1DataGridViewTextBoxColumn3, Me.Context2DataGridViewTextBoxColumn3, Me.Context3DataGridViewTextBoxColumn3})
         Me.DataGridView3.DataSource = Me.StockUsedBindingSource
         Me.DataGridView3.Location = New System.Drawing.Point(6, 6)
         Me.DataGridView3.Name = "DataGridView3"
+        Me.DataGridView3.ReadOnly = True
         Me.DataGridView3.Size = New System.Drawing.Size(1140, 518)
         Me.DataGridView3.TabIndex = 0
         '
@@ -296,72 +312,84 @@ Partial Class DirectlyEdit
         Me.StockID1DataGridViewTextBoxColumn2.DataPropertyName = "stockID1"
         Me.StockID1DataGridViewTextBoxColumn2.HeaderText = "stockID1"
         Me.StockID1DataGridViewTextBoxColumn2.Name = "StockID1DataGridViewTextBoxColumn2"
+        Me.StockID1DataGridViewTextBoxColumn2.ReadOnly = True
         '
         'StockID2DataGridViewTextBoxColumn2
         '
         Me.StockID2DataGridViewTextBoxColumn2.DataPropertyName = "stockID2"
         Me.StockID2DataGridViewTextBoxColumn2.HeaderText = "stockID2"
         Me.StockID2DataGridViewTextBoxColumn2.Name = "StockID2DataGridViewTextBoxColumn2"
+        Me.StockID2DataGridViewTextBoxColumn2.ReadOnly = True
         '
         'StockID3DataGridViewTextBoxColumn2
         '
         Me.StockID3DataGridViewTextBoxColumn2.DataPropertyName = "stockID3"
         Me.StockID3DataGridViewTextBoxColumn2.HeaderText = "stockID3"
         Me.StockID3DataGridViewTextBoxColumn2.Name = "StockID3DataGridViewTextBoxColumn2"
+        Me.StockID3DataGridViewTextBoxColumn2.ReadOnly = True
         '
         'DescriptionDataGridViewTextBoxColumn3
         '
         Me.DescriptionDataGridViewTextBoxColumn3.DataPropertyName = "description"
         Me.DescriptionDataGridViewTextBoxColumn3.HeaderText = "description"
         Me.DescriptionDataGridViewTextBoxColumn3.Name = "DescriptionDataGridViewTextBoxColumn3"
+        Me.DescriptionDataGridViewTextBoxColumn3.ReadOnly = True
         '
         'ColorDataGridViewTextBoxColumn3
         '
         Me.ColorDataGridViewTextBoxColumn3.DataPropertyName = "color"
         Me.ColorDataGridViewTextBoxColumn3.HeaderText = "color"
         Me.ColorDataGridViewTextBoxColumn3.Name = "ColorDataGridViewTextBoxColumn3"
+        Me.ColorDataGridViewTextBoxColumn3.ReadOnly = True
         '
         'SizeDataGridViewTextBoxColumn3
         '
         Me.SizeDataGridViewTextBoxColumn3.DataPropertyName = "size"
         Me.SizeDataGridViewTextBoxColumn3.HeaderText = "size"
         Me.SizeDataGridViewTextBoxColumn3.Name = "SizeDataGridViewTextBoxColumn3"
+        Me.SizeDataGridViewTextBoxColumn3.ReadOnly = True
         '
         'CountDataGridViewTextBoxColumn3
         '
         Me.CountDataGridViewTextBoxColumn3.DataPropertyName = "count"
         Me.CountDataGridViewTextBoxColumn3.HeaderText = "count"
         Me.CountDataGridViewTextBoxColumn3.Name = "CountDataGridViewTextBoxColumn3"
+        Me.CountDataGridViewTextBoxColumn3.ReadOnly = True
         '
         'InternalIDDataGridViewTextBoxColumn3
         '
         Me.InternalIDDataGridViewTextBoxColumn3.DataPropertyName = "internalID"
         Me.InternalIDDataGridViewTextBoxColumn3.HeaderText = "internalID"
         Me.InternalIDDataGridViewTextBoxColumn3.Name = "InternalIDDataGridViewTextBoxColumn3"
+        Me.InternalIDDataGridViewTextBoxColumn3.ReadOnly = True
         '
         'LocationDataGridViewTextBoxColumn
         '
         Me.LocationDataGridViewTextBoxColumn.DataPropertyName = "location"
         Me.LocationDataGridViewTextBoxColumn.HeaderText = "location"
         Me.LocationDataGridViewTextBoxColumn.Name = "LocationDataGridViewTextBoxColumn"
+        Me.LocationDataGridViewTextBoxColumn.ReadOnly = True
         '
         'Context1DataGridViewTextBoxColumn3
         '
         Me.Context1DataGridViewTextBoxColumn3.DataPropertyName = "context1"
         Me.Context1DataGridViewTextBoxColumn3.HeaderText = "context1"
         Me.Context1DataGridViewTextBoxColumn3.Name = "Context1DataGridViewTextBoxColumn3"
+        Me.Context1DataGridViewTextBoxColumn3.ReadOnly = True
         '
         'Context2DataGridViewTextBoxColumn3
         '
         Me.Context2DataGridViewTextBoxColumn3.DataPropertyName = "context2"
         Me.Context2DataGridViewTextBoxColumn3.HeaderText = "context2"
         Me.Context2DataGridViewTextBoxColumn3.Name = "Context2DataGridViewTextBoxColumn3"
+        Me.Context2DataGridViewTextBoxColumn3.ReadOnly = True
         '
         'Context3DataGridViewTextBoxColumn3
         '
         Me.Context3DataGridViewTextBoxColumn3.DataPropertyName = "context3"
         Me.Context3DataGridViewTextBoxColumn3.HeaderText = "context3"
         Me.Context3DataGridViewTextBoxColumn3.Name = "Context3DataGridViewTextBoxColumn3"
+        Me.Context3DataGridViewTextBoxColumn3.ReadOnly = True
         '
         'StockUsedBindingSource
         '
@@ -387,12 +415,15 @@ Partial Class DirectlyEdit
         '
         'DataGridView2
         '
+        Me.DataGridView2.AllowUserToAddRows = False
+        Me.DataGridView2.AllowUserToDeleteRows = False
         Me.DataGridView2.AutoGenerateColumns = False
         Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PartIDDataGridViewTextBoxColumn, Me.DescriptionDataGridViewTextBoxColumn2, Me.ColorDataGridViewTextBoxColumn2, Me.SizeDataGridViewTextBoxColumn2, Me.CountDataGridViewTextBoxColumn2, Me.InternalIDDataGridViewTextBoxColumn2, Me.ShopNumberDataGridViewTextBoxColumn, Me.ItemNumberDataGridViewTextBoxColumn, Me.ItemQuantityDataGridViewTextBoxColumn, Me.Context1DataGridViewTextBoxColumn2, Me.Context2DataGridViewTextBoxColumn2, Me.Context3DataGridViewTextBoxColumn2})
         Me.DataGridView2.DataSource = Me.PartsBindingSource1
         Me.DataGridView2.Location = New System.Drawing.Point(6, 6)
         Me.DataGridView2.Name = "DataGridView2"
+        Me.DataGridView2.ReadOnly = True
         Me.DataGridView2.Size = New System.Drawing.Size(1140, 518)
         Me.DataGridView2.TabIndex = 9
         '
@@ -401,72 +432,84 @@ Partial Class DirectlyEdit
         Me.PartIDDataGridViewTextBoxColumn.DataPropertyName = "partID"
         Me.PartIDDataGridViewTextBoxColumn.HeaderText = "partID"
         Me.PartIDDataGridViewTextBoxColumn.Name = "PartIDDataGridViewTextBoxColumn"
+        Me.PartIDDataGridViewTextBoxColumn.ReadOnly = True
         '
         'DescriptionDataGridViewTextBoxColumn2
         '
         Me.DescriptionDataGridViewTextBoxColumn2.DataPropertyName = "description"
         Me.DescriptionDataGridViewTextBoxColumn2.HeaderText = "description"
         Me.DescriptionDataGridViewTextBoxColumn2.Name = "DescriptionDataGridViewTextBoxColumn2"
+        Me.DescriptionDataGridViewTextBoxColumn2.ReadOnly = True
         '
         'ColorDataGridViewTextBoxColumn2
         '
         Me.ColorDataGridViewTextBoxColumn2.DataPropertyName = "color"
         Me.ColorDataGridViewTextBoxColumn2.HeaderText = "color"
         Me.ColorDataGridViewTextBoxColumn2.Name = "ColorDataGridViewTextBoxColumn2"
+        Me.ColorDataGridViewTextBoxColumn2.ReadOnly = True
         '
         'SizeDataGridViewTextBoxColumn2
         '
         Me.SizeDataGridViewTextBoxColumn2.DataPropertyName = "size"
         Me.SizeDataGridViewTextBoxColumn2.HeaderText = "size"
         Me.SizeDataGridViewTextBoxColumn2.Name = "SizeDataGridViewTextBoxColumn2"
+        Me.SizeDataGridViewTextBoxColumn2.ReadOnly = True
         '
         'CountDataGridViewTextBoxColumn2
         '
         Me.CountDataGridViewTextBoxColumn2.DataPropertyName = "count"
         Me.CountDataGridViewTextBoxColumn2.HeaderText = "count"
         Me.CountDataGridViewTextBoxColumn2.Name = "CountDataGridViewTextBoxColumn2"
+        Me.CountDataGridViewTextBoxColumn2.ReadOnly = True
         '
         'InternalIDDataGridViewTextBoxColumn2
         '
         Me.InternalIDDataGridViewTextBoxColumn2.DataPropertyName = "internalID"
         Me.InternalIDDataGridViewTextBoxColumn2.HeaderText = "internalID"
         Me.InternalIDDataGridViewTextBoxColumn2.Name = "InternalIDDataGridViewTextBoxColumn2"
+        Me.InternalIDDataGridViewTextBoxColumn2.ReadOnly = True
         '
         'ShopNumberDataGridViewTextBoxColumn
         '
         Me.ShopNumberDataGridViewTextBoxColumn.DataPropertyName = "shopNumber"
         Me.ShopNumberDataGridViewTextBoxColumn.HeaderText = "shopNumber"
         Me.ShopNumberDataGridViewTextBoxColumn.Name = "ShopNumberDataGridViewTextBoxColumn"
+        Me.ShopNumberDataGridViewTextBoxColumn.ReadOnly = True
         '
         'ItemNumberDataGridViewTextBoxColumn
         '
         Me.ItemNumberDataGridViewTextBoxColumn.DataPropertyName = "itemNumber"
         Me.ItemNumberDataGridViewTextBoxColumn.HeaderText = "itemNumber"
         Me.ItemNumberDataGridViewTextBoxColumn.Name = "ItemNumberDataGridViewTextBoxColumn"
+        Me.ItemNumberDataGridViewTextBoxColumn.ReadOnly = True
         '
         'ItemQuantityDataGridViewTextBoxColumn
         '
         Me.ItemQuantityDataGridViewTextBoxColumn.DataPropertyName = "itemQuantity"
         Me.ItemQuantityDataGridViewTextBoxColumn.HeaderText = "itemQuantity"
         Me.ItemQuantityDataGridViewTextBoxColumn.Name = "ItemQuantityDataGridViewTextBoxColumn"
+        Me.ItemQuantityDataGridViewTextBoxColumn.ReadOnly = True
         '
         'Context1DataGridViewTextBoxColumn2
         '
         Me.Context1DataGridViewTextBoxColumn2.DataPropertyName = "context1"
         Me.Context1DataGridViewTextBoxColumn2.HeaderText = "context1"
         Me.Context1DataGridViewTextBoxColumn2.Name = "Context1DataGridViewTextBoxColumn2"
+        Me.Context1DataGridViewTextBoxColumn2.ReadOnly = True
         '
         'Context2DataGridViewTextBoxColumn2
         '
         Me.Context2DataGridViewTextBoxColumn2.DataPropertyName = "context2"
         Me.Context2DataGridViewTextBoxColumn2.HeaderText = "context2"
         Me.Context2DataGridViewTextBoxColumn2.Name = "Context2DataGridViewTextBoxColumn2"
+        Me.Context2DataGridViewTextBoxColumn2.ReadOnly = True
         '
         'Context3DataGridViewTextBoxColumn2
         '
         Me.Context3DataGridViewTextBoxColumn2.DataPropertyName = "context3"
         Me.Context3DataGridViewTextBoxColumn2.HeaderText = "context3"
         Me.Context3DataGridViewTextBoxColumn2.Name = "Context3DataGridViewTextBoxColumn2"
+        Me.Context3DataGridViewTextBoxColumn2.ReadOnly = True
         '
         'PartsBindingSource1
         '
