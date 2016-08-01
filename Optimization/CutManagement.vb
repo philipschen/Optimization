@@ -546,9 +546,9 @@ Public Class CutManagement
         ' Lists for database updates
         '
         Dim newstockinternalID As ArrayList = New ArrayList
-        Dim usedstockinternalID As ArrayList = New ArrayList
-        Dim usedstockinternalamount As ArrayList = New ArrayList
-        Dim usedstockinternalIDcreated As ArrayList = New ArrayList
+        'Dim usedstockinternalID As ArrayList = New ArrayList
+        'Dim usedstockinternalamount As ArrayList = New ArrayList
+        'Dim usedstockinternalIDcreated As ArrayList = New ArrayList
 
         '
         ' Lists for pdf output
@@ -585,6 +585,12 @@ Public Class CutManagement
         Dim xusedcount As ArrayList = New ArrayList
         Dim xusedinternalID As ArrayList = New ArrayList
         Dim xusedcontext2 As ArrayList = New ArrayList
+
+        ' List of Used parts created
+        Dim cusedsize As ArrayList = New ArrayList
+        Dim cusedcount As ArrayList = New ArrayList
+        Dim cusedinternalID As ArrayList = New ArrayList
+
         '
         ' Populates list of corresponding new and used stocks
         '
@@ -1014,8 +1020,6 @@ Public Class CutManagement
                             Dim remove2 As Integer = 0
                             Dim countplace1 As ArrayList = New ArrayList
 
-
-
                             For it1 = 0 To uosize.Count - 1
                                 If layoutit > 0 Then
                                     If countbool(it1) AndAlso partLength = uosize(it1) AndAlso String.Equals(partlistid(it), uopartID(it1)) Then
@@ -1128,57 +1132,14 @@ Public Class CutManagement
                         ' Saves remainder parts to table
                         '
                         If usedsize1(it) - remainder > usedminsize(it) Then
-                            Dim internalID As ArrayList = New ArrayList
-                            Dim rn As New Random
-                            Dim it1 As Integer
-                            Dim boolinternalID As Boolean = True
-                            Dim inputusedID As Integer
-                            Dim stockid2 As ArrayList = New ArrayList
-                            Dim size As ArrayList = New ArrayList
-                            Dim count As ArrayList = New ArrayList
-                            Dim boolupdatetable As Boolean = False
 
-                            cmd.CommandText = "SELECT stockID2, size, count, context2  FROM stockUsed"
-                            cmd.ExecuteNonQuery()
-
-                            readerObj = cmd.ExecuteReader
-                            While readerObj.Read
-                                stockid2.Add(readerObj("stockID2").ToString)
-                                size.Add(readerObj("size").ToString)
-                                count.Add(readerObj("count"))
-                                Dim temp4 As Integer = Convert.ToInt64(readerObj("context2").ToString)
-                                internalID.Add(temp4)
-                            End While
-                            readerObj.Close()
-                            inputusedID = rn.Next(1000000, 9999999)
-                            For it1 = 0 To internalID.Count - 1
-                                If internalID(it1) = inputusedID Then
-                                    it1 = 0
-                                    inputusedID = rn.Next(1000000, 9999999)
-                                End If
-                            Next
-
-                            Dim temp3 As String = Convert.ToString(inputusedID)
                             Dim temp2 As String = Convert.ToString(usedsize1(it) - remainder)
-                            If stockid2.Count > 1 Then
-                                For it2 = 0 To stockid2.Count - 1
-                                    If String.Equals(stockid2(it2), usedstockID2(it)) AndAlso String.Equals(size(it2), temp2) Then
-                                        count(it2) += Convert.ToInt64(temp)
-                                        cmd.CommandText = "UPDATE stockUsed SET count = " + count(it2).ToString + " WHERE context2 = " + internalID(it2).ToString
-                                        cmd.ExecuteNonQuery()
-                                        usedstockinternalID.Add(internalID(it2).ToString)
-                                        usedstockinternalamount.Add(count(it2).ToString)
-                                        boolupdatetable = True
-                                    End If
-                                Next
-                            End If
 
-                            If Not boolupdatetable Then
-                                cmd.CommandText = "INSERT INTO stockUsed VALUES('" + usedstockID1(it) + "', '" + usedstockID2(it) + "' , '" + usedstockID3(it) + "', '" + useddescription(it) + "' , '" + usedcolor(it) + "', " + temp2 + ", " + temp + ", " + usedinternalID(it) + " , '' , '" + usedsaw(it) + "' , " + temp3 + ", '')"
-                                cmd.ExecuteNonQuery()
-                                usedstockinternalIDcreated.Add(inputusedID)
-                            End If
+                            cusedcount.Add(temp)
+                            cusedinternalID.Add(usedinternalID(it))
+                            cusedsize.Add(temp2)
                         End If
+
                     End If
 
                 Next iLayout
@@ -1245,11 +1206,12 @@ Public Class CutManagement
                 con.ConnectionString = connectionstring.connect1
                 con.Open()
                 cmd.Connection = con
-
+                ' Parts table
                 For it = 0 To partsinternalID.Count - 1
                     cmd.CommandText = "DELETE FROM parts WHERE internalID = " + partsinternalID(it).ToString
                     cmd.ExecuteNonQuery()
                 Next
+                ' New stock table
                 For it = 0 To newstockinternalID.Count - 1
                     If excountwork(it) = 0 Then
                         cmd.CommandText = "SELECT count, internalID FROM stockNew"
@@ -1268,59 +1230,91 @@ Public Class CutManagement
                         cmd.ExecuteNonQuery()
                     End If
                 Next
-                For it = 0 To usedcontext2.Count - 1
-                    If excountwork(it) = 0 Then
-                        cmd.CommandText = "SELECT count, context2 FROM stockUsed"
-                        cmd.ExecuteNonQuery()
-                        Dim count As Integer
-                        Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
-                        While readerObj.Read
-                            If String.Equals(readerObj("context2").ToString, usedcontext2(it)) Then
-                                count = readerObj("count")
+                ' Used stock table
+                For it = 0 To cusedinternalID.Count - 1
+                    Dim internalID As ArrayList = New ArrayList
+                    Dim rn As New Random
+                    Dim it1 As Integer
+                    Dim boolinternalID As Boolean = True
+                    Dim inputusedID As Integer
+                    Dim stockinternalID As ArrayList = New ArrayList
+                    Dim size As ArrayList = New ArrayList
+                    Dim count As ArrayList = New ArrayList
+                    Dim boolupdatetable As Boolean = False
+
+                    Dim tpusedstockID1 As ArrayList = New ArrayList
+                    Dim tpusedstockID2 As ArrayList = New ArrayList
+                    Dim tpusedstockID3 As ArrayList = New ArrayList
+                    Dim tpuseddescription As ArrayList = New ArrayList
+                    Dim tpusedcolor As ArrayList = New ArrayList
+                    Dim tpusedinternalID As ArrayList = New ArrayList
+                    Dim tpusedsaw As ArrayList = New ArrayList
+
+                    cmd.CommandText = "SELECT stockID1, stockID2, description, color, size, count, context1, context2  FROM stockUsed"
+                    cmd.ExecuteNonQuery()
+                    Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
+                    While readerObj.Read
+                        stockinternalID.Add(readerObj("internalID").ToString)
+                        size.Add(readerObj("size").ToString)
+                        count.Add(readerObj("count"))
+                        Dim temp4 As Integer = Convert.ToInt64(readerObj("context2").ToString)
+                        internalID.Add(temp4)
+                    End While
+                    readerObj.Close()
+                    inputusedID = rn.Next(1000000, 9999999)
+                    For it1 = 0 To internalID.Count - 1
+                        If internalID(it1) = inputusedID Then
+                            it1 = 0
+                            inputusedID = rn.Next(1000000, 9999999)
+                        End If
+                    Next
+                    If stockinternalID.Count > 1 Then
+                        For it2 = 0 To stockinternalID.Count - 1
+                            If String.Equals(stockinternalID(it2), cusedinternalID(it)) AndAlso String.Equals(size(it2), cusedsize(it)) Then
+                                count(it2) += Convert.ToInt64(cusedsize(it))
+                                cmd.CommandText = "UPDATE stockUsed SET count = " + count(it2).ToString + " WHERE context2 = " + internalID(it2).ToString
+                                cmd.ExecuteNonQuery()
+                                boolupdatetable = True
                             End If
+                        Next
+                    End If
+
+                    If Not boolupdatetable Then
+                        Dim t1 As String = ""
+                        Dim t2 As String = ""
+                        Dim t3 As String = ""
+                        Dim t4 As String = ""
+                        Dim t5 As String = ""
+                        Dim t8 As String = ""
+
+                        cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, count, internalID, context1, context2  FROM stockNew"
+                        cmd.ExecuteNonQuery()
+                        readerObj = cmd.ExecuteReader
+                        While readerObj.Read
+                            tpusedstockID1.Add(readerObj("stockID1").ToString)
+                            tpusedstockID2.Add(readerObj("stockID2").ToString)
+                            tpusedstockID3.Add(readerObj("stockID3").ToString)
+                            tpuseddescription.Add(readerObj("description").ToString)
+                            tpusedcolor.Add(readerObj("color").ToString)
+                            tpusedinternalID.Add(readerObj("internalID").ToString)
+                            tpusedsaw.Add(readerObj("context1").ToString)
                         End While
                         readerObj.Close()
-                        count = count - Convert.ToInt64(usedcontextamount(it))
-                        If count > 0 Then
-                            cmd.CommandText = "UPDATE stockUsed SET count = " + count.ToString + " WHERE context2 = " + usedcontext2(it)
-                            cmd.ExecuteNonQuery()
-                        Else
-                            cmd.CommandText = "DELETE FROM stockUsed WHERE context2 = " + usedcontext2(it)
-                            cmd.ExecuteNonQuery()
-                        End If
+                        For it1 = 0 To tpusedinternalID.Count - 1
+                            If String.Equals(tpusedinternalID(it1), cusedinternalID(it)) Then
+                                t1 = tpusedstockID1(it1)
+                                t2 = tpusedstockID2(it1)
+                                t3 = tpusedstockID3(it1)
+                                t4 = tpuseddescription(it1)
+                                t5 = tpusedcolor(it1)
+                                t8 = tpusedsaw(it1)
+                            End If
+                        Next
+                        cmd.CommandText = "INSERT INTO stockUsed VALUES('" + t1 + "', '" + t2 + "' , '" + t3 + "', '" + t4 + "' , '" + t5 + "', " + cusedsize(it) + ", " + cusedcount(it) + ", " + cusedinternalID(it) + " , '' , '" + t8 + "' , " + inputusedID.ToString + ", '')"
+                        cmd.ExecuteNonQuery()
                     End If
                 Next
-                Me.Close()
-            Else
-                '
-                ' If you do not want to remove parts and stocks from tables.
-                '
-                'Dim con As New SqlConnection
-                'Dim cmd As New SqlCommand
-                'con.ConnectionString = connectionstring.connect1
-                'con.Open()
-                'cmd.Connection = con
-                'For it = 0 To usedstockinternalIDcreated.Count - 1
-                '    cmd.CommandText = "DELETE FROM stockUsed WHERE context2 = " + usedstockinternalIDcreated(it).ToString
-                '    cmd.ExecuteNonQuery()
-                'Next
 
-                'cmd.CommandText = "SELECT count, context2 FROM stockUsed"
-                'cmd.ExecuteNonQuery()
-                'Dim count As Integer
-
-                'For it = 0 To usedstockinternalID.Count - 1
-                '    Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
-                '    While readerObj.Read
-                '        If String.Equals(readerObj("context2").ToString, usedcontext2(it)) Then
-                '            count = readerObj("count")
-                '        End If
-                '    End While
-                '    readerObj.Close()
-                '    count -= usedcontextamount(it)
-                '    cmd.CommandText = "UPDATE stockUsed SET count = " + count.ToString + " WHERE context2 = " + usedstockinternalID(it).ToString
-                '    cmd.ExecuteNonQuery()
-                'Next
                 Me.Close()
             End If
 
