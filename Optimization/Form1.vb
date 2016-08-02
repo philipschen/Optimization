@@ -26,9 +26,8 @@ Public Class Form1
     End Sub
 
     Private Sub set_Click(sender As Object, e As EventArgs) Handles Button3.Click
-
-        Dim result1 As DialogResult = MessageBox.Show("Are you certain you want to delete all tables?", "Confirm Deletion", MessageBoxButtons.YesNo)
-        If result1 = DialogResult.Yes Then
+        Dim frm1 As Confirm1 = New Confirm1
+        If frm1.ShowDialog() = DialogResult.OK Then
             Dim con As New SqlConnection
             Dim cmd As New SqlCommand
             con.ConnectionString = connectionstring.connect1
@@ -66,18 +65,6 @@ Public Class Form1
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         Dim excellin1 As NavInput = New NavInput()
         excellin1.Show()
-    End Sub
-
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        Dim con As New SqlConnection
-        Dim cmd As New SqlCommand
-        con.ConnectionString = connectionstring.connect1
-        con.Open()
-        cmd.Connection = con
-
-        cmd.CommandText = "DELETE FROM stockUsed"
-        cmd.ExecuteNonQuery()
-
     End Sub
 End Class
 

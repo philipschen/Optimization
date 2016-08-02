@@ -403,7 +403,7 @@ Public Class Extrusions
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         If TextBox2 Is Nothing Or TextBox3.Text Is Nothing OrElse TextBox2.Text = "" OrElse TextBox3.Text = "" Then
             MessageBox.Show("Enter a size and count")
-        Else
+        ElseIf ListBox3.SelectedIndex >= 0 Then
             Dim con As New SqlConnection
             Dim cmd As New SqlCommand
             con.ConnectionString = connectionstring.connect1
@@ -500,14 +500,14 @@ Public Class Extrusions
                     cmd1.ExecuteNonQuery()
                 End If
             End If
-                Me.StockUsedTableAdapter.Fill(Me.OptimizationDatabaseDataSet3.stockUsed)
+            Me.StockUsedTableAdapter.Fill(Me.OptimizationDatabaseDataSet3.stockUsed)
         End If
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         If TextBox2 Is Nothing Or TextBox3.Text Is Nothing OrElse TextBox2.Text = "" OrElse TextBox3.Text = "" Then
             MessageBox.Show("Enter a size and count")
-        Else
+        ElseIf ListBox3.SelectedIndex >= 0 Then
             Dim con As New SqlConnection
             Dim cmd As New SqlCommand
             con.ConnectionString = connectionstring.connect1
@@ -680,33 +680,36 @@ Public Class Extrusions
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        If ListBox3.SelectedIndex >= 0 Then
+            Dim result1 As DialogResult = MessageBox.Show("Are you certain you want to clear this extrusion of all used parts?", "Confirm Deletion", MessageBoxButtons.YesNo)
+            If result1 = DialogResult.Yes Then
+                Dim con As New SqlConnection
+                Dim cmd As New SqlCommand
+                con.ConnectionString = connectionstring.connect1
+                con.Open()
+                cmd.Connection = con
 
-        Dim result1 As DialogResult = MessageBox.Show("Are you certain you want to clear this extrusion of all used parts?", "Confirm Deletion", MessageBoxButtons.YesNo)
-        If result1 = DialogResult.Yes Then
+                cmd.CommandText = "DELETE FROM stockUsed WHERE stockID2 = '" + stockID2(oUsed(ListBox3.SelectedIndex)) + "'"
+                cmd.ExecuteNonQuery()
+
+                Me.StockUsedTableAdapter.Fill(Me.OptimizationDatabaseDataSet3.stockUsed)
+            End If
+        End If
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        Dim frm1 As Confirm1 = New Confirm1
+        If frm1.ShowDialog() = DialogResult.OK Then
             Dim con As New SqlConnection
             Dim cmd As New SqlCommand
             con.ConnectionString = connectionstring.connect1
             con.Open()
             cmd.Connection = con
 
-            cmd.CommandText = "DELETE FROM stockUsed WHERE stockID2 = '" + stockID2(oUsed(ListBox3.SelectedIndex)) + "'"
+            cmd.CommandText = "DELETE FROM stockUsed"
             cmd.ExecuteNonQuery()
 
             Me.StockUsedTableAdapter.Fill(Me.OptimizationDatabaseDataSet3.stockUsed)
         End If
-
-    End Sub
-
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-        Dim con As New SqlConnection
-        Dim cmd As New SqlCommand
-        con.ConnectionString = connectionstring.connect1
-        con.Open()
-        cmd.Connection = con
-
-        cmd.CommandText = "DELETE FROM stockUsed"
-        cmd.ExecuteNonQuery()
-
-        Me.StockUsedTableAdapter.Fill(Me.OptimizationDatabaseDataSet3.stockUsed)
     End Sub
 End Class
