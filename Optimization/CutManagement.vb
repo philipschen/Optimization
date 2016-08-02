@@ -498,6 +498,7 @@ Public Class CutManagement
         Dim partlistcount As ArrayList = New ArrayList
         Dim partlistcolor As ArrayList = New ArrayList
         Dim partsinternalID As ArrayList = New ArrayList
+        Dim partslistcalculated As ArrayList = New ArrayList
         Dim itWorks As Boolean = False
         partcountIndex.Add(0)
         Dim itpart As Integer = 0
@@ -828,7 +829,7 @@ Public Class CutManagement
             '
             If xusedinternalID.Count > 0 Then
                 For it1 = 0 To xusedinternalID.Count - 1
-                    If String.Equals(xusedinternalID(it1), usedinternalID(it)) Then
+                    If String.Equals(xusedinternalID(it1), usedinternalID(it)) AndAlso Convert.ToInt32(xusedcount(it1)) > 0 Then
                         Dim temp3 As Double = Convert.ToDouble(xusedsize1(it1))
                         Dim temp4 As Integer = Convert.ToInt32(xusedcount(it1))
                         Calculator.AddLinearStock(temp3, temp4)
@@ -836,12 +837,13 @@ Public Class CutManagement
 
                 Next
             End If
-            If stock_exists(it) Then
+
+            If stock_exists(it) AndAlso Convert.ToInt32(usedcount(it)) > 0 Then
                 newstockinternalID.Add(usedinternalID(it))
                 Dim temp1 As Double = Convert.ToDouble(usedsize1(it))
                 Dim temp2 As Integer = Convert.ToInt32(usedcount(it))
                 Calculator.AddLinearStock(temp1, temp2)
-            Else
+            ElseIf Not stock_exists(it) Then
                 '
                 ' Adds Page if can't find stock
                 '
@@ -853,6 +855,7 @@ Public Class CutManagement
                 excountlist.Add(partlistcount(it))
                 excountlistu.Add(0)
                 excountwork.Add(1)
+                partslistcalculated.Add(False)
             End If
 
             '
@@ -983,7 +986,7 @@ Public Class CutManagement
                         Dim descriptionstring7 As String = "Layout Number = " + temp1
                         Dim leftanchor As Integer = 40
 
-                        gfx.DrawString("Page " + pageNo, font2, XBrushes.Black, New XRect(leftanchor, 50 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                        'gfx.DrawString("Page " + pageNo, font2, XBrushes.Black, New XRect(leftanchor, 50 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                         gfx.DrawString(descriptionString, font3, XBrushes.Black, New XRect(leftanchor, 65 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                         gfx.DrawString(descriptionString2, font2, XBrushes.Black, New XRect(leftanchor, 80 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                         gfx.DrawString(descriptionString3, font2, XBrushes.Black, New XRect(leftanchor, 95 + pos2 - 10, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
@@ -1146,7 +1149,7 @@ Public Class CutManagement
                 excountlist.Add(itemcount)
                 excountlistu.Add(itemcount2)
                 excountwork.Add(0)
-
+                partslistcalculated.Add(True)
             ElseIf stock_exists(it) Then
                 itWorks = True
                 Console.WriteLine("calculate fail")
@@ -1156,6 +1159,7 @@ Public Class CutManagement
                 excountlist.Add(usedcount(it))
                 excountlistu.Add(0)
                 excountwork.Add(2)
+                partslistcalculated.Add(False)
             End If
             Console.WriteLine(result)
             Calculator.Clear()
@@ -1174,7 +1178,7 @@ Public Class CutManagement
                     gfx.DrawString((it + 1).ToString + ". New: " + excountlist(it).ToString + " " + "Used: " + excountlistu(it).ToString + " " + partlistd(it) + " ID:" + partlistid(it), font, XBrushes.Black, New XRect(40, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                     pos1 += 15
                 ElseIf excountwork(it) = 1 Then
-                    gfx.DrawString((it + 1).ToString + ". Not Cut, Partcount: " + excountlist(it).ToString + "  " + partlistd(it) + " ID:" + partlistid(it), font, XBrushes.Black, New XRect(40, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
+                    gfx.DrawString((it + 1).ToString + ". Not in Database, Partcount: " + excountlist(it).ToString + "  " + partlistd(it) + " ID:" + partlistid(it), font, XBrushes.Black, New XRect(40, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
                     pos1 += 15
                 ElseIf excountwork(it) = 2 Then
                     gfx.DrawString((it + 1).ToString + ". Not Enough, current Stock: " + excountlist(it).ToString + "  " + partlistd(it) + " ID:" + partlistid(it), font, XBrushes.Black, New XRect(40, 70 + pos1, page.Width.Point, page.Height.Point), XStringFormats.TopLeft)
@@ -1207,9 +1211,11 @@ Public Class CutManagement
                 con.Open()
                 cmd.Connection = con
                 ' Parts table
-                For it = 0 To partsinternalID.Count - 1
-                    cmd.CommandText = "DELETE FROM parts WHERE internalID = " + partsinternalID(it).ToString
-                    cmd.ExecuteNonQuery()
+                For it = 0 To partlistid.Count - 1
+                    If partslistcalculated(it) Then
+                        cmd.CommandText = "DELETE FROM parts WHERE partID = '" + partlistid(it).ToString + "'"
+                        cmd.ExecuteNonQuery()
+                    End If
                 Next
                 ' New stock table
                 For it = 0 To newstockinternalID.Count - 1
@@ -1250,7 +1256,7 @@ Public Class CutManagement
                     Dim tpusedinternalID As ArrayList = New ArrayList
                     Dim tpusedsaw As ArrayList = New ArrayList
 
-                    cmd.CommandText = "SELECT stockID1, stockID2, description, color, size, count, context1, context2  FROM stockUsed"
+                    cmd.CommandText = "SELECT stockID1, stockID2, description, size, count, internalID, context1, context2  FROM stockUsed"
                     cmd.ExecuteNonQuery()
                     Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
                     While readerObj.Read
