@@ -38,7 +38,7 @@ Public Class Extrusions
         con.Open()
         cmd.Connection = con
 
-        cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, internalID, context1 FROM stockNew"
+        cmd.CommandText = "SELECT stockID1, stockID2, stockID3, description, color, size, internalID, context1 FROM stockNew ORDER by stockID2"
         cmd.ExecuteNonQuery()
         Dim readerObj As SqlClient.SqlDataReader = cmd.ExecuteReader
 
@@ -342,8 +342,8 @@ Public Class Extrusions
         oUsed.Clear()
         For it1 = 0 To description.Count - 1
 
-            If String.Equals(ComboBox3.SelectedItem, stockID2(it1)) And Not oUsed.Contains(it1) Then
-                ListBox2.Items.Add(description(it1) + " " + color(it1) + " ")
+            If String.Equals(ComboBox5.SelectedItem, stockID2(it1)) And Not oUsed.Contains(it1) Then
+                ListBox3.Items.Add(description(it1) + " " + color(it1) + " ")
                 oUsed.Add(it1)
             End If
             'If Not String.Equals(ComboBox3.SelectedItem, stockID2(it1)) Then
