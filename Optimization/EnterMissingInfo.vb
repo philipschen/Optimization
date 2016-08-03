@@ -28,7 +28,7 @@
         ListBox2.Items.Add("230")
         ListBox2.Items.Add("240")
         ListBox2.Items.Add("OTHER")
-        ListBox2.SelectedIndex = 0
+        ListBox2.SelectedIndex = 1
 
         ListBox3.Items.Add("BRONZE")
         ListBox3.Items.Add("WHITE")

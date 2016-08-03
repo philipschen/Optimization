@@ -66,6 +66,7 @@ Partial Class CutManagement
         Me.ComboBox5 = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
+        Me.Button7 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -303,6 +304,7 @@ Partial Class CutManagement
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.Button7)
         Me.TabPage2.Controls.Add(Me.ListBox1)
         Me.TabPage2.Controls.Add(Me.CheckBox1)
         Me.TabPage2.Controls.Add(Me.Label19)
@@ -366,7 +368,7 @@ Partial Class CutManagement
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(320, 434)
+        Me.Button4.Location = New System.Drawing.Point(285, 434)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(129, 68)
         Me.Button4.TabIndex = 36
@@ -375,7 +377,7 @@ Partial Class CutManagement
         '
         'Button5
         '
-        Me.Button5.Location = New System.Drawing.Point(167, 434)
+        Me.Button5.Location = New System.Drawing.Point(150, 434)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(129, 68)
         Me.Button5.TabIndex = 35
@@ -540,6 +542,15 @@ Partial Class CutManagement
         Me.Label14.Size = New System.Drawing.Size(0, 25)
         Me.Label14.TabIndex = 4
         '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(420, 434)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(129, 68)
+        Me.Button7.TabIndex = 42
+        Me.Button7.Text = "Clear Selected Set"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
         'CutManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -608,4 +619,5 @@ Partial Class CutManagement
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents ListBox1 As ListBox
     Friend WithEvents Label14 As Label
+    Friend WithEvents Button7 As Button
 End Class

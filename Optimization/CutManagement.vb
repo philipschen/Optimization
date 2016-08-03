@@ -498,6 +498,8 @@ Public Class CutManagement
         Dim partlistcount As ArrayList = New ArrayList
         Dim partlistcolor As ArrayList = New ArrayList
         Dim partsinternalID As ArrayList = New ArrayList
+        Dim partsIDs As ArrayList = New ArrayList
+
         Dim partslistcalculated As ArrayList = New ArrayList
         Dim itWorks As Boolean = False
         partcountIndex.Add(0)
@@ -507,6 +509,7 @@ Public Class CutManagement
         '
         For it = 0 To uopartID.Count - 1
             partsinternalID.Add(uointernalID(it))
+            partsIDs.Add(uopartID(it))
             If Not partlistd.Contains(uodescription(it)) Then
                 partlistd.Add(uodescription(it))
                 partlistid.Add(uopartID(it))
@@ -1213,8 +1216,12 @@ Public Class CutManagement
                 ' Parts table
                 For it = 0 To partlistid.Count - 1
                     If partslistcalculated(it) Then
-                        cmd.CommandText = "DELETE FROM parts WHERE partID = '" + partlistid(it).ToString + "'"
-                        cmd.ExecuteNonQuery()
+                        For it1 = 0 To partsIDs.Count - 1
+                            If String.Equals(partlistid(it), partsIDs(it1)) Then
+                                cmd.CommandText = "DELETE FROM parts WHERE internalID = '" + partsinternalID(it1).ToString + "'"
+                                cmd.ExecuteNonQuery()
+                            End If
+                        Next
                     End If
                 Next
                 ' New stock table
@@ -1324,6 +1331,50 @@ Public Class CutManagement
                 Me.Close()
             End If
 
+        End If
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Dim frm1 As Confirm1 = New Confirm1
+        If frm1.ShowDialog() = DialogResult.OK Then
+            Dim con As New SqlConnection
+            Dim cmd As New SqlCommand
+            con.ConnectionString = connectionstring.connect1
+            con.Open()
+            cmd.Connection = con
+            For it = 0 To uointernalID.Count - 1
+                cmd.CommandText = "DELETE FROM parts WHERE internalID = '" + uointernalID(it).ToString + "'"
+                cmd.ExecuteNonQuery()
+            Next
+            ListBox1.Items.Clear()
+            ListBox3.Items.Clear()
+
+            uopartID.Clear()
+            uodescription.Clear()
+            uocolor.Clear()
+            uosize.Clear()
+            uocount.Clear()
+            uointernalID.Clear()
+            uoshopnumber.Clear()
+            uoitemNumber.Clear()
+            uoitemQuantity.Clear()
+            uolistorderline.Clear()
+
+            lopartID.Clear()
+            lodescription.Clear()
+            locolor.Clear()
+            losize.Clear()
+            locount.Clear()
+            lointernalID.Clear()
+            loshopnumber.Clear()
+            loitemNumber.Clear()
+            loitemQuantity.Clear()
+            loselect.Clear()
+            lolistorderline.Clear()
+
+            ComboBox5.Items.Clear()
+            ComboBox4.Items.Clear()
+            ComboBox7.Items.Clear()
         End If
     End Sub
 End Class
