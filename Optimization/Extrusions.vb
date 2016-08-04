@@ -20,15 +20,15 @@ Public Class Extrusions
         'TODO: This line of code loads data into the 'OptimizationDatabaseDataSet.stockNew' table. You can move, or remove it, as needed.
         Me.StockNewTableAdapter.Fill(Me.OptimizationDatabaseDataSet.stockNew)
         Me.DataGridView1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridView1.AutoResizeColumns()
+        'Me.DataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
         Me.DataGridView2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridView2.AutoResizeColumns()
+        'Me.DataGridView2.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
         ' Set the caption bar text of the form.  
         Me.Text = connectionstring.version
 
         Label19.Visible = False
         RichTextBox3.Text = "F201 = BRONZE" + vbCrLf + "F202 = WHITE" + vbCrLf + "FSP2 = OTHER"
-        RichTextBox3.Text = "F201 = BRONZE" + vbCrLf + "F202 = WHITE" + vbCrLf + "FSP2 = OTHER"
+        RichTextBox4.Text = "F201 = BRONZE" + vbCrLf + "F202 = WHITE" + vbCrLf + "FSP2 = OTHER"
 
         ListBox2.Items.Add("New Part")
 

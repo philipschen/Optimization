@@ -25,6 +25,9 @@ Partial Class Extrusions
         Me.components = New System.ComponentModel.Container()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
         Me.StockID1DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StockID2DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -59,14 +62,8 @@ Partial Class Extrusions
         Me.ComboBox5 = New System.Windows.Forms.ComboBox()
         Me.ComboBox6 = New System.Windows.Forms.ComboBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.RichTextBox4 = New System.Windows.Forms.RichTextBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.StockID1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.StockID2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.StockID3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescriptionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SizeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StockNewBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.OptimizationDatabaseDataSet = New OptimizationDatabaseDataSet()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -91,10 +88,11 @@ Partial Class Extrusions
         Me.StockNewTableAdapter = New OptimizationDatabaseDataSetTableAdapters.stockNewTableAdapter()
         Me.StockUsedTableAdapter = New OptimizationDatabaseDataSet3TableAdapters.stockUsedTableAdapter()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
-        Me.RichTextBox4 = New System.Windows.Forms.RichTextBox()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button8 = New System.Windows.Forms.Button()
+        Me.StockID2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StockID3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescriptionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SizeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage2.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.StockUsedBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -143,6 +141,33 @@ Partial Class Extrusions
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Used Extrusions"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'Button8
+        '
+        Me.Button8.Location = New System.Drawing.Point(320, 360)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(129, 68)
+        Me.Button8.TabIndex = 30
+        Me.Button8.Text = "Clear Table"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(167, 358)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(129, 68)
+        Me.Button7.TabIndex = 29
+        Me.Button7.Text = "Clear This ID"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'RichTextBox3
+        '
+        Me.RichTextBox3.Location = New System.Drawing.Point(12, 244)
+        Me.RichTextBox3.Name = "RichTextBox3"
+        Me.RichTextBox3.ReadOnly = True
+        Me.RichTextBox3.Size = New System.Drawing.Size(176, 108)
+        Me.RichTextBox3.TabIndex = 28
+        Me.RichTextBox3.Text = ""
         '
         'DataGridView2
         '
@@ -456,68 +481,28 @@ Partial Class Extrusions
         Me.TabPage1.Text = "New Extrusions"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'RichTextBox4
+        '
+        Me.RichTextBox4.Location = New System.Drawing.Point(12, 244)
+        Me.RichTextBox4.Name = "RichTextBox4"
+        Me.RichTextBox4.ReadOnly = True
+        Me.RichTextBox4.Size = New System.Drawing.Size(176, 108)
+        Me.RichTextBox4.TabIndex = 29
+        Me.RichTextBox4.Text = ""
+        '
         'DataGridView1
         '
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.AutoGenerateColumns = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.StockID1DataGridViewTextBoxColumn, Me.StockID2DataGridViewTextBoxColumn, Me.StockID3DataGridViewTextBoxColumn, Me.DescriptionDataGridViewTextBoxColumn, Me.ColorDataGridViewTextBoxColumn, Me.SizeDataGridViewTextBoxColumn, Me.CountDataGridViewTextBoxColumn})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.StockID2DataGridViewTextBoxColumn, Me.StockID3DataGridViewTextBoxColumn, Me.DescriptionDataGridViewTextBoxColumn, Me.SizeDataGridViewTextBoxColumn, Me.CountDataGridViewTextBoxColumn})
         Me.DataGridView1.DataSource = Me.StockNewBindingSource
         Me.DataGridView1.Location = New System.Drawing.Point(545, 12)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.Size = New System.Drawing.Size(601, 514)
         Me.DataGridView1.TabIndex = 13
-        '
-        'StockID1DataGridViewTextBoxColumn
-        '
-        Me.StockID1DataGridViewTextBoxColumn.DataPropertyName = "stockID1"
-        Me.StockID1DataGridViewTextBoxColumn.HeaderText = "stockID1"
-        Me.StockID1DataGridViewTextBoxColumn.Name = "StockID1DataGridViewTextBoxColumn"
-        Me.StockID1DataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'StockID2DataGridViewTextBoxColumn
-        '
-        Me.StockID2DataGridViewTextBoxColumn.DataPropertyName = "stockID2"
-        Me.StockID2DataGridViewTextBoxColumn.HeaderText = "stockID2"
-        Me.StockID2DataGridViewTextBoxColumn.Name = "StockID2DataGridViewTextBoxColumn"
-        Me.StockID2DataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'StockID3DataGridViewTextBoxColumn
-        '
-        Me.StockID3DataGridViewTextBoxColumn.DataPropertyName = "stockID3"
-        Me.StockID3DataGridViewTextBoxColumn.HeaderText = "stockID3"
-        Me.StockID3DataGridViewTextBoxColumn.Name = "StockID3DataGridViewTextBoxColumn"
-        Me.StockID3DataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'DescriptionDataGridViewTextBoxColumn
-        '
-        Me.DescriptionDataGridViewTextBoxColumn.DataPropertyName = "description"
-        Me.DescriptionDataGridViewTextBoxColumn.HeaderText = "description"
-        Me.DescriptionDataGridViewTextBoxColumn.Name = "DescriptionDataGridViewTextBoxColumn"
-        Me.DescriptionDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'ColorDataGridViewTextBoxColumn
-        '
-        Me.ColorDataGridViewTextBoxColumn.DataPropertyName = "color"
-        Me.ColorDataGridViewTextBoxColumn.HeaderText = "color"
-        Me.ColorDataGridViewTextBoxColumn.Name = "ColorDataGridViewTextBoxColumn"
-        Me.ColorDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'SizeDataGridViewTextBoxColumn
-        '
-        Me.SizeDataGridViewTextBoxColumn.DataPropertyName = "size"
-        Me.SizeDataGridViewTextBoxColumn.HeaderText = "size"
-        Me.SizeDataGridViewTextBoxColumn.Name = "SizeDataGridViewTextBoxColumn"
-        Me.SizeDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'CountDataGridViewTextBoxColumn
-        '
-        Me.CountDataGridViewTextBoxColumn.DataPropertyName = "count"
-        Me.CountDataGridViewTextBoxColumn.HeaderText = "count"
-        Me.CountDataGridViewTextBoxColumn.Name = "CountDataGridViewTextBoxColumn"
-        Me.CountDataGridViewTextBoxColumn.ReadOnly = True
         '
         'StockNewBindingSource
         '
@@ -737,41 +722,40 @@ Partial Class Extrusions
         Me.Label19.TabIndex = 2
         Me.Label19.Text = "Loading..."
         '
-        'RichTextBox3
+        'StockID2DataGridViewTextBoxColumn
         '
-        Me.RichTextBox3.Location = New System.Drawing.Point(12, 244)
-        Me.RichTextBox3.Name = "RichTextBox3"
-        Me.RichTextBox3.ReadOnly = True
-        Me.RichTextBox3.Size = New System.Drawing.Size(176, 108)
-        Me.RichTextBox3.TabIndex = 28
-        Me.RichTextBox3.Text = ""
+        Me.StockID2DataGridViewTextBoxColumn.DataPropertyName = "stockID2"
+        Me.StockID2DataGridViewTextBoxColumn.HeaderText = "stockID2"
+        Me.StockID2DataGridViewTextBoxColumn.Name = "StockID2DataGridViewTextBoxColumn"
+        Me.StockID2DataGridViewTextBoxColumn.ReadOnly = True
         '
-        'RichTextBox4
+        'StockID3DataGridViewTextBoxColumn
         '
-        Me.RichTextBox4.Location = New System.Drawing.Point(12, 244)
-        Me.RichTextBox4.Name = "RichTextBox4"
-        Me.RichTextBox4.ReadOnly = True
-        Me.RichTextBox4.Size = New System.Drawing.Size(176, 108)
-        Me.RichTextBox4.TabIndex = 29
-        Me.RichTextBox4.Text = ""
+        Me.StockID3DataGridViewTextBoxColumn.DataPropertyName = "stockID3"
+        Me.StockID3DataGridViewTextBoxColumn.HeaderText = "stockID3"
+        Me.StockID3DataGridViewTextBoxColumn.Name = "StockID3DataGridViewTextBoxColumn"
+        Me.StockID3DataGridViewTextBoxColumn.ReadOnly = True
         '
-        'Button7
+        'DescriptionDataGridViewTextBoxColumn
         '
-        Me.Button7.Location = New System.Drawing.Point(167, 358)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(129, 68)
-        Me.Button7.TabIndex = 29
-        Me.Button7.Text = "Clear This ID"
-        Me.Button7.UseVisualStyleBackColor = True
+        Me.DescriptionDataGridViewTextBoxColumn.DataPropertyName = "description"
+        Me.DescriptionDataGridViewTextBoxColumn.HeaderText = "description"
+        Me.DescriptionDataGridViewTextBoxColumn.Name = "DescriptionDataGridViewTextBoxColumn"
+        Me.DescriptionDataGridViewTextBoxColumn.ReadOnly = True
         '
-        'Button8
+        'SizeDataGridViewTextBoxColumn
         '
-        Me.Button8.Location = New System.Drawing.Point(320, 360)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(129, 68)
-        Me.Button8.TabIndex = 30
-        Me.Button8.Text = "Clear Table"
-        Me.Button8.UseVisualStyleBackColor = True
+        Me.SizeDataGridViewTextBoxColumn.DataPropertyName = "size"
+        Me.SizeDataGridViewTextBoxColumn.HeaderText = "size"
+        Me.SizeDataGridViewTextBoxColumn.Name = "SizeDataGridViewTextBoxColumn"
+        Me.SizeDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'CountDataGridViewTextBoxColumn
+        '
+        Me.CountDataGridViewTextBoxColumn.DataPropertyName = "count"
+        Me.CountDataGridViewTextBoxColumn.HeaderText = "count"
+        Me.CountDataGridViewTextBoxColumn.Name = "CountDataGridViewTextBoxColumn"
+        Me.CountDataGridViewTextBoxColumn.ReadOnly = True
         '
         'Extrusions
         '
@@ -826,13 +810,6 @@ Partial Class Extrusions
     Friend WithEvents OptimizationDatabaseDataSet As OptimizationDatabaseDataSet
     Friend WithEvents StockNewBindingSource As BindingSource
     Friend WithEvents StockNewTableAdapter As OptimizationDatabaseDataSetTableAdapters.stockNewTableAdapter
-    Friend WithEvents StockID1DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents StockID2DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents StockID3DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents DescriptionDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents ColorDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents SizeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents CountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents Button4 As Button
     Friend WithEvents Label9 As Label
     Friend WithEvents RichTextBox2 As RichTextBox
@@ -874,4 +851,9 @@ Partial Class Extrusions
     Friend WithEvents RichTextBox4 As RichTextBox
     Friend WithEvents Button8 As Button
     Friend WithEvents Button7 As Button
+    Friend WithEvents StockID2DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents StockID3DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents DescriptionDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents SizeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents CountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 End Class
