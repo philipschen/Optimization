@@ -158,6 +158,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="InitialSetup.Designer.vb">
+      <DependentUpon>InitialSetup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="inputColor.Designer.vb">
       <DependentUpon>inputColor.vb</DependentUpon>
     </Compile>
@@ -288,6 +294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InitialSetup.resx">
+      <DependentUpon>InitialSetup.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="inputColor.resx">
       <DependentUpon>inputColor.vb</DependentUpon>

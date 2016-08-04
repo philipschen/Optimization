@@ -2,6 +2,24 @@
 Public Class Form1
     Dim connectionstring As Class1 = New Class1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim con As New SqlConnection
+        Dim cmd As New SqlCommand
+        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True"
+        Try
+            con.Open()
+        Catch
+        Finally
+            If (con.State = ConnectionState.Open) Then
+                con.Close()
+            Else
+                Dim ext1 As InitialSetup = New InitialSetup()
+                ext1.ShowDialog()
+                If ext1.DialogResult = DialogResult.No Then
+                    Me.Close()
+                End If
+            End If
+        End Try
+
         ' Set the caption bar text of the form.  
         Me.Text = connectionstring.version
         Button3.Visible = True
@@ -12,7 +30,6 @@ Public Class Form1
         Catch
 
         End Try
-
     End Sub
 
     Private Sub BStock_Click(sender As Object, e As EventArgs) Handles BStock.Click
@@ -65,6 +82,11 @@ Public Class Form1
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         Dim excellin1 As NavInput = New NavInput()
         excellin1.Show()
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+
+
     End Sub
 End Class
 
