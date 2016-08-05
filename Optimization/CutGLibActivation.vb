@@ -1,10 +1,10 @@
 ﻿Imports System.Data.SqlClient
 
-Public Class InitialSetup
+Public Class CutGLibActivation
     Dim connectionstring As Class1 = New Class1
-    Private Sub InitialSetup_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        RichTextBox1.Text = "Before running this you must make sure that microsoft SQL 2014 is installed and a server named SQLEXPRESS is created." + vbCrLf + vbCrLf + "More detailed instructions can be found in the InstallationGuide and ReadMe"
-        TextBox1.Text = "https://www.microsoft.com/en-us/download/details.aspx?id=42299"
+    Private Sub CutGLibActivation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        RichTextBox1.Text = "1. Go to the following URL and Download CutGLib." + vbCrLf + "2. Run The .EXE File from it." + vbCrLf + "3. Launch The Get License Application and follow the instructions." + vbCrLf + vbCrLf + "More detailed instructions found in the InstallationGuide and ReadME"
+        TextBox1.Text = "http://www.optimalon.com/CutGLib_install.htm"
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

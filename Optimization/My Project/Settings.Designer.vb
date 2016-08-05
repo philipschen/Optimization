@@ -11,6 +11,7 @@
 Option Strict On
 Option Explicit On
 
+
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
@@ -56,8 +57,7 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=Parts;Integrated Security=Tru"& _ 
-            "e")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=(Local)\SQLEXPRESS;Initial Catalog=Parts;Integrated Security=True")>  _
         Public ReadOnly Property PartsConnectionString() As String
             Get
                 Return CType(Me("PartsConnectionString"),String)
@@ -67,8 +67,7 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=OptimizationDatabase;Integrat"& _ 
-            "ed Security=True")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=(Local)\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True")>  _
         Public ReadOnly Property OptimizationDatabaseConnectionString() As String
             Get
                 Return CType(Me("OptimizationDatabaseConnectionString"),String)

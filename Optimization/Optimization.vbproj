@@ -121,6 +121,12 @@
     <Compile Include="Confirm1.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CutGLibActivation.Designer.vb">
+      <DependentUpon>CutGLibActivation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CutGLibActivation.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CutManagement.Designer.vb">
       <DependentUpon>CutManagement.vb</DependentUpon>
     </Compile>
@@ -276,6 +282,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Confirm1.resx">
       <DependentUpon>Confirm1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CutGLibActivation.resx">
+      <DependentUpon>CutGLibActivation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CutManagement.resx">
       <DependentUpon>CutManagement.vb</DependentUpon>

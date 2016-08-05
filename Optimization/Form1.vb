@@ -4,7 +4,7 @@ Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim con As New SqlConnection
         Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=TOSHIBA-2015\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True"
+        con.ConnectionString = "Data Source=(Local)\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True"
         Try
             con.Open()
         Catch
@@ -14,6 +14,21 @@ Public Class Form1
             Else
                 Dim ext1 As InitialSetup = New InitialSetup()
                 ext1.ShowDialog()
+                Try
+                    con.Open()
+                    cmd.Connection = con
+                    cmd.CommandText = "CREATE TABLE parts" + "(partID nvarchar(50), description nvarchar(50), color nvarchar(50), size FLOAT, count int, internalID int, shopNumber nvarchar(50), itemNumber float, itemQuantity int, context1 nvarchar(50), context2 float, context3 nvarchar(50))"
+                    cmd.ExecuteNonQuery()
+                    cmd.CommandText = "CREATE TABLE stockNew" + "(stockID1 nvarchar(50), stockID2 nvarchar(50), stockID3 nvarchar(50), description nvarchar(MAX), color nvarchar(50), size FLOAT, count int, internalID int, context1 nvarchar(50), context2 float, context3 nvarchar(50))"
+                    cmd.ExecuteNonQuery()
+                    cmd.CommandText = "CREATE TABLE stockUsed" + "(stockID1 nvarchar(50), stockID2 nvarchar(50), stockID3 nvarchar(50), description nvarchar(MAX), color nvarchar(50), size FLOAT, count int, internalID int, location nvarchar(50), context1 nvarchar(50), context2 float, context3 nvarchar(50))"
+                    cmd.ExecuteNonQuery()
+                    cmd.CommandText = "CREATE TABLE activationCode" + "(CutGLib nvarchar(50))"
+                    cmd.ExecuteNonQuery()
+                    MessageBox.Show("Tables have been created successfully", "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Catch
+                End Try
+
                 If ext1.DialogResult = DialogResult.No Then
                     Me.Close()
                 End If
@@ -84,9 +99,5 @@ Public Class Form1
         excellin1.Show()
     End Sub
 
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-
-
-    End Sub
 End Class
 
