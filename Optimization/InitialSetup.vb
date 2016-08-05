@@ -11,9 +11,7 @@ Public Class InitialSetup
         Dim str As String
         '"Data Source=(Local)\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True"
         Dim myConn As SqlConnection = New SqlConnection("Server=(local)\SQLEXPRESS;Integrated Security=True;database=master")
-
         str = "Create Database TestDB"
-
         Dim myCommand As SqlCommand = New SqlCommand(str, myConn)
 
         Try

@@ -2,36 +2,53 @@
 Public Class Form1
     Dim connectionstring As Class1 = New Class1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim con As New SqlConnection
-        Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=(Local)\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True"
+        Dim con1 As New SqlConnection
+        Dim cmd1 As New SqlCommand
+        con1.ConnectionString = "Data Source=(Local)\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True"
+
+        '
+        ' Initial Setup for DataBase and Tables
+        '
         Try
-            con.Open()
+            con1.Open()
+            If (con1.State = ConnectionState.Open) Then
+                Dim con As New SqlConnection
+                Dim cmd As New SqlCommand
+                con.ConnectionString = "Data Source=(Local)\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True"
+                con.Open()
+                cmd.Connection = con
+
+                Try
+                    cmd.CommandText = "SELECT internalID, shopNumber  FROM parts"
+                    cmd.ExecuteNonQuery()
+                Catch
+                    Try
+                        cmd.CommandText = "CREATE TABLE dbo.parts" + "(partID nvarchar(50) NOT NULL, description nvarchar(50), color nvarchar(50), size FLOAT NOT NULL, count int NOT NULL, internalID int NOT NULL, shopNumber nvarchar(50) NOT NULL, itemNumber float, itemQuantity int, context1 nvarchar(50), context2 float, context3 nvarchar(50))"
+                        cmd.ExecuteNonQuery()
+                        cmd.CommandText = "CREATE TABLE dbo.stockNew" + "(stockID1 nvarchar(50), stockID2 nvarchar(50) NOT NULL, stockID3 nvarchar(50), description nvarchar(MAX), color nvarchar(50), size FLOAT NOT NULL, count int NOT NULL, internalID int NOT NULL, context1 nvarchar(50), context2 float, context3 nvarchar(50))"
+                        cmd.ExecuteNonQuery()
+                        cmd.CommandText = "CREATE TABLE dbo.stockUsed" + "(stockID1 nvarchar(50), stockID2 nvarchar(50) NOT NULL, stockID3 nvarchar(50), description nvarchar(MAX), color nvarchar(50), size FLOAT NOT NULL, count int NOT NULL, internalID int NOT NULL, location nvarchar(50), context1 nvarchar(50), context2 float, context3 nvarchar(50))"
+                        cmd.ExecuteNonQuery()
+                        cmd.CommandText = "CREATE TABLE dbo.activationCode" + "(CutGLib nvarchar(50))"
+                        cmd.ExecuteNonQuery()
+                        MessageBox.Show("Tables have been created successfully", "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Catch ex As Exception
+                        MessageBox.Show(ex.ToString())
+                    End Try
+                End Try
+            End If
         Catch
         Finally
-            If (con.State = ConnectionState.Open) Then
-                con.Close()
+            If (con1.State = ConnectionState.Open) Then
+                con1.Close()
             Else
                 Dim ext1 As InitialSetup = New InitialSetup()
                 ext1.ShowDialog()
-                Try
-                    con.Open()
-                    cmd.Connection = con
-                    cmd.CommandText = "CREATE TABLE parts" + "(partID nvarchar(50), description nvarchar(50), color nvarchar(50), size FLOAT, count int, internalID int, shopNumber nvarchar(50), itemNumber float, itemQuantity int, context1 nvarchar(50), context2 float, context3 nvarchar(50))"
-                    cmd.ExecuteNonQuery()
-                    cmd.CommandText = "CREATE TABLE stockNew" + "(stockID1 nvarchar(50), stockID2 nvarchar(50), stockID3 nvarchar(50), description nvarchar(MAX), color nvarchar(50), size FLOAT, count int, internalID int, context1 nvarchar(50), context2 float, context3 nvarchar(50))"
-                    cmd.ExecuteNonQuery()
-                    cmd.CommandText = "CREATE TABLE stockUsed" + "(stockID1 nvarchar(50), stockID2 nvarchar(50), stockID3 nvarchar(50), description nvarchar(MAX), color nvarchar(50), size FLOAT, count int, internalID int, location nvarchar(50), context1 nvarchar(50), context2 float, context3 nvarchar(50))"
-                    cmd.ExecuteNonQuery()
-                    cmd.CommandText = "CREATE TABLE activationCode" + "(CutGLib nvarchar(50))"
-                    cmd.ExecuteNonQuery()
-                    MessageBox.Show("Tables have been created successfully", "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Catch
-                End Try
-
                 If ext1.DialogResult = DialogResult.No Then
                     Me.Close()
                 End If
+                MessageBox.Show("Re-Launch EasyCut", "MyProgram", MessageBoxButtons.OK)
+                Me.Close()
             End If
         End Try
 
@@ -99,5 +116,21 @@ Public Class Form1
         excellin1.Show()
     End Sub
 
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Dim con As New SqlConnection
+        Dim cmd As New SqlCommand
+        con.ConnectionString = "Data Source=(Local)\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True"
+        con.Open()
+        cmd.Connection = con
+        cmd.CommandText = "CREATE TABLE dbo.parts" + "(partID nvarchar(50) NOT NULL, description nvarchar(50), color nvarchar(50), size FLOAT NOT NULL, count int NOT NULL, internalID int NOT NULL, shopNumber nvarchar(50) NOT NULL, itemNumber float, itemQuantity int, context1 nvarchar(50), context2 float, context3 nvarchar(50))"
+        cmd.ExecuteNonQuery()
+        cmd.CommandText = "CREATE TABLE dbo.stockNew" + "(stockID1 nvarchar(50), stockID2 nvarchar(50) NOT NULL, stockID3 nvarchar(50), description nvarchar(MAX), color nvarchar(50), size FLOAT NOT NULL, count int NOT NULL, internalID int NOT NULL, context1 nvarchar(50), context2 float, context3 nvarchar(50))"
+        cmd.ExecuteNonQuery()
+        cmd.CommandText = "CREATE TABLE dbo.stockUsed" + "(stockID1 nvarchar(50), stockID2 nvarchar(50) NOT NULL, stockID3 nvarchar(50), description nvarchar(MAX), color nvarchar(50), size FLOAT NOT NULL, count int NOT NULL, internalID int NOT NULL, location nvarchar(50), context1 nvarchar(50), context2 float, context3 nvarchar(50))"
+        cmd.ExecuteNonQuery()
+        cmd.CommandText = "CREATE TABLE dbo.activationCode" + "(CutGLib nvarchar(50))"
+        cmd.ExecuteNonQuery()
+        MessageBox.Show("Tables have been created successfully", "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
 End Class
 
