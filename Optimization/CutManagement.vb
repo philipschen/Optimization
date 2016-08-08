@@ -477,10 +477,8 @@ Public Class CutManagement
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Dim countbool As ArrayList = New ArrayList
         Dim uocountdownrep As ArrayList = New ArrayList
-        Dim uocountdownrep2 As ArrayList = New ArrayList
         For it = 0 To uocount.Count - 1
             uocountdownrep.Add(uocount(it) / uoitemQuantity(it))
-            uocountdownrep2.Add(uocount(it) / uoitemQuantity(it))
         Next
         Dim uocountdown As ArrayList = New ArrayList
         For it = 0 To uoitemQuantity.Count - 1
@@ -720,26 +718,29 @@ Public Class CutManagement
         Dim frm2 As OmitParts = New OmitParts()
         frm2.des = partlistd
         If frm2.ShowDialog() = DialogResult.OK Then
-            For it = 0 To frm2.omitted.Count - 1
-                Dim intloc As Integer = partlistd.IndexOf(frm2.omitted(it))
-                For it1 = uopartID.Count - 1 To 0
-                    If String.Equals(frm2.omitted(it), uodescription(it1)) Then
-                        uopartID.RemoveAt(it1)
-                        uodescription.RemoveAt(it1)
-                        uocolor.RemoveAt(it1)
-                        uosize.RemoveAt(it1)
-                        uocount.RemoveAt(it1)
-                        uointernalID.RemoveAt(it1)
-                        uoshopnumber.RemoveAt(it1)
-                        uoitemNumber.RemoveAt(it1)
-                        uoitemQuantity.RemoveAt(it1)
-                        uoUsed.RemoveAt(it1)
-                        uolistorderline.RemoveAt(it1)
-                    End If
-                Next
-                partlistd.Remove(frm2.omitted(it))
+            If frm2.omitted.Count > 0 Then
+                For it = 0 To frm2.omitted.Count - 1
+                    Dim intloc As Integer = partlistd.IndexOf(frm2.omitted(it))
+                    For it1 = uopartID.Count - 1 To 0 Step -1
+                        If String.Equals(frm2.omitted(it), uodescription(it1)) Then
+                            uopartID.RemoveAt(it1)
+                            uodescription.RemoveAt(it1)
+                            uocolor.RemoveAt(it1)
+                            uosize.RemoveAt(it1)
+                            uocount.RemoveAt(it1)
+                            uointernalID.RemoveAt(it1)
+                            uoshopnumber.RemoveAt(it1)
+                            uoitemNumber.RemoveAt(it1)
+                            uoitemQuantity.RemoveAt(it1)
+                            uocountdownrep.RemoveAt(it1)
+                            uoUsed.RemoveAt(it1)
+                            uolistorderline.RemoveAt(it1)
+                        End If
+                    Next
+                    partlistd.Remove(frm2.omitted(it))
+                    partlistid.RemoveAt(intloc)
 
-                For it1 = 0 To xusedinternalID.Count - 1
+                    For it1 = 0 To xusedinternalID.Count - 1
                         If String.Equals(xusedinternalID(it1), usedinternalID(intloc)) Then
                             xusedsize1.RemoveAt(intloc)
                             xusedcount.RemoveAt(intloc)
@@ -761,11 +762,12 @@ Public Class CutManagement
                     stock_exists.RemoveAt(intloc)
 
                 Next
+            End If
         End If
-        '
-        ' Sort by saw
-        '
-        Dim switchpos As ArrayList = New ArrayList
+            '
+            ' Sort by saw
+            '
+            Dim switchpos As ArrayList = New ArrayList
         Dim alreadyin As ArrayList = New ArrayList
         Dim sorted As SortedList(Of String, Integer) = New SortedList(Of String, Integer)
         For it = 0 To usedsaw.Count - 1
