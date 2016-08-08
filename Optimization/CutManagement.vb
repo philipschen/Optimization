@@ -835,7 +835,7 @@ Public Class CutManagement
             Label14.Text = "Calculating Cuts..."
             Dim Calculator As CutGLib.CutEngine
             Calculator = New CutGLib.CutEngine
-            'Calculator.SetComputerLicenseKey("1234")
+            Calculator.SetComputerLicenseKey(connectionstring.cutkey())
             Dim con As New SqlConnection
             Dim cmd As New SqlCommand
             con.ConnectionString = connectionstring.connect1

@@ -99,7 +99,7 @@ Partial Class CutGLibActivation
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(245, 101)
         Me.Button1.TabIndex = 8
-        Me.Button1.Text = "Already Installed"
+        Me.Button1.Text = "Accept Code"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'TextBox2

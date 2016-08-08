@@ -18,7 +18,7 @@ Public Class InitialSetup
             myConn.Open()
             myCommand.ExecuteNonQuery()
             Dim result1 As DialogResult = MessageBox.Show("Database is created successfully",
-                        "MyProgram", MessageBoxButtons.OK,
+                        connectionstring.version, MessageBoxButtons.OK,
                          MessageBoxIcon.Information)
             If result1 = DialogResult.OK Then
             End If

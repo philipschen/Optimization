@@ -8,31 +8,22 @@ Public Class CutGLibActivation
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim str As String
-        '"Data Source=(Local)\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True"
-        Dim myConn As SqlConnection = New SqlConnection("Server=(local)\SQLEXPRESS;Integrated Security=True;database=master")
+        If TextBox2.Text = "" Or TextBox2.Text Is Nothing Then
+            MessageBox.Show("Please copy the activation code into the box.")
+        Else
+            Dim con As New SqlConnection
+            Dim cmd As New SqlCommand
+            con.ConnectionString = connectionstring.connect1
+            con.Open()
+            cmd.Connection = con
 
-        str = "Create Database TestDB"
+            cmd.CommandText = "DELETE FROM activationCode"
+            cmd.ExecuteNonQuery()
 
-        Dim myCommand As SqlCommand = New SqlCommand(str, myConn)
-
-        Try
-            myConn.Open()
-            myCommand.ExecuteNonQuery()
-            Dim result1 As DialogResult = MessageBox.Show("Database is created successfully",
-                        "MyProgram", MessageBoxButtons.OK,
-                         MessageBoxIcon.Information)
-            If result1 = DialogResult.OK Then
-            End If
-
-        Catch ex As Exception
-            MessageBox.Show(ex.ToString())
-        Finally
-            If (myConn.State = ConnectionState.Open) Then
-                myConn.Close()
-            End If
+            cmd.CommandText = "INSERT into activationCode Values('" + TextBox2.Text + "')"
+            cmd.ExecuteNonQuery()
             Me.Close()
-        End Try
+        End If
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click

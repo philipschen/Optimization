@@ -1,11 +1,12 @@
 ﻿Imports System.Data.SqlClient
+Imports CutGLib
 Public Class Form1
     Dim connectionstring As Class1 = New Class1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim con1 As New SqlConnection
         Dim cmd1 As New SqlCommand
         con1.ConnectionString = "Data Source=(Local)\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True"
-
+        Dim failed As Boolean = False
         '
         ' Initial Setup for DataBase and Tables
         '
@@ -31,7 +32,7 @@ Public Class Form1
                         cmd.ExecuteNonQuery()
                         cmd.CommandText = "CREATE TABLE dbo.activationCode" + "(CutGLib nvarchar(50))"
                         cmd.ExecuteNonQuery()
-                        MessageBox.Show("Tables have been created successfully", "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        MessageBox.Show("Tables have been created successfully", connectionstring.version, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Catch ex As Exception
                         MessageBox.Show(ex.ToString())
                     End Try
@@ -47,21 +48,40 @@ Public Class Form1
                 If ext1.DialogResult = DialogResult.No Then
                     Me.Close()
                 End If
-                MessageBox.Show("Re-Launch EasyCut", "MyProgram", MessageBoxButtons.OK)
-                Me.Close()
+                failed = True
+                MessageBox.Show("Re-Launch EasyCut", connectionstring.version, MessageBoxButtons.OK)
             End If
         End Try
+        '
+        ' Checks to make sure calculator license works
+        '
+        If failed Then
+            Me.Close()
+        Else
+            Dim result As String
+            Dim Calculator As CutGLib.CutEngine
+            Calculator = New CutGLib.CutEngine
+            Calculator.SetComputerLicenseKey(connectionstring.cutkey())
+            Calculator.AddLinearStock(10, 10)
+            Calculator.AddLinearPart(10, 10)
+            Result = Calculator.ExecuteLinear()
+            Console.WriteLine(result)
+            If String.Equals(result, "The license has expired") Then
+                Dim ext1 As CutGLibActivation = New CutGLibActivation()
+                ext1.ShowDialog()
+            End If
 
-        ' Set the caption bar text of the form.  
-        Me.Text = connectionstring.version
-        Button3.Visible = True
+            ' Set the caption bar text of the form.  
+            Me.Text = connectionstring.version
+            Button3.Visible = True
 
-        Try
-            PictureBox1.Image = Image.FromFile("temp.jpg")
-            PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
-        Catch
+            Try
+                PictureBox1.Image = Image.FromFile("temp.jpg")
+                PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
+            Catch
 
-        End Try
+            End Try
+        End If
     End Sub
 
     Private Sub BStock_Click(sender As Object, e As EventArgs) Handles BStock.Click
@@ -114,23 +134,6 @@ Public Class Form1
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         Dim excellin1 As NavInput = New NavInput()
         excellin1.Show()
-    End Sub
-
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        Dim con As New SqlConnection
-        Dim cmd As New SqlCommand
-        con.ConnectionString = "Data Source=(Local)\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True"
-        con.Open()
-        cmd.Connection = con
-        cmd.CommandText = "CREATE TABLE dbo.parts" + "(partID nvarchar(50) NOT NULL, description nvarchar(50), color nvarchar(50), size FLOAT NOT NULL, count int NOT NULL, internalID int NOT NULL, shopNumber nvarchar(50) NOT NULL, itemNumber float, itemQuantity int, context1 nvarchar(50), context2 float, context3 nvarchar(50))"
-        cmd.ExecuteNonQuery()
-        cmd.CommandText = "CREATE TABLE dbo.stockNew" + "(stockID1 nvarchar(50), stockID2 nvarchar(50) NOT NULL, stockID3 nvarchar(50), description nvarchar(MAX), color nvarchar(50), size FLOAT NOT NULL, count int NOT NULL, internalID int NOT NULL, context1 nvarchar(50), context2 float, context3 nvarchar(50))"
-        cmd.ExecuteNonQuery()
-        cmd.CommandText = "CREATE TABLE dbo.stockUsed" + "(stockID1 nvarchar(50), stockID2 nvarchar(50) NOT NULL, stockID3 nvarchar(50), description nvarchar(MAX), color nvarchar(50), size FLOAT NOT NULL, count int NOT NULL, internalID int NOT NULL, location nvarchar(50), context1 nvarchar(50), context2 float, context3 nvarchar(50))"
-        cmd.ExecuteNonQuery()
-        cmd.CommandText = "CREATE TABLE dbo.activationCode" + "(CutGLib nvarchar(50))"
-        cmd.ExecuteNonQuery()
-        MessageBox.Show("Tables have been created successfully", "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 End Class
 
