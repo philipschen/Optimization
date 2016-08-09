@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Public Class Class1
     Public Property connect1 As String = "Data Source=(Local)\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True"
+
     Public Function cutkey() As String
         Dim cutkey1 As String = ""
         Dim con As New SqlConnection
