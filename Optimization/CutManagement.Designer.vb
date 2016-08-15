@@ -45,8 +45,8 @@ Partial Class CutManagement
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Button7 = New System.Windows.Forms.Button()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ComboBox6 = New System.Windows.Forms.ComboBox()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -66,7 +66,7 @@ Partial Class CutManagement
         Me.ComboBox5 = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -304,9 +304,9 @@ Partial Class CutManagement
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.Button8)
         Me.TabPage2.Controls.Add(Me.Button7)
         Me.TabPage2.Controls.Add(Me.ListBox1)
-        Me.TabPage2.Controls.Add(Me.CheckBox1)
         Me.TabPage2.Controls.Add(Me.Label19)
         Me.TabPage2.Controls.Add(Me.ComboBox6)
         Me.TabPage2.Controls.Add(Me.Button4)
@@ -326,6 +326,15 @@ Partial Class CutManagement
         Me.TabPage2.Text = "Cuts by Order"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(420, 434)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(129, 68)
+        Me.Button7.TabIndex = 42
+        Me.Button7.Text = "Clear Selected Set"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
         'ListBox1
         '
         Me.ListBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -335,16 +344,6 @@ Partial Class CutManagement
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.Size = New System.Drawing.Size(299, 436)
         Me.ListBox1.TabIndex = 41
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(377, 19)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(94, 24)
-        Me.CheckBox1.TabIndex = 40
-        Me.CheckBox1.Text = "Select All"
-        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'Label19
         '
@@ -542,14 +541,14 @@ Partial Class CutManagement
         Me.Label14.Size = New System.Drawing.Size(0, 25)
         Me.Label14.TabIndex = 4
         '
-        'Button7
+        'Button8
         '
-        Me.Button7.Location = New System.Drawing.Point(420, 434)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(129, 68)
-        Me.Button7.TabIndex = 42
-        Me.Button7.Text = "Clear Selected Set"
-        Me.Button7.UseVisualStyleBackColor = True
+        Me.Button8.Location = New System.Drawing.Point(420, 19)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(94, 31)
+        Me.Button8.TabIndex = 43
+        Me.Button8.Text = "Select All"
+        Me.Button8.UseVisualStyleBackColor = True
         '
         'CutManagement
         '
@@ -616,8 +615,8 @@ Partial Class CutManagement
     Friend WithEvents ComboBox5 As ComboBox
     Friend WithEvents Label12 As Label
     Friend WithEvents ComboBox7 As ComboBox
-    Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents ListBox1 As ListBox
     Friend WithEvents Label14 As Label
     Friend WithEvents Button7 As Button
+    Friend WithEvents Button8 As Button
 End Class

@@ -11,6 +11,7 @@
             DialogResult = DialogResult.OK
             Me.Close()
         Else
+            MessageBox.Show("Invalid Word")
             TextBox1.Text = ""
         End If
     End Sub

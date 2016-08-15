@@ -15,7 +15,6 @@ Public Class CutManagement
     Dim oitemNumber As ArrayList = New ArrayList
     Dim oitemQuantity As ArrayList = New ArrayList
     Dim osetNumber As ArrayList = New ArrayList
-    Dim oUsed As ArrayList = New ArrayList
     Dim oselect As ArrayList = New ArrayList
     Dim olistorderline As ArrayList = New ArrayList
     ' lists of everything in the listbox
@@ -29,7 +28,6 @@ Public Class CutManagement
     Dim loitemNumber As ArrayList = New ArrayList
     Dim loitemQuantity As ArrayList = New ArrayList
     Dim losetNumber As ArrayList = New ArrayList
-    Dim loUsed As ArrayList = New ArrayList
     Dim loselect As ArrayList = New ArrayList
     Dim lolistorderline As ArrayList = New ArrayList
     ' list of parts used in calculation
@@ -43,8 +41,8 @@ Public Class CutManagement
     Dim uoitemNumber As ArrayList = New ArrayList
     Dim uoitemQuantity As ArrayList = New ArrayList
     Dim uosetNumber As ArrayList = New ArrayList
-    Dim uoUsed As ArrayList = New ArrayList
     Dim uolistorderline As ArrayList = New ArrayList
+    Dim uoselect As ArrayList = New ArrayList
 
     Private Sub CutManagement_load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set the caption bar text of the form.  
@@ -93,6 +91,7 @@ Public Class CutManagement
         uoitemNumber.Clear()
         uoitemQuantity.Clear()
         uolistorderline.Clear()
+
 
         opartID.Clear()
         odescription.Clear()
@@ -183,19 +182,7 @@ Public Class CutManagement
     End Sub
 
     Private Sub ComboBox5_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox5.SelectedValueChanged
-        ListBox1.Items.Clear()
         ListBox3.Items.Clear()
-
-        uopartID.Clear()
-        uodescription.Clear()
-        uocolor.Clear()
-        uosize.Clear()
-        uocount.Clear()
-        uointernalID.Clear()
-        uoshopnumber.Clear()
-        uoitemNumber.Clear()
-        uoitemQuantity.Clear()
-        uolistorderline.Clear()
 
         lopartID.Clear()
         lodescription.Clear()
@@ -231,19 +218,7 @@ Public Class CutManagement
     End Sub
 
     Private Sub ComboBox4_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox4.SelectedValueChanged
-        ListBox1.Items.Clear()
         ListBox3.Items.Clear()
-
-        uopartID.Clear()
-        uodescription.Clear()
-        uocolor.Clear()
-        uosize.Clear()
-        uocount.Clear()
-        uointernalID.Clear()
-        uoshopnumber.Clear()
-        uoitemNumber.Clear()
-        uoitemQuantity.Clear()
-        uolistorderline.Clear()
 
         lopartID.Clear()
         lodescription.Clear()
@@ -278,19 +253,7 @@ Public Class CutManagement
 
     End Sub
     Private Sub ComboBox7_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox7.SelectedIndexChanged
-        ListBox1.Items.Clear()
         ListBox3.Items.Clear()
-
-        uopartID.Clear()
-        uodescription.Clear()
-        uocolor.Clear()
-        uosize.Clear()
-        uocount.Clear()
-        uointernalID.Clear()
-        uoshopnumber.Clear()
-        uoitemNumber.Clear()
-        uoitemQuantity.Clear()
-        uolistorderline.Clear()
 
         lopartID.Clear()
         lodescription.Clear()
@@ -320,6 +283,7 @@ Public Class CutManagement
                 loitemQuantity.Add(oitemQuantity(it))
                 loselect.Add(it)
                 lolistorderline.Add(olistorderline(it))
+                losetNumber.Add(osetNumber(it))
             End If
         Next
     End Sub
@@ -337,81 +301,81 @@ Public Class CutManagement
         Dim pString As String = ""
         ' Sets item full description
         If ListBox1.SelectedIndex >= 0 Then
-            pString = uodescription(ListBox1.SelectedIndex) + vbCrLf + "Color: " + uocolor(ListBox1.SelectedIndex) + vbCrLf + "Size: " + uosize(ListBox1.SelectedIndex) + vbCrLf + "Count: " + uocount(ListBox1.SelectedIndex) + vbCrLf + "Shop Number: " + uoshopnumber(ListBox1.SelectedIndex) 
+            pString = uodescription(ListBox1.SelectedIndex) + vbCrLf + "Color: " + uocolor(ListBox1.SelectedIndex) + vbCrLf + "Size: " + uosize(ListBox1.SelectedIndex) + vbCrLf + "Count: " + uocount(ListBox1.SelectedIndex) + vbCrLf + "Shop Number: " + uoshopnumber(ListBox1.SelectedIndex)
             RichTextBox4.Text = pString
         End If
     End Sub
 
-    Private Sub CheckBox1_CheckedChanged_1(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
-        If CheckBox1.Checked = True Then
-            For it = 0 To ListBox3.Items.Count - 1
-                ListBox3.SelectedIndex = it
-                oUsed.Add(ListBox3.SelectedIndex)
-                ListBox1.Items.Add(ListBox3.SelectedItem)
+    Private Sub CheckBox1_CheckedChanged_1(sender As Object, e As EventArgs) Handles Button8.Click
 
-                uopartID.Add(lopartID(ListBox3.SelectedIndex))
-                uodescription.Add(lodescription(ListBox3.SelectedIndex))
-                uocolor.Add(locolor(ListBox3.SelectedIndex))
-                uosize.Add(losize(ListBox3.SelectedIndex))
-                uocount.Add(locount(ListBox3.SelectedIndex))
-                uointernalID.Add(lointernalID(ListBox3.SelectedIndex))
-                uoshopnumber.Add(loshopnumber(ListBox3.SelectedIndex))
-                uoitemNumber.Add(loitemNumber(ListBox3.SelectedIndex))
-                uoitemQuantity.Add(loitemQuantity(ListBox3.SelectedIndex))
-                uoUsed.Add(oUsed(ListBox3.SelectedIndex))
-                uolistorderline.Add(lolistorderline(ListBox3.SelectedIndex))
-            Next
+        uoselect.Clear()
+        For it = 0 To ListBox3.Items.Count - 1
+            ListBox3.SelectedIndex = it
+            ListBox1.Items.Add(ListBox3.SelectedItem)
 
-            lopartID.Clear()
-            lodescription.Clear()
-            locolor.Clear()
-            losize.Clear()
-            locount.Clear()
-            lointernalID.Clear()
-            loshopnumber.Clear()
-            loitemNumber.Clear()
-            loitemQuantity.Clear()
-            loselect.Clear()
-            lolistorderline.Clear()
+            uopartID.Add(lopartID(ListBox3.SelectedIndex))
+            uodescription.Add(lodescription(ListBox3.SelectedIndex))
+            uocolor.Add(locolor(ListBox3.SelectedIndex))
+            uosize.Add(losize(ListBox3.SelectedIndex))
+            uocount.Add(locount(ListBox3.SelectedIndex))
+            uointernalID.Add(lointernalID(ListBox3.SelectedIndex))
+            uoshopnumber.Add(loshopnumber(ListBox3.SelectedIndex))
+            uoitemNumber.Add(loitemNumber(ListBox3.SelectedIndex))
+            uoitemQuantity.Add(loitemQuantity(ListBox3.SelectedIndex))
+            uolistorderline.Add(lolistorderline(ListBox3.SelectedIndex))
+            uoselect.Add(loselect(ListBox3.SelectedIndex))
+            uosetNumber.Add(losetNumber(ListBox3.SelectedIndex))
+        Next
 
-            ListBox3.Items.Clear()
-        ElseIf CheckBox1.Checked = False Then
-            oUsed.Clear()
-            While ListBox1.Items.Count > 0
-                ListBox1.SelectedIndex = 0
-                ListBox3.Items.Add(ListBox1.SelectedItem)
-                ListBox1.Items.RemoveAt(ListBox1.SelectedIndex)
-            End While
-            For it = 0 To uopartID.Count - 1
-                lopartID.Add(uopartID(it))
-                lodescription.Add(uodescription(it))
-                locolor.Add(uocolor(it))
-                losize.Add(uosize(it))
-                locount.Add(uocount(it))
-                lointernalID.Add(uointernalID(it))
-                loshopnumber.Add(uoshopnumber(it))
-                loitemNumber.Add(uoitemNumber(it))
-                loitemQuantity.Add(uoitemQuantity(it))
-                loselect.Add(it)
-                lolistorderline.Add(uolistorderline(it))
-            Next
-            uopartID.Clear()
-            uodescription.Clear()
-            uocolor.Clear()
-            uosize.Clear()
-            uocount.Clear()
-            uointernalID.Clear()
-            uoshopnumber.Clear()
-            uoitemNumber.Clear()
-            uoitemQuantity.Clear()
-            uoUsed.Clear()
-            uolistorderline.Clear()
-        End If
+        For it = uoselect.Count - 1 To 0 Step -1
+            opartID.RemoveAt(uoselect(it))
+            odescription.RemoveAt(uoselect(it))
+            ocolor.RemoveAt(uoselect(it))
+            osize.RemoveAt(uoselect(it))
+            ocount.RemoveAt(uoselect(it))
+            ointernalID.RemoveAt(uoselect(it))
+            oshopnumber.RemoveAt(uoselect(it))
+            oitemNumber.RemoveAt(uoselect(it))
+            oitemQuantity.RemoveAt(uoselect(it))
+            osetNumber.RemoveAt(uoselect(it))
+            olistorderline.RemoveAt(uoselect(it))
+        Next
+
+        lopartID.Clear()
+        lodescription.Clear()
+        locolor.Clear()
+        losize.Clear()
+        locount.Clear()
+        lointernalID.Clear()
+        loshopnumber.Clear()
+        loitemNumber.Clear()
+        loitemQuantity.Clear()
+        loselect.Clear()
+        lolistorderline.Clear()
+
+        ListBox3.Items.Clear()
+
+        ComboBox5.Items.Clear()
+        ComboBox4.Items.Clear()
+        ComboBox7.Items.Clear()
+        For it = 0 To opartID.Count - 1
+            If String.Equals(ComboBox6.SelectedItem, oshopnumber(it).ToString) And Not ComboBox5.Items.Contains(opartID(it).ToString) Then
+                ComboBox5.Items.Add(opartID(it).ToString)
+            End If
+            If String.Equals(ComboBox6.SelectedItem, oshopnumber(it).ToString) And Not ComboBox4.Items.Contains(odescription(it).ToString) Then
+                ComboBox4.Items.Add(odescription(it).ToString)
+            End If
+            If String.Equals(ComboBox6.SelectedItem, oshopnumber(it).ToString) And Not ComboBox7.Items.Contains(osetNumber(it)) Then
+                ComboBox7.Items.Add(osetNumber(it))
+            End If
+        Next
+
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         If ListBox3.SelectedIndex >= 0 Then
-            oUsed.Add(ListBox3.SelectedIndex)
+            uoselect.Clear()
+
             ListBox1.Items.Add(ListBox3.SelectedItem)
 
             'Clears the list of parts to cuts and repopulates list of cut parts
@@ -424,8 +388,21 @@ Public Class CutManagement
             uoshopnumber.Add(loshopnumber(ListBox3.SelectedIndex))
             uoitemNumber.Add(loitemNumber(ListBox3.SelectedIndex))
             uoitemQuantity.Add(loitemQuantity(ListBox3.SelectedIndex))
-            uoUsed.Add(ListBox3.SelectedIndex)
             uolistorderline.Add(lolistorderline(ListBox3.SelectedIndex))
+            uoselect.Add(loselect(ListBox3.SelectedIndex))
+            uosetNumber.Add(losetNumber(ListBox3.SelectedIndex))
+
+            opartID.RemoveAt(ListBox3.SelectedIndex)
+            odescription.RemoveAt(ListBox3.SelectedIndex)
+            ocolor.RemoveAt(ListBox3.SelectedIndex)
+            osize.RemoveAt(ListBox3.SelectedIndex)
+            ocount.RemoveAt(ListBox3.SelectedIndex)
+            ointernalID.RemoveAt(ListBox3.SelectedIndex)
+            oshopnumber.RemoveAt(ListBox3.SelectedIndex)
+            oitemNumber.RemoveAt(ListBox3.SelectedIndex)
+            oitemQuantity.RemoveAt(ListBox3.SelectedIndex)
+            osetNumber.RemoveAt(ListBox3.SelectedIndex)
+            olistorderline.RemoveAt(ListBox3.SelectedIndex)
 
             lopartID.RemoveAt(ListBox3.SelectedIndex)
             lodescription.RemoveAt(ListBox3.SelectedIndex)
@@ -436,8 +413,9 @@ Public Class CutManagement
             loshopnumber.RemoveAt(ListBox3.SelectedIndex)
             loitemNumber.RemoveAt(ListBox3.SelectedIndex)
             loitemQuantity.RemoveAt(ListBox3.SelectedIndex)
-            loselect.RemoveAt(ListBox3.SelectedIndex)
             lolistorderline.RemoveAt(ListBox3.SelectedIndex)
+            loselect.RemoveAt(ListBox3.SelectedIndex)
+            losetNumber.Remove(uosetNumber(ListBox3.SelectedIndex))
 
             ListBox3.Items.RemoveAt(ListBox3.SelectedIndex)
         End If
@@ -445,6 +423,22 @@ Public Class CutManagement
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         ' Clears All Cuts
+        ComboBox5.Items.Clear()
+        ComboBox4.Items.Clear()
+        ComboBox7.Items.Clear()
+
+        opartID.Clear()
+        odescription.Clear()
+        ocolor.Clear()
+        osize.Clear()
+        ocount.Clear()
+        ointernalID.Clear()
+        oshopnumber.Clear()
+        oitemNumber.Clear()
+        oitemQuantity.Clear()
+        oselect.Clear()
+        olistorderline.Clear()
+
         ListBox3.Items.Clear()
         ListBox1.Items.Clear()
 
@@ -460,7 +454,6 @@ Public Class CutManagement
         loselect.Clear()
         lolistorderline.Clear()
 
-        oUsed.Clear()
         uopartID.Clear()
         uodescription.Clear()
         uocolor.Clear()
@@ -470,8 +463,8 @@ Public Class CutManagement
         uoshopnumber.Clear()
         uoitemNumber.Clear()
         uoitemQuantity.Clear()
-        uoUsed.Clear()
         uolistorderline.Clear()
+        uoselect.Clear()
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
@@ -733,7 +726,6 @@ Public Class CutManagement
                             uoitemNumber.RemoveAt(it1)
                             uoitemQuantity.RemoveAt(it1)
                             uocountdownrep.RemoveAt(it1)
-                            uoUsed.RemoveAt(it1)
                             uolistorderline.RemoveAt(it1)
                         End If
                     Next
@@ -764,10 +756,10 @@ Public Class CutManagement
                 Next
             End If
         End If
-            '
-            ' Sort by saw
-            '
-            Dim switchpos As ArrayList = New ArrayList
+        '
+        ' Sort by saw
+        '
+        Dim switchpos As ArrayList = New ArrayList
         Dim alreadyin As ArrayList = New ArrayList
         Dim sorted As SortedList(Of String, Integer) = New SortedList(Of String, Integer)
         For it = 0 To usedsaw.Count - 1
