@@ -175,6 +175,7 @@ Public Class CutManagement
                 loitemQuantity.Add(oitemQuantity(it))
                 loselect.Add(it)
                 lolistorderline.Add(olistorderline(it))
+                losetNumber.Add(osetNumber(it))
 
                 it += 1
             End If
@@ -212,6 +213,7 @@ Public Class CutManagement
                 loitemQuantity.Add(oitemQuantity(it))
                 loselect.Add(it)
                 lolistorderline.Add(olistorderline(it))
+                losetNumber.Add(osetNumber(it))
             End If
         Next
 
@@ -248,6 +250,7 @@ Public Class CutManagement
                 loitemQuantity.Add(oitemQuantity(it))
                 loselect.Add(it)
                 lolistorderline.Add(olistorderline(it))
+                losetNumber.Add(osetNumber(it))
             End If
         Next
 
