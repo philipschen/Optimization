@@ -20,5 +20,5 @@ Public Class Class1
         Return cutkey1
     End Function
 
-    Public Property version As String = "Easy Cut V1.2"
+    Public Property version As String = "Easy Cut V1.3"
 End Class
